@@ -31,6 +31,17 @@ namespace TLKJ.Utils
                 return "";
             }
         }
+        public static float getFloat(String cStr)
+        {
+            try
+            {
+                return Convert.ToSingle(cStr);
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+        }
 
         public static string getDecimalStr(decimal dVal)
         {
