@@ -1,0 +1,9 @@
+D:\VideoAI\Common.Util\obj\x86\Debug\Common.Util.csproj.CoreCompileInputs.cache
+D:\VideoAI\Common.Util\bin\x86\Debug\Common.Util.dll
+D:\VideoAI\Common.Util\bin\x86\Debug\Common.Util.pdb
+D:\VideoAI\Common.Util\bin\x86\Debug\Newtonsoft.Json.dll
+D:\VideoAI\Common.Util\bin\x86\Debug\Newtonsoft.Json.xml
+D:\VideoAI\Common.Util\obj\x86\Debug\Common.Util.csproj.CopyComplete
+D:\VideoAI\Common.Util\obj\x86\Debug\Common.Util.dll
+D:\VideoAI\Common.Util\obj\x86\Debug\Common.Util.pdb
+D:\VideoAI\Common.Util\obj\x86\Debug\Common.Util.csprojAssemblyReference.cache

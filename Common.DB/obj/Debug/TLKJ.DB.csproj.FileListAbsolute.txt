@@ -1,0 +1,9 @@
+D:\VideoAI\Common.DB\bin\Debug\Common.DB.dll
+D:\VideoAI\Common.DB\bin\Debug\Common.DB.pdb
+D:\VideoAI\Common.DB\bin\Debug\Common.Util.dll
+D:\VideoAI\Common.DB\bin\Debug\Newtonsoft.Json.dll
+D:\VideoAI\Common.DB\bin\Debug\Common.Util.pdb
+D:\VideoAI\Common.DB\bin\Debug\Newtonsoft.Json.xml
+D:\VideoAI\Common.DB\obj\Debug\TLKJ.DB.csprojResolveAssemblyReference.cache
+D:\VideoAI\Common.DB\obj\Debug\Common.DB.dll
+D:\VideoAI\Common.DB\obj\Debug\Common.DB.pdb
