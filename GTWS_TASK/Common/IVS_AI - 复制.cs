@@ -5,31 +5,14 @@ using System.Text;
 using System.Runtime.InteropServices;
 using System.Drawing;
 using System.Windows.Forms;
-using Emgu.CV.OCR;
-using Emgu.CV;
-using Emgu.CV.Structure;
-using Emgu.CV.CvEnum;
-using Emgu.CV.Util;
 using TLKJ.Utils;
 
 namespace TLKJ_IVS
 {
     public class IVS_AI
     {
-        [System.Runtime.InteropServices.DllImportAttribute("gdi32.dll")]
-        public static extern bool BitBlt(
-             IntPtr hdcDest, // handle to destination DC
-             int nXDest, // x-coord of destination upper-left corner
-             int nYDest, // y-coord of destination upper-left corner
-             int nWidth, // width of destination rectangle
-             int nHeight, // height of destination rectangle
-             IntPtr hdcSrc, // handle to source DC
-             int nXSrc, // x-coordinate of source upper-left corner
-             int nYSrc, // y-coordinate of source upper-left corner
-             System.Int32 dwRop // raster operation code
-        );
 
-        public static String getKeyText(Image<Gray, byte> vImage)
+        public static String getKeyText(String cFileName)
         {
             String cStr = "";
             string path = Application.StartupPath + "\\tessdata";  //下载识别文件夹

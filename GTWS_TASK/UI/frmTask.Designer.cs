@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.YWZ_TXT_LIST = new System.Windows.Forms.ListBox();
-            this.CameraNameList = new System.Windows.Forms.ListBox();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnEndReal = new System.Windows.Forms.Button();
             this.btnStartReal = new System.Windows.Forms.Button();
@@ -59,19 +58,21 @@
             this.视频监控ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.遍历截图ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.同步摄像机列表ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.系统配置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.任务时间ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnPreset = new System.Windows.Forms.Button();
             this.btnAI = new System.Windows.Forms.Button();
             this.LB_MSG = new System.Windows.Forms.Label();
             this.btnTake = new System.Windows.Forms.Button();
-            this.timAI = new System.Windows.Forms.Timer(this.components);
             this.timTake = new System.Windows.Forms.Timer(this.components);
             this.timPreset = new System.Windows.Forms.Timer(this.components);
             this.txtCAMERA_NAME = new System.Windows.Forms.TextBox();
             this.timTask = new System.Windows.Forms.Timer(this.components);
-            this.系统配置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.任务时间ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.GBList = new System.Windows.Forms.GroupBox();
+            this.CameraNameList = new System.Windows.Forms.ListBox();
             this.panel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.GBList.SuspendLayout();
             this.SuspendLayout();
             // 
             // YWZ_TXT_LIST
@@ -84,18 +85,6 @@
             this.YWZ_TXT_LIST.Size = new System.Drawing.Size(239, 88);
             this.YWZ_TXT_LIST.TabIndex = 62;
             this.YWZ_TXT_LIST.DoubleClick += new System.EventHandler(this.CameraYZWList_DoubleClick);
-            // 
-            // CameraNameList
-            // 
-            this.CameraNameList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
-            this.CameraNameList.FormattingEnabled = true;
-            this.CameraNameList.ItemHeight = 12;
-            this.CameraNameList.Location = new System.Drawing.Point(12, 28);
-            this.CameraNameList.Name = "CameraNameList";
-            this.CameraNameList.Size = new System.Drawing.Size(239, 304);
-            this.CameraNameList.TabIndex = 63;
-            this.CameraNameList.DoubleClick += new System.EventHandler(this.CameraNameList_DoubleClick);
             // 
             // btnClose
             // 
@@ -384,6 +373,21 @@
             this.同步摄像机列表ToolStripMenuItem.Text = "同步摄像机列表";
             this.同步摄像机列表ToolStripMenuItem.Click += new System.EventHandler(this.同步摄像机列表ToolStripMenuItem_Click);
             // 
+            // 系统配置ToolStripMenuItem
+            // 
+            this.系统配置ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.任务时间ToolStripMenuItem});
+            this.系统配置ToolStripMenuItem.Name = "系统配置ToolStripMenuItem";
+            this.系统配置ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
+            this.系统配置ToolStripMenuItem.Text = "系统配置";
+            // 
+            // 任务时间ToolStripMenuItem
+            // 
+            this.任务时间ToolStripMenuItem.Name = "任务时间ToolStripMenuItem";
+            this.任务时间ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.任务时间ToolStripMenuItem.Text = "定时任务";
+            this.任务时间ToolStripMenuItem.Click += new System.EventHandler(this.任务时间ToolStripMenuItem_Click);
+            // 
             // btnPreset
             // 
             this.btnPreset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -427,11 +431,6 @@
             this.btnTake.UseVisualStyleBackColor = true;
             this.btnTake.Click += new System.EventHandler(this.btnTake_Click);
             // 
-            // timAI
-            // 
-            this.timAI.Interval = 200;
-            this.timAI.Tick += new System.EventHandler(this.timAI_Tick);
-            // 
             // timTake
             // 
             this.timTake.Enabled = true;
@@ -458,26 +457,35 @@
             this.timTask.Interval = 3000;
             this.timTask.Tick += new System.EventHandler(this.timTask_Tick);
             // 
-            // 系统配置ToolStripMenuItem
+            // GBList
             // 
-            this.系统配置ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.任务时间ToolStripMenuItem});
-            this.系统配置ToolStripMenuItem.Name = "系统配置ToolStripMenuItem";
-            this.系统配置ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
-            this.系统配置ToolStripMenuItem.Text = "系统配置";
+            this.GBList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.GBList.Controls.Add(this.CameraNameList);
+            this.GBList.Location = new System.Drawing.Point(12, 28);
+            this.GBList.Name = "GBList";
+            this.GBList.Size = new System.Drawing.Size(239, 306);
+            this.GBList.TabIndex = 80;
+            this.GBList.TabStop = false;
             // 
-            // 任务时间ToolStripMenuItem
+            // CameraNameList
             // 
-            this.任务时间ToolStripMenuItem.Name = "任务时间ToolStripMenuItem";
-            this.任务时间ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.任务时间ToolStripMenuItem.Text = "定时任务";
-            this.任务时间ToolStripMenuItem.Click += new System.EventHandler(this.任务时间ToolStripMenuItem_Click);
+            this.CameraNameList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.CameraNameList.FormattingEnabled = true;
+            this.CameraNameList.ItemHeight = 12;
+            this.CameraNameList.Location = new System.Drawing.Point(2, 20);
+            this.CameraNameList.Name = "CameraNameList";
+            this.CameraNameList.Size = new System.Drawing.Size(237, 280);
+            this.CameraNameList.TabIndex = 64;
+            this.CameraNameList.DoubleClick += new System.EventHandler(this.CameraNameList_DoubleClick);
             // 
             // frmTask
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(975, 612);
+            this.Controls.Add(this.GBList);
             this.Controls.Add(this.txtCAMERA_NAME);
             this.Controls.Add(this.LB_MSG);
             this.Controls.Add(this.btnAI);
@@ -489,7 +497,6 @@
             this.Controls.Add(this.btnEndReal);
             this.Controls.Add(this.btnTake);
             this.Controls.Add(this.btnStartReal);
-            this.Controls.Add(this.CameraNameList);
             this.Controls.Add(this.YWZ_TXT_LIST);
             this.Name = "frmTask";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -500,6 +507,7 @@
             this.panel1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.GBList.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -508,7 +516,6 @@
         #endregion
 
         private System.Windows.Forms.ListBox YWZ_TXT_LIST;
-        private System.Windows.Forms.ListBox CameraNameList;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnEndReal;
         private System.Windows.Forms.Button btnStartReal;
@@ -540,7 +547,6 @@
         private System.Windows.Forms.Button btnAI;
         private System.Windows.Forms.Label LB_MSG;
         private System.Windows.Forms.Button btnTake;
-        private System.Windows.Forms.Timer timAI;
         private System.Windows.Forms.Timer timTake;
         private System.Windows.Forms.Timer timPreset;
         private System.Windows.Forms.TextBox txtCAMERA_NAME;
@@ -548,5 +554,7 @@
         private System.Windows.Forms.ToolStripMenuItem 同步摄像机列表ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 系统配置ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 任务时间ToolStripMenuItem;
+        private System.Windows.Forms.GroupBox GBList;
+        private System.Windows.Forms.ListBox CameraNameList;
     }
 }

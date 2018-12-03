@@ -8,17 +8,14 @@ using System.Text;
 using System.Windows.Forms;
 using TLKJ.Utils;
 using TLKJ.DB;
-using Emgu.CV;
-using Emgu.CV.Structure;
 using System.Runtime.InteropServices;
-using Emgu.CV.UI;
 
 namespace GTWS_TASK.UI
 {
     public partial class frmImage : Form
     {
-        String cFileName = @"D:\VideoAI\GTWS_TASK\bin\Debug\Images\201811161629330000014660000000.jpg";
-        private ImageBox ActiveBox = null;
+        String cFileName = @"IMG01.jpg";
+        private PictureBox ActiveBox = null;
         public frmImage()
         {
             InitializeComponent();
@@ -40,52 +37,13 @@ namespace GTWS_TASK.UI
             JActiveTable aMaster = new JActiveTable();
             JActiveTable aSlave = new JActiveTable();
             aSlave.TableName = "XT_IMG_LIST";
-            aMaster.TableName = "XT_IMG_REC";
-
-            String cExportDir = "Export";
-            String cREC_ID = "123456";
-            Image<Bgr, Byte> Bgr_Image = new Image<Bgr, byte>(cFileName);
-            Image<Gray, Byte> Gray_Image = Bgr_Image.Convert<Gray, Byte>();
-            Image<Gray, Byte> Binary_Image = new Image<Gray, byte>(Gray_Image.Size);
-
-            //CvInvoke.cvThreshold(Gray_Image, Binary_Image, iGrayMinVal, iGrayMaxVal, Emgu.CV.CvEnum.THRESH.CV_THRESH_BINARY);
-            ActiveBox.Image = Binary_Image;
-            //if (cExportDir.Length > 0)
-            //{
-            //    return;
-            //}
-
-            IntPtr Dyncontour = new IntPtr();
-            IntPtr Dynstorage = CvInvoke.cvCreateMemStorage(0);
-            MCvContour con = new MCvContour();
-
-            int n = CvInvoke.cvFindContours(Gray_Image, Dynstorage, ref Dyncontour, Marshal.SizeOf(con), Emgu.CV.CvEnum.RETR_TYPE.CV_RETR_CCOMP, Emgu.CV.CvEnum.CHAIN_APPROX_METHOD.CV_CHAIN_APPROX_SIMPLE, new Point(0, 0));
-            Seq<Point> vContour = new Seq<Point>(Dyncontour, null);
-
-            //IntPtr dst = CvInvoke.cvCreateImage(CvInvoke.cvGetSize(Gray_Image), Emgu.CV.CvEnum.IPL_DEPTH.IPL_DEPTH_8U, 3);
-            // CvInvoke.cvZero(dst);
-
-            int i = -1;
-            for (; vContour != null && vContour.Ptr.ToInt32() != 0; vContour = vContour.HNext)
-            {
-                Rectangle vRect = vContour.BoundingRectangle;
-                if ((vRect.Width < iMinVal) || (vRect.Height < iMinVal)) continue;
-                if ((vRect.Width > iMaxVal) || (vRect.Height > iMaxVal)) continue;
-                Point ptX = new Point(vRect.X, vRect.Y);
-                Point ptY = new Point(vRect.X + vRect.Width, vRect.Y + vRect.Height);
-                CvInvoke.cvRectangle(Bgr_Image, ptX, ptY, new MCvScalar(255, 0, 0), 2, Emgu.CV.CvEnum.LINE_TYPE.EIGHT_CONNECTED, 1);
-                //i++;
-                //String cKeyID = StringEx.getString(i + 1000);
-                //Image<Bgr, Byte> vResult = Bgr_Image.GetSubRect(vRect);
-                //String cFileName2 = cREC_ID + "_" + cKeyID.ToString();
-                //vResult.Save(cExportDir + "\\" + cKeyID + ".jpg"); 
-            }
-            ActiveBox.Image = Bgr_Image;
+            aMaster.TableName = "XT_IMG_REC"; 
+             
         }
 
         private void frmImage_Load(object sender, EventArgs e)
         {
-            ActiveBox = new ImageBox();
+            ActiveBox = new PictureBox();
             ActiveBox.Parent = this;
             ActiveBox.Left = 10;
             ActiveBox.Top = 10;

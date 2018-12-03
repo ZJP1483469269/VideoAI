@@ -16,8 +16,6 @@ using System.Threading;
 using System.Drawing.Imaging;
 using TLKJ.DB;
 using Renci.SshNet;
-using Emgu.CV;
-using Emgu.CV.Structure;
 
 namespace GTWS_TASK.UI
 {
@@ -25,13 +23,20 @@ namespace GTWS_TASK.UI
     {
         private ArrayList YWZ_VAL_LIST = new ArrayList();
 
-        public ArrayList CAMEAR_VAL_LIST = new ArrayList();
+        public ArrayList CAMEAR_INF_LIST = new ArrayList();
+
+        public List<String> CAMEAR_ID_LIST = new List<String>();
+
         public ArrayList TASK_VAL_LIST = new ArrayList();
 
         Dictionary<String, String> ValDict = new Dictionary<string, string>();
         public String ActiveCameraText;
         public String ActiveCameraCode;
         public String ActiveCameraName;
+
+        public String ActiveDevice_ID;
+        public String ActiveLeftCount;
+
         ulong ulReplayHandle = 0;
         ulong ulRealPlayHandle = 0;//实况
         ulong ulRealPlayCBHandle = 0;//实况码流 
@@ -115,11 +120,13 @@ namespace GTWS_TASK.UI
 
             try
             {
-                if (TASK_VAL_LIST.Count > 0)
+                String cORG_ID = INIConfig.ReadString("Config", AppConfig.ORG_ID);
+                if (getTaskCameraCode(cORG_ID))
                 {
-                    Object objInfo = TASK_VAL_LIST[TASK_VAL_LIST.Count - 1];
-                    TASK_VAL_LIST.RemoveAt(TASK_VAL_LIST.Count - 1);
-                    CameraNameList.SelectedIndex = TASK_VAL_LIST.Count - 1;
+                    log4net.WriteTextLog("剩余任务:" + ActiveLeftCount + ",当前任务:" + ActiveDevice_ID);
+                    int idx = CAMEAR_ID_LIST.IndexOf(ActiveDevice_ID);
+                    Object objInfo = CAMEAR_INF_LIST[idx];
+                    CameraNameList.SelectedIndex = idx;
 
                     IVS_CAMERA_BRIEF_INFO rowKey = (IVS_CAMERA_BRIEF_INFO)objInfo;
 
@@ -156,6 +163,21 @@ namespace GTWS_TASK.UI
             {
                 timPreset.Enabled = true;
             }
+        }
+
+
+        public Boolean getTaskCameraCode(String cOrgID)
+        {
+            String sql = "SELECT TOP 1 DEVICE_ID,(SELECT COUNT(1) FROM  XT_TASK_LIST X WHERE X.ORG_ID='" + cOrgID + "') AS LEFT_TASK FROM XT_TASK_LIST WHERE ORG_ID='" + cOrgID + "' ";
+            DataTable dtRows = DbManager.GetDataTable(sql);
+            if (dtRows != null && dtRows.Rows.Count > 0)
+            {
+                ActiveDevice_ID = StringEx.getString(dtRows, 0, "DEVICE_ID");
+                ActiveLeftCount = StringEx.getString(dtRows, 0, "LEFT_TASK");
+                DbManager.ExeSql(" DELETE FROM XT_TASK_LIST WHERE ORG_ID='" + cOrgID + "' AND DEVICE_ID='" + ActiveDevice_ID + "'");
+                return true;
+            }
+            return false;
         }
 
         public int InitCameraLogin()
@@ -206,19 +228,19 @@ namespace GTWS_TASK.UI
             int iCameraCount = 0;
             try
             {
-                long sizeList = Marshal.SizeOf(typeof(IVS_CAMERA_BRIEF_INFO_LIST));//992
-                long sizeInfo = Marshal.SizeOf(typeof(IVS_CAMERA_BRIEF_INFO));//980
-                long deviceInfoLen = (pIndexRange.uiToIndex - pIndexRange.uiFromIndex) * sizeInfo;//2939020
-                long iBuffSize = sizeList + deviceInfoLen;//2940012
-                IntPtr pDeviceListPtr = Marshal.AllocHGlobal((int)iBuffSize);//734789664
-                IntPtr pDeviceINFO = Marshal.AllocHGlobal((int)deviceInfoLen);//737738784
+                long sizeList = Marshal.SizeOf(typeof(IVS_CAMERA_BRIEF_INFO_LIST));                 //992
+                long sizeInfo = Marshal.SizeOf(typeof(IVS_CAMERA_BRIEF_INFO));                      //980
+                long deviceInfoLen = (pIndexRange.uiToIndex - pIndexRange.uiFromIndex) * sizeInfo;  //2939020
+                long iBuffSize = sizeList + deviceInfoLen;                                          //2940012
+                IntPtr pDeviceListPtr = Marshal.AllocHGlobal((int)iBuffSize);                       //734789664
+                IntPtr pDeviceINFO = Marshal.AllocHGlobal((int)deviceInfoLen);                      //737738784
 
                 int iCode = IVS_API.IVS_SDK_GetDeviceList(ApplicationEvent.iSession, 2, ref pIndexRange, pDeviceListPtr, (uint)iBuffSize);//0
 
                 IVS_CAMERA_BRIEF_INFO_LIST list = new IVS_CAMERA_BRIEF_INFO_LIST();
                 list.stCamerBriefInfo = new IVS_CAMERA_BRIEF_INFO[pIndexRange.uiToIndex - pIndexRange.uiFromIndex];
                 list = (IVS_CAMERA_BRIEF_INFO_LIST)Marshal.PtrToStructure(pDeviceListPtr, typeof(IVS_CAMERA_BRIEF_INFO_LIST));
-                iCameraCount = StringEx.getInt(list.uiTotal);//得到数量                
+                iCameraCount = StringEx.getInt(list.uiTotal);                                       //得到数量                
                 Marshal.FreeHGlobal(pDeviceListPtr);
                 Marshal.FreeHGlobal(pDeviceINFO);
             }
@@ -230,7 +252,7 @@ namespace GTWS_TASK.UI
         }
         public void InitCamearaList(int iPACK_SIZE)
         {
-            CAMEAR_VAL_LIST.Clear();
+            CAMEAR_INF_LIST.Clear();
             CameraNameList.Items.Clear();
 
             IVS_INDEX_RANGE pIndexRange = new IVS_INDEX_RANGE();
@@ -262,7 +284,8 @@ namespace GTWS_TASK.UI
                         Marshal.Copy(tempInfoByte, 0, tempInfoIntPtr, (int)sizeInfo);
 
                         IVS_CAMERA_BRIEF_INFO st = (IVS_CAMERA_BRIEF_INFO)Marshal.PtrToStructure(tempInfoIntPtr, typeof(IVS_CAMERA_BRIEF_INFO));//摄像机的内容                
-                        CAMEAR_VAL_LIST.Add(st);
+                        CAMEAR_INF_LIST.Add(st);
+                        CAMEAR_ID_LIST.Add(st.cCode);
                         CameraNameList.Items.Add(st.cCameraLocation);
                     }
                     Marshal.FreeHGlobal(tempInfoIntPtr);
@@ -413,7 +436,7 @@ namespace GTWS_TASK.UI
             if (CameraNameList.SelectedIndex != -1)
             {
                 int iPos = CameraNameList.SelectedIndex;
-                IVS_CAMERA_BRIEF_INFO vCameraInfo = (IVS_CAMERA_BRIEF_INFO)CAMEAR_VAL_LIST[iPos];
+                IVS_CAMERA_BRIEF_INFO vCameraInfo = (IVS_CAMERA_BRIEF_INFO)CAMEAR_INF_LIST[iPos];
                 timAfter.Enabled = false;
                 ActiveCameraCode = vCameraInfo.cCode;
                 ArrayList YZWList = Camera_YZW_List(ActiveCameraCode);
@@ -578,11 +601,17 @@ namespace GTWS_TASK.UI
             {
                 InitCamearaList(iCameraCount);
             }
-            TASK_VAL_LIST = CAMEAR_VAL_LIST;
+            TASK_VAL_LIST = CAMEAR_INF_LIST;
+            GBList.Text = "共" + CAMEAR_INF_LIST.Count + "个摄像机";
         }
 
         private void 遍历截图ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            String cORG_ID = INIConfig.ReadString("Config", AppConfig.ORG_ID);
+            DbManager.ExeSql("INSERT INTO XT_TASK_LIST(DEVICE_ID,ORG_ID) "
+                   + " SELECT DEVICE_ID,ORG_ID "
+                   + " FROM XT_CAMERA WHERE ORG_ID='" + cORG_ID + "' "
+                   + " AND NOT EXISTS(SELECT 1 FROM XT_TASK_LIST X WHERE X.DEVICE_ID=XT_CAMERA.DEVICE_ID AND X.ORG_ID='" + cORG_ID + "') ");
             this.timAfter.Enabled = true;
         }
 
@@ -640,27 +669,24 @@ namespace GTWS_TASK.UI
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //String cAppDir = Path.GetDirectoryName(Application.ExecutablePath) + "\\Images\\";
-            //if (Directory.Exists(cAppDir))
-            //{
-            //    Directory.CreateDirectory(cAppDir);
-            //}
+            String cAppDir = Path.GetDirectoryName(Application.ExecutablePath) + "\\Images\\";
+            if (Directory.Exists(cAppDir))
+            {
+                Directory.CreateDirectory(cAppDir);
+            }
 
-            //String cKeyID = AutoID.getAutoID();
-            //String cImageFileName = cAppDir + cKeyID + ".jpg";
-            //int iCode = IVS_API.IVS_SDK_LocalSnapshot(ApplicationEvent.iSession, (UInt32)ulRealPlayHandle, 1, cImageFileName);
-            //if (iCode == 0)
-            //{
-            //    Image<Gray, byte> GrayImage = IVS_AI.getGrayImage(cImageFileName);
-            //    String cAutoID = AutoID.getAutoID();
-            //    GrayImage.Save("D:\\" + cAutoID + ".jpg");
-            //    this.LB_MSG.Text = IVS_AI.getKeyText(GrayImage);
-            //    //pictureBox1.Load("D:\\" + cAutoID + ".jpg");
-            //}
-            //else
-            //{
-            //    log4net.WriteTextLog("IVS_SDK_LocalSnapshot:" + iCode);
-            //}
+            String cKeyID = AutoID.getAutoID();
+            String cImageFileName = cAppDir + cKeyID + ".jpg";
+            int iCode = IVS_API.IVS_SDK_LocalSnapshot(ApplicationEvent.iSession, (UInt32)ulRealPlayHandle, 1, cImageFileName);
+            if (iCode == 0)
+            {
+                String cKeyTex = TLKJ_AI.getImageText(cImageFileName);
+                this.LB_MSG.Text = cKeyTex;
+            }
+            else
+            {
+                log4net.WriteTextLog("IVS_SDK_LocalSnapshot:" + iCode);
+            }
         }
 
         private void btnTake_Click(object sender, EventArgs e)
@@ -715,23 +741,24 @@ namespace GTWS_TASK.UI
 
         private void timTake_Tick(object sender, EventArgs e)
         {
-            int iDFS_FLAG = StringEx.getInt(INIConfig.ReadString("UPLOAD", "DFS_FLAG", "0"));
-            if (iDFS_FLAG > 0)
+            timTake.Enabled = false;
+            try
             {
-                timTake.Enabled = false;
-                try
+                int iDFS_FLAG = StringEx.getInt(INIConfig.ReadString("UPLOAD", "DFS_FLAG", "0"));
+                if (iDFS_FLAG > 0)
                 {
                     UploadTask.Execute();
                 }
-                catch (Exception ex)
-                {
-
-                }
-                finally
-                {
-                    timTake.Enabled = true;
-                }
             }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                timTake.Enabled = true;
+            }
+
         }
 
         private void timPreset_Tick(object sender, EventArgs e)
@@ -785,42 +812,62 @@ namespace GTWS_TASK.UI
                     Directory.CreateDirectory(cAppDir);
                 }
 
-
+                int iPRESET_ID = 9999;
                 String cKeyID = "";
                 string cKeyGuid = "";
                 if (idx != -1)
                 {
                     cKeyID = AutoID.getAutoID() + "_" + String.Format("{0:0#00}", idx);
                     cKeyGuid = ActiveCameraCode + "X" + String.Format("{0:0#00}", idx);
+                    iPRESET_ID = idx;
                 }
                 else
                 {
                     cKeyID = AutoID.getAutoID() + "_0000";
                     cKeyGuid = ActiveCameraCode + "X" + "0000";
+                    iPRESET_ID = 9999;
                 }
 
                 String cFileName = cAppDir + cKeyID + ".jpg";
                 Application.DoEvents();
                 iCode = IVS_API.IVS_SDK_LocalSnapshot(ApplicationEvent.iSession, (UInt32)ulRealPlayHandle, 1, cFileName);
-                DbManager.ExeSql(" insert into XT_CAMERA_STATUS(GUID,CAMERA_ID,PRESET_ID) VALUES('" + cKeyGuid + "','" + ActiveCameraCode + "'," + idx + 1 + ")");
 
-                List<String> sqls = new List<string>();
                 if (iCode == 0)
                 {
+                    log4net.WriteTextLog("IVS_SDK_LocalSnapshot成功！" + cFileName);
+                    String cKeyText = TLKJ_AI.getImageText(cFileName);
+                    List<String> sqls = new List<string>();
                     String cDayTime = DateTime.Now.ToString("yyyyMMddHHmmss");
                     String cFileDir = "/Images/" + cKeyID + ".jpg";
-                    StringBuilder sql = new StringBuilder();
-                    sql.Append("insert into XT_IMG_REC ");
-                    sql.Append(" (REC_ID,CAMERA_ID,PRESET_ID,FILE_URL,CREATE_TIME,UPLOAD_FLAG )");
-                    sql.Append(" values('" + cKeyID + "','" + ActiveCameraCode + "','" + idx + 1 + "','" + cFileDir + "','" + cDayTime + "',0)");
-                    sqls.Add(sql.ToString());
-                    sqls.Add(" UPDATE XT_CAMERA_STATUS SET FILE_URL='" + cFileDir + "',UPDATE_TIME='" + cDayTime + "' WHERE GUID='" + cKeyGuid + "'");
+                    JActiveTable aMaster = new JActiveTable();
+                    aMaster.TableName = "XT_IMG_REC";
+                    aMaster.AddField("REC_ID", cKeyID);
+                    aMaster.AddField("CAMERA_ID", ActiveCameraCode);
+                    aMaster.AddField("PRESET_ID", iPRESET_ID);
+                    if (!String.IsNullOrEmpty(cKeyText))
+                    {
+                        aMaster.AddField("P", TLKJ_AI.getP(cKeyText));
+                        aMaster.AddField("T", TLKJ_AI.getT(cKeyText));
+                        aMaster.AddField("X", TLKJ_AI.getX(cKeyText));
+                    }
+                    aMaster.AddField("FILE_URL", cFileDir);
+                    aMaster.AddField("CREATE_TIME", cDayTime);
+                    aMaster.AddField("UPLOAD_FLAG", 0);
+
+                    String cMasterSQL = aMaster.getInsertSQL();
+                    JActiveTable aSlave = new JActiveTable();
+                    aSlave.TableName = "XT_CAMERA_STATUS";
+                    aSlave.AddField("FILE_URL", cFileDir);
+                    aSlave.AddField("UPDATE_TIME", cDayTime);
+                    String cSlaveSQL = aSlave.getUpdateSQL("CAMERA_ID = '" + ActiveCameraCode + "' AND PRESET_ID = '" + StringEx.getString(iPRESET_ID) + "'");
+
+                    sqls.Add(cMasterSQL);
+                    sqls.Add(cSlaveSQL);
                     iCode = DbManager.ExeSql(sqls).Code;
                     if (iCode > 0)
                     {
                         log4net.WriteTextLog(cKeyID + "插入数据库成功");
                     }
-                    log4net.WriteTextLog("IVS_SDK_LocalSnapshot成功！" + cFileName);
                 }
                 else
                 {
@@ -845,42 +892,58 @@ namespace GTWS_TASK.UI
             }
         }
 
+        public Boolean CheckTask(String cTaskID)
+        {
+            Boolean AllowTask = INIConfig.ReadInt("TASK", cTaskID + "_FLAG") > 0;
+            String cDayHour = DateTime.Now.ToString("HHmm");
+            String cDay = DateTime.Now.ToString("yyyyMMdd");
+            String cORG_ID = INIConfig.ReadString("Config", AppConfig.ORG_ID);
+            if (AllowTask)
+            {
+                String cTASK = INIConfig.ReadString("TASK", cTaskID);
+                if (cTASK.Equals(cDayHour))
+                {
+                    String cTASK_DAY = INIConfig.ReadString("TASK", cTaskID + "_DAY");
+                    if (!cTASK_DAY.Equals(cDay))
+                    {
+                        JActiveTable aTable = new JActiveTable();
+                        aTable.TableName = "XT_TASK";
+                        aTable.AddField("TASK_ID", cTaskID);
+                        aTable.AddField("TASK_TIME", cTASK);
+                        aTable.AddField("TASK_DAY", cDay);
+                        aTable.AddField("ORG_ID", cORG_ID);
+                        String sql = aTable.getUpdateSQL(" ORG_ID='" + cORG_ID + "' AND TASK_ID='" + cTaskID + "'");
+                        int iCode = DbManager.ExeSql(sql).Code;
+                        if (iCode == 0)
+                        {
+                            sql = aTable.getInsertSQL();
+                            iCode = DbManager.ExeSql(sql).Code;
+                        }
+                        INIConfig.Write("TASK", cTaskID + "_DAY", cDay);
+                        return iCode > 0;
+                    }
+                }
+                return false;
+            }
+            else
+            {
+                return false;
+            }
 
+        }
 
         private void timTask_Tick(object sender, EventArgs e)
         {
-            Boolean AllowAMTask = INIConfig.ReadInt("TASK", AppConfig.DAY_AM + "_FLAG") > 0;
-            Boolean AllowPMTask = INIConfig.ReadInt("TASK", AppConfig.DAY_PM + "_FLAG") > 0;
-            String cDayHour = DateTime.Now.ToString("HHmmss");
-            String cDay = DateTime.Now.ToString("yyyyMMdd");
-            if (AllowAMTask)
+            if (CheckTask(AppConfig.DAY_AM))
             {
-                String cTASK_AM = INIConfig.ReadString("TASK", AppConfig.DAY_AM);
-                if (cTASK_AM.Equals(cDayHour))
-                {
-                    String cTASK_DAY = INIConfig.ReadString("TASK", AppConfig.DAY_AM + "_DAY");
-                    if (!cTASK_DAY.Equals(cDay))
-                    {
-                        MUToolStripMenuItem_Click(null, null);
-                        timAfter.Enabled = true;
-                        INIConfig.Write("TASK", AppConfig.DAY_AM + "_DAY", cDay);
-                    }
-                }
+                MUToolStripMenuItem_Click(null, null);
+                timAfter.Enabled = true;
 
             }
-            if (AllowPMTask)
+            else if (CheckTask(AppConfig.DAY_PM))
             {
-                String cTASK_PM = INIConfig.ReadString("TASK", AppConfig.DAY_PM);
-                if (cTASK_PM.Equals(cDayHour))
-                {
-                    String cTASK_DAY = INIConfig.ReadString("TASK", AppConfig.DAY_PM + "_DAY");
-                    if (!cTASK_DAY.Equals(cDay))
-                    {
-                        MUToolStripMenuItem_Click(null, null);
-                        timAfter.Enabled = true;
-                        INIConfig.Write("TASK", AppConfig.DAY_PM + "_DAY", cDay);
-                    }
-                }
+                MUToolStripMenuItem_Click(null, null);
+                timAfter.Enabled = true;
             }
         }
 
@@ -888,12 +951,10 @@ namespace GTWS_TASK.UI
         {
             String cORG_ID = INIConfig.ReadString("Config", AppConfig.ORG_ID);
             JActiveTable aTable = new JActiveTable();
-            for (int i = 0; i < TASK_VAL_LIST.Count; i++)
+            for (int i = TASK_VAL_LIST.Count - 1; i >= 0; i--)
             {
-                Object objInfo = TASK_VAL_LIST[TASK_VAL_LIST.Count - 1];
-                TASK_VAL_LIST.RemoveAt(TASK_VAL_LIST.Count - 1);
-                CameraNameList.SelectedIndex = TASK_VAL_LIST.Count - 1;
-
+                Object objInfo = TASK_VAL_LIST[i];
+                CameraNameList.SelectedIndex = i;
                 IVS_CAMERA_BRIEF_INFO rowKey = (IVS_CAMERA_BRIEF_INFO)objInfo;
 
                 aTable.TableName = "XT_CAMERA_LIST";
@@ -922,7 +983,6 @@ namespace GTWS_TASK.UI
                         log4net.WriteTextLog("摄像机写入成功");
                     else
                         log4net.WriteTextLog("摄像机写入失败");
-
                 }
             }
         }

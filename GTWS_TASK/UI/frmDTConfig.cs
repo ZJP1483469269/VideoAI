@@ -26,6 +26,7 @@ namespace GTWS_TASK.UI
         {
             INIConfig.Write("TASK", AppConfig.DAY_AM, this.txtDAY_AM.Text);
             INIConfig.Write("TASK", AppConfig.DAY_PM, this.txtDAY_PM.Text);
+            this.Close();
         }
 
         private void frmConfig_Load(object sender, EventArgs e)

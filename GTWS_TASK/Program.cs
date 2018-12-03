@@ -1,11 +1,12 @@
-﻿using GTWS_TASK.UI;
+﻿
+using GTWS_TASK.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using TLKJ.Utils;
 
-namespace GTWS_TASK
+namespace GTWS_BD
 {
     static class Program
     {

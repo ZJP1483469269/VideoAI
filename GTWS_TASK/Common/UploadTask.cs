@@ -71,7 +71,7 @@ namespace TLKJ_IVS
                     isUpload = false;
                     if (iEXPORT_IMAGE > 0)
                     {
-                        List<String> ImageList = TLKJ_AI_24.GetImageList(cREC_ID, cFileName, iMinVal, iMaxVal, iGrayMinVal, iGrayMaxVal);
+                        List<String> ImageList = TLKJ_AI.getImageList(cFileName, iMinVal, iMaxVal, iGrayMinVal, iGrayMaxVal);
                         List<String> sqls = new List<string>();
                         for (int k = 0; (ImageList != null) && (k < ImageList.Count); k++)
                         {
