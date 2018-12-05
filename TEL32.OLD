@@ -1,0 +1,391 @@
+[SYSTEM]
+IRQ=18
+VoiceNum=60
+RecordVoiceNum=30
+MfcNum=32
+DtmfNum=32
+PcmNum=1
+UserBoardNum=0
+TrunkRecvValue=0
+TrunkSendValue=0
+DtmfBeginChannel=0
+VoiceCompress=0
+VariableLenTimeLimit=3
+MfcRecvStream=4
+MfcSendStream=4
+DialVoiceStream=11
+DialVoiceChannel=31
+INTActiveTime=20
+DtmfIntCount=1
+DtmfRecvInterval=1
+TeleConversation=0
+DisablePopBox = 0    // 缺省为0。当设定为1时，禁止弹出对话框
+WaveFormat=0	     //在文件录音、文件放音时，是否采用WAVE格式；仅仅对PCI接口的数字卡有效
+		       0：正常语音格式（缺省值）
+		       1：WAVE语音格式（CCITT A-Law 8000Hz，8位，单声道）
+EnableFSK = 0
+ECRMode = 0
+R=75
+
+InstallDir=C:\DJDBDK\
+CardType=3
+WorkMode=1
+
+#--------------------------------------------------
+# next is new add for fine adjust
+#--------------------------------------------------
+# MasterClock=0    使用从时钟方式，缺省方式
+#               1    使用主时钟方式，自测时使用
+# CRC=0            自动CRC方式
+#       1            DISABLE CRC ，缺省
+# StopLoop=0       从时钟方式时，自动循环检测同步的PCM号
+#            1       从时钟方式时，始终采用PCM0来同步
+#------------------------------------------------------------------------
+MasterClock=0
+CRC=1
+StopLoop=0
+Info=0
+SharedMemAddr=0xd000
+UseDrv=1
+
+#------------------------------------------------------------------------
+# next is add for Volume adjust
+#------------------------------------------------------------------------
+# VoiceRecVol：	-20~+20，缺省为0
+#		语音通道在录音时，调整的音量大小。
+#		单位为db，+6db表示放大一倍，-6db表示缩小一倍。
+# VoicePlayVol：-20~+20，缺省为0
+#		语音通道在放音时，调整的音量大小。
+#------------------------------------------------------------------------
+VoiceRecVol = 0
+VoicePlayVol = 0
+
+
+#------------------------------------------------------------------------
+# 以下配置项，用来指定录音时写文件的时间间隔
+#------------------------------------------------------------------------
+# VoiceSizeItem,  可配置项为0或1，默认为0
+# 0               4秒写一次文件
+# 1               1秒写一次文件
+#
+# 由于VoiceSizeItem配置项是新增加的，需要DJPCI.sys和TCE1_32.DLL都支持才能修改，
+# VoiceSizeItemCanModify，用来显示DJPCI.sys和TCE1_32.DLL是否支持对VoiceSizeItem进行修改。
+# 0     不支持修改VoiceSizeItem
+# 1     可以修改VoiceSizeItem                        
+#------------------------------------------------------------------------
+VoiceSizeItem =0
+VoiceSizeItemCanModify =1
+
+
+[ModeArray]
+#------------------------------------------------------------------------
+# next is new add for WorkMode=8
+#------------------------------------------------------------------------
+# WorkMode=8	在一台PC中，SS1、DSS1、SS7可以同时混用
+#		仅东进PCI数字卡才支持此方式
+#		此时，每个PCM的工作方式由下表确定
+# PcmMode[x]=0	有效值：0、1、2、3
+#		0: 无信令方式(与SS7配合)
+#		1: SS1
+#		2: DSS1(ISDN PRI)
+#		3: SS7
+# 注意：同一片卡上的PCM，其方式必须相同
+#------------------------------------------------------------------------
+PcmMode[1]=0
+PcmMode[2]=0
+PcmMode[3]=0
+PcmMode[4]=0
+PcmMode[5]=1
+PcmMode[6]=1
+PcmMode[7]=1
+PcmMode[8]=1
+PcmMode[9]=1
+PcmMode[10]=1
+PcmMode[11]=1
+PcmMode[12]=1
+PcmMode[13]=1
+PcmMode[14]=1
+PcmMode[15]=1
+PcmMode[16]=1
+#------------------------------------------------------------------------
+
+
+[FSK]
+#------------------------------------------------------------------------
+# next is new add for EnableFSK=1
+#------------------------------------------------------------------------
+# RecvSeizure=100	接收时，检查的前导个数；缺省100，有效值10~300（单位：比特）
+# RecvBuffer=1024	接收时，内部缓冲区的大小；缺省1024，有效值256~8*1024（单位：字节）
+#
+# SendSeizure=300	发送时，发送的前导个数；缺省300，有效值0~1000（单位：比特）
+# SendMark=80		发送时，紧跟前导的MARK个数；缺省80，有效值0~1000（单位：比特）
+# SendBuffer=128	发送时，可以发送数据的最大字节数；缺省128，有效值64~1024（单位：字节）
+# SendVol=-6		发送时，音量的大小；缺省-6，有效值0~-30（单位：DB）
+# BaudRate=1200         发送时，波特率,默认值为1200
+# SymbolFreq0=2100      发送时，标记0的频率，默认值为2100
+# SymbolFreq1=1300      发送时，标记1的频率，默认值为1300
+#------------------------------------------------------------------------
+RecvSeizure=80
+RecvBuffer=1024
+SendSeizure=300
+SendMark=80
+SendBuffer=128
+SendVol=-6
+BaudRate=1200
+SymbolFreq0=2100
+SymbolFreq1=1300
+#------------------------------------------------------------------------
+
+
+[PcmInfo]
+PcmAddr[1]=0x0
+TrunkStream[1]=0
+DialChannelNum[1]=0
+DialStartChannel[1]=0
+MfcLength[1]=5
+MfcLenCtrlPos[1]=1
+MfcLengthTable[1]=0, 0,0,0, 0,0,0, 0,0,0
+CallerEnable[1]=1
+CallerRecvTable[1]=0, 0,0,0, 0,0,0, 0,0,0
+
+PcmAddr[2]=0x0
+TrunkStream[2]=1
+DialChannelNum[2]=0
+DialStartChannel[2]=0
+MfcLength[2]=5
+MfcLenCtrlPos[2]=1
+MfcLengthTable[2]=5, 5,5,5, 5,5,5, 5,5,5
+CallerEnable[2]=0
+CallerRecvTable[2]=0, 0,0,0, 0,0,0, 0,0,0
+
+PcmAddr[3]=0x210
+TrunkStream[3]=0
+DialChannelNum[3]=0
+DialStartChannel[3]=0
+MfcLength[3]=5
+MfcLenCtrlPos[3]=1
+MfcLengthTable[3]=5, 5,5,5, 5,5,5, 5,5,5
+CallerEnable[3]=0
+CallerRecvTable[3]=0, 0,0,0, 0,0,0, 0,0,0
+
+PcmAddr[4]=0x210
+TrunkStream[4]=1
+DialChannelNum[4]=0
+DialStartChannel[4]=0
+MfcLength[4]=5
+MfcLenCtrlPos[4]=1
+MfcLengthTable[4]=5, 5,5,5, 5,5,5, 5,5,5
+CallerEnable[4]=0
+CallerRecvTable[4]=0, 0,0,0, 0,0,0, 0,0,0
+
+PcmAddr[5]=0x2
+TrunkStream[5]=0
+DialChannelNum[5]=0
+DialStartChannel[5]=0
+MfcLength[5]=5
+MfcLenCtrlPos[5]=1
+MfcLengthTable[5]=5, 5,5,5, 5,5,5, 5,5,5
+CallerEnable[5]=1
+CallerRecvTable[5]=0, 0,0,0, 0,0,0, 0,0,0
+
+PcmAddr[6]=0x2
+TrunkStream[6]=1
+DialChannelNum[6]=0
+DialStartChannel[6]=0
+MfcLength[6]=5
+MfcLenCtrlPos[6]=1
+MfcLengthTable[6]=5, 5,5,5, 5,5,5, 5,5,5
+CallerEnable[6]=0
+CallerRecvTable[6]=0, 0,0,0, 0,0,0, 0,0,0
+
+PcmAddr[7]=0x1
+TrunkStream[7]=2
+DialChannelNum[7]=0
+DialStartChannel[7]=0
+MfcLength[7]=5
+MfcLenCtrlPos[7]=1
+MfcLengthTable[7]=5, 5,5,5, 5,5,5, 5,5,5
+CallerEnable[7]=0
+CallerRecvTable[7]=0, 0,0,0, 0,0,0, 0,0,0
+
+PcmAddr[8]=0x1
+TrunkStream[8]=3
+DialChannelNum[8]=0
+DialStartChannel[8]=0
+MfcLength[8]=5
+MfcLenCtrlPos[8]=1
+MfcLengthTable[8]=5, 5,5,5, 5,5,5, 5,5,5
+CallerEnable[8]=0
+CallerRecvTable[8]=0, 0,0,0, 0,0,0, 0,0,0
+
+PcmAddr[9]=0x2
+TrunkStream[9]=0
+DialChannelNum[9]=0
+DialStartChannel[9]=0
+MfcLength[9]=5
+MfcLenCtrlPos[9]=1
+MfcLengthTable[9]=5, 5,5,5, 5,5,5, 5,5,5
+CallerEnable[9]=
+CallerEnable[9]=0
+CallerRecvTable[9]=0, 0,0,0, 0,0,0, 0,0,0
+
+PcmAddr[10]=0x2
+TrunkStream[10]=1
+DialChannelNum[10]=0
+DialStartChannel[10]=0
+MfcLength[10]=5
+MfcLenCtrlPos[10]=1
+MfcLengthTable[10]=5, 5,5,5, 5,5,5, 5,5,5
+CallerEnable[10]=0
+CallerRecvTable[10]=0, 0,0,0, 0,0,0, 0,0,0
+
+PcmAddr[11]=0x2
+TrunkStream[11]=2
+DialChannelNum[11]=0
+DialStartChannel[11]=0
+MfcLength[11]=5
+MfcLenCtrlPos[11]=1
+MfcLengthTable[11]=5, 5,5,5, 5,5,5, 5,5,5
+CallerEnable[11]=0
+CallerRecvTable[11]=0, 0,0,0, 0,0,0, 0,0,0
+
+PcmAddr[12]=0x2
+TrunkStream[12]=3
+DialChannelNum[12]=0
+DialStartChannel[12]=0
+MfcLength[12]=5
+MfcLenCtrlPos[12]=1
+MfcLengthTable[12]=5, 5,5,5, 5,5,5, 5,5,5
+CallerEnable[12]=0
+CallerRecvTable[12]=0, 0,0,0, 0,0,0, 0,0,0
+
+PcmAddr[13]=0x3
+TrunkStream[13]=0
+DialChannelNum[13]=0
+DialStartChannel[13]=0
+MfcLength[13]=5
+MfcLenCtrlPos[13]=1
+MfcLengthTable[13]=5, 5,5,5, 5,5,5, 5,5,5
+CallerEnable[13]=0
+CallerRecvTable[13]=0, 0,0,0, 0,0,0, 0,0,0
+
+PcmAddr[14]=0x3
+TrunkStream[14]=1
+DialChannelNum[14]=0
+DialStartChannel[14]=0
+MfcLength[14]=5
+MfcLenCtrlPos[14]=1
+MfcLengthTable[14]=5, 5,5,5, 5,5,5, 5,5,5
+CallerEnable[14]=
+CallerRecvTable[14]=0, 0,0,0, 0,0,0, 0,0,0
+
+PcmAddr[15]=0x3
+TrunkStream[15]=2
+DialChannelNum[15]=0
+DialStartChannel[15]=0
+MfcLength[15]=5
+MfcLenCtrlPos[15]=1
+MfcLengthTable[15]=5, 5,5,5, 5,5,5, 5,5,5
+CallerEnable[15]=
+CallerRecvTable[15]=0, 0,0,0, 0,0,0, 0,0,0
+
+PcmAddr[16]=0x3
+TrunkStream[16]=3
+DialChannelNum[16]=0
+DialStartChannel[16]=0
+MfcLength[16]=5
+MfcLenCtrlPos[16]=1
+MfcLengthTable[16]=5, 5,5,5, 5,5,5, 5,5,5
+CallerEnable[16]=
+CallerRecvTable[16]=0, 0,0,0, 0,0,0, 0,0,0
+
+[UserInfo]
+UserBoardType[1]=16
+UserAddr[1]=0x1200
+UserStream[1]=15
+UserNumber[1]=16
+
+[Fax]
+FaxCardNo=0
+MemAddr=0xd800
+FaxStream=14
+
+Fax1=0x2200
+Fax2=0x2600
+Fax3=0x2A00
+Fax4=0x2E00
+Fax5=0x3200
+Fax6=0x3600
+Fax7=0x3A00
+Fax8=0x3E00
+
+[DJTTS]
+MinCutSize=10	
+* 自动断句时，最少的汉字数；必须大于等于10；缺省为10
+MaxCutSize=80
+* 自动断句时，最多的汉字数；必须大于MinCutSize；缺省为80
+CN_Divide=，。、！？；
+* 用来断句的汉字标点符号表；不能为空；最多10个汉字
+ENG_Dive=,.!?;
+* 用来断句的英文标点符号表；最多10个英文字符
+
+[Conf]
+CardNum=1
+CardType=0
+ConfCTx = 1    //缺省为1，表示会议资源将会过机；设定为0，则会议资源不过机
+ConfDtmf = 1   // 是否抑制DTMF，1表示抑制，0表示不抑制，缺省为1
+ConfVocMode = 0		// 对会议放音时，是否可以使用中继通道的语音资源。0表示不可以，1表示可以，缺省为0。
+
+Addr[1]=0x8200
+Stream[1]=7
+
+Addr[2]=0x8204
+Stream[2]=6
+
+Addr[3]=0x8208
+Stream[3]=5
+
+#--------------------------------------------------------------------------
+# next section is new add for Skip Time Slot(the skipped TS is Signalling TS)
+#--------------------------------------------------------------------------
+# SkipTS_All =    0       与原来兼容的方式，所有的PCM跳过第16时隙（缺省值）
+#                 1~31    设定所有的PCM跳过的时隙编号
+#                 -1      按照下面的表格，设定每个PCM跳过的时隙编号
+# SkipTS_Pcm[x] = 1~31    设定本PCM跳过的时隙编号，当SkipTS_ALL = -1时生效
+#-------------------------------------------------------------------------
+[SkipTS]
+SkipTS_All = 0
+SkipTS_Pcm[1] = 16
+SkipTS_Pcm[2] = 16
+SkipTS_Pcm[3] = 16
+SkipTS_Pcm[4] = 16
+SkipTS_Pcm[5] = 16
+SkipTS_Pcm[6] = 16
+SkipTS_Pcm[7] = 16
+SkipTS_Pcm[8] = 16
+SkipTS_Pcm[9] = 16
+SkipTS_Pcm[10] = 16
+SkipTS_Pcm[11] = 16
+SkipTS_Pcm[12] = 16
+SkipTS_Pcm[13] = 16
+SkipTS_Pcm[14] = 16
+SkipTS_Pcm[15] = 16
+SkipTS_Pcm[16] = 16
+
+[NewConf]
+CardNum=0
+#新会议卡板卡数量，最大为4
+NewConfFlag=1
+#是否使能新会议卡1.使能。0.不使能
+GroupMaxMember=512
+#默认最大成员数。应小于等于512
+GroupMaxSpeaker=10
+#默认最大可说话成员数。应小于等于64
+GroupMaxSpeaking=4
+#默认最大可同时说话成员数。应小于等于6
+MaxSilenceTime=1
+#默认最小静默时间，应小于等于5
+JoinedByEnergy=1
+#默认会议模式1.抢占模式.0.不抢占模式
+[VT]
+VTCardNum=0
