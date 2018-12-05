@@ -176,6 +176,12 @@
     <Compile Include="UI\frmPreset.Designer.cs">
       <DependentUpon>frmPreset.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\frmTask.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1231,19 +1237,19 @@
     <Content Include="Config.ini">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="images\IMG01.jpg">
+    <Content Include="Model\IMG01.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="images\OpenCV_Chessboard.png">
+    <Content Include="Model\OpenCV_Chessboard.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="images\OpenCV_Chessboard2.png">
+    <Content Include="Model\OpenCV_Chessboard2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="images\OpenCV_Chessboard3.png">
+    <Content Include="Model\OpenCV_Chessboard3.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="images\Photo.png">
+    <Content Include="Model\Photo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="x64\liblept172.dll">
@@ -1333,6 +1339,7 @@
     <Folder Include="bin\x86\Debug\zh-cn\" />
     <Folder Include="bin\x86\Debug\zh-tw\" />
     <Folder Include="doc\" />
+    <Folder Include="images\" />
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
@@ -1366,6 +1373,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\frmPreset.resx">
       <DependentUpon>frmPreset.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\frmTask.resx">
       <DependentUpon>frmTask.cs</DependentUpon>

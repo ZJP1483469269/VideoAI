@@ -28,7 +28,7 @@ namespace TLKJ_IVS
 
             int iDFS_FLAG = StringEx.getInt(INIConfig.ReadString("Config", "DFS_FLAG", "0"));
 
-            DataTable dtRows = DbManager.GetDataTable(" select TOP 5 *  from XT_IMG_REC where UPLOAD_FLAG=0  ");
+            DataTable dtRows = DbManager.QueryData(" select TOP 5 *  from XT_IMG_REC where UPLOAD_FLAG=0  ");
             String cAppDir = Application.StartupPath;
             Boolean isUpload = false;
             JActiveTable aMaster = new JActiveTable();
@@ -60,7 +60,7 @@ namespace TLKJ_IVS
                         aMaster.AddField("UPLOAD_FLAG", 1);
                         aMaster.AddField("ALARM_FLAG", 0);
                         log4net.WriteTextLog("REC_ID为：" + cREC_ID + "的图片上传成功！");
-                        int iCode = DbManager.ExeSql(aMaster.getUpdateSQL(" REC_ID='" + cREC_ID + "' ")).Code;
+                        int iCode = DbManager.ExeSql(aMaster.getUpdateSQL(" REC_ID='" + cREC_ID + "' "));
                         if (iCode > 0)
                         {
                             log4net.WriteTextLog("REC_ID为：" + cREC_ID + "的图片抠图成功！");
@@ -71,12 +71,13 @@ namespace TLKJ_IVS
                     isUpload = false;
                     if (iEXPORT_IMAGE > 0)
                     {
-                        List<String> ImageList = TLKJ_AI.getImageList(cFileName, iMinVal, iMaxVal, iGrayMinVal, iGrayMaxVal);
+                        List<KeyValue> ImageList = TLKJ_AI.getImageList(cFileName, iMinVal, iMaxVal, iGrayMinVal, iGrayMaxVal);
                         List<String> sqls = new List<string>();
                         for (int k = 0; (ImageList != null) && (k < ImageList.Count); k++)
                         {
                             Application.DoEvents();
-                            String cImageFileName = ImageList[k];
+                            KeyValue rowKey = ImageList[k];
+                            String cImageFileName = rowKey.Text;
                             if (iDFS_FLAG == 1)
                             {
                                 UploadFlag = Upload(cImageFileName, cDFS_PATH);
@@ -97,10 +98,11 @@ namespace TLKJ_IVS
                                 aSlave.AddField("CAMERA_ID", cREC_ID);
                                 aSlave.AddField("FILE_URL", cDFS_PATH + cImageFileName);
                                 aSlave.AddField("CREATE_TIME", DateUtils.getDayTimeNum());
+                                aSlave.AddField("POINT_LIST", rowKey.Val);
                                 sqls.Add(aSlave.getInsertSQL());
                             }
                         }
-                        int iCode = DbManager.ExeSql(sqls).Code;
+                        int iCode = DbManager.ExeSql(sqls);
                         if (iCode > 0)
                         {
                             isUpload = true;
@@ -111,7 +113,7 @@ namespace TLKJ_IVS
                     {
                         aMaster.ClearField();
                         aSlave.AddField("AI_FLAG", 1);
-                        int iCode = DbManager.ExeSql(aMaster.getUpdateSQL(" REC_ID='" + cREC_ID + "' ")).Code;
+                        int iCode = DbManager.ExeSql(aMaster.getUpdateSQL(" REC_ID='" + cREC_ID + "' "));
                         if (iCode > 0)
                         {
                             log4net.WriteTextLog("REC_ID为：" + cREC_ID + "的图片抠图成功！");
@@ -162,6 +164,10 @@ namespace TLKJ_IVS
                 fs = new FileStream(cFilePath, FileMode.Open);
                 String cFileName = Path.GetFileName(cFilePath);
                 sftp.CreateDirectory(cDFSPath);
+                if (!cDFSPath.EndsWith("/"))
+                {
+                    cDFSPath = cDFSPath + "/";
+                }
                 sftp.UploadFile(fs, cDFSPath + cFileName);
                 return true;
             }
@@ -187,7 +193,7 @@ namespace TLKJ_IVS
             }
         }
 
-        private static bool CopyFile(string cFileName, string cDFS_PATH)
+        public static bool CopyFile(string cFileName, string cDFS_PATH)
         {
             try
             {

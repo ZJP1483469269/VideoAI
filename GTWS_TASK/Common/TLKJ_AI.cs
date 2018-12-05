@@ -18,7 +18,24 @@ namespace TLKJ_IVS
         public static String getImageText(String cFileName)
         {
             Bitmap vBmp = getPTXImage(cFileName);
-            return getImageText(vBmp);
+            String cStr = getImageText(vBmp);
+            if ((cStr.IndexOf("P") != -1) && (cStr.IndexOf("T") != -1) && (cStr.IndexOf("X") != -1))
+                return cStr;
+            else
+            {
+                String cPTXName = cFileName.Replace("images", "ptx");
+                try
+                {
+                    vBmp.Save(cPTXName);
+                    vBmp.Dispose();
+                }
+                catch (Exception ex)
+                {
+                    log4net.WriteTextLog(ex.Message);
+                }
+                log4net.WriteTextLog(cStr);
+                return "";
+            }
         }
         public static float getP(String cStr)
         {
@@ -28,7 +45,7 @@ namespace TLKJ_IVS
             int idxX = cStr.IndexOf("X");
             try
             {
-                String cVal = StringEx.getString(cStr.Substring(idxP, idxT));
+                String cVal = StringEx.getString(cStr.Substring(idxP + 1, idxT - 1));
                 return StringEx.getFloat(cVal);
             }
             catch (Exception ex)
@@ -45,7 +62,7 @@ namespace TLKJ_IVS
             int idxX = cStr.IndexOf("X");
             try
             {
-                String cVal = StringEx.getString(cStr.Substring(idxT, idxX));
+                String cVal = StringEx.getString(cStr.Substring(idxT + 1, idxX - 1));
                 return StringEx.getFloat(cVal);
             }
             catch (Exception ex)
@@ -62,7 +79,7 @@ namespace TLKJ_IVS
             int idxX = cStr.IndexOf("X");
             try
             {
-                String cVal = StringEx.getString(cStr.Substring(idxX));
+                String cVal = StringEx.getString(cStr.Substring(idxX + 1));
                 return StringEx.getFloat(cVal);
             }
             catch (Exception ex)
@@ -131,7 +148,7 @@ namespace TLKJ_IVS
             return BitmapConverter.ToBitmap(GrayImage);
         }
 
-        public static List<String> getImageList(String cFileName)
+        public static List<KeyValue> getImageList(String cFileName)
         {
             int iMinVal = StringEx.getInt(INIConfig.ReadString("Config", AppConfig.IMAGE_MIN, "0"));
             int iMaxVal = StringEx.getInt(INIConfig.ReadString("Config", AppConfig.IMAGE_MAX, "0"));
@@ -142,35 +159,42 @@ namespace TLKJ_IVS
             return getImageList(cFileName, iMinVal, iMaxVal, iGrayMinVal, iGrayMaxVal);
         }
 
-        public static List<String> getImageList(String cFileName, int iMinVal, int iMaxVal, int iGrayMinVal, int iGrayMaxVal)
+        public static List<KeyValue> getImageList(String cFileName, int iMinVal, int iMaxVal, int iGrayMinVal, int iGrayMaxVal)
         {
-            String cID = "Export";
             Mat BgrImage = null;
-            Mat GrayImage = null;
-            List<String> ImageList = new List<String>();
-            String cAbsoDir = Path.GetDirectoryName(cFileName);
-            String cExportDir = cAbsoDir + @"\" + cID;
+            Mat GrayImage = new Mat();
+
+            List<KeyValue> ImageList = new List<KeyValue>();
+            String cExportDir = Path.GetDirectoryName(cFileName);
+            cExportDir = cExportDir.Replace("images", "export") + "\\";
             if (!Directory.Exists(cExportDir))
             {
                 Directory.CreateDirectory(cExportDir); //不存在文件夹，创建
             }
 
+            //调取图片
             BgrImage = Cv2.ImRead(cFileName, ImreadModes.AnyColor);
-            GrayImage = Cv2.ImRead(cFileName, ImreadModes.Grayscale);
+
+            //转灰度
+            Cv2.CvtColor(BgrImage, GrayImage, ColorConversionCodes.BGR2GRAY);
+
+            //转黑白
+            Mat BinaryImage = new Mat();
+
             Mat vMat = new Mat();
-            Cv2.BitwiseAnd(GrayImage, vMat, GrayImage);
-            GrayImage.SaveImage("IMG02.jpg");
-            //Image<Gray, byte> binaryImage = GrayImage.ThresholdBinary(new Gray(thresholdBinary), new Gray(iVal));
-            // ThresholdToZeroInv反取零   ThresholdToZero取零     ThresholdBinary二值    ThresholdBinaryInv反二值  ThresholdTrunc截断
-            Mat binaryImage = GrayImage.Threshold(iGrayMinVal, iMaxVal, ThresholdTypes.Binary);
-            GrayImage.SaveImage("IMG03.jpg");
+
+            BinaryImage = GrayImage.Threshold(iGrayMinVal, iMaxVal, ThresholdTypes.Binary);
+
+            BinaryImage.SaveImage("D:\\IMG03.jpg");
+
+            String cFileID = Path.GetFileName(cFileName).Replace(".jpg", "");
             try
             {
                 OpenCvSharp.Point[][] rvs = new OpenCvSharp.Point[1][];
                 HierarchyIndex[] hierarchys = new HierarchyIndex[1];
 
-                Cv2.FindContours(binaryImage, out rvs, out hierarchys, RetrievalModes.Tree, ContourApproximationModes.ApproxNone);
-
+                Cv2.FindContours(BinaryImage, out rvs, out hierarchys, RetrievalModes.Tree, ContourApproximationModes.ApproxNone);
+                int j = 1;
                 for (int i = 0; i < rvs.Length; i++)
                 {
                     OpenCvSharp.Point[] objItem = rvs[i];
@@ -178,19 +202,25 @@ namespace TLKJ_IVS
 
                     if ((vRect.Width < iMinVal) || (vRect.Height < iMinVal)) continue;
                     if ((vRect.Width > iMaxVal) || (vRect.Height > iMaxVal)) continue;
-                    //j++;
+                    j++;
                     //Point p1 = new Point(vRect.X, vRect.Y);
                     //Point p2 = new Point(vRect.X + vRect.Width, vRect.Y + vRect.Height);
 
                     Mat vResult = new Mat(BgrImage, vRect);
-                    vResult.SaveImage(@"Export\" + Path.GetFileName(cFileName) + "_" + i.ToString() + ".jpg");
+
+                    vResult.SaveImage(cExportDir + cFileID + "_" + j.ToString() + ".jpg");
                     //ImageList.Add(vResult);
                     //String cFileName = DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + i.ToString();
                     //vResult.Save(cExportDir + "\\" + i + ".jpg");
                     //ImageList.Add(cExportDir + "\\" + i + ".jpg");
                     Cv2.Rectangle(BgrImage, vRect, new Scalar(255, 0, 0));
+
+                    KeyValue rowKey = new KeyValue();
+                    rowKey.Text = cExportDir + cFileID + "_" + j.ToString() + ".jpg";
+                    rowKey.Val = JsonLib.ToJSON(vRect);
+                    ImageList.Add(rowKey);
                 }
-                BgrImage.SaveImage("IMG04.jpg");
+                BgrImage.SaveImage("D:\\IMG04.jpg");
             }
             catch (Exception ex)
             {

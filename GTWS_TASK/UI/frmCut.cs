@@ -11,6 +11,7 @@ using TLKJ.Utils;
 using TLKJ.DB;
 using System.IO;
 using OpenCvSharp.Extensions;
+using TLKJ_IVS;
 
 namespace GTWS_BD
 {
@@ -24,11 +25,12 @@ namespace GTWS_BD
 
         private void btnLoad_Click(object sender, EventArgs e)
         {
-            String cFileName = @".\images\IMG01.jpg";
-            List<String> LS = getImageList(cFileName);
+            String cFileName = @".\Model\IMG01.jpg";
+            List<KeyValue> LS = TLKJ_AI.getImageList(cFileName);
             for (int i = 0; i < LS.Count; i++)
             {
-                String vImage = LS[i];
+                KeyValue rowKey = LS[i];
+                String vImage = rowKey.Text;
             }
             MessageBox.Show(LS.Count.ToString());
         }
@@ -94,73 +96,6 @@ namespace GTWS_BD
             {
                 log4net.WriteTextLog("报错，原因为：" + ex);
             }
-        }
-        public List<String> getImageList(String cFileName)
-        {
-            int iMinVal = StringEx.getInt(INIConfig.ReadString("Config", AppConfig.IMAGE_MIN, "0"));
-            int iMaxVal = StringEx.getInt(INIConfig.ReadString("Config", AppConfig.IMAGE_MAX, "0"));
-
-            int iGrayMinVal = StringEx.getInt(INIConfig.ReadString("Config", AppConfig.GRAY_MIN, "0"));
-            int iGrayMaxVal = StringEx.getInt(INIConfig.ReadString("Config", AppConfig.GRAY_MAX, "0"));
-            int iEXPORT_IMAGE = StringEx.getInt(INIConfig.ReadString("Config", AppConfig.EXPORT_IMAGE, "0"));
-            return getImageList(cFileName, iMinVal, iMaxVal, iGrayMinVal, iGrayMaxVal);
-        }
-
-        public List<String> getImageList(String cFileName, int iMinVal, int iMaxVal, int iGrayMinVal, int iGrayMaxVal)
-        {
-            String cID = "Export";
-            Mat BgrImage = null;
-            Mat GrayImage = null;
-            List<String> ImageList = new List<String>();
-            String cAbsoDir = Path.GetDirectoryName(cFileName);
-            String cExportDir = cAbsoDir + @"\" + cID;
-            if (!Directory.Exists(cExportDir))
-            {
-                Directory.CreateDirectory(cExportDir); //不存在文件夹，创建
-            }
-
-            BgrImage = Cv2.ImRead(cFileName, ImreadModes.AnyColor);
-            GrayImage = Cv2.ImRead(cFileName, ImreadModes.Grayscale);
-            Mat vMat = new Mat();
-          //  Cv2.BitwiseAnd(GrayImage, vMat, GrayImage);
-            GrayImage.SaveImage("IMG02.jpg");
-            //Image<Gray, byte> binaryImage = GrayImage.ThresholdBinary(new Gray(thresholdBinary), new Gray(iVal));
-            // ThresholdToZeroInv反取零   ThresholdToZero取零     ThresholdBinary二值    ThresholdBinaryInv反二值  ThresholdTrunc截断
-            Mat binaryImage = GrayImage.Threshold(iGrayMinVal, iMaxVal, ThresholdTypes.Binary);
-            GrayImage.SaveImage("IMG03.jpg");
-            try
-            {
-                OpenCvSharp.Point[][] rvs = new OpenCvSharp.Point[1][];
-                HierarchyIndex[] hierarchys = new HierarchyIndex[1];
-
-                Cv2.FindContours(binaryImage, out rvs, out hierarchys, RetrievalModes.Tree, ContourApproximationModes.ApproxNone);
-
-                for (int i = 0; i < rvs.Length; i++)
-                {
-                    OpenCvSharp.Point[] objItem = rvs[i];
-                    Rect vRect = Cv2.BoundingRect(objItem);
-
-                    if ((vRect.Width < iMinVal) || (vRect.Height < iMinVal)) continue;
-                    if ((vRect.Width > iMaxVal) || (vRect.Height > iMaxVal)) continue;
-                    //j++;
-                    //Point p1 = new Point(vRect.X, vRect.Y);
-                    //Point p2 = new Point(vRect.X + vRect.Width, vRect.Y + vRect.Height);
-
-                    Mat vResult = new Mat(BgrImage, vRect);
-                    vResult.SaveImage(@"Export\" + Path.GetFileName(cFileName) + "_" + i.ToString() + ".jpg");
-                    //ImageList.Add(vResult);
-                    //String cFileName = DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + i.ToString();
-                    //vResult.Save(cExportDir + "\\" + i + ".jpg");
-                    //ImageList.Add(cExportDir + "\\" + i + ".jpg");
-                    Cv2.Rectangle(BgrImage, vRect, new Scalar(255, 0, 0));
-                }
-                BgrImage.SaveImage("IMG04.jpg");
-            }
-            catch (Exception ex)
-            {
-                log4net.WriteTextLog("报错，原因为：" + ex);
-            }
-            return ImageList;
         }
 
         private void IMG_MIN_ValueChanged(object sender, EventArgs e)
