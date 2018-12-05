@@ -75,8 +75,8 @@
     <Compile Include="DBResult.cs" />
     <Compile Include="ExecSqlResult.cs" />
     <Compile Include="IDB.cs" />
+    <Compile Include="DBFactory.cs" />
     <Compile Include="MsSqlDB.cs" />
-    <Compile Include="MySqlDB.cs" />
     <Compile Include="JActiveTable.cs" />
     <Compile Include="JActiveField.cs" />
   </ItemGroup>

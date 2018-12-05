@@ -3,7 +3,7 @@ using System.Web;
 using System.Data;
 using System.Collections;
 using System.Data.SqlClient;
-using System.Text; 
+using System.Text;
 using System;
 using System.Data.Common;
 
@@ -16,8 +16,9 @@ namespace TLKJ.DB
     {
         DBResult QueryData(String cFileList, String cTableName, String cWhereParm, String cOrderBy, int iPageNo, int iPageSize);
 
-        int ExeSql(string[] vSqlList, List<DbParameter[]> vListParms);
+        int ExeSql(List<String> sqls, List<Object[]> ParmList);
 
-        DataTable Query(string strSql, DbParameter[] vArrayParms);
+        DataTable Query(String sql, Object[] ParmList);
+        DbConnection getDBConnect();
     }
 }

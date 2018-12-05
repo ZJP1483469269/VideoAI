@@ -83,7 +83,7 @@ namespace TLKJ.DB
             sql.Append(" ) tab");
             sql.Append(" where rownumber>" + iStart + " and rownumber<=" + iFinish);
 
-            vret.dtrows = GetDataTable(sql.ToString());
+            vret.dtrows = QueryData(sql.ToString());
             return vret;
         }
 
@@ -92,9 +92,17 @@ namespace TLKJ.DB
         /// </summary>
         /// <param name="strSql"></param>
         /// <returns></returns>
-        public static DataTable GetDataTable(string strSql)
+        public static DataTable QueryData(string strSql)
         {
-            return (new DbManager().QueryTable(strSql));
+            IDB vDB = DBFactory.getDB();
+            return vDB.Query(strSql, null);
+        }
+
+
+        public static DataTable QueryData(string strSql, Object[] ParmList)
+        {
+            IDB vDB = DBFactory.getDB();
+            return vDB.Query(strSql, ParmList);
         }
 
         /// <summary>
@@ -105,7 +113,7 @@ namespace TLKJ.DB
         /// <param name="cWhereParm">条件</param>
         /// <param name="cOrderBy">排序</param>
         /// <returns></returns>
-        public static DataTable GetDataTable(String cFileList, String cTableName, String cWhereParm, String cOrderBy)
+        public static DataTable QueryData(String cFileList, String cTableName, String cWhereParm, String cOrderBy)
         {
             StringBuilder sql = new StringBuilder();
             sql.Append(" SELECT " + cFileList);
@@ -118,7 +126,7 @@ namespace TLKJ.DB
             {
                 sql.Append(" order by " + cOrderBy);
             }
-            return GetDataTable(sql.ToString());
+            return QueryData(sql.ToString());
         }
 
         /// <summary>
@@ -128,9 +136,9 @@ namespace TLKJ.DB
         /// <param name="cTableName"></param>
         /// <param name="cWhereParm"></param>
         /// <returns></returns>
-        public static DataTable GetDataTable(String cFileList, String cTableName, String cWhereParm)
+        public static DataTable QueryData(String cFileList, String cTableName, String cWhereParm)
         {
-            return GetDataTable(cFileList, cTableName, cWhereParm, null);
+            return QueryData(cFileList, cTableName, cWhereParm, null);
         }
 
         /// <summary>
@@ -139,62 +147,11 @@ namespace TLKJ.DB
         /// <param name="cFileList"></param>
         /// <param name="cTableName"></param>
         /// <returns></returns>
-        public static DataTable GetDataTable(String cFileList, String cTableName)
+        public static DataTable QueryData(String cFileList, String cTableName)
         {
-            return GetDataTable(cFileList, cTableName, null, null);
+            return QueryData(cFileList, cTableName, null, null);
         }
 
-        /// <summary>
-        /// 获取数据集合
-        /// </summary>
-        /// <param name="strSql"></param>
-        /// <returns></returns>
-        public DataTable QueryTable(string strSql)
-        {
-            strSql = (strSql == null) ? "" : strSql.Trim();
-
-            if (strSql.Equals("")) return null;
-            SqlConnection cn = new SqlConnection(INIConfig.ReadString("Config", "ConnStr"));
-            if (cn == null)
-            {
-                return null;
-            }
-            try
-            {
-                cn.Open();
-            }
-            catch (Exception ex)
-            {
-                log4net.WriteTextLog(ex.Message);
-            }
-            try
-            {
-                SqlCommand cmd = cn.CreateCommand();
-                cmd.CommandText = strSql;
-                SqlDataAdapter dap = new SqlDataAdapter();
-                dap.SelectCommand = cmd;
-                DataSet ds = new DataSet();
-                dap.Fill(ds);
-                if ((ds != null) && (ds.Tables.Count > 0))
-                {
-                    return ds.Tables[0];
-                }
-                else
-                {
-                    return null;
-                }
-            }
-            catch (Exception ex)
-            {
-                log4net.WriteTextLog("SQL：" + ex.Message);
-                log4net.WriteTextLog("执行：" + strSql);
-                return null;
-            }
-            finally
-            {
-                cn.Close();
-            }
-        }
         /// <summary>
         /// 获取指定sqL的值
         /// </summary>
@@ -206,7 +163,7 @@ namespace TLKJ.DB
             string strTemp = null;
             strSql = (strSql == null) ? "" : strSql.Trim();
             if (strSql.Equals("")) return null;
-            DataTable dt = GetDataTable(strSql);
+            DataTable dt = QueryData(strSql);
             if (dt != null && dt.Rows.Count > 0)
             {
                 strTemp = StringEx.getString(dt.Rows[0][0]);
@@ -233,57 +190,29 @@ namespace TLKJ.DB
         public static int GetCount(string strSql)
         {
             string sStr = GetValue(strSql);
-            if (string.IsNullOrEmpty(sStr))
-            {
-                return 0;
-            }
-            else
-            {
-                try
-                {
-                    return int.Parse(sStr);
-                }
-                catch (Exception ex)
-                {
-                    return AppConfig.FAILURE;
-                }
-            }
+            return StringEx.getInt(sStr);
         }
 
-        public static ExecSqlResult ExeSql(List<String> sqlList)
+        public static int ExeSql(List<String> sqlList)
         {
-            string[] sqls = new string[sqlList.Count];
-            for (int i = 0; i < sqlList.Count; i++)
-            {
-                sqls[i] = sqlList[i];
-            }
+            return ExeSql(sqlList, null);
+        }
+
+        public static int ExeSql(string sql)
+        {
+            List<String> sqls = new List<string>();
+            sqls.Add(sql);
             return ExeSql(sqls, null);
         }
 
-        public static ExecSqlResult ExeSql(string sql)
+        public static int ExeSql(String[] sqlList)
         {
-            string[] sqls = new string[1];
-            sqls[0] = sql;
-            return ExeSql(sqls, null);
-        }
-
-        public static ExecSqlResult ExeSql(string[] sqlList)
-        {
-            string[] sqls = new string[sqlList.Length];
+            List<String> sqls = new List<string>();
             for (int i = 0; i < sqlList.Length; i++)
             {
-                sqls[i] = StringEx.getString(sqlList[i]);
+                sqls.Add(StringEx.getString(sqlList[i]));
             }
             return ExeSql(sqls, null);
-        }
-
-        public static ExecSqlResult ExeSql(string sql, DbParameter[] ParmList)
-        {
-            string[] sqls = new string[1];
-            sqls[0] = sql;
-            List<DbParameter[]> vParmList = new List<DbParameter[]>(1);
-            vParmList.Add(ParmList);
-            return ExeSql(sqls, vParmList);
         }
 
         /// <summary>
@@ -292,116 +221,10 @@ namespace TLKJ.DB
         /// <param name="sqlArray"></param>
         /// <param name="callBy"></param>
         /// <returns></returns>
-        public static ExecSqlResult ExeSql(string[] vSqlList, List<DbParameter[]> vParmList)
+        public static int ExeSql(List<String> vSqlList, List<Object[]> vParmList)
         {
-            ExecSqlResult result = new ExecSqlResult();
-            int iSqlCount = 0;
-            SqlConnection cn = null;
-            SqlTransaction trans = null;
-            string sql = "";
-            try
-            {
-                cn = new SqlConnection(INIConfig.ReadString("Config", "ConnStr"));
-                cn.Open();
-                SqlCommand cmd = cn.CreateCommand();
-                trans = cn.BeginTransaction();
-                cmd.Transaction = trans;
-                string Trandid = Guid.NewGuid().ToString();
-                for (int i = 0; i < vSqlList.Length; i++)
-                {
-                    sql = (vSqlList[i] == null) ? "" : vSqlList[i].ToString().Trim();
-                    if (sql.Length > 0)
-                    {
-                        cmd.Parameters.Clear();
-                        cmd.CommandText = sql;
-                        if (vParmList != null)
-                        {
-                            if (vParmList[i] != null)
-                            {
-                                for (int j = 0; j < vParmList[i].Length; j++)
-                                {
-                                    cmd.Parameters.Add(vParmList[i][j]);
-                                }
-                            }
-                        }
-                        int flag = cmd.ExecuteNonQuery();
-                        if (flag > 0)
-                        {
-                            iSqlCount++;
-                        }
-
-                    }
-                }
-                trans.Commit();
-                trans = null;
-                result.Code = iSqlCount;
-                return result;
-            }
-            catch (Exception ex)
-            {
-                log4net.WriteTextLog("SQL：" + ex.Message);
-                log4net.WriteTextLog("执行：" + sql);
-
-                #region
-                if (trans != null) trans.Rollback();
-                #endregion
-                result.Code = -1;
-                result.Message = ex.Message;
-                return result;
-            }
-            finally
-            {
-                if (cn != null)
-                {
-                    try
-                    {
-                        cn.Close();
-                    }
-                    catch (Exception ex)
-                    {
-                        cn = null;
-                    }
-                }
-            }
-        }
-        public static string DataTable2Json(DataTable dt)
-        {
-            if (dt == null || dt.Rows.Count == 0)
-            {
-                return "";
-            }
-            StringBuilder jsonBuilder = new StringBuilder();
-            jsonBuilder.Append("[");
-            for (int i = 0; i < dt.Rows.Count; i++)
-            {
-                jsonBuilder.Append("{");
-                for (int j = 0; j < dt.Columns.Count; j++)
-                {
-                    jsonBuilder.Append("\"");
-                    jsonBuilder.Append(dt.Columns[j].ColumnName);
-                    jsonBuilder.Append("\":\"");
-                    jsonBuilder.Append(dt.Rows[i][j].ToString());
-                    jsonBuilder.Append("\",");
-                }
-                jsonBuilder.Remove(jsonBuilder.Length - 1, 1);
-                jsonBuilder.Append("},");
-            }
-            jsonBuilder.Remove(jsonBuilder.Length - 1, 1);
-            jsonBuilder.Append("]");
-            return jsonBuilder.ToString();
-        }
-
-
-        public static DataSet GetDataSet(string connectionString, string safeSql)
-        {
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                DataSet ds = new DataSet();
-                SqlCommand cmd = new SqlCommand(safeSql, connection);
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                da.Fill(ds);
-                return ds;
-            }
+            IDB vDB = DBFactory.getDB();
+            return vDB.ExeSql(vSqlList, vParmList);
         }
     }
 }

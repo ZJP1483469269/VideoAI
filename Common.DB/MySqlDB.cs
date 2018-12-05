@@ -21,7 +21,63 @@ namespace TLKJ.DB
             // TODO: 在此处添加构造函数逻辑
             //
         }
+        public int ExeSql(List<String> sqls, List<Object[]> Parms)
+        {
+            int iSqlCount = 0;
+            SqlConnection cn = new SqlConnection(Config.GetAppSettings("constr"));
+            cn.Open();
+            SqlTransaction trans = null;
+            string sql = "";
+            try
+            {
+                SqlCommand cmd = cn.CreateCommand();
+                trans = cn.BeginTransaction();
+                cmd.Transaction = trans;
+                string Trandid = Guid.NewGuid().ToString();
+                for (int i = 0; i < sqls.Count; i++)
+                {
+                    sql = (sqls[i] == null) ? "" : sqls[i].ToString().Trim();
+                    if (sql.Length > 0)
+                    {
+                        cmd.Parameters.Clear();
+                        cmd.CommandText = sql;
+                        if (Parms != null)
+                        {
+                            if (Parms[i] != null)
+                            {
+                                for (int j = 0; j < Parms[i].Length; j++)
+                                {
+                                    cmd.Parameters.Add(Parms[i][j]);
+                                }
+                            }
+                        }
+                        int flag = cmd.ExecuteNonQuery();
+                        if (flag > 0)
+                        {
+                            iSqlCount++;
+                        }
 
+                    }
+                }
+                trans.Commit();
+                trans = null;
+                return iSqlCount;
+            }
+            catch (Exception ex)
+            {
+                log4net.WriteTextLog("SQL：" + ex.Message);
+                log4net.WriteTextLog("执行：" + sql);
+
+                #region
+                if (trans != null) trans.Rollback();
+                #endregion
+                return -1;
+            }
+            finally
+            {
+                cn.Close();
+            }
+        }
         /// <summary>
         /// 分页获取
         /// </summary>
@@ -165,8 +221,8 @@ namespace TLKJ.DB
             }
             catch (Exception ex)
             {
-                 log4net.WriteTextLog("SQL：" + ex.Message);
-                 log4net.WriteTextLog("执行：" + strSql);
+                log4net.WriteTextLog("SQL：" + ex.Message);
+                log4net.WriteTextLog("执行：" + strSql);
                 return null;
             }
             finally
@@ -304,8 +360,8 @@ namespace TLKJ.DB
             }
             catch (Exception ex)
             {
-                 log4net.WriteTextLog("SQL：" + ex.Message);
-                 log4net.WriteTextLog("执行：" + sql);
+                log4net.WriteTextLog("SQL：" + ex.Message);
+                log4net.WriteTextLog("执行：" + sql);
 
                 #region
                 if (trans != null) trans.Rollback();
