@@ -1,0 +1,139 @@
+登录时间：2018年12月2日 22:28:23
+访问地址：/api/rest.ashx?action_type=XT_NEWS&action_method=save
+用户地址：::1
+登陆页面：http://localhost:53440/sysweb/news_df_edit.aspx
+操作内容：ActiveResult：{"result":-1,"total":0,"rows":[],"validfield":"","validmessage":"单位编码不能为空！","info":{},"isLock":0}
+登录时间：2018年12月2日 22:29:44
+访问地址：/api/rest.ashx?action_type=XT_NEWS&action_method=find&ID=null
+用户地址：::1
+登陆页面：http://localhost:53440/sysweb/news_df_edit.aspx
+操作内容：ActiveResult：{"result":-1,"total":0,"rows":[],"validfield":"","validmessage":"","info":{},"isLock":0}
+登录时间：2018年12月2日 22:29:50
+访问地址：/api/rest.ashx?action_type=XT_NEWS&action_method=save
+用户地址：::1
+登陆页面：http://localhost:53440/sysweb/news_df_edit.aspx
+操作内容：ActiveResult：{"result":-1,"total":0,"rows":[],"validfield":"","validmessage":"单位编码不能为空！","info":{},"isLock":0}
+登录时间：2018年12月2日 22:32:23
+访问地址：/Admin/login.aspx
+用户地址：::1
+操作内容：Admin_Login
+登录时间：2018年12月2日 22:32:32
+访问地址：/Admin/index.aspx
+用户地址：::1
+登陆页面：http://localhost:53440/Admin/login.aspx
+操作内容：TOKEN的值是49dc583b02d3f2dc51c5db84ba03085
+登录时间：2018年12月2日 22:32:37
+访问地址：/api/rest.ashx?action_type=XT_NEWS&action_method=query&limit=15&offset=0&maxrows=15&ORG_ID=411025&CLS_ID=LAW_GJ&_=1543761157103
+用户地址：::1
+登陆页面：http://localhost:53440/sysweb/news_gj_list.aspx?ID=1701
+操作内容：ActiveResult：{"result":1,"total":0,"rows":[],"validfield":"","validmessage":"","info":{},"isLock":0}
+登录时间：2018年12月2日 22:32:38
+访问地址：/api/rest.ashx?action_type=XT_NEWS&action_method=find&ID=null
+用户地址：::1
+登陆页面：http://localhost:53440/sysweb/news_gj_edit.aspx
+操作内容：ActiveResult：{"result":-1,"total":0,"rows":[],"validfield":"","validmessage":"","info":{},"isLock":0}
+登录时间：2018年12月2日 22:32:55
+访问地址：/api/rest.ashx?action_type=XT_NEWS&action_method=query&limit=15&offset=0&maxrows=15&ORG_ID=411025&CLS_ID=LAW_DF&_=1543761174937
+用户地址：::1
+登陆页面：http://localhost:53440/sysweb/news_df_list.aspx?ID=1702
+操作内容：ActiveResult：{"result":1,"total":0,"rows":[],"validfield":"","validmessage":"","info":{},"isLock":0}
+登录时间：2018年12月2日 22:32:56
+访问地址：/api/rest.ashx?action_type=XT_NEWS&action_method=find&ID=null
+用户地址：::1
+登陆页面：http://localhost:53440/sysweb/news_df_edit.aspx
+操作内容：ActiveResult：{"result":-1,"total":0,"rows":[],"validfield":"","validmessage":"","info":{},"isLock":0}
+登录时间：2018年12月2日 22:33:23
+访问地址：/api/rest.ashx?action_type=XT_NEWS&action_method=save
+用户地址：::1
+登陆页面：http://localhost:53440/sysweb/news_df_edit.aspx
+操作内容：ActiveResult：{"result":-1,"total":0,"rows":[],"validfield":"","validmessage":"单位编码不能为空！","info":{},"isLock":0}
+登录时间：2018年12月2日 22:36:03
+访问地址：/api/rest.ashx?action_type=XT_NEWS&action_method=find&ID=null
+用户地址：::1
+登陆页面：http://localhost:53440/sysweb/news_df_edit.aspx
+操作内容：ActiveResult：{"result":-1,"total":0,"rows":[],"validfield":"","validmessage":"","info":{},"isLock":0}
+登录时间：2018年12月2日 22:38:45
+访问地址：/api/rest.ashx?action_type=XT_NEWS&action_method=save
+用户地址：::1
+登陆页面：http://localhost:53440/sysweb/news_df_edit.aspx
+操作内容：ActiveResult：{"result":-1,"total":0,"rows":[],"validfield":"","validmessage":"单位编码不能为空！","info":{},"isLock":0}
+登录时间：2018年12月2日 22:38:48
+访问地址：/api/rest.ashx?action_type=XT_NEWS&action_method=query&limit=15&offset=0&maxrows=15&ORG_ID=411025&CLS_ID=LAW_DF&_=1543761526101
+用户地址：::1
+登陆页面：http://localhost:53440/sysweb/news_df_list.aspx?ID=1702
+操作内容：ActiveResult：{"result":1,"total":0,"rows":[],"validfield":"","validmessage":"","info":{},"isLock":0}
+登录时间：2018年12月2日 22:38:55
+访问地址：/Admin/login.aspx
+用户地址：::1
+登陆页面：http://localhost:53440/Admin/Logoff.aspx
+操作内容：Admin_Login
+登录时间：2018年12月2日 22:39:05
+访问地址：/Admin/index.aspx
+用户地址：::1
+登陆页面：http://localhost:53440/Admin/login.aspx
+操作内容：TOKEN的值是a778399713ab8d2db1e0ddef4dbdaf8
+登录时间：2018年12月2日 22:39:07
+访问地址：/api/rest.ashx?action_type=XT_NEWS&action_method=query&limit=15&offset=0&maxrows=15&ORG_ID=411025&CLS_ID=LAW_GJ&_=1543761547480
+用户地址：::1
+登陆页面：http://localhost:53440/sysweb/news_gj_list.aspx?ID=1701
+操作内容：ActiveResult：{"result":1,"total":0,"rows":[],"validfield":"","validmessage":"","info":{},"isLock":0}
+登录时间：2018年12月2日 22:39:09
+访问地址：/api/rest.ashx?action_type=XT_NEWS&action_method=find&ID=null
+用户地址：::1
+登陆页面：http://localhost:53440/sysweb/news_gj_edit.aspx
+操作内容：ActiveResult：{"result":-1,"total":0,"rows":[],"validfield":"","validmessage":"","info":{},"isLock":0}
+登录时间：2018年12月2日 22:39:33
+访问地址：/api/rest.ashx?action_type=XT_NEWS&action_method=query&limit=15&offset=0&maxrows=15&ORG_ID=411025&CLS_ID=LAW_DF&_=1543761572405
+用户地址：::1
+登陆页面：http://localhost:53440/sysweb/news_df_list.aspx?ID=1702
+操作内容：ActiveResult：{"result":1,"total":0,"rows":[],"validfield":"","validmessage":"","info":{},"isLock":0}
+登录时间：2018年12月2日 22:39:38
+访问地址：/api/rest.ashx?action_type=XT_NEWS&action_method=find&ID=null
+用户地址：::1
+登陆页面：http://localhost:53440/sysweb/news_df_edit.aspx
+操作内容：ActiveResult：{"result":-1,"total":0,"rows":[],"validfield":"","validmessage":"","info":{},"isLock":0}
+登录时间：2018年12月2日 22:39:56
+访问地址：/api/rest.ashx?action_type=XT_NEWS&action_method=save
+用户地址：::1
+登陆页面：http://localhost:53440/sysweb/news_df_edit.aspx
+操作内容：ActiveResult：{"result":-1,"total":0,"rows":[],"validfield":"","validmessage":"单位编码不能为空！","info":{},"isLock":0}
+登录时间：2018年12月2日 22:40:31
+访问地址：/Admin/login.aspx
+用户地址：::1
+登陆页面：http://localhost:53440/Admin/logoff.aspx
+操作内容：Admin_Login
+登录时间：2018年12月2日 22:40:39
+访问地址：/Admin/index.aspx
+用户地址：::1
+登陆页面：http://localhost:53440/Admin/login.aspx
+操作内容：TOKEN的值是f628b9395b6444b351338eeff0156cc0
+登录时间：2018年12月2日 22:40:43
+访问地址：/api/rest.ashx?action_type=XT_NEWS&action_method=query&limit=15&offset=0&maxrows=15&ORG_ID=411025&CLS_ID=LAW_GJ&_=1543761643033
+用户地址：::1
+登陆页面：http://localhost:53440/sysweb/news_gj_list.aspx?ID=1701
+操作内容：ActiveResult：{"result":1,"total":0,"rows":[],"validfield":"","validmessage":"","info":{},"isLock":0}
+登录时间：2018年12月2日 22:40:45
+访问地址：/api/rest.ashx?action_type=XT_NEWS&action_method=query&limit=15&offset=0&maxrows=15&ORG_ID=411025&CLS_ID=LAW_GJ&_=1543761645046
+用户地址：::1
+登陆页面：http://localhost:53440/sysweb/news_gj_list.aspx?ID=1701
+操作内容：ActiveResult：{"result":1,"total":0,"rows":[],"validfield":"","validmessage":"","info":{},"isLock":0}
+登录时间：2018年12月2日 22:40:48
+访问地址：/api/rest.ashx?action_type=XT_NEWS&action_method=query&limit=15&offset=0&maxrows=15&ORG_ID=411025&CLS_ID=LAW_GJ&_=1543761648254
+用户地址：::1
+登陆页面：http://localhost:53440/sysweb/news_gj_list.aspx?ID=1701
+操作内容：ActiveResult：{"result":1,"total":0,"rows":[],"validfield":"","validmessage":"","info":{},"isLock":0}
+登录时间：2018年12月2日 22:41:01
+访问地址：/Admin/index.aspx
+用户地址：::1
+登陆页面：http://localhost:53440/Admin/login.aspx
+操作内容：TOKEN的值是f628b9395b6444b351338eeff0156cc0
+登录时间：2018年12月2日 22:42:10
+访问地址：/Admin/index.aspx
+用户地址：::1
+登陆页面：http://localhost:53440/Admin/login.aspx
+操作内容：TOKEN的值是f628b9395b6444b351338eeff0156cc0
+登录时间：2018年12月2日 22:42:21
+访问地址：/api/rest.ashx?action_type=XT_NEWS&action_method=query&limit=15&offset=0&maxrows=15&ORG_ID=411025&CLS_ID=LAW_GJ&_=1543761741855
+用户地址：::1
+登陆页面：http://localhost:53440/sysweb/news_gj_list.aspx?ID=1701
+操作内容：ActiveResult：{"result":1,"total":0,"rows":[],"validfield":"","validmessage":"","info":{},"isLock":0}

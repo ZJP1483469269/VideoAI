@@ -1,0 +1,49 @@
+﻿.files {
+        width: 55px;
+        height: 55px;
+    }
+
+.filesbig {
+    width: 600px;
+    height: 700px;
+}
+
+#close {
+    background: url(img/close.png) no-repeat;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    text-indent: -999em;
+}
+
+#mask {
+    background-color: #ccc;
+    opacity: 0.7;
+    filter: alpha(opacity=70);
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+}
+
+#login {
+    position: fixed;
+    z-index: 1001;
+}
+
+.loginCon {
+    position: relative;
+    width: 670px;
+    height: 380px;
+    background: lightblue;
+    border: 3px solid #333;
+    text-align: center;
+}
+
+    .images {
+        width: 300px;
+        height: 300px;
+    }

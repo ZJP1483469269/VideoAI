@@ -1,0 +1,95 @@
+@CHARSET "UTF-8";
+/*公共样式*/
+* {
+}
+
+img,body,html {
+	border: 0 none;
+	/*font-family: Arial, Microsoft Yahei, Verdana, Helvetica, AppleGothic, sans-serif;*/
+}
+
+span
+{
+	font-family: Arial, Microsoft Yahei, Verdana, Helvetica, AppleGothic, sans-serif;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 1;
+}
+
+div {
+	border-top: #708090 solid 1px;
+	border-collapse: collapse;
+	line-height: 30px;
+}
+
+
+.div_page {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	bottom: 0px;
+	right: 0px;
+}
+
+.ptzbtn {
+	width: 45px;
+}
+
+html {
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+}
+
+body {
+	min-width: 800px;
+	
+	background: #f0f0f0;
+	/*font: 14px normal Verdana, Arial, Helvetica, sans-serif;*/
+	font:14px;
+	color: #444;
+}
+
+body,div,p,td,input,button,select,textarea,ul,li,a,td {
+	/*font-size: 12px;*/
+	
+}
+
+
+input[type=button] {
+	font-family: Microsoft Yahei;
+	cursor: pointer;
+	color: black;
+	
+	background: #F0F0F0 repeat-x;
+	padding-top: 3px;
+	border-top: 1px solid #708090;
+	border-right: 1px solid #708090;
+	border-bottom: 1px solid #708090;
+	border-left: 1px solid #708090;
+	font-size: 10pt;
+	cursor: hand;
+	text-align: center;
+}
+
+input[type=text] {
+	width: 120px;
+	font-family: Arial, Microsoft Yahei;
+}
+
+input[type=checkbox]
+{
+	font-family:KaiTi;
+}
+
+select {
+	width: 100px;
+}
+
+.codeline {
+	font-size: 14px;
+	font-weight: normal;
+	color: blue;
+}

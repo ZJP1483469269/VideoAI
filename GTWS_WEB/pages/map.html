@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>商丘</title>
+    <link href="/static/leaflet/leaflet.css" rel="stylesheet" type="text/css" />
+    <script src="/static/js/jquery.js" type="text/javascript"></script>
+    <script src="/static/leaflet/leaflet.js" type="text/javascript"></script>
+    <script src="/static/leaflet/map.js" type="text/javascript"></script>
+    <style type="text/css">
+        #map
+        {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div id="map">
+    </div>
+    <script type="text/javascript">
+        var url = "http://localhost:8008/tiles/{z}/{x}/{y}.png";
+        var tilemap = new L.TileLayer(url);
+        var center = new L.latLng(34.39, 115.65);
+        map = new L.Map("map", {
+            CRS: 'Simple',      //离线地图加载规则
+            center: center,
+            zoom: 15,
+            layers: [tilemap],  //插入的地图的图层
+            minZoom: 11,
+            maxZoom: 18,
+            opacity: 0.1,
+            maxBounds: [        //地图的东西南北最大边界，
+                [33.6, 114.5],
+                [34.95, 116.8]
+            ]
+        });
+        var kmlLayer = new L.KML("shangqiu.kml", { async: true });
+        kmlLayer.on("loaded", function (e) {
+            map.fitBounds(e.target.getBounds());
+        });
+
+        map.addLayer(kmlLayer);
+    </script>
+</body>
+</html>

@@ -1,0 +1,174 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="static/js/jquery.js"></script>
+    <link href="static/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="static/bootstrap/bootstrap-table.min.css" rel="stylesheet" />
+    <script src="static/bootstrap/bootstrap-table.min.js"></script>
+    <script src="static/bootstrap/bootstrap-table-zh-CN.js"></script>
+    <meta charset="utf-8" />
+    <script type="text/javascript">
+        $(function () {
+            var obj = document.getElementById("shenheinfo");
+            obj.style.position = "relative";
+            var sreenWidth = window.screen.width - 400 - 540;
+            obj.style.width = sreenWidth + "px";
+            var leftStyle = (document.body.scrollWidth - sreenWidth) / 2;
+            obj.style.left = leftStyle - 18 + "px";
+            obj.style.top = "5px";
+
+            var DBGrid = document.getElementById("DBGrid");
+            DBGrid.style.position = "relative";
+            DBGrid.style.width = sreenWidth + "px";
+            //DBGrid.style.left = leftStyle - 18 + "px";
+            DBGrid.style.top = "5px";
+
+            var bootstracp = document.getElementById("fixed-table-body");
+            bootstracp.style.position = "relative";
+            bootstracp.style.width = sreenWidth + "px";
+            bootstracp.style.left = leftStyle - 8 + "px";
+            bootstracp.style.top = "5px";
+
+            $('#DBGrid').bootstrapTable({
+                url: '/api/rest.ashx?action_type=Web&action_method=fetch',         //请求后台的URL（*）
+                method: 'post',             //请求方式（*）
+                striped: true,              //是否显示行间隔色
+                cache: false,               //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+                pagination: true,           //是否显示分页（*）
+                sortable: false,            //是否启用排序
+                sortOrder: "asc",           //排序方式
+                sidePagination: "server",   //分页方式：client客户端分页，server服务端分页（*）
+                queryParams: getParams, //传递参数（*）
+                pageNumber: 1,               //初始化加载第一页，默认第一页
+                pageSize: 25,               //每页的记录行数（*）
+                pageList: [10, 25, 50, 100], //可供选择的每页的行数（*）
+                strictSearch: true,
+                clickToSelect: true,         //是否启用点击选中行
+                uniqueId: "batch_no",      //每一行的唯一标识，一般为主键列
+                cardView: false,            //是否显示详细视图
+                detailView: false,          //是否显示父子表
+                columns: [
+                    {
+                        field: 'id'
+                        , title: '序号'
+                        , align: 'center'
+                        , formatter: function (value, row, index) {
+                            return index + 1;
+                        }
+                    },
+                      {
+                          field: 'id',
+                          align: 'center'
+                        , title: 'ID'
+                      },
+                    {
+                        field: 'xianqu',
+                        align: 'center'
+                        , title: '所属县区'
+                    },
+
+                    {
+                        field: 'danwei'
+                        , title: '被举报人'
+                        , align: 'center'
+                    },
+                   {
+                       field: 'xmdisc'
+                        , title: '项目描述'
+                        , align: 'center'
+                   },
+                       {
+                           field: 'email'
+                        , title: '邮箱'
+                        , align: 'center'
+                       },
+                       {
+                           field: 'adress'
+                        , title: '详细地址'
+                        , align: 'center'
+                       },
+                        {
+                            field: 'neirong'
+                        , title: '内容'
+                        , align: 'center'
+                        },
+                         {
+                             field: 'sd_reslut'
+                        , title: '是否有效'
+                        , align: 'center'
+                       , formatter: function (value, row, index) {
+                           if (value == '1') {
+                              value="有效";
+                           } else if(value=='2') {
+                               value = "无效";
+                           } else {
+                               value = "未审核";
+                           }
+                           return value;
+                       }
+                     },
+                    {
+                        field: ''
+                        , title: '操作'
+                        , align: 'center'
+                        , formatter: function (value, row, index) {
+                            var cStr = "<a href='#' onclick='Event_Modify_jb(" + row.id + ");' class=" + row.id + " data-tag='' data-href='' data-val='' >详情<span class='sdzt'></span></a>";
+                            return cStr;
+                        }
+                    }
+                ]
+            })
+
+
+        });
+        function Event_Modify_jb(flag) {
+            var cUrl = window.location.href;
+            location.href = ("jb.html?sendfrom=" + flag + "&vals=" + flag + "&types=shending");
+
+        }
+        var getParams = function (params) {
+            var temp = { //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+                limit: params.limit, //页面大小
+                offset: params.offset, //页码
+                maxrows: params.limit,
+                pageindex: params.pageNumber,
+                batch_no: $("#batch_no").val()
+            };
+            return temp;
+        };
+
+    </script>
+    <style type="text/css">
+        .fixed-table-body {
+            /*background-color: magenta;*/
+            overflow: hidden;
+            /*width:400px;*/
+        }
+
+        table {
+            table-layout: fixed;
+        }
+
+        td {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <iframe class="" id="mainframe" width="100%" scrolling="no" height="265px" src="DivTop.html" frameborder="0"></iframe>
+    </div>
+    <div class="jbbaseinfo" id="shenheinfo" style="border: #b7b3b9 1px solid;display:none">
+    </div>
+    <div id="fixed-table-body">
+        <table id="DBGrid"></table>
+    </div>
+    <div class="Div-buttom ">
+        <iframe class="" id="mainframe" width="100%" scrolling="no" height="265px" src="DivButtom.html" frameborder="0"></iframe>
+    </div>
+</body>
+</html>

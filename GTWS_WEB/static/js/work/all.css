@@ -1,0 +1,89 @@
+﻿/*
+2017.jb.js
+*/
+.Default-baseDiv {
+    position: relative;
+    top: 8px;
+}
+
+.jbshortMess {
+    /*background-image: url(/index/tabbg4.jpg);
+    background-repeat: no-repeat;*/
+    width: 978px;
+    margin: 0px auto;
+    /*background: #F0F8CF;*/
+    height: 30px;
+    line-height: 30px;
+    border: #b7b3b9 1px solid;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.jbWeChat {
+    width: 978px;
+    margin: 0px auto;
+    /*background: #F0F8CF;*/
+    height: 30px;
+    line-height: 30px;
+    border: #b7b3b9 1px solid;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.jbWeb {
+    width: 978px;
+    margin: 0px auto;
+    /*background: #F0F8CF;*/
+    height: 30px;
+    line-height: 30px;
+    border: #b7b3b9 1px solid;
+    text-align: center;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.jbSpan-base {
+    position: relative;
+    /*background-color: #b7b3b9;*/
+    left:10px;
+    font-size: 20px;
+    text-align: left;
+    
+}
+.imgWechat {
+    width:89%;
+    height:89%;
+}
+
+.imgSms
+{
+    width:80%;
+    height:80%;
+}
+.jbWechatp {
+    font-size: 20px;
+    text-align: left;
+}
+
+.jbbaseinfo-Top {
+    position: relative;
+    top: 0px;
+}
+
+.jbbaseinfo-button {
+    display: -webkit-box;
+}
+
+.jbbaseinfo-buttonLeft {
+    width: 75%;
+    height: 100%;
+    position: relative;
+    padding: 10px;
+    /*display:table-cell;*/
+}
+
+.jbbaseinfo-buttonRight {
+    position: relative;
+    width: 24%;
+    /*display:table-cell;*/
+}
