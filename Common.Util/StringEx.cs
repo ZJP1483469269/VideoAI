@@ -4,7 +4,7 @@ using System.Web;
 using System.Text;
 using System.IO;
 using System.Configuration;
-using System.Data; 
+using System.Data;
 namespace TLKJ.Utils
 {
     /// <summary>
@@ -24,6 +24,19 @@ namespace TLKJ.Utils
             try
             {
                 Object objValue = dtRows.Rows[iRowIdx][cFieldName];
+                return getString(objValue);
+            }
+            catch (Exception ex)
+            {
+                return "";
+            }
+        }
+
+        public static string getString(DataTable dtRows, int iRowIdx, int iColIdx)
+        {
+            try
+            {
+                Object objValue = dtRows.Rows[iRowIdx][iColIdx];
                 return getString(objValue);
             }
             catch (Exception ex)
