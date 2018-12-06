@@ -104,7 +104,7 @@ namespace TLKJ.DB
 
         public int ExeSql(List<String> sqls, List<Object[]> ParmList)
         {
-            int iSqlCount = 0;  
+            int iSqlCount = 0;
             SqlTransaction trans = null;
             string sql = "";
             try
@@ -183,7 +183,7 @@ namespace TLKJ.DB
         {
             try
             {
-                SqlConnection cn = (SqlConnection)getDBConnect();
+                cn = (SqlConnection)getDBConnect();
                 SqlCommand cmd = cn.CreateCommand();
                 SqlDataAdapter sda = new SqlDataAdapter();
                 sda.SelectCommand = cmd;
