@@ -1,0 +1,1483 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\OpenCvSharp3-AnyCPU.4.0.0.20181129\build\OpenCvSharp3-AnyCPU.props" Condition="Exists('..\packages\OpenCvSharp3-AnyCPU.4.0.0.20181129\build\OpenCvSharp3-AnyCPU.props')" />
+  <PropertyGroup>
+    <StartupObject>GTWS_BD.Program</StartupObject>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B9501CAD-5296-4BD7-8EA5-7EDC58711CE5}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>GTWS_TASK</RootNamespace>
+    <AssemblyName>GTWS_TASK</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Release\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Release\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="geckofx-core, Version=33.0.5.0, Culture=neutral, PublicKeyToken=3209ac31600d1857, processorArchitecture=MSIL">
+      <HintPath>..\packages\geckofx-core.33.0.5.1\lib\net40\geckofx-core.dll</HintPath>
+    </Reference>
+    <Reference Include="geckofx-winforms, Version=33.0.5.0, Culture=neutral, PublicKeyToken=3209ac31600d1857, processorArchitecture=MSIL">
+      <HintPath>..\packages\geckofx-winforms.33.0.5.1\lib\net40\geckofx-winforms.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\x86\Debug\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenCvSharp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6adad1e807fea099, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenCvSharp3-AnyCPU.4.0.0.20181129\lib\net40\OpenCvSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="OpenCvSharp.Blob, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6adad1e807fea099, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenCvSharp3-AnyCPU.4.0.0.20181129\lib\net40\OpenCvSharp.Blob.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="OpenCvSharp.Extensions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6adad1e807fea099, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenCvSharp3-AnyCPU.4.0.0.20181129\lib\net40\OpenCvSharp.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="OpenCvSharp.UserInterface, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6adad1e807fea099, processorArchitecture=MSIL">
+      <HintPath>..\packages\OpenCvSharp3-AnyCPU.4.0.0.20181129\lib\net40\OpenCvSharp.UserInterface.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Renci.SshNet">
+      <HintPath>doc\Renci.SshNet.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Tesseract, Version=3.0.2.0, Culture=neutral, PublicKeyToken=ebeb3d86bef60cbe, processorArchitecture=MSIL">
+      <HintPath>..\packages\Tesseract.3.0.2.0\lib\net40\Tesseract.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\ApplicationEvent.cs" />
+    <Compile Include="Common\Const.cs" />
+    <Compile Include="Common\HttpUtil.cs" />
+    <Compile Include="Common\WebJS.cs" />
+    <Compile Include="Common\WebSQL.cs" />
+    <Compile Include="TLKJAI\GPSAI.cs" />
+    <Compile Include="TLKJAI\IMGAI.cs" />
+    <Compile Include="Common\IVS_API.cs" />
+    <Compile Include="Common\ShellAPI.cs" />
+    <Compile Include="Common\TVNode.cs" />
+    <Compile Include="Common\UploadTask.cs" />
+    <Compile Include="IVS_Struct\IVS_ALARM_EVENT.cs" />
+    <Compile Include="IVS_Struct\IVS_ALARM_NOTIFY.cs" />
+    <Compile Include="IVS_Struct\IVS_ALARM_OPERATE_INFO.cs" />
+    <Compile Include="IVS_Struct\IVS_CAMERA_BRIEF_INFO.cs" />
+    <Compile Include="IVS_Struct\IVS_CAMERA_BRIEF_INFO_LIST.cs" />
+    <Compile Include="IVS_Struct\IVS_CAMERA_OSD_CFG.cs" />
+    <Compile Include="IVS_Struct\IVS_CAMERA_TYPE.cs" />
+    <Compile Include="IVS_Struct\IVS_DEVICE_GROUP.cs" />
+    <Compile Include="IVS_Struct\IVS_DEVICE_GROUP_LIST.cs" />
+    <Compile Include="IVS_Struct\IVS_DEV_STATUS.cs" />
+    <Compile Include="IVS_Struct\IVS_DOMAIN_ROUTE.cs" />
+    <Compile Include="IVS_Struct\IVS_DOMAIN_ROUTE_LIST.cs" />
+    <Compile Include="IVS_Struct\IVS_INDEX_RANGE.cs" />
+    <Compile Include="IVS_Struct\IVS_IP.cs" />
+    <Compile Include="IVS_Struct\IVS_LOCAL_RECORD_PARAM.cs" />
+    <Compile Include="IVS_Struct\IVS_LOGIN_INFO.cs" />
+    <Compile Include="IVS_Struct\IVS_OSD_NAME.cs" />
+    <Compile Include="IVS_Struct\IVS_OSD_TIME.cs" />
+    <Compile Include="IVS_Struct\IVS_PTZ_PRESET.cs" />
+    <Compile Include="IVS_Struct\IVS_RAW_FRAME_INFO.cs" />
+    <Compile Include="IVS_Struct\IVS_REALPLAY_PARAM.cs" />
+    <Compile Include="IVS_Struct\IVS_RECT_FLOAT.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="UI\frmBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmBase.Designer.cs">
+      <DependentUpon>frmBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\frmBD.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmBD.designer.cs">
+      <DependentUpon>frmBD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\frmConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmConfig.Designer.cs">
+      <DependentUpon>frmConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\frmCut.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmCut.designer.cs">
+      <DependentUpon>frmCut.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\frmDTConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmDTConfig.designer.cs">
+      <DependentUpon>frmDTConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\frmIEWeb.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmIEWeb.Designer.cs">
+      <DependentUpon>frmIEWeb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\frmImage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmImage.Designer.cs">
+      <DependentUpon>frmImage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\frmPreset.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmPreset.Designer.cs">
+      <DependentUpon>frmPreset.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\frmViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmViewer.Designer.cs">
+      <DependentUpon>frmViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\frmTask.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmTask.Designer.cs">
+      <DependentUpon>frmTask.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\frmKitWeb.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmKitWeb.Designer.cs">
+      <DependentUpon>frmKitWeb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\frmXS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmXS.designer.cs">
+      <DependentUpon>frmXS.cs</DependentUpon>
+    </Compile>
+    <Content Include="bin\x86\Debug\ACE.dll" />
+    <Content Include="bin\x86\Debug\Apache.NMS.ActiveMQ.dll" />
+    <Content Include="bin\x86\Debug\Apache.NMS.dll" />
+    <Content Include="bin\x86\Debug\bp_base.dll" />
+    <Content Include="bin\x86\Debug\bp_frame.dll" />
+    <Content Include="bin\x86\Debug\bp_log.dll" />
+    <Content Include="bin\x86\Debug\bp_net.dll" />
+    <Content Include="bin\x86\Debug\Common.DB.dll" />
+    <Content Include="bin\x86\Debug\Common.DB.pdb" />
+    <Content Include="bin\x86\Debug\Common.Util.dll" />
+    <Content Include="bin\x86\Debug\Common.Util.pdb" />
+    <Content Include="bin\x86\Debug\config\CompatibleVersion.xml" />
+    <Content Include="bin\x86\Debug\config\log.xml" />
+    <Content Include="bin\x86\Debug\config\net.xml" />
+    <Content Include="bin\x86\Debug\config\SDKConfig.xml" />
+    <Content Include="bin\x86\Debug\config\service.xml" />
+    <Content Include="bin\x86\Debug\defaultConfig\CameraAlias.xml" />
+    <Content Include="bin\x86\Debug\defaultConfig\LocalConfig.xml" />
+    <Content Include="bin\x86\Debug\DocX.dll" />
+    <Content Include="bin\x86\Debug\eSDKLogAPI.dll" />
+    <Content Include="bin\x86\Debug\eSDK_Secure_C.dll" />
+    <Content Include="bin\x86\Debug\GTWS_TASK.exe" />
+    <Content Include="bin\x86\Debug\GTWS_TASK.pdb" />
+    <Content Include="bin\x86\Debug\GTWS_TASK.vshost.exe" />
+    <Content Include="bin\x86\Debug\HCCore.dll" />
+    <Content Include="bin\x86\Debug\HCNetSDK.dll" />
+    <Content Include="bin\x86\Debug\HCNetSDKCom\HCAlarm.dll" />
+    <Content Include="bin\x86\Debug\HCNetSDKCom\HCCoreDevCfg.dll" />
+    <Content Include="bin\x86\Debug\HCNetSDKCom\HCDisplay.dll" />
+    <Content Include="bin\x86\Debug\HCNetSDKCom\HCGeneralCfgMgr.dll" />
+    <Content Include="bin\x86\Debug\HCNetSDKCom\HCIndustry.dll" />
+    <Content Include="bin\x86\Debug\HCNetSDKCom\HCPlayBack.dll" />
+    <Content Include="bin\x86\Debug\HCNetSDKCom\HCPreview.dll" />
+    <Content Include="bin\x86\Debug\HCNetSDKCom\HCVoiceTalk.dll" />
+    <Content Include="bin\x86\Debug\HW_ThirdParty\HIK\AnalyzeData.dll" />
+    <Content Include="bin\x86\Debug\i18n\ar-AE.xml" />
+    <Content Include="bin\x86\Debug\i18n\en-HK.xml" />
+    <Content Include="bin\x86\Debug\i18n\en-US.xml" />
+    <Content Include="bin\x86\Debug\i18n\es-CR.xml" />
+    <Content Include="bin\x86\Debug\i18n\fr-FR.xml" />
+    <Content Include="bin\x86\Debug\i18n\pt-BR.xml" />
+    <Content Include="bin\x86\Debug\i18n\ru-RU.xml" />
+    <Content Include="bin\x86\Debug\i18n\tr-TR.xml" />
+    <Content Include="bin\x86\Debug\i18n\zh-CN.xml" />
+    <Content Include="bin\x86\Debug\i18n\zh-HK.xml" />
+    <Content Include="bin\x86\Debug\i18n\zh-TW.xml" />
+    <Content Include="bin\x86\Debug\Images\201811161555000000014176000000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811161629290000018710000000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811161629330000014660000000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811161629470000019893000000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811161629530000012297000000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811161629570000019360000000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811161730080000011807000000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811161730160000019520000000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811161730320000014281000000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811191532430000019611000000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811191533020000011991000000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811191533510000010461000000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811191533570000019277000000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811191543270000019291000000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811221347260000016252000000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271349520000013839000000_0005.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271349560000017587000000_0004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271350000000018619000000_0003.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271353230000016459000000_0005.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271353270000013031000000_0004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271354470000012211000000_0005.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271356380000019061000000_0005.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271357310000018464000000_0004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271444170000016078000000_0005.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271444290000014856000000_0004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271444350000018623000000_0003.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271444390000015751000000_0002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271444420000010056000000_0001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271444460000015548000000_0000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271444500000011215000000_0005.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271444530000011932000000_0004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271444570000017424000000_0003.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271445000000018141000000_0002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271445040000013633000000_0001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271445070000010761000000_0000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271445110000015033000000_0005.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271445150000014113000000_0004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271445180000013194000000_0003.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271445220000017814000000_0002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271447560000015331000000_0005.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271448080000014882000000_0004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271803530000016804000000_0005.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271804130000016818000000_0004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271804350000019556000000_0003.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271804460000011988000000_0002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271804580000010667000000_0001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271806070000014450000000_0005.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271806220000011229000000_0004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271806350000010398000000_0003.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271806480000017616000000_0002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271820580000013824000000_0005.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271821120000014465000000_0004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271821270000016261000000_0003.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271821430000010149000000_0002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271821560000010955000000_0001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271826120000010989000000_0005.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271827250000010439000000_0004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271827430000015492000000_0003.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271827550000015317000000_0002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271831230000014123000000_0005.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271831230000014123000000_0005\1000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271831560000017209000000_0005.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271831560000017209000000_0005\1000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271831560000017209000000_0005\1001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271831560000017209000000_0005\1002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271832000000019845000000_0004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271832000000019845000000_0004\1000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271832000000019845000000_0004\1001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271832000000019845000000_0004\1002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271832000000019845000000_0004\1003.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271832000000019845000000_0004\1004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271832000000019845000000_0004\1005.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271832000000019845000000_0004\1006.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271832000000019845000000_0004\1007.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271832000000019845000000_0004\1008.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271924540000012357000000_0005.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271924570000014469000000_0004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271924570000014469000000_0004\1000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271924570000014469000000_0004\1001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271924570000014469000000_0004\1002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271924570000014469000000_0004\1003.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271924570000014469000000_0004\1004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271924570000014469000000_0004\1005.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271924570000014469000000_0004\1006.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271924570000014469000000_0004\1007.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271924570000014469000000_0004\1008.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271924570000014469000000_0004\1009.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271925010000016265000000_0003.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271925010000016265000000_0003\1000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271925010000016265000000_0003\1001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271925010000016265000000_0003\1002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271925010000016265000000_0003\1003.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271925010000016265000000_0003\1004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271925010000016265000000_0003\1005.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271925010000016265000000_0003\1006.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271925010000016265000000_0003\1007.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271925010000016265000000_0003\1008.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271925010000016265000000_0003\1009.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271925010000016265000000_0003\1010.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271925010000016265000000_0003\1011.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271925050000010886000000_0002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271925080000013870000000_0001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271925120000018174000000_0000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271925120000018174000000_0000\1000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271925160000018028000000_0005.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271925160000018028000000_0005\1000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271925160000018028000000_0005\1001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271925160000018028000000_0005\1002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271925160000018028000000_0005\1003.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271925160000018028000000_0005\1004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271925200000012648000000_0004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271925200000012648000000_0004\1000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271925200000012648000000_0004\1001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271925200000012648000000_0004\1002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271925200000012648000000_0004\1003.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271925200000012648000000_0004\1004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271925200000012648000000_0004\1005.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271925200000012648000000_0004\1006.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271925200000012648000000_0004\1007.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271925200000012648000000_0004\1008.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271925230000015316000000_0003.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271925230000015316000000_0003\1000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271925230000015316000000_0003\1001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271925230000015316000000_0003\1002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271925230000015316000000_0003\1003.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271925230000015316000000_0003\1004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271925230000015316000000_0003\1005.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271925230000015316000000_0003\1006.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271925230000015316000000_0003\1007.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271925270000011573000000_0002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271925310000010653000000_0001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271925510000012062000000_0005.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271927150000014575000000_0005.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271930270000019144000000_0005.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271930310000019827000000_0004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271930310000019827000000_0004\1000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271930310000019827000000_0004\1001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271930310000019827000000_0004\1002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271930310000019827000000_0004\1003.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271930310000019827000000_0004\1004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271930310000019827000000_0004\1005.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271930310000019827000000_0004\1006.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271930310000019827000000_0004\1007.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271930310000019827000000_0004\1008.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271930310000019827000000_0004\1009.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271930310000019827000000_0004\1010.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271931030000013460000000_0005.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271931030000013460000000_0005\1000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271931030000013460000000_0005\1001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271931060000017524000000_0004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271931060000017524000000_0004\1000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271931060000017524000000_0004\1001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271931060000017524000000_0004\1002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271931060000017524000000_0004\1003.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271931060000017524000000_0004\1004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271931060000017524000000_0004\1005.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271931060000017524000000_0004\1006.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271931060000017524000000_0004\1007.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271931060000017524000000_0004\1008.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271931060000017524000000_0004\1009.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271931060000017524000000_0004\1010.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271931060000017524000000_0004\1011.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271931060000017524000000_0004\1012.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271931060000017524000000_0004\1013.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271931100000013781000000_0003.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942040000013832000000_0005.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942070000015629000000_0004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942070000015629000000_0004\1000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942070000015629000000_0004\1001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942070000015629000000_0004\1002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942070000015629000000_0004\1003.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942070000015629000000_0004\1004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942070000015629000000_0004\1005.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942070000015629000000_0004\1006.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942070000015629000000_0004\1007.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942070000015629000000_0004\1008.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942070000015629000000_0004\1009.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942070000015629000000_0004\1010.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942120000019560000000_0003.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942120000019560000000_0003\1000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942120000019560000000_0003\1001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942120000019560000000_0003\1002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942160000018084000000_0002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942200000012705000000_0001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942240000010324000000_0000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942240000010324000000_0000\1000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942240000010324000000_0000\1001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942240000010324000000_0000\1002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942280000012403000000_0005.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942280000012403000000_0005\1000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942280000012403000000_0005\1001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942280000012403000000_0005\1002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942320000011101000000_0004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942320000011101000000_0004\1000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942320000011101000000_0004\1001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942320000011101000000_0004\1002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942320000011101000000_0004\1003.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942320000011101000000_0004\1004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942320000011101000000_0004\1005.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942320000011101000000_0004\1006.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942320000011101000000_0004\1007.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942320000011101000000_0004\1008.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942350000019625000000_0003.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942390000018149000000_0002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942430000014406000000_0001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942460000017390000000_0000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942470000034500000000_0000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942510000018531000000_0005.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942510000018531000000_0005\1000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942510000018531000000_0005\1001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942510000018531000000_0005\1002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942510000018531000000_0005\1003.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942510000018531000000_0005\1004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942510000018531000000_0005\1005.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942510000018531000000_0005\1006.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942510000018531000000_0005\1007.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942510000018531000000_0005\1008.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942510000018531000000_0005\1009.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942540000013151000000_0004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942540000013151000000_0004\1000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942540000013151000000_0004\1001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942540000013151000000_0004\1002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942540000013151000000_0004\1003.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942540000013151000000_0004\1004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942540000013151000000_0004\1005.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942540000013151000000_0004\1006.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942540000013151000000_0004\1007.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942540000013151000000_0004\1008.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942540000013151000000_0004\1009.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942540000013151000000_0004\1010.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942540000013151000000_0004\1011.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942580000012198000000_0003.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942580000012198000000_0003\1000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942580000012198000000_0003\1001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942580000012198000000_0003\1002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942580000012198000000_0003\1003.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271942580000012198000000_0003\1004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271943020000018770000000_0002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271943020000018770000000_0002\1000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271943020000018770000000_0002\1001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271943020000018770000000_0002\1002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271943020000018770000000_0002\1003.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271943020000018770000000_0002\1004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271943080000010270000000_0001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271943120000016285000000_0000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271943160000010283000000_0005.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271943160000010283000000_0005\1000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271943160000010283000000_0005\1001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271943160000010283000000_0005\1002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271943160000010283000000_0005\1003.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271943160000010283000000_0005\1004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271943210000013965000000_0004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271943210000013965000000_0004\1000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271943210000013965000000_0004\1001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271943210000013965000000_0004\1002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271943210000013965000000_0004\1003.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271943210000013965000000_0004\1004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271943210000013965000000_0004\1005.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271943210000013965000000_0004\1006.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271943210000013965000000_0004\1007.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271943210000013965000000_0004\1008.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271943210000013965000000_0004\1009.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271943210000013965000000_0004\1010.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271943210000013965000000_0004\1011.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271943260000016817000000_0003.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271943290000016977000000_0002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271943330000013201000000_0001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271943330000013201000000_0001\1000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271943330000013201000000_0001\1001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271943330000013201000000_0001\1002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271943330000013201000000_0001\1003.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271943330000013201000000_0001\1004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271943330000013201000000_0001\1005.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271943370000019707000000_0000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271943370000019707000000_0000\1000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271943370000019707000000_0000\1001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271943420000010640000000_0005.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271943460000014671000000_0004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271943460000014671000000_0004\1000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271943460000014671000000_0004\1001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271943500000013370000000_0003.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271943540000016321000000_0002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271943580000010592000000_0001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271944020000016052000000_0000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271944020000016052000000_0000\1000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271944020000016052000000_0000\1001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271944020000016052000000_0000\1002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271944050000014227000000_0004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271944050000014227000000_0004\1000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271944050000014227000000_0004\1001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271944050000014227000000_0004\1002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271944050000014227000000_0004\1003.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271944050000014227000000_0004\1004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271944050000014227000000_0004\1005.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271944050000014227000000_0004\1006.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271944050000014227000000_0004\1007.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271944050000014227000000_0004\1008.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271944090000013307000000_0003.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271944140000018908000000_0002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271944180000011859000000_0001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271944210000013656000000_0000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271944250000015178000000_0004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271944290000014226000000_0003.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271944330000018813000000_0002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271944330000018813000000_0002\1000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271944370000010892000000_0001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271944410000015479000000_0000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271944450000010590000000_0005.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271944490000017162000000_0004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271944490000017162000000_0004\1000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271944490000017162000000_0004\1001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271944490000017162000000_0004\1002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271944490000017162000000_0004\1003.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271944490000017162000000_0004\1004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271944490000017162000000_0004\1005.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271944490000017162000000_0004\1006.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271944490000017162000000_0004\1007.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271944490000017162000000_0004\1008.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271944490000017162000000_0004\1009.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271944490000017162000000_0004\1010.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271944530000015271000000_0003.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271944530000015271000000_0003\1000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271944530000015271000000_0003\1001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271944530000015271000000_0003\1002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271944530000015271000000_0003\1003.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271944530000015271000000_0003\1004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271944530000015271000000_0003\1005.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271944570000010905000000_0002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945010000018316000000_0001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945050000012904000000_0000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945050000012904000000_0000\1000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945050000012904000000_0000\1001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945050000012904000000_0000\1002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945050000012904000000_0000\1003.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945050000012904000000_0000\1004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945050000012904000000_0000\1005.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945050000012904000000_0000\1006.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945050000012904000000_0000\1007.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945050000012904000000_0000\1008.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945100000019028000000_0005.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945140000016647000000_0004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945180000011550000000_0003.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945220000011677000000_0002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945260000017900000000_0001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945260000017900000000_0001\1000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945260000017900000000_0001\1001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945260000017900000000_0001\1002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945260000017900000000_0001\1003.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945260000017900000000_0001\1004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945260000017900000000_0001\1005.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945260000017900000000_0001\1006.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945260000017900000000_0001\1007.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945260000017900000000_0001\1008.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945300000011342000000_0000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945300000011342000000_0000\1000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945300000011342000000_0000\1001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945300000011342000000_0000\1002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945350000012831000000_0006.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945350000012831000000_0006\1000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945350000012831000000_0006\1001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945350000012831000000_0006\1002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945350000012831000000_0006\1003.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945350000012831000000_0006\1004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945350000012831000000_0006\1005.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945350000012831000000_0006\1006.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945390000014005000000_0005.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945390000014005000000_0005\1000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945430000010545000000_0004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945430000010545000000_0004\1000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945430000010545000000_0004\1001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945430000010545000000_0004\1002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945430000010545000000_0004\1003.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945430000010545000000_0004\1004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945430000010545000000_0004\1005.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945430000010545000000_0004\1006.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945430000010545000000_0004\1007.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945430000010545000000_0004\1008.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945470000013670000000_0003.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945510000018606000000_0002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945550000018733000000_0001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271945590000011369000000_0000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271946030000018988000000_0005.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271946070000017163000000_0004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271946100000019591000000_0003.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271946150000016653000000_0002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271946180000019322000000_0001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271946220000018369000000_0000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271946220000018369000000_0000\1000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271946220000018369000000_0000\1001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271946220000018369000000_0000\1002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271946260000012956000000_0005.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271946260000012956000000_0005\1000.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271946260000012956000000_0005\1001.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271946260000012956000000_0005\1002.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271946260000012956000000_0005\1003.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271946260000012956000000_0005\1004.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271946260000012956000000_0005\1005.jpg" />
+    <Content Include="bin\x86\Debug\Images\201811271946260000012956000000_0005\1006.jpg" />
+    <Content Include="bin\x86\Debug\ivs_base.dll" />
+    <Content Include="bin\x86\Debug\ivs_compression.dll" />
+    <Content Include="bin\x86\Debug\IVS_IADraw.dll" />
+    <Content Include="bin\x86\Debug\IVS_NetSource.dll" />
+    <Content Include="bin\x86\Debug\IVS_OCXPlayer.ocx" />
+    <Content Include="bin\x86\Debug\IVS_Player.dll" />
+    <Content Include="bin\x86\Debug\IVS_SDK.dll" />
+    <Content Include="bin\x86\Debug\IVS_SDKNetKeyBoard.dll" />
+    <Content Include="bin\x86\Debug\IVS_SDKTVWall.dll" />
+    <Content Include="bin\x86\Debug\ivs_security.dll" />
+    <Content Include="bin\x86\Debug\ivs_sftp.dll" />
+    <Content Include="bin\x86\Debug\kmc.dll" />
+    <Content Include="bin\x86\Debug\lame_enc.dll" />
+    <Content Include="bin\x86\Debug\libeay32.dll" />
+    <Content Include="bin\x86\Debug\libmp3lame.dll" />
+    <Content Include="bin\x86\Debug\libmpg123.dll" />
+    <Content Include="bin\x86\Debug\libsecurec.dll" />
+    <Content Include="bin\x86\Debug\libssh2.dll" />
+    <Content Include="bin\x86\Debug\lib\protocols\nss.dll" />
+    <Content Include="bin\x86\Debug\logs\20181127WPZF.txt" />
+    <Content Include="bin\x86\Debug\logs\20181128WPZF.txt" />
+    <Content Include="bin\x86\Debug\Microsoft.DirectX.DirectSound.dll" />
+    <Content Include="bin\x86\Debug\Microsoft.DirectX.dll" />
+    <Content Include="bin\x86\Debug\mp4DLL.dll" />
+    <Content Include="bin\x86\Debug\msvcp100.dll" />
+    <Content Include="bin\x86\Debug\msvcr100.dll" />
+    <Content Include="bin\x86\Debug\NAudio.dll" />
+    <Content Include="bin\x86\Debug\Newtonsoft.Json.dll" />
+    <Content Include="bin\x86\Debug\nss.dll" />
+    <Content Include="bin\x86\Debug\RabbitMQ.Client.dll" />
+    <Content Include="bin\x86\Debug\Renci.SshNet.dll" />
+    <Content Include="bin\x86\Debug\rtsp_client.dll" />
+    <Content Include="bin\x86\Debug\Skin\black\DigtalPtz\PNG\BOTTOM_GRAY.png" />
+    <Content Include="bin\x86\Debug\Skin\black\DigtalPtz\PNG\BOTTOM_LEFT_GRAY.png" />
+    <Content Include="bin\x86\Debug\Skin\black\DigtalPtz\PNG\BOTTOM_LEFT_NOMAL.png" />
+    <Content Include="bin\x86\Debug\Skin\black\DigtalPtz\PNG\BOTTOM_LEFT_SELECT.png" />
+    <Content Include="bin\x86\Debug\Skin\black\DigtalPtz\PNG\BOTTOM_NOMAL.png" />
+    <Content Include="bin\x86\Debug\Skin\black\DigtalPtz\PNG\BOTTOM_RIGHT_GRAY.png" />
+    <Content Include="bin\x86\Debug\Skin\black\DigtalPtz\PNG\BOTTOM_RIGHT_NOMAL.png" />
+    <Content Include="bin\x86\Debug\Skin\black\DigtalPtz\PNG\BOTTOM_RIGHT_SELECT.png" />
+    <Content Include="bin\x86\Debug\Skin\black\DigtalPtz\PNG\BOTTOM_SELECT.png" />
+    <Content Include="bin\x86\Debug\Skin\black\DigtalPtz\PNG\CAPUTRE_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\DigtalPtz\PNG\CAPUTRE_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\DigtalPtz\PNG\CAPUTRE_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\DigtalPtz\PNG\CAPUTRE_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\DigtalPtz\PNG\LEFT_GRAY.png" />
+    <Content Include="bin\x86\Debug\Skin\black\DigtalPtz\PNG\LEFT_NOMAL.png" />
+    <Content Include="bin\x86\Debug\Skin\black\DigtalPtz\PNG\LEFT_SELECT.png" />
+    <Content Include="bin\x86\Debug\Skin\black\DigtalPtz\PNG\RIGHT_GRAY.png" />
+    <Content Include="bin\x86\Debug\Skin\black\DigtalPtz\PNG\RIGHT_NOMAL.png" />
+    <Content Include="bin\x86\Debug\Skin\black\DigtalPtz\PNG\RIGHT_SELECT.png" />
+    <Content Include="bin\x86\Debug\Skin\black\DigtalPtz\PNG\TOP_GRAY.png" />
+    <Content Include="bin\x86\Debug\Skin\black\DigtalPtz\PNG\TOP_LEFT_GRAY.png" />
+    <Content Include="bin\x86\Debug\Skin\black\DigtalPtz\PNG\TOP_LEFT_NOMAL.png" />
+    <Content Include="bin\x86\Debug\Skin\black\DigtalPtz\PNG\TOP_LEFT_SELECT.png" />
+    <Content Include="bin\x86\Debug\Skin\black\DigtalPtz\PNG\TOP_NOMAL.png" />
+    <Content Include="bin\x86\Debug\Skin\black\DigtalPtz\PNG\TOP_RIGHT_GRAY.png" />
+    <Content Include="bin\x86\Debug\Skin\black\DigtalPtz\PNG\TOP_RIGHT_NOMAL.png" />
+    <Content Include="bin\x86\Debug\Skin\black\DigtalPtz\PNG\TOP_RIGHT_SELECT.png" />
+    <Content Include="bin\x86\Debug\Skin\black\DigtalPtz\PNG\TOP_SELECT.png" />
+    <Content Include="bin\x86\Debug\Skin\black\DigtalPtz\PNG\ZOOMIN_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\DigtalPtz\PNG\ZOOMIN_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\DigtalPtz\PNG\ZOOMIN_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\DigtalPtz\PNG\ZOOMIN_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\DigtalPtz\PNG\ZOOMOUT_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\DigtalPtz\PNG\ZOOMOUT_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\DigtalPtz\PNG\ZOOMOUT_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\DigtalPtz\PNG\ZOOMOUT_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\DigtalPtz\PNG\ZOOMOVER_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\DigtalPtz\PNG\ZOOMOVER_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\DigtalPtz\PNG\ZOOMOVER_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\DigtalPtz\PNG\ZOOMOVER_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\DigtalPtz\PNG\ZOOM_REAT_TEXT.png" />
+    <Content Include="bin\x86\Debug\Skin\black\IAToolBar\PNG\DISPLAYMODE_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\IAToolBar\PNG\DISPLAYMODE_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\IAToolBar\PNG\DISPLAYMODE_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\IAToolBar\PNG\DISPLAYMODE_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\IAToolBar\PNG\MOVE_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\IAToolBar\PNG\MOVE_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\IAToolBar\PNG\MOVE_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\IAToolBar\PNG\MOVE_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\IAToolBar\PNG\PLAY_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\IAToolBar\PNG\PLAY_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\IAToolBar\PNG\PLAY_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\IAToolBar\PNG\PLAY_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\IAToolBar\PNG\POLYGON_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\IAToolBar\PNG\POLYGON_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\IAToolBar\PNG\POLYGON_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\IAToolBar\PNG\POLYGON_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\IAToolBar\PNG\RECT_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\IAToolBar\PNG\RECT_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\IAToolBar\PNG\RECT_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\IAToolBar\PNG\RECT_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\IAToolBar\PNG\STOP_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\IAToolBar\PNG\STOP_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\IAToolBar\PNG\STOP_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\IAToolBar\PNG\STOP_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\IAToolBar\PNG\ZOOMIN_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\IAToolBar\PNG\ZOOMIN_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\IAToolBar\PNG\ZOOMIN_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\IAToolBar\PNG\ZOOMIN_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\IAToolBar\PNG\ZOOMOUT_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\IAToolBar\PNG\ZOOMOUT_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\IAToolBar\PNG\ZOOMOUT_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\IAToolBar\PNG\ZOOMOUT_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\SoundCtrl\BackGround.png" />
+    <Content Include="bin\x86\Debug\Skin\black\TitleBar\PNG\ADD_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\TitleBar\PNG\ADD_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\TitleBar\PNG\ADD_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\TitleBar\PNG\ADD_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\TitleBar\PNG\ALARM_STATUS_ON.png" />
+    <Content Include="bin\x86\Debug\Skin\black\TitleBar\PNG\BLACK_BG.png" />
+    <Content Include="bin\x86\Debug\Skin\black\TitleBar\PNG\CRUISETRACK_STATUS_ON.png" />
+    <Content Include="bin\x86\Debug\Skin\black\TitleBar\PNG\DELETE_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\TitleBar\PNG\DELETE_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\TitleBar\PNG\DELETE_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\TitleBar\PNG\DELETE_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\TitleBar\PNG\LEFT_GRAY.png" />
+    <Content Include="bin\x86\Debug\Skin\black\TitleBar\PNG\LEFT_NOMAL.png" />
+    <Content Include="bin\x86\Debug\Skin\black\TitleBar\PNG\LEFT_SELECT.png" />
+    <Content Include="bin\x86\Debug\Skin\black\TitleBar\PNG\MESSAGE_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\TitleBar\PNG\MESSAGE_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\TitleBar\PNG\MESSAGE_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\TitleBar\PNG\MESSAGE_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\TitleBar\PNG\OFF_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\TitleBar\PNG\OFF_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\TitleBar\PNG\OFF_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\TitleBar\PNG\OFF_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\TitleBar\PNG\RECORD_STATUS_ON.png" />
+    <Content Include="bin\x86\Debug\Skin\black\TitleBar\PNG\RIGHT_GRAY.png" />
+    <Content Include="bin\x86\Debug\Skin\black\TitleBar\PNG\RIGHT_NOMAL.png" />
+    <Content Include="bin\x86\Debug\Skin\black\TitleBar\PNG\RIGHT_SELECT.png" />
+    <Content Include="bin\x86\Debug\Skin\black\TitleBar\PNG\SINGLEFRAME_STATUS_ON.png" />
+    <Content Include="bin\x86\Debug\Skin\black\TitleBar\PNG\TURNCRUISE_OFF.png" />
+    <Content Include="bin\x86\Debug\Skin\black\TitleBar\PNG\TURNCRUISE_ON.png" />
+    <Content Include="bin\x86\Debug\Skin\black\TitleBar\PNG\TVWALL_RECONNECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\TitleBar\PNG\TVWALL_VIDEO_BROKEN.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\TitleBar\PNG\TV_Wall_HANDLING.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\TitleBar\PNG\TV_Wall_OK.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\TitleBar\PNG\WATERMARKGRAY.png" />
+    <Content Include="bin\x86\Debug\Skin\black\TitleBar\PNG\WATERMARKNOMAL.png" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\bar.bmp" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\bgdown.bmp" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\bgdown_.bmp" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\bgmiddle.bmp" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\bgmiddle_.bmp" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\bgup.bmp" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\bgup_.bmp" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\CAPTURE_GRAY.BMP" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\CAPTURE_NORMAL.BMP" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\CAPTURE_SELECT.BMP" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\E_MAP_GRAY.BMP" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\E_MAP_NORMAL.BMP" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\E_MAP_SELECT.BMP" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\INSTANT_BP_GRAY.BMP" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\INSTANT_BP_NORMAL.BMP" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\INSTANT_BP_SELECT.BMP" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\LABEL_GRAY.BMP" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\LABEL_NORMAL.BMP" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\LABEL_SELECT.BMP" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\MAGNIFY_GRAY.BMP" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\MAGNIFY_NORMAL.BMP" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\MAGNIFY_SELECT.BMP" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\MASTERAUXILIARY_GRAY.BMP" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\MASTERAUXILIARY_NORMAL.BMP" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\MASTERAUXILIARY_SELECT.BMP" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\NET_GRAY.BMP" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\NET_NORMAL.BMP" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\NET_SELECT.BMP" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\NOSOUND_GRAY.BMP" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\NOSOUND_NORMAL.BMP" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\NOSOUND_SELECT.BMP" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\NOTALK_GRAY.bmp" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\NOTALK_NORMAL.bmp" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\NoTALK_SELECT.bmp" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\PTZ3D_GRAY.BMP" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\PTZ3D_NORMAL.BMP" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\PTZ3D_SELECT.BMP" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\PTZ_GRAY.BMP" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\PTZ_NORMAL.BMP" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\PTZ_SELECT.BMP" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\QUALITY_GRAY.BMP" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\QUALITY_NORMAL.BMP" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\QUALITY_SELECT.BMP" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\RECORD_GRAY.BMP" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\RECORD_NORMAL.BMP" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\RECORD_SELECT.BMP" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\SETWND_GRAY.BMP" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\SETWND_NORMAL.BMP" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\SETWND_SELECT.BMP" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\SOUND_GRAY.BMP" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\SOUND_NORMAL.BMP" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\SOUND_SELECT.BMP" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\SUPERINTEL_GRAY.BMP" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\SUPERINTEL_NORMAL.BMP" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\SUPERINTEL_SELECT.BMP" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\TALK_GRAY.BMP" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\TALK_NORMAL.BMP" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\TALK_SELECT.BMP" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\TV_GRAY.BMP" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\TV_NORMAL.BMP" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\BMP\TV_SELECT.BMP" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\BACK_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\BACK_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\BACK_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\BACK_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\BG_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\BG_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\BLACK_BG.png" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\CAPUTRE_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\CAPUTRE_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\CAPUTRE_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\CAPUTRE_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\EMAP_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\EMAP_gray.png" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\EMAP_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\EMAP_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\LABEL_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\LABEL_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\LABEL_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\LABEL_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\LOCKER_UP_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\LOCKER_UP_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\LOCKER_UP_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\LOCKER_UP_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\MAGNIFY_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\MAGNIFY_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\MAGNIFY_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\MAGNIFY_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\MASTERMAUXILIARY_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\MASTERMAUXILIARY_gray.png" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\MASTERMAUXILIARY_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\MASTERMAUXILIARY_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\NETQUALITY_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\NETQUALITY_gray.png" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\NETQUALITY_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\NETQUALITY_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\NET_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\NET_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\NET_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\NET_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\NOSOUND_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\NOSOUND_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\NOSOUND_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\NOSOUND_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\NOTALKBACK_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\NOTALKBACK_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\NOTALKBACK_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\NOTALKBACK_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\PTZ3D_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\PTZ3D_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\PTZ3D_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\PTZ3D_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\PTZ_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\ptz_gray.png" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\PTZ_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\PTZ_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\RECORD_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\RECORD_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\RECORD_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\RECORD_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\RETRACTED_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\RETRACTED_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\RETRACTED_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\RETRACTED_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\RETURN_FOCUS.png" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\RETURN_GRAY.png" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\RETURN_NORMAL.png" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\RETURN_SELECT.png" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\SETWARDWND_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\SETWARDWND_gray.png" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\SETWARDWND_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\SETWARDWND_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\SOUND_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\SOUND_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\SOUND_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\SOUND_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\START_FOCUS.png" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\START_GRAY.png" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\START_NORMAL.png" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\START_SELECT.png" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\STOP_FOCUS.png" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\STOP_GRAY.png" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\STOP_NORMAL.png" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\STOP_SELECT.png" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\SUPERINTEL_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\SUPERINTEL_gray.png" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\SUPERINTEL_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\SUPERINTEL_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\TALKBACK_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\TALKBACK_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\TALKBACK_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\TALKBACK_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\TVWALL_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\TVWALL_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\TVWALL_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\TVWALL_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\WARNING.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\WARNING_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\WARNING_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\WARNING_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\ToolBar\PNG\WARNING_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\black\TVWallStatusBar\PNG\TVWall_Channel_Offline.png" />
+    <Content Include="bin\x86\Debug\Skin\black\TVWallStatusBar\PNG\TVWall_Channel_Online.png" />
+    <Content Include="bin\x86\Debug\Skin\black\VideoPane\BMP\instantreplay.png" />
+    <Content Include="bin\x86\Debug\Skin\black\VideoPane\BMP\logo.png" />
+    <Content Include="bin\x86\Debug\Skin\black\VideoPane\BMP\logo_alarm.png" />
+    <Content Include="bin\x86\Debug\Skin\black\VideoPane\BMP\TRANSLUCENT_BG.png" />
+    <Content Include="bin\x86\Debug\Skin\Skins.xml" />
+    <Content Include="bin\x86\Debug\Skin\white\DigtalPtz\PNG\BOTTOM_GRAY.png" />
+    <Content Include="bin\x86\Debug\Skin\white\DigtalPtz\PNG\BOTTOM_LEFT_GRAY.png" />
+    <Content Include="bin\x86\Debug\Skin\white\DigtalPtz\PNG\BOTTOM_LEFT_NOMAL.png" />
+    <Content Include="bin\x86\Debug\Skin\white\DigtalPtz\PNG\BOTTOM_LEFT_SELECT.png" />
+    <Content Include="bin\x86\Debug\Skin\white\DigtalPtz\PNG\BOTTOM_NOMAL.png" />
+    <Content Include="bin\x86\Debug\Skin\white\DigtalPtz\PNG\BOTTOM_RIGHT_GRAY.png" />
+    <Content Include="bin\x86\Debug\Skin\white\DigtalPtz\PNG\BOTTOM_RIGHT_NOMAL.png" />
+    <Content Include="bin\x86\Debug\Skin\white\DigtalPtz\PNG\BOTTOM_RIGHT_SELECT.png" />
+    <Content Include="bin\x86\Debug\Skin\white\DigtalPtz\PNG\BOTTOM_SELECT.png" />
+    <Content Include="bin\x86\Debug\Skin\white\DigtalPtz\PNG\CAPUTRE_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\DigtalPtz\PNG\CAPUTRE_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\DigtalPtz\PNG\CAPUTRE_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\DigtalPtz\PNG\CAPUTRE_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\DigtalPtz\PNG\LEFT_GRAY.png" />
+    <Content Include="bin\x86\Debug\Skin\white\DigtalPtz\PNG\LEFT_NOMAL.png" />
+    <Content Include="bin\x86\Debug\Skin\white\DigtalPtz\PNG\LEFT_SELECT.png" />
+    <Content Include="bin\x86\Debug\Skin\white\DigtalPtz\PNG\RIGHT_GRAY.png" />
+    <Content Include="bin\x86\Debug\Skin\white\DigtalPtz\PNG\RIGHT_NOMAL.png" />
+    <Content Include="bin\x86\Debug\Skin\white\DigtalPtz\PNG\RIGHT_SELECT.png" />
+    <Content Include="bin\x86\Debug\Skin\white\DigtalPtz\PNG\TOP_GRAY.png" />
+    <Content Include="bin\x86\Debug\Skin\white\DigtalPtz\PNG\TOP_LEFT_GRAY.png" />
+    <Content Include="bin\x86\Debug\Skin\white\DigtalPtz\PNG\TOP_LEFT_NOMAL.png" />
+    <Content Include="bin\x86\Debug\Skin\white\DigtalPtz\PNG\TOP_LEFT_SELECT.png" />
+    <Content Include="bin\x86\Debug\Skin\white\DigtalPtz\PNG\TOP_NOMAL.png" />
+    <Content Include="bin\x86\Debug\Skin\white\DigtalPtz\PNG\TOP_RIGHT_GRAY.png" />
+    <Content Include="bin\x86\Debug\Skin\white\DigtalPtz\PNG\TOP_RIGHT_NOMAL.png" />
+    <Content Include="bin\x86\Debug\Skin\white\DigtalPtz\PNG\TOP_RIGHT_SELECT.png" />
+    <Content Include="bin\x86\Debug\Skin\white\DigtalPtz\PNG\TOP_SELECT.png" />
+    <Content Include="bin\x86\Debug\Skin\white\DigtalPtz\PNG\ZOOMIN_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\DigtalPtz\PNG\ZOOMIN_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\DigtalPtz\PNG\ZOOMIN_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\DigtalPtz\PNG\ZOOMIN_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\DigtalPtz\PNG\ZOOMOUT_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\DigtalPtz\PNG\ZOOMOUT_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\DigtalPtz\PNG\ZOOMOUT_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\DigtalPtz\PNG\ZOOMOUT_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\DigtalPtz\PNG\ZOOMOVER_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\DigtalPtz\PNG\ZOOMOVER_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\DigtalPtz\PNG\ZOOMOVER_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\DigtalPtz\PNG\ZOOMOVER_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\DigtalPtz\PNG\ZOOM_REAT_TEXT.png" />
+    <Content Include="bin\x86\Debug\Skin\white\IAToolBar\PNG\DISPLAYMODE_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\IAToolBar\PNG\DISPLAYMODE_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\IAToolBar\PNG\DISPLAYMODE_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\IAToolBar\PNG\DISPLAYMODE_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\IAToolBar\PNG\MOVE_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\IAToolBar\PNG\MOVE_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\IAToolBar\PNG\MOVE_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\IAToolBar\PNG\MOVE_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\IAToolBar\PNG\PLAY_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\IAToolBar\PNG\PLAY_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\IAToolBar\PNG\PLAY_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\IAToolBar\PNG\PLAY_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\IAToolBar\PNG\POLYGON_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\IAToolBar\PNG\POLYGON_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\IAToolBar\PNG\POLYGON_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\IAToolBar\PNG\POLYGON_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\IAToolBar\PNG\RECT_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\IAToolBar\PNG\RECT_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\IAToolBar\PNG\RECT_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\IAToolBar\PNG\RECT_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\IAToolBar\PNG\STOP_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\IAToolBar\PNG\STOP_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\IAToolBar\PNG\STOP_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\IAToolBar\PNG\STOP_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\IAToolBar\PNG\ZOOMIN_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\IAToolBar\PNG\ZOOMIN_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\IAToolBar\PNG\ZOOMIN_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\IAToolBar\PNG\ZOOMIN_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\IAToolBar\PNG\ZOOMOUT_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\IAToolBar\PNG\ZOOMOUT_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\IAToolBar\PNG\ZOOMOUT_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\IAToolBar\PNG\ZOOMOUT_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\SoundCtrl\BackGround.png" />
+    <Content Include="bin\x86\Debug\Skin\white\TitleBar\PNG\ADD_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\TitleBar\PNG\ADD_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\TitleBar\PNG\ADD_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\TitleBar\PNG\ADD_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\TitleBar\PNG\ALARM_STATUS_ON.png" />
+    <Content Include="bin\x86\Debug\Skin\white\TitleBar\PNG\BLACK_BG.png" />
+    <Content Include="bin\x86\Debug\Skin\white\TitleBar\PNG\CRUISETRACK_STATUS_ON.png" />
+    <Content Include="bin\x86\Debug\Skin\white\TitleBar\PNG\DELETE_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\TitleBar\PNG\DELETE_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\TitleBar\PNG\DELETE_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\TitleBar\PNG\DELETE_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\TitleBar\PNG\LEFT_GRAY.png" />
+    <Content Include="bin\x86\Debug\Skin\white\TitleBar\PNG\LEFT_NOMAL.png" />
+    <Content Include="bin\x86\Debug\Skin\white\TitleBar\PNG\LEFT_SELECT.png" />
+    <Content Include="bin\x86\Debug\Skin\white\TitleBar\PNG\MESSAGE_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\TitleBar\PNG\MESSAGE_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\TitleBar\PNG\MESSAGE_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\TitleBar\PNG\MESSAGE_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\TitleBar\PNG\OFF_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\TitleBar\PNG\OFF_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\TitleBar\PNG\OFF_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\TitleBar\PNG\OFF_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\TitleBar\PNG\RECORD_STATUS_ON.png" />
+    <Content Include="bin\x86\Debug\Skin\white\TitleBar\PNG\RIGHT_GRAY.png" />
+    <Content Include="bin\x86\Debug\Skin\white\TitleBar\PNG\RIGHT_NOMAL.png" />
+    <Content Include="bin\x86\Debug\Skin\white\TitleBar\PNG\RIGHT_SELECT.png" />
+    <Content Include="bin\x86\Debug\Skin\white\TitleBar\PNG\SINGLEFRAME_STATUS_ON.png" />
+    <Content Include="bin\x86\Debug\Skin\white\TitleBar\PNG\TURNCRUISE_OFF.png" />
+    <Content Include="bin\x86\Debug\Skin\white\TitleBar\PNG\TURNCRUISE_ON.png" />
+    <Content Include="bin\x86\Debug\Skin\white\TitleBar\PNG\TVWALL_RECONNECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\TitleBar\PNG\TVWALL_VIDEO_BROKEN.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\TitleBar\PNG\TV_Wall_HANDLING.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\TitleBar\PNG\TV_Wall_OK.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\TitleBar\PNG\WATERMARKGRAY.png" />
+    <Content Include="bin\x86\Debug\Skin\white\TitleBar\PNG\WATERMARKNOMAL.png" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\bar.bmp" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\bgdown.bmp" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\bgdown_.bmp" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\bgmiddle.bmp" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\bgmiddle_.bmp" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\bgup.bmp" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\bgup_.bmp" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\CAPTURE_GRAY.BMP" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\CAPTURE_NORMAL.BMP" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\CAPTURE_SELECT.BMP" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\E_MAP_GRAY.BMP" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\E_MAP_NORMAL.BMP" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\E_MAP_SELECT.BMP" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\INSTANT_BP_GRAY.BMP" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\INSTANT_BP_NORMAL.BMP" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\INSTANT_BP_SELECT.BMP" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\LABEL_GRAY.BMP" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\LABEL_NORMAL.BMP" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\LABEL_SELECT.BMP" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\MAGNIFY_GRAY.BMP" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\MAGNIFY_NORMAL.BMP" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\MAGNIFY_SELECT.BMP" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\MASTERAUXILIARY_GRAY.BMP" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\MASTERAUXILIARY_NORMAL.BMP" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\MASTERAUXILIARY_SELECT.BMP" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\NET_GRAY.BMP" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\NET_NORMAL.BMP" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\NET_SELECT.BMP" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\NOSOUND_GRAY.BMP" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\NOSOUND_NORMAL.BMP" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\NOSOUND_SELECT.BMP" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\NOTALK_GRAY.bmp" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\NOTALK_NORMAL.bmp" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\NoTALK_SELECT.bmp" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\PTZ3D_GRAY.BMP" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\PTZ3D_NORMAL.BMP" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\PTZ3D_SELECT.BMP" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\PTZ_GRAY.BMP" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\PTZ_NORMAL.BMP" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\PTZ_SELECT.BMP" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\QUALITY_GRAY.BMP" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\QUALITY_NORMAL.BMP" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\QUALITY_SELECT.BMP" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\RECORD_GRAY.BMP" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\RECORD_NORMAL.BMP" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\RECORD_SELECT.BMP" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\SETWND_GRAY.BMP" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\SETWND_NORMAL.BMP" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\SETWND_SELECT.BMP" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\SOUND_GRAY.BMP" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\SOUND_NORMAL.BMP" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\SOUND_SELECT.BMP" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\SUPERINTEL_GRAY.BMP" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\SUPERINTEL_NORMAL.BMP" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\SUPERINTEL_SELECT.BMP" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\TALK_GRAY.BMP" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\TALK_NORMAL.BMP" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\TALK_SELECT.BMP" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\TV_GRAY.BMP" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\TV_NORMAL.BMP" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\BMP\TV_SELECT.BMP" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\BACK_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\BACK_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\BACK_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\BACK_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\BG_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\BG_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\BLACK_BG.png" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\CAPUTRE_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\CAPUTRE_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\CAPUTRE_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\CAPUTRE_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\EMAP_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\EMAP_gray.png" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\EMAP_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\EMAP_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\LABEL_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\LABEL_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\LABEL_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\LABEL_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\LOCKER_UP_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\LOCKER_UP_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\LOCKER_UP_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\LOCKER_UP_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\MAGNIFY_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\MAGNIFY_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\MAGNIFY_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\MAGNIFY_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\MASTERMAUXILIARY_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\MASTERMAUXILIARY_gray.png" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\MASTERMAUXILIARY_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\MASTERMAUXILIARY_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\NETQUALITY_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\NETQUALITY_gray.png" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\NETQUALITY_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\NETQUALITY_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\NET_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\NET_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\NET_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\NET_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\NOSOUND_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\NOSOUND_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\NOSOUND_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\NOSOUND_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\NOTALKBACK_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\NOTALKBACK_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\NOTALKBACK_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\NOTALKBACK_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\PTZ3D_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\PTZ3D_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\PTZ3D_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\PTZ3D_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\PTZ_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\ptz_gray.png" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\PTZ_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\PTZ_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\RECORD_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\RECORD_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\RECORD_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\RECORD_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\RETRACTED_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\RETRACTED_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\RETRACTED_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\RETRACTED_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\RETURN_FOCUS.png" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\RETURN_GRAY.png" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\RETURN_NORMAL.png" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\RETURN_SELECT.png" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\SETWARDWND_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\SETWARDWND_gray.png" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\SETWARDWND_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\SETWARDWND_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\SOUND_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\SOUND_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\SOUND_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\SOUND_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\START_FOCUS.png" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\START_GRAY.png" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\START_NORMAL.png" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\START_SELECT.png" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\STOP_FOCUS.png" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\STOP_GRAY.png" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\STOP_NORMAL.png" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\STOP_SELECT.png" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\SUPERINTEL_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\SUPERINTEL_gray.png" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\SUPERINTEL_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\SUPERINTEL_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\TALKBACK_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\TALKBACK_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\TALKBACK_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\TALKBACK_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\TVWALL_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\TVWALL_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\TVWALL_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\TVWALL_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\WARNING.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\WARNING_FOCUS.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\WARNING_GRAY.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\WARNING_NORMAL.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\ToolBar\PNG\WARNING_SELECT.PNG" />
+    <Content Include="bin\x86\Debug\Skin\white\TVWallStatusBar\PNG\TVWall_Channel_Offline.png" />
+    <Content Include="bin\x86\Debug\Skin\white\TVWallStatusBar\PNG\TVWall_Channel_Online.png" />
+    <Content Include="bin\x86\Debug\Skin\white\VideoPane\BMP\instantreplay.png" />
+    <Content Include="bin\x86\Debug\Skin\white\VideoPane\BMP\logo.png" />
+    <Content Include="bin\x86\Debug\Skin\white\VideoPane\BMP\logo_alarm.png" />
+    <Content Include="bin\x86\Debug\Skin\white\VideoPane\BMP\TRANSLUCENT_BG.png" />
+    <Content Include="bin\x86\Debug\SQLite.Interop.dll" />
+    <Content Include="bin\x86\Debug\ssleay32.dll" />
+    <Content Include="bin\x86\Debug\svacdec.dll" />
+    <Content Include="bin\x86\Debug\System.Net.Http.dll" />
+    <Content Include="bin\x86\Debug\System.Net.Http.Extensions.dll" />
+    <Content Include="bin\x86\Debug\System.Net.Http.Extensions.xml" />
+    <Content Include="bin\x86\Debug\System.Net.Http.Primitives.dll" />
+    <Content Include="bin\x86\Debug\System.Net.Http.Primitives.xml" />
+    <Content Include="bin\x86\Debug\System.Net.Http.WebRequest.dll" />
+    <Content Include="bin\x86\Debug\System.Net.Http.WebRequest.xml" />
+    <Content Include="bin\x86\Debug\System.Net.Http.xml" />
+    <Content Include="bin\x86\Debug\TLKJ.Utils.dll" />
+    <Content Include="bin\x86\Debug\TLKJ.Utils.pdb" />
+    <Content Include="bin\x86\Debug\update.xml" />
+    <Content Include="bin\x86\Debug\updateservice.xml" />
+    <Content Include="bin\x86\Debug\WavConvertAmr.dll" />
+    <Content Include="bin\x86\Debug\zlib.dll" />
+    <Content Include="Config.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Model\IMG01.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Model\OpenCV_Chessboard.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Model\OpenCV_Chessboard2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Model\OpenCV_Chessboard3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Model\Photo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="x64\liblept172.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="x64\libtesseract304.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="x86\liblept172.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="x86\libtesseract304.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\x86\Debug\de\" />
+    <Folder Include="bin\x86\Debug\es\" />
+    <Folder Include="bin\x86\Debug\fr\" />
+    <Folder Include="bin\x86\Debug\hu\" />
+    <Folder Include="bin\x86\Debug\Images\201811271448080000014882000000_0004\" />
+    <Folder Include="bin\x86\Debug\Images\201811271924540000012357000000_0005\" />
+    <Folder Include="bin\x86\Debug\Images\201811271925050000010886000000_0002\" />
+    <Folder Include="bin\x86\Debug\Images\201811271925080000013870000000_0001\" />
+    <Folder Include="bin\x86\Debug\Images\201811271925270000011573000000_0002\" />
+    <Folder Include="bin\x86\Debug\Images\201811271925310000010653000000_0001\" />
+    <Folder Include="bin\x86\Debug\Images\201811271925510000012062000000_0005\" />
+    <Folder Include="bin\x86\Debug\Images\201811271927150000014575000000_0005\" />
+    <Folder Include="bin\x86\Debug\Images\201811271930270000019144000000_0005\" />
+    <Folder Include="bin\x86\Debug\Images\201811271931100000013781000000_0003\" />
+    <Folder Include="bin\x86\Debug\Images\201811271942040000013832000000_0005\" />
+    <Folder Include="bin\x86\Debug\Images\201811271942160000018084000000_0002\" />
+    <Folder Include="bin\x86\Debug\Images\201811271942200000012705000000_0001\" />
+    <Folder Include="bin\x86\Debug\Images\201811271942350000019625000000_0003\" />
+    <Folder Include="bin\x86\Debug\Images\201811271942390000018149000000_0002\" />
+    <Folder Include="bin\x86\Debug\Images\201811271942430000014406000000_0001\" />
+    <Folder Include="bin\x86\Debug\Images\201811271942460000017390000000_0000\" />
+    <Folder Include="bin\x86\Debug\Images\201811271942470000034500000000_0000\" />
+    <Folder Include="bin\x86\Debug\Images\201811271943080000010270000000_0001\" />
+    <Folder Include="bin\x86\Debug\Images\201811271943120000016285000000_0000\" />
+    <Folder Include="bin\x86\Debug\Images\201811271943260000016817000000_0003\" />
+    <Folder Include="bin\x86\Debug\Images\201811271943290000016977000000_0002\" />
+    <Folder Include="bin\x86\Debug\Images\201811271943420000010640000000_0005\" />
+    <Folder Include="bin\x86\Debug\Images\201811271943500000013370000000_0003\" />
+    <Folder Include="bin\x86\Debug\Images\201811271943540000016321000000_0002\" />
+    <Folder Include="bin\x86\Debug\Images\201811271943580000010592000000_0001\" />
+    <Folder Include="bin\x86\Debug\Images\201811271944090000013307000000_0003\" />
+    <Folder Include="bin\x86\Debug\Images\201811271944140000018908000000_0002\" />
+    <Folder Include="bin\x86\Debug\Images\201811271944180000011859000000_0001\" />
+    <Folder Include="bin\x86\Debug\Images\201811271944210000013656000000_0000\" />
+    <Folder Include="bin\x86\Debug\Images\201811271944250000015178000000_0004\" />
+    <Folder Include="bin\x86\Debug\Images\201811271944290000014226000000_0003\" />
+    <Folder Include="bin\x86\Debug\Images\201811271944370000010892000000_0001\" />
+    <Folder Include="bin\x86\Debug\Images\201811271944410000015479000000_0000\" />
+    <Folder Include="bin\x86\Debug\Images\201811271944450000010590000000_0005\" />
+    <Folder Include="bin\x86\Debug\Images\201811271944570000010905000000_0002\" />
+    <Folder Include="bin\x86\Debug\Images\201811271945010000018316000000_0001\" />
+    <Folder Include="bin\x86\Debug\Images\201811271945100000019028000000_0005\" />
+    <Folder Include="bin\x86\Debug\Images\201811271945140000016647000000_0004\" />
+    <Folder Include="bin\x86\Debug\Images\201811271945180000011550000000_0003\" />
+    <Folder Include="bin\x86\Debug\Images\201811271945220000011677000000_0002\" />
+    <Folder Include="bin\x86\Debug\Images\201811271945470000013670000000_0003\" />
+    <Folder Include="bin\x86\Debug\Images\201811271945510000018606000000_0002\" />
+    <Folder Include="bin\x86\Debug\Images\201811271945550000018733000000_0001\" />
+    <Folder Include="bin\x86\Debug\Images\201811271945590000011369000000_0000\" />
+    <Folder Include="bin\x86\Debug\Images\201811271946030000018988000000_0005\" />
+    <Folder Include="bin\x86\Debug\Images\201811271946070000017163000000_0004\" />
+    <Folder Include="bin\x86\Debug\Images\201811271946100000019591000000_0003\" />
+    <Folder Include="bin\x86\Debug\Images\201811271946150000016653000000_0002\" />
+    <Folder Include="bin\x86\Debug\Images\201811271946180000019322000000_0001\" />
+    <Folder Include="bin\x86\Debug\it\" />
+    <Folder Include="bin\x86\Debug\ja\" />
+    <Folder Include="bin\x86\Debug\lib\services\" />
+    <Folder Include="bin\x86\Debug\pt\" />
+    <Folder Include="bin\x86\Debug\ru\" />
+    <Folder Include="bin\x86\Debug\sk\" />
+    <Folder Include="bin\x86\Debug\sv\" />
+    <Folder Include="bin\x86\Debug\tessdata\" />
+    <Folder Include="bin\x86\Debug\tr\" />
+    <Folder Include="bin\x86\Debug\zh-cn\" />
+    <Folder Include="bin\x86\Debug\zh-tw\" />
+    <Folder Include="doc\" />
+    <Folder Include="images\" />
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common.DB\TLKJ.DB.csproj">
+      <Project>{B6E0B7D2-692C-4505-83AA-45EFFE080C38}</Project>
+      <Name>TLKJ.DB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common.Util\TLKJ.Util.csproj">
+      <Project>{9C69D4E3-5A02-41C0-B4DB-A356C443B65C}</Project>
+      <Name>TLKJ.Util</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="UI\frmBase.resx">
+      <DependentUpon>frmBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\frmBD.resx">
+      <DependentUpon>frmBD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\frmConfig.resx">
+      <DependentUpon>frmConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\frmCut.resx">
+      <DependentUpon>frmCut.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\frmDTConfig.resx">
+      <DependentUpon>frmDTConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\frmIEWeb.resx">
+      <DependentUpon>frmIEWeb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\frmImage.resx">
+      <DependentUpon>frmImage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\frmPreset.resx">
+      <DependentUpon>frmPreset.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\frmViewer.resx">
+      <DependentUpon>frmViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\frmTask.resx">
+      <DependentUpon>frmTask.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\frmKitWeb.resx">
+      <DependentUpon>frmKitWeb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\frmXS.resx">
+      <DependentUpon>frmXS.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="bin\x86\Debug\Config.ini" />
+    <None Include="bin\x86\Debug\eSDKClientLogCfg.ini" />
+    <None Include="bin\x86\Debug\GTWS_TASK.vshost.exe.manifest" />
+    <None Include="bin\x86\Debug\log\Backup\eSDK-VCN-API-Windows-Cpp.interface.backup.log" />
+    <None Include="bin\x86\Debug\log\eSDK-VCN-API-Windows-Cpp.interface.log" />
+    <None Include="bin\x86\Debug\log\eSDK-VCN-API-Windows-Cpp.operation.log" />
+    <None Include="bin\x86\Debug\log\eSDK-VCN-API-Windows-Cpp.run.log" />
+    <None Include="bin\x86\Debug\mp_log.conf" />
+    <None Include="bin\x86\Debug\regsvrOCX.bat" />
+    <None Include="bin\x86\Debug\Skin\Skin.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <Content Include="tessdata\eng.cube.bigrams">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tessdata\eng.cube.fold">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tessdata\eng.cube.lm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tessdata\eng.cube.nn">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tessdata\eng.cube.params">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tessdata\eng.cube.size">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tessdata\eng.cube.word-freq">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tessdata\eng.tesseract_cube.nn">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tessdata\eng.traineddata">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\OpenCvSharp3-AnyCPU.4.0.0.20181129\build\OpenCvSharp3-AnyCPU.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\OpenCvSharp3-AnyCPU.4.0.0.20181129\build\OpenCvSharp3-AnyCPU.props'))" />
+  </Target>
+</Project>
