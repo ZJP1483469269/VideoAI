@@ -58,6 +58,7 @@
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.OracleClient" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -71,14 +72,15 @@
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DbManager.cs" />
+    <Compile Include="DbConnectionPool.cs" />
     <Compile Include="DBResult.cs" />
+    <Compile Include="DBSqlServer.cs" />
     <Compile Include="ExecSqlResult.cs" />
-    <Compile Include="IDB.cs" />
-    <Compile Include="DBFactory.cs" />
-    <Compile Include="MsSqlDB.cs" />
+    <Compile Include="DbManager.cs" />
+    <Compile Include="IDBBASE.cs" />
     <Compile Include="JActiveTable.cs" />
     <Compile Include="JActiveField.cs" />
+    <Compile Include="JDBBASE.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common.Util\TLKJ.Util.csproj">

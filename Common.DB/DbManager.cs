@@ -1,47 +1,171 @@
-﻿using System.Collections.Generic;
-using System.Web;
+﻿using System;
 using System.Data;
 using System.Collections;
-using System.Data.SqlClient;
+using System.Collections.Generic;
 using System.Text;
-using System;
-using System.Data.Common;
+using TLKJ.DB;
 using TLKJ.Utils;
 
 namespace TLKJ.DB
 {
     /// <summary>
-    /// DbManager 的摘要说明
+    /// G_CN 的摘要说明.
     /// </summary>
+    ///
     public class DbManager
     {
-        public DbManager()
+        public static bool Exists(string strSQL)
         {
-            //
-            // TODO: 在此处添加构造函数逻辑
-            //
+            JDBBASE db = DbConnectionPool.Instance();
+            try
+            {
+                if (db != null)
+                {
+                    string obj = db.GetStrValue(strSQL);
+                    int iResult = obj.Equals("") ? 0 : int.Parse(obj);
+                    if (iResult > 0)
+                        return true;
+                    else
+                        return false;
+                }
+                else
+                {
+                    log4net.WriteLogFile("获取连接对象失败", 3);
+                    return false;
+                }
+            }
+            finally
+            {
+                DbConnectionPool.ReturnConnect(db);
+            }
         }
-        /// <summary>
-        /// 分页获取
-        /// </summary>
-        /// <param name="cFileList"></param>
-        /// <param name="cTableName"></param>
-        /// <param name="cWhereParm"></param>
-        /// <param name="cOrderBy"></param>
-        /// <param name="iPageNo"></param>
-        /// <param name="iPageSize"></param>
-        /// <returns></returns>
+
+        public static int GetMaxID(String StrFieldName, String StrTableName)
+        {
+            JDBBASE db = DbConnectionPool.Instance();
+            try
+            {
+                if (db != null)
+                {
+                    String strSQL = "SELECT MAX(" + StrFieldName + ") FROM " + StrTableName;
+                    Object objValue = db.GetStrValue(strSQL);
+                    if (objValue.Equals(""))
+                    {
+                        objValue = "0";
+                    }
+                    return int.Parse(objValue.ToString()) + 1;
+                }
+                else
+                {
+                    log4net.WriteLogFile("获取连接对象失败", 3);
+                    return 0;
+                }
+            }
+            finally
+            {
+                DbConnectionPool.ReturnConnect(db);
+            }
+        }
+
+
+        public static String GetStrValue(string strSQL)
+        {
+            JDBBASE db = DbConnectionPool.Instance();
+            try
+            {
+                if (db != null)
+                {
+                    return db.GetStrValue(strSQL);
+                }
+                else
+                {
+                    log4net.WriteLogFile("G_CN:GetStrValue:获取连接对象失败", 3);
+                    return "";
+                }
+            }
+            finally
+            {
+                DbConnectionPool.ReturnConnect(db);
+            }
+
+        } 
+
+        public static String ServerDateTime()
+        {
+            JDBBASE db = DbConnectionPool.Instance();
+            try
+            {
+                if (db != null)
+                {
+                    IDBBASE myface = (IDBBASE)db;
+                    return myface.ServerDateTime();
+                }
+                else
+                {
+                    log4net.WriteLogFile("获取连接对象失败", 3);
+                    return null;
+                }
+            }
+            finally
+            {
+                DbConnectionPool.ReturnConnect(db);
+            }
+        }
+
+        public static DataTable QueryData(string strSQL)
+        {
+            JDBBASE db = DbConnectionPool.Instance();
+            try
+            {
+                if (db != null)
+                {
+                    return db.GetDataTable(strSQL); ;
+                }
+                else
+                {
+                    log4net.WriteLogFile("获取连接对象失败", 3);
+                    return null;
+                }
+            }
+            finally
+            {
+                DbConnectionPool.ReturnConnect(db);
+            }
+        }
+
+
+        public static int ExecSQL(string strSQL)
+        {
+            List<string> sqls = new List<string>();
+            sqls.Add(strSQL);
+            return ExecSQL(sqls, null);
+        }
+
+        public static int ExecSQL(List<String> sqls)
+        {            
+            return ExecSQL(sqls, null);
+        }
+        public static int ExecSQL(string[] sqlStrlist)
+        {
+            List<string> sqls = new List<string>();
+            for (int i = 0; i < sqlStrlist.Length; i++)
+            {
+                sqls.Add(sqlStrlist[i]);
+            }
+            return ExecSQL(sqls, null);
+        }
+
+
         public static DBResult Query(String cFileList, String cTableName, String cWhereParm, String cOrderBy, int iPageNo, int iPageSize)
         {
             DBResult vret = new DBResult();
             StringBuilder sql = new StringBuilder();
-
             sql.Append(" SELECT count(1) FROM " + cTableName);
-            if (!String.IsNullOrEmpty(cWhereParm))
+            if (!String.IsNullOrWhiteSpace(cWhereParm))
             {
                 sql.Append("    where " + cWhereParm);
             }
-            int iRowCount = StringEx.getInt(GetValue(sql.ToString()));
+            int iRowCount = StringEx.getInt(GetStrValue(sql.ToString()));
             int iPageCount = iRowCount / iPageSize;
             int iPageLeft = iRowCount % iPageSize;
             if (iPageLeft != 0)
@@ -56,13 +180,7 @@ namespace TLKJ.DB
             {
                 iPageNo = 1;
             }
-            if (!String.IsNullOrEmpty(cOrderBy))
-            {
-                if (!cOrderBy.Trim().ToUpper().StartsWith("ORDER BY"))
-                {
-                    cOrderBy = " ORDER BY " + cOrderBy;
-                }
-            }
+
             int iStart = (iPageNo - 1) * iPageSize;
             int iFinish = iPageNo * iPageSize;
             vret.PAGE_SIZE = iPageSize;
@@ -70,161 +188,50 @@ namespace TLKJ.DB
             vret.PAGE_NO = iPageNo;
             vret.PAGE_COUNT = iPageCount;
 
-            sql.Length = 0;
+            sql.Clear();
 
             sql.Append(" SELECT * FROM ( ");
             sql.Append("    select row_number() over(" + cOrderBy + ") rownumber ");
             sql.Append("    ," + cFileList);
             sql.Append("    from " + cTableName);
-            if (!String.IsNullOrEmpty(cWhereParm))
+            if (!String.IsNullOrWhiteSpace(cWhereParm))
             {
                 sql.Append("    where " + cWhereParm);
             }
             sql.Append(" ) tab");
-            sql.Append(" where rownumber>" + iStart + " and rownumber<=" + iFinish);
-
+            sql.Append(" where rownumber>" + iStart + " and rownumber<" + iFinish);
             vret.dtrows = QueryData(sql.ToString());
             return vret;
         }
 
-        /// <summary>
-        /// GetDataTable获取
-        /// </summary>
-        /// <param name="strSql"></param>
-        /// <returns></returns>
-        public static DataTable QueryData(string strSql)
+        public static int ExecSQL(List<string> sqls, List<object[]> parmList)
         {
-            IDB vDB = DBFactory.getDB();
-            return vDB.Query(strSql, null);
-        }
-
-
-        public static DataTable QueryData(string strSql, Object[] ParmList)
-        {
-            IDB vDB = DBFactory.getDB();
-            return vDB.Query(strSql, ParmList);
-        }
-
-        /// <summary>
-        /// 查询数据不分页
-        /// </summary>
-        /// <param name="cFileList">字段列表</param>
-        /// <param name="cTableName">数据表</param>
-        /// <param name="cWhereParm">条件</param>
-        /// <param name="cOrderBy">排序</param>
-        /// <returns></returns>
-        public static DataTable QueryData(String cFileList, String cTableName, String cWhereParm, String cOrderBy)
-        {
-            StringBuilder sql = new StringBuilder();
-            sql.Append(" SELECT " + cFileList);
-            sql.Append(" FROM " + cTableName);
-            if (!String.IsNullOrEmpty(cWhereParm))
+            JDBBASE db = DbConnectionPool.Instance();
+            try
             {
-                sql.Append(" where " + cWhereParm);
+                if (db != null)
+                {
+                    try
+                    {
+                        IDBBASE vDB = (IDBBASE)db;
+                        return vDB.ExecSQL(sqls, parmList);
+                    }
+                    catch (Exception ex)
+                    {
+                        log4net.WriteLogFile(ex.Message, 3);
+                        return 0;
+                    }
+                }
+                else
+                {
+                    log4net.WriteLogFile("获取连接对象失败", 3);
+                    return -1;
+                }
             }
-            if (!String.IsNullOrEmpty(cOrderBy))
+            finally
             {
-                sql.Append(" order by " + cOrderBy);
+                DbConnectionPool.ReturnConnect(db);
             }
-            return QueryData(sql.ToString());
-        }
-
-        /// <summary>
-        /// 查询数据
-        /// </summary>
-        /// <param name="cFileList"></param>
-        /// <param name="cTableName"></param>
-        /// <param name="cWhereParm"></param>
-        /// <returns></returns>
-        public static DataTable QueryData(String cFileList, String cTableName, String cWhereParm)
-        {
-            return QueryData(cFileList, cTableName, cWhereParm, null);
-        }
-
-        /// <summary>
-        /// 查询数据列表
-        /// </summary>
-        /// <param name="cFileList"></param>
-        /// <param name="cTableName"></param>
-        /// <returns></returns>
-        public static DataTable QueryData(String cFileList, String cTableName)
-        {
-            return QueryData(cFileList, cTableName, null, null);
-        }
-
-        /// <summary>
-        /// 获取指定sqL的值
-        /// </summary>
-        /// <param name="strSql"></param>
-        /// <param name="callBy"></param>
-        /// <returns></returns>
-        public static String GetValue(string strSql)
-        {
-            string strTemp = null;
-            strSql = (strSql == null) ? "" : strSql.Trim();
-            if (strSql.Equals("")) return null;
-            DataTable dt = QueryData(strSql);
-            if (dt != null && dt.Rows.Count > 0)
-            {
-                strTemp = StringEx.getString(dt.Rows[0][0]);
-                return strTemp.ToString();
-            }
-            else
-            {
-                return "";
-            }
-        }
-
-        public static String GetDate()
-        {
-            string cDayTime = GetDateTime();
-            return cDayTime.Substring(0, cDayTime.IndexOf(" "));
-        }
-
-        public static String GetDateTime()
-        {
-            string strSql = " SELECT GETDATE() ";
-            return GetValue(strSql);
-        }
-        ///
-        public static int GetCount(string strSql)
-        {
-            string sStr = GetValue(strSql);
-            return StringEx.getInt(sStr);
-        }
-
-        public static int ExeSql(List<String> sqlList)
-        {
-            return ExeSql(sqlList, null);
-        }
-
-        public static int ExeSql(string sql)
-        {
-            List<String> sqls = new List<string>();
-            sqls.Add(sql);
-            return ExeSql(sqls, null);
-        }
-
-        public static int ExeSql(String[] sqlList)
-        {
-            List<String> sqls = new List<string>();
-            for (int i = 0; i < sqlList.Length; i++)
-            {
-                sqls.Add(StringEx.getString(sqlList[i]));
-            }
-            return ExeSql(sqls, null);
-        }
-
-        /// <summary>
-        /// 执行多条SQL语句
-        /// </summary>
-        /// <param name="sqlArray"></param>
-        /// <param name="callBy"></param>
-        /// <returns></returns>
-        public static int ExeSql(List<String> vSqlList, List<Object[]> vParmList)
-        {
-            IDB vDB = DBFactory.getDB();
-            return vDB.ExeSql(vSqlList, vParmList);
         }
     }
 }
