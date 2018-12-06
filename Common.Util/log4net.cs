@@ -15,9 +15,17 @@ namespace TLKJ.Utils
             // TODO: Add constructor logic here
             //
         }
+        public static void WriteLogFile(String errMSG, int iLogLevel)
+        {
+            WriteTextLog(errMSG);
+        }
+        public static void WriteLogFile(String errMSG )
+        {
+            WriteTextLog(errMSG);
+        }
         public static void WriteTextLog(String errMSG)
-        { 
-            String cAppDir = AppDomain.CurrentDomain.BaseDirectory;            
+        {
+            String cAppDir = AppDomain.CurrentDomain.BaseDirectory;
             String cLogDir = cAppDir + "logs";
             if (!Directory.Exists(cLogDir))
             {
@@ -26,7 +34,7 @@ namespace TLKJ.Utils
             String cLogName = "WPZF.txt";
             string curDT = System.DateTime.Now.ToString("yyyyMMdd");
             String logFile = cLogDir + "\\" + curDT + cLogName;
-            StreamWriter sw = null; 
+            StreamWriter sw = null;
 
             try
             {

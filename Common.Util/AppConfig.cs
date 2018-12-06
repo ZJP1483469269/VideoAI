@@ -32,7 +32,7 @@ namespace TLKJ.Utils
         public static readonly string EMPTY = "EMPTY";
 
         public static readonly string IMAGE_MAX = "IMAGE_MAX";
-        public static readonly string IMAGE_MIN = "IMAGE_MIN"; 
+        public static readonly string IMAGE_MIN = "IMAGE_MIN";
 
         public static readonly string GRAY_MIN = "GRAY_MIN";
         public static readonly string GRAY_MAX = "GRAY_MAX";
@@ -47,7 +47,12 @@ namespace TLKJ.Utils
         public static readonly string DAY_AM = "DAY_AM";
         public static readonly string DAY_PM = "DAY_PM";
         public static readonly string EXPORT_IMAGE = "EXPORT_IMAGE";
-        public static readonly string ORG_ID = "ORG_ID"; 
+        public static readonly string ORG_ID = "ORG_ID";
+
+        public static readonly string DB_TYPE = "DB_TYPE";
+        public static readonly string DB_URL = "DB_URL";
+        public static readonly string DB_MAX = "DB_MAX";
+
 
         //public readonly static string COOKIE_COOKIEUSERNAME = "COOKIE_COOKIEUSERNAME";
 

@@ -94,6 +94,7 @@
     <Compile Include="IMSysLog.cs" />
     <Compile Include="INIConfig.cs" />
     <Compile Include="JsonLib.cs" />
+    <Compile Include="GPSXY.cs" />
     <Compile Include="KeyInfo.cs" />
     <Compile Include="KeyValue.cs" />
     <Compile Include="log4net.cs" />
