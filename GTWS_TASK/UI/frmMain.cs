@@ -16,6 +16,7 @@ using System.Threading;
 using System.Drawing.Imaging;
 using TLKJ.DB;
 using Renci.SshNet;
+using TLKJAI;
 
 namespace GTWS_TASK.UI
 {
@@ -174,7 +175,7 @@ namespace GTWS_TASK.UI
             {
                 ActiveDevice_ID = StringEx.getString(dtRows, 0, "DEVICE_ID");
                 ActiveLeftCount = StringEx.getString(dtRows, 0, "LEFT_TASK");
-                DbManager.ExeSql(" DELETE FROM XT_TASK_LIST WHERE ORG_ID='" + cOrgID + "' AND DEVICE_ID='" + ActiveDevice_ID + "'");
+                DbManager.ExecSQL(" DELETE FROM XT_TASK_LIST WHERE ORG_ID='" + cOrgID + "' AND DEVICE_ID='" + ActiveDevice_ID + "'");
                 return true;
             }
             return false;
@@ -612,7 +613,7 @@ namespace GTWS_TASK.UI
         private void 遍历截图ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             String cORG_ID = INIConfig.ReadString("Config", AppConfig.ORG_ID);
-            DbManager.ExeSql("INSERT INTO XT_TASK_LIST(DEVICE_ID,ORG_ID) "
+            DbManager.ExecSQL("INSERT INTO XT_TASK_LIST(DEVICE_ID,ORG_ID) "
                    + " SELECT DEVICE_ID,ORG_ID "
                    + " FROM XT_CAMERA WHERE ORG_ID='" + cORG_ID + "' "
                    + " AND NOT EXISTS(SELECT 1 FROM XT_TASK_LIST X WHERE X.DEVICE_ID=XT_CAMERA.DEVICE_ID AND X.ORG_ID='" + cORG_ID + "') ");
@@ -684,7 +685,7 @@ namespace GTWS_TASK.UI
             int iCode = IVS_API.IVS_SDK_LocalSnapshot(ApplicationEvent.iSession, (UInt32)ulRealPlayHandle, 1, cImageFileName);
             if (iCode == 0)
             {
-                String cKeyTex = TLKJ_AI.getImageText(cImageFileName);
+                String cKeyTex = IMGAI.getImageText(cImageFileName);
                 this.LB_MSG.Text = cKeyTex;
             }
             else
@@ -839,7 +840,7 @@ namespace GTWS_TASK.UI
                 if (iCode == 0)
                 {
                     log4net.WriteTextLog("IVS_SDK_LocalSnapshot成功！" + cFileName);
-                    String cKeyText = TLKJ_AI.getImageText(cFileName);
+                    String cKeyText = IMGAI.getImageText(cFileName);
                     List<String> sqls = new List<string>();
                     String cDayTime = DateTime.Now.ToString("yyyyMMddHHmmss");
                     String cFileDir = "/Images/" + cKeyID + ".jpg";
@@ -850,9 +851,9 @@ namespace GTWS_TASK.UI
                     aMaster.AddField("PRESET_ID", iPRESET_ID);
                     if (!String.IsNullOrEmpty(cKeyText))
                     {
-                        aMaster.AddField("P", TLKJ_AI.getP(cKeyText));
-                        aMaster.AddField("T", TLKJ_AI.getT(cKeyText));
-                        aMaster.AddField("X", TLKJ_AI.getX(cKeyText));
+                        aMaster.AddField("P", IMGAI.getP(cKeyText));
+                        aMaster.AddField("T", IMGAI.getT(cKeyText));
+                        aMaster.AddField("X", IMGAI.getX(cKeyText));
                     }
                     aMaster.AddField("FILE_URL", cFileDir);
                     aMaster.AddField("CREATE_TIME", cDayTime);
@@ -867,7 +868,7 @@ namespace GTWS_TASK.UI
 
                     sqls.Add(cMasterSQL);
                     sqls.Add(cSlaveSQL);
-                    iCode = DbManager.ExeSql(sqls);
+                    iCode = DbManager.ExecSQL(sqls);
                     if (iCode > 0)
                     {
                         log4net.WriteTextLog(cKeyID + "插入数据库成功");
@@ -917,11 +918,11 @@ namespace GTWS_TASK.UI
                         aTable.AddField("TASK_DAY", cDay);
                         aTable.AddField("ORG_ID", cORG_ID);
                         String sql = aTable.getUpdateSQL(" ORG_ID='" + cORG_ID + "' AND TASK_ID='" + cTaskID + "'");
-                        int iCode = DbManager.ExeSql(sql);
+                        int iCode = DbManager.ExecSQL(sql);
                         if (iCode == 0)
                         {
                             sql = aTable.getInsertSQL();
-                            iCode = DbManager.ExeSql(sql);
+                            iCode = DbManager.ExecSQL(sql);
                         }
                         INIConfig.Write("TASK", cTaskID + "_DAY", cDay);
                         return iCode > 0;
@@ -974,7 +975,7 @@ namespace GTWS_TASK.UI
                 aTable.AddField("UITYPE", rowKey.uiType);
                 aTable.AddField("UPDATE_TIME", DateUtils.getDayTimeNum());
                 String sql = aTable.getUpdateSQL("DEVICE_ID='" + rowKey.cCode + "'");
-                int iCode = DbManager.ExeSql(sql);
+                int iCode = DbManager.ExecSQL(sql);
                 if (iCode > 0)
                 {
                     log4net.WriteTextLog("摄像机更新成功");
@@ -982,7 +983,7 @@ namespace GTWS_TASK.UI
                 else
                 {
                     sql = aTable.getInsertSQL();
-                    iCode = DbManager.ExeSql(sql);
+                    iCode = DbManager.ExecSQL(sql);
                     if (iCode > 0)
                         log4net.WriteTextLog("摄像机写入成功");
                     else

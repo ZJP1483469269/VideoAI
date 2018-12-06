@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using TLKJ.DB;
 using TLKJ.Utils;
 using Renci.SshNet;
+using TLKJAI;
 
 namespace TLKJ_IVS
 {
@@ -60,7 +61,7 @@ namespace TLKJ_IVS
                         aMaster.AddField("UPLOAD_FLAG", 1);
                         aMaster.AddField("ALARM_FLAG", 0);
                         log4net.WriteTextLog("REC_ID为：" + cREC_ID + "的图片上传成功！");
-                        int iCode = DbManager.ExeSql(aMaster.getUpdateSQL(" REC_ID='" + cREC_ID + "' "));
+                        int iCode = DbManager.ExecSQL(aMaster.getUpdateSQL(" REC_ID='" + cREC_ID + "' "));
                         if (iCode > 0)
                         {
                             log4net.WriteTextLog("REC_ID为：" + cREC_ID + "的图片抠图成功！");
@@ -71,7 +72,7 @@ namespace TLKJ_IVS
                     isUpload = false;
                     if (iEXPORT_IMAGE > 0)
                     {
-                        List<KeyValue> ImageList = TLKJ_AI.getImageList(cFileName, iMinVal, iMaxVal, iGrayMinVal, iGrayMaxVal);
+                        List<KeyValue> ImageList = IMGAI.getImageList(cFileName, iMinVal, iMaxVal, iGrayMinVal, iGrayMaxVal);
                         List<String> sqls = new List<string>();
                         for (int k = 0; (ImageList != null) && (k < ImageList.Count); k++)
                         {
@@ -102,7 +103,7 @@ namespace TLKJ_IVS
                                 sqls.Add(aSlave.getInsertSQL());
                             }
                         }
-                        int iCode = DbManager.ExeSql(sqls);
+                        int iCode = DbManager.ExecSQL(sqls);
                         if (iCode > 0)
                         {
                             isUpload = true;
@@ -113,7 +114,7 @@ namespace TLKJ_IVS
                     {
                         aMaster.ClearField();
                         aSlave.AddField("AI_FLAG", 1);
-                        int iCode = DbManager.ExeSql(aMaster.getUpdateSQL(" REC_ID='" + cREC_ID + "' "));
+                        int iCode = DbManager.ExecSQL(aMaster.getUpdateSQL(" REC_ID='" + cREC_ID + "' "));
                         if (iCode > 0)
                         {
                             log4net.WriteTextLog("REC_ID为：" + cREC_ID + "的图片抠图成功！");

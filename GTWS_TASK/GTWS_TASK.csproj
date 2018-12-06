@@ -105,8 +105,8 @@
   <ItemGroup>
     <Compile Include="Common\ApplicationEvent.cs" />
     <Compile Include="Common\Const.cs" />
-    <Compile Include="Common\GPSXY.cs" />
-    <Compile Include="Common\TLKJ_AI.cs" />
+    <Compile Include="TLKJAI\GPSAI.cs" />
+    <Compile Include="TLKJAI\IMGAI.cs" />
     <Compile Include="Common\IVS_API.cs" />
     <Compile Include="Common\ShellAPI.cs" />
     <Compile Include="Common\TVNode.cs" />

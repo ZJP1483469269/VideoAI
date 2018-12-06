@@ -11,9 +11,9 @@ using System.IO;
 using OpenCvSharp.Extensions;
 using Tesseract;
 
-namespace TLKJ_IVS
+namespace TLKJAI
 {
-    public class TLKJ_AI
+    public class IMGAI
     {
         public static String getImageText(String cFileName)
         {
@@ -87,8 +87,7 @@ namespace TLKJ_IVS
                 return 0;
             }
         }
-
-
+         
         public static String getImageText(Bitmap vBmp)
         {
             String cStr = null;

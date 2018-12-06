@@ -12,6 +12,7 @@ using TLKJ.DB;
 using System.IO;
 using OpenCvSharp.Extensions;
 using TLKJ_IVS;
+using TLKJAI;
 
 namespace GTWS_BD
 {
@@ -26,7 +27,7 @@ namespace GTWS_BD
         private void btnLoad_Click(object sender, EventArgs e)
         {
             String cFileName = @".\Model\IMG01.jpg";
-            List<KeyValue> LS = TLKJ_AI.getImageList(cFileName);
+            List<KeyValue> LS = IMGAI.getImageList(cFileName);
             for (int i = 0; i < LS.Count; i++)
             {
                 KeyValue rowKey = LS[i];
