@@ -129,12 +129,77 @@ namespace TLKJ_IVS
 
 
         private static SftpClient sftp = null;
-        public static Boolean Upload(String cFilePath, String cDFSPath)
+        public static Boolean Upload(String cFileName, String cType)
         {
-            if (!File.Exists(cFilePath))
+            if (!File.Exists(cFileName))
             {
                 return false;
             }
+            String cDFS_PATH = INIConfig.ReadString(cType, "DFS_PATH", "");
+            String cDFSType = INIConfig.ReadString(cType, "DFS_TYPE", "");
+
+            if (!cDFSType.Equals("SSH"))
+            {
+                return CopyFile(cFileName, cDFS_PATH);
+            }
+            else
+            {
+                return SSH_Upload(cFileName, cType);
+            }
+        }
+        public static Boolean RemoveFileList(List<KeyValue> ImageList)
+        {
+            String cFileDir = "";
+            for (int k = ImageList.Count - 1; (k >= 0); k--)
+            {
+                KeyValue rowKey = ImageList[k];
+                String cImageFileName = rowKey.Text;
+                if (String.IsNullOrEmpty(cFileDir))
+                {
+                    cFileDir = Path.GetDirectoryName(cImageFileName);
+                }
+
+                if (File.Exists(cImageFileName))
+                {
+                    try
+                    {
+                        File.Delete(cImageFileName);
+                    }
+                    catch (Exception ex)
+                    {
+                        log4net.WriteTextLog(ex.Message);
+                    }
+                }
+            }
+            return true;
+        }
+        public static Boolean RemoveFileDir(String cFileDir)
+        {
+            try
+            {
+                Directory.Delete(cFileDir);
+            }
+            catch (Exception ex)
+            {
+                log4net.WriteTextLog(ex.Message);
+            }
+            return true;
+        }
+        public static Boolean RemoveFile(String cFileDir)
+        {
+            try
+            {
+                File.Delete(cFileDir);
+            }
+            catch (Exception ex)
+            {
+                log4net.WriteTextLog(ex.Message);
+            }
+            return true;
+        }
+        public static Boolean SSH_Upload(String cFileName, String cDFSType)
+        {
+            String cDFS_PATH = INIConfig.ReadString(cDFSType, "DFS_PATH", "");
             Boolean isConnected = false;
             if (sftp != null)
             {
@@ -149,21 +214,34 @@ namespace TLKJ_IVS
                     sftp = null;
                 }
             }
+
+
             if (!isConnected)
             {
-                String cDFS_HOST = INIConfig.ReadString("UPLOAD", "DFS_HOST", "0");
-                String cDFS_PORT = INIConfig.ReadString("UPLOAD", "DFS_PORT", "0");
-                String cDFS_USER = INIConfig.ReadString("UPLOAD", "DFS_USER", "0");
-                String cDFS_PASS = INIConfig.ReadString("UPLOAD", "DFS_PASS", "0");
-                sftp = new SftpClient(cDFS_HOST, cDFS_USER, cDFS_PASS);
+                String cDFS_HOST = INIConfig.ReadString(cDFSType, "DFS_HOST", "");
+                String cDFS_PORT = INIConfig.ReadString(cDFSType, "DFS_PORT", "22");
+                int iDFS_PORT = StringEx.getInt(cDFS_PORT);
+                String cDFS_USER = INIConfig.ReadString(cDFSType, "DFS_USER", "root");
+                String cDFS_PASS = INIConfig.ReadString(cDFSType, "DFS_PASS", "");
+
+
+                sftp = new SftpClient(cDFS_HOST, iDFS_PORT, cDFS_USER, cDFS_PASS);
             }
             FileStream fs = null;
             try
             {
                 sftp.Connect();
-                fs = new FileStream(cFilePath, FileMode.Open);
-                String cFileName = Path.GetFileName(cFilePath);
-                sftp.CreateDirectory(cDFSPath);
+                fs = new FileStream(cFileName, FileMode.Open);
+                String cStr = Path.GetFileName(cFileName);
+                try
+                {
+                    sftp.CreateDirectory(cDFS_PATH);
+                }
+                catch (Exception ex)
+                {
+
+                }
+                String cDFSPath = cDFS_PATH;
                 if (!cDFSPath.EndsWith("/"))
                 {
                     cDFSPath = cDFSPath + "/";
@@ -173,6 +251,7 @@ namespace TLKJ_IVS
             }
             catch (Exception ex)
             {
+                log4net.WriteTextLog(ex.Message);
                 sftp = null;
                 return false;
             }

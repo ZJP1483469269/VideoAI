@@ -8,7 +8,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{52F65E1A-5E6D-446B-8B06-9BF35A553646}</ProjectGuid>
+    <ProjectGuid>{4A68E7C2-2452-4237-ACF6-301E482AB78E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>GTWS_TASK</RootNamespace>
     <AssemblyName>GTWS_TASK</AssemblyName>
