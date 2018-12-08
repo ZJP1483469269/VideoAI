@@ -221,5 +221,10 @@ namespace GTWS_BD
 
             }
         }
+
+        private void frmBD_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

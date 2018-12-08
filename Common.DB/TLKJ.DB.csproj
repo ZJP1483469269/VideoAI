@@ -74,7 +74,8 @@
   <ItemGroup>
     <Compile Include="DbConnectionPool.cs" />
     <Compile Include="DBResult.cs" />
-    <Compile Include="DBSqlServer.cs" />
+    <Compile Include="DBMySQL.cs" />
+    <Compile Include="DBMSSQL.cs" />
     <Compile Include="ExecSqlResult.cs" />
     <Compile Include="DbManager.cs" />
     <Compile Include="IDBBASE.cs" />

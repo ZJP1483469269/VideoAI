@@ -72,19 +72,19 @@ namespace TLKJ.DB
             {
                 if (iDB_TYPE == 1)
                 {
-                    DBSqlServer Connect = new DBSqlServer(cConnString);
+                    DBMSSQL Connect = new DBMSSQL(cConnString);
                     if (Connect != null)
                         Connects.Enqueue(Connect);
                 }
                 else if (iDB_TYPE == 2)
                 {
-                    DBSqlServer Connect = new DBSqlServer(cConnString);
+                    DBMSSQL Connect = new DBMSSQL(cConnString);
                     if (Connect != null)
                         Connects.Enqueue(Connect);
                 }
                 else if (iDB_TYPE == 3)
                 {
-                    DBSqlServer Connect = new DBSqlServer(cConnString);
+                    DBMySQL Connect = new DBMySQL(cConnString);
                     if (Connect != null)
                         Connects.Enqueue(Connect);
                 }
@@ -148,15 +148,15 @@ namespace TLKJ.DB
                 {
                     if (iDB_TYPE == 1)
                     {
-                        Connect = new DBSqlServer(cConnString);
+                        Connect = new DBMSSQL(cConnString);
                     }
                     else if (iDB_TYPE == 2)
                     {
-                        Connect = new DBSqlServer(cConnString);
+                        Connect = new DBMSSQL(cConnString);
                     }
                     else if (iDB_TYPE == 3)
                     {
-                        Connect = new DBSqlServer(cConnString);
+                        Connect = new DBMySQL(cConnString);
                     }
 
                     if (Connect != null)

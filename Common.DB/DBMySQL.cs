@@ -14,10 +14,10 @@ namespace TLKJ.DB
     /// DBSqlServer 的摘要说明。
 
     /// </summary>
-    public class DBSqlServer : JDBBASE, IDBBASE
+    public class DBMySQL : JDBBASE, IDBBASE
     {
 
-        public DBSqlServer(String AConnString)
+        public DBMySQL(String AConnString)
         {
 
             if (dbConnect == null)
@@ -252,7 +252,7 @@ namespace TLKJ.DB
 
 
 
-        ~DBSqlServer()
+        ~DBMySQL()
         {
             //
         }

@@ -15,8 +15,10 @@ namespace TLKJ.DB
     /// </summary>
     public class JActiveField
     {
+        public int DBType;
         public String FieldName;
         public String FieldValue;
+        public String FieldDesc;
 
         public JActiveField(string cFieldName, string cFieldValue)
         {
@@ -34,6 +36,13 @@ namespace TLKJ.DB
         {
             this.FieldName = cFieldName;
             this.FieldValue = dVal.ToString();
+        }
+
+        public JActiveField(String cFieldName, String cFieldDesc, int iDBType)
+        {
+            DBType = iDBType;
+            this.FieldName = cFieldName;
+            FieldDesc = cFieldDesc;
         }
     }
 }

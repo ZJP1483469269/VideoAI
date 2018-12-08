@@ -1274,6 +1274,7 @@
     <Content Include="Config.ini">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="doc\Newtonsoft.Json.dll" />
     <Content Include="Model\IMG01.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -1375,7 +1376,6 @@
     <Folder Include="bin\x86\Debug\tr\" />
     <Folder Include="bin\x86\Debug\zh-cn\" />
     <Folder Include="bin\x86\Debug\zh-tw\" />
-    <Folder Include="doc\" />
     <Folder Include="images\" />
     <Folder Include="Properties\" />
   </ItemGroup>

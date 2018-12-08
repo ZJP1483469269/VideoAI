@@ -43,7 +43,7 @@
             // btnLoad
             // 
             this.btnLoad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLoad.Location = new System.Drawing.Point(540, 13);
+            this.btnLoad.Location = new System.Drawing.Point(909, 13);
             this.btnLoad.Name = "btnLoad";
             this.btnLoad.Size = new System.Drawing.Size(101, 23);
             this.btnLoad.TabIndex = 0;
@@ -53,19 +53,19 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.Location = new System.Drawing.Point(13, 13);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(521, 286);
+            this.pictureBox1.Size = new System.Drawing.Size(890, 502);
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
             // Read_Corners
             // 
             this.Read_Corners.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Read_Corners.Location = new System.Drawing.Point(540, 42);
+            this.Read_Corners.Location = new System.Drawing.Point(909, 42);
             this.Read_Corners.Name = "Read_Corners";
             this.Read_Corners.Size = new System.Drawing.Size(101, 23);
             this.Read_Corners.TabIndex = 2;
@@ -76,7 +76,7 @@
             // Corners_Nx
             // 
             this.Corners_Nx.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Corners_Nx.Location = new System.Drawing.Point(571, 108);
+            this.Corners_Nx.Location = new System.Drawing.Point(940, 108);
             this.Corners_Nx.Name = "Corners_Nx";
             this.Corners_Nx.Size = new System.Drawing.Size(70, 21);
             this.Corners_Nx.TabIndex = 3;
@@ -85,7 +85,7 @@
             // Corners_Ny
             // 
             this.Corners_Ny.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Corners_Ny.Location = new System.Drawing.Point(571, 135);
+            this.Corners_Ny.Location = new System.Drawing.Point(940, 135);
             this.Corners_Ny.Name = "Corners_Ny";
             this.Corners_Ny.Size = new System.Drawing.Size(70, 21);
             this.Corners_Ny.TabIndex = 3;
@@ -95,7 +95,7 @@
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(542, 111);
+            this.label1.Location = new System.Drawing.Point(911, 111);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(23, 12);
             this.label1.TabIndex = 4;
@@ -105,7 +105,7 @@
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(542, 138);
+            this.label2.Location = new System.Drawing.Point(911, 138);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(23, 12);
             this.label2.TabIndex = 4;
@@ -114,7 +114,7 @@
             // btnCalibrate
             // 
             this.btnCalibrate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCalibrate.Location = new System.Drawing.Point(540, 71);
+            this.btnCalibrate.Location = new System.Drawing.Point(909, 71);
             this.btnCalibrate.Name = "btnCalibrate";
             this.btnCalibrate.Size = new System.Drawing.Size(101, 23);
             this.btnCalibrate.TabIndex = 2;
@@ -124,20 +124,20 @@
             // 
             // lstLogs
             // 
-            this.lstLogs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lstLogs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lstLogs.FormattingEnabled = true;
             this.lstLogs.ItemHeight = 12;
-            this.lstLogs.Location = new System.Drawing.Point(13, 306);
+            this.lstLogs.Location = new System.Drawing.Point(13, 522);
             this.lstLogs.Name = "lstLogs";
-            this.lstLogs.Size = new System.Drawing.Size(521, 88);
+            this.lstLogs.Size = new System.Drawing.Size(890, 88);
             this.lstLogs.TabIndex = 6;
             // 
             // frmBD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(653, 401);
+            this.ClientSize = new System.Drawing.Size(1022, 617);
             this.Controls.Add(this.lstLogs);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -148,7 +148,9 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnLoad);
             this.Name = "frmBD";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "摄像机标定";
+            this.Load += new System.EventHandler(this.frmBD_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
