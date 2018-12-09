@@ -37,6 +37,9 @@
             this.IMG_MAX = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.btnGray = new System.Windows.Forms.Button();
+            this.btnBinary = new System.Windows.Forms.Button();
+            this.btnFind = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GRAY_MIN)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GRAY_MAX)).BeginInit();
@@ -47,18 +50,18 @@
             // btnLoad
             // 
             this.btnLoad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLoad.Location = new System.Drawing.Point(853, 13);
+            this.btnLoad.Location = new System.Drawing.Point(853, 86);
             this.btnLoad.Name = "btnLoad";
             this.btnLoad.Size = new System.Drawing.Size(75, 23);
             this.btnLoad.TabIndex = 0;
-            this.btnLoad.Text = "btnLoad";
+            this.btnLoad.Text = "1";
             this.btnLoad.UseVisualStyleBackColor = true;
             this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
             // 
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(853, 43);
+            this.button1.Location = new System.Drawing.Point(853, 12);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 1;
@@ -68,9 +71,9 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(832, 589);
@@ -123,7 +126,7 @@
             0,
             0,
             0});
-            this.IMG_MIN.Location = new System.Drawing.Point(853, 291);
+            this.IMG_MIN.Location = new System.Drawing.Point(852, 376);
             this.IMG_MIN.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -143,7 +146,7 @@
             // IMG_MAX
             // 
             this.IMG_MAX.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.IMG_MAX.Location = new System.Drawing.Point(853, 318);
+            this.IMG_MAX.Location = new System.Drawing.Point(852, 403);
             this.IMG_MAX.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -161,6 +164,7 @@
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(851, 442);
             this.label1.Name = "label1";
@@ -170,18 +174,54 @@
             // 
             // label2
             // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(851, 276);
+            this.label2.Location = new System.Drawing.Point(850, 361);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(23, 12);
             this.label2.TabIndex = 5;
             this.label2.Text = "IMG";
+            // 
+            // btnGray
+            // 
+            this.btnGray.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGray.Location = new System.Drawing.Point(853, 115);
+            this.btnGray.Name = "btnGray";
+            this.btnGray.Size = new System.Drawing.Size(75, 23);
+            this.btnGray.TabIndex = 6;
+            this.btnGray.Text = "2";
+            this.btnGray.UseVisualStyleBackColor = true;
+            this.btnGray.Click += new System.EventHandler(this.btnGray_Click);
+            // 
+            // btnBinary
+            // 
+            this.btnBinary.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnBinary.Location = new System.Drawing.Point(853, 145);
+            this.btnBinary.Name = "btnBinary";
+            this.btnBinary.Size = new System.Drawing.Size(75, 23);
+            this.btnBinary.TabIndex = 7;
+            this.btnBinary.Text = "3";
+            this.btnBinary.UseVisualStyleBackColor = true;
+            this.btnBinary.Click += new System.EventHandler(this.btnBinary_Click);
+            // 
+            // btnFind
+            // 
+            this.btnFind.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnFind.Location = new System.Drawing.Point(853, 175);
+            this.btnFind.Name = "btnFind";
+            this.btnFind.Size = new System.Drawing.Size(75, 23);
+            this.btnFind.TabIndex = 8;
+            this.btnFind.Text = "4";
+            this.btnFind.UseVisualStyleBackColor = true;
             // 
             // frmCut
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(937, 613);
+            this.Controls.Add(this.btnFind);
+            this.Controls.Add(this.btnBinary);
+            this.Controls.Add(this.btnGray);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.IMG_MAX);
@@ -214,7 +254,9 @@
         private System.Windows.Forms.NumericUpDown IMG_MAX;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-
+        private System.Windows.Forms.Button btnGray;
+        private System.Windows.Forms.Button btnBinary;
+        private System.Windows.Forms.Button btnFind;
     }
 }
 
