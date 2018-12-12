@@ -6,10 +6,12 @@ using System.Runtime.InteropServices;
 using System.Drawing;
 using System.Windows.Forms;
 using TLKJ.Utils;
-using OpenCvSharp;
 using System.IO;
-using OpenCvSharp.Extensions;
-using Tesseract;
+using Emgu.CV;
+using Emgu.CV.Structure;
+using Emgu.CV.OCR;
+using Emgu.CV.Util;
+using Emgu.CV.CvEnum;
 
 namespace TLKJAI
 {
@@ -17,7 +19,7 @@ namespace TLKJAI
     {
         public static String getImageText(String cFileName)
         {
-            Bitmap vBmp = getPTXImage(cFileName);
+            Image<Gray, byte> vBmp = getPTXImage(cFileName);
             String cStr = getImageText(vBmp);
             if ((cStr.IndexOf("P") != -1) && (cStr.IndexOf("T") != -1) && (cStr.IndexOf("X") != -1))
                 return cStr;
@@ -62,7 +64,7 @@ namespace TLKJAI
             int idxX = cStr.IndexOf("X");
             try
             {
-                String cVal = StringEx.getString(cStr.Substring(idxT + 1, idxX - 1));
+                String cVal = StringEx.getString(cStr.Substring(idxT + 1, idxX - 1)).Trim();
                 return StringEx.getFloat(cVal);
             }
             catch (Exception ex)
@@ -87,18 +89,19 @@ namespace TLKJAI
                 return 0;
             }
         }
-         
-        public static String getImageText(Bitmap vBmp)
+
+        public static String getImageText(Image<Gray, Byte> vBmp)
         {
             String cStr = null;
             try
             {
+                vBmp.Save("PTX.jpg");
                 string path = Application.StartupPath + "\\tessdata";  //下载识别文件夹
                 string language = "eng";//识别语言
-                TesseractEngine ocr = new TesseractEngine(path, language, EngineMode.Default);//生成OCR对象。 
+                Tesseract ocr = new Tesseract(path, language, OcrEngineMode.Default);//生成OCR对象。 
                 ocr.SetVariable("tessedit_char_whitelist", "0123456789XPT.");//此方法表示只识别1234567890与x字母 
-                Page vf = ocr.Process(vBmp);//放进图像到OCR对象中
-                cStr = vf.GetText();
+                ocr.SetImage(vBmp);
+                cStr = ocr.GetUTF8Text();
             }
             catch (Exception ex)
             {
@@ -111,10 +114,10 @@ namespace TLKJAI
             return cStr;
         }
 
-        public static Bitmap getPTXImage(String cFileName)
+        public static Image<Gray, byte> getPTXImage(String cFileName)
         {
-            Mat fromImage = new Mat(cFileName);
-            OpenCvSharp.Rect rect = new OpenCvSharp.Rect();
+            Image<Bgr, byte> fromImage = new Image<Bgr, byte>(cFileName);
+            Rectangle rect = new Rectangle();
             rect.X = StringEx.getInt(Config.GetAppSettings(AppConfig.RECT_LEFT));
             rect.Y = StringEx.getInt(Config.GetAppSettings(AppConfig.RECT_TOP));
             rect.Width = StringEx.getInt(Config.GetAppSettings(AppConfig.RECT_WIDTH));
@@ -128,23 +131,22 @@ namespace TLKJAI
 
 
             //裁剪
-            Mat vRectImage = new Mat(fromImage, rect);
+            Image<Bgr, byte> vRectImage = fromImage.GetSubRect(rect);
 
             //转灰度
-            Mat GrayImage = new Mat(vRectImage.Width, vRectImage.Height, MatType.CV_8SC1);
-            Cv2.CvtColor(vRectImage, GrayImage, ColorConversionCodes.RGB2GRAY);
+            Image<Gray, byte> GrayImage = vRectImage.Convert<Gray, byte>();
+
 
             //黑白翻转
-            Mat vMat = new Mat();
-            Mat ResultGrayImage = new Mat(vRectImage.Width, vRectImage.Height, MatType.CV_8SC1);
-            Cv2.BitwiseNot(GrayImage, ResultGrayImage, vMat);
+            Image<Gray, byte> ResultGrayImage = new Image<Gray, byte>(vRectImage.Width, vRectImage.Height);
+            CvInvoke.BitwiseNot(GrayImage, ResultGrayImage);
             GrayImage = ResultGrayImage;
 
             //二值化
-            ResultGrayImage = new Mat(vRectImage.Width, vRectImage.Height, MatType.CV_8SC1);
-            Cv2.Threshold(GrayImage, ResultGrayImage, iBINARY_MIN, iBINARY_MAX, ThresholdTypes.Binary);
+            ResultGrayImage = new Image<Gray, byte>(vRectImage.Width, vRectImage.Height);
+            CvInvoke.Threshold(GrayImage, ResultGrayImage, iBINARY_MIN, iBINARY_MAX, Emgu.CV.CvEnum.ThresholdType.Binary);
 
-            return BitmapConverter.ToBitmap(GrayImage);
+            return GrayImage;
         }
 
         public static List<KeyValue> getImageList(String cFileName)
@@ -160,72 +162,63 @@ namespace TLKJAI
 
         public static List<KeyValue> getImageList(String cFileName, int iMinVal, int iMaxVal, int iGrayMinVal, int iGrayMaxVal)
         {
-            Mat BgrImage = null;
-            Mat GrayImage = new Mat();
-
-            List<KeyValue> ImageList = new List<KeyValue>();
-            String cExportDir = Path.GetDirectoryName(cFileName);
-            cExportDir = cExportDir.Replace("images", "export") + "\\";
-            if (!Directory.Exists(cExportDir))
-            {
-                Directory.CreateDirectory(cExportDir); //不存在文件夹，创建
-            }
-
-            //调取图片
-            BgrImage = Cv2.ImRead(cFileName, ImreadModes.AnyColor);
-
-            //转灰度
-            Cv2.CvtColor(BgrImage, GrayImage, ColorConversionCodes.BGR2GRAY);
-
-            //转黑白
-            Mat BinaryImage = new Mat();
-
-            Mat vMat = new Mat();
-
-            BinaryImage = GrayImage.Threshold(iGrayMinVal, iMaxVal, ThresholdTypes.Binary);
-
-            BinaryImage.SaveImage("D:\\IMG03.jpg");
-
-            String cFileID = Path.GetFileName(cFileName).Replace(".jpg", "");
             try
             {
-                OpenCvSharp.Point[][] rvs = new OpenCvSharp.Point[1][];
-                HierarchyIndex[] hierarchys = new HierarchyIndex[1];
+                Image<Bgr, Byte> BgrImage = null;
+                Image<Gray, Byte> GrayImage = null;
 
-                Cv2.FindContours(BinaryImage, out rvs, out hierarchys, RetrievalModes.Tree, ContourApproximationModes.ApproxNone);
-                int j = 1;
-                for (int i = 0; i < rvs.Length; i++)
+                List<KeyValue> ImageList = new List<KeyValue>();
+                String cExportDir = Path.GetDirectoryName(cFileName);
+                cExportDir = cExportDir.Replace("images", "export") + "\\";
+                if (!Directory.Exists(cExportDir))
                 {
-                    OpenCvSharp.Point[] objItem = rvs[i];
-                    OpenCvSharp.Rect vRect = Cv2.BoundingRect(objItem);
+                    Directory.CreateDirectory(cExportDir); //不存在文件夹，创建
+                }
 
-                    if ((vRect.Width < iMinVal) || (vRect.Height < iMinVal)) continue;
-                    if ((vRect.Width > iMaxVal) || (vRect.Height > iMaxVal)) continue;
+                //调取图片
+                BgrImage = new Image<Bgr, byte>(cFileName);
+                GrayImage = new Image<Gray, byte>(BgrImage.Width, BgrImage.Height);
+
+                //转灰度
+                CvInvoke.CvtColor(BgrImage, GrayImage, Emgu.CV.CvEnum.ColorConversion.Rgb2Gray);
+
+                //转黑白
+                Image<Gray, byte> BinaryImage = GrayImage.ThresholdToZeroInv(new Gray(iGrayMinVal));
+
+                BinaryImage.Save("D:\\IMG03.jpg");
+
+                String cFileID = Path.GetFileName(cFileName).Replace(".jpg", "");
+
+                VectorOfVectorOfPoint rvs = new VectorOfVectorOfPoint();
+                CvInvoke.FindContours(BinaryImage, rvs, null, RetrType.List, ChainApproxMethod.ChainApproxSimple);
+
+                int j = 10001;
+                for (int i = 0; i < rvs.Size; i++)
+                {
+                    var contour = rvs[i];
+                    Rectangle BoundingBox = CvInvoke.BoundingRectangle(contour);
+                    if ((BoundingBox.Width < iMinVal) || (BoundingBox.Height < iMinVal)) continue;
+                    if ((BoundingBox.Width > iMaxVal) || (BoundingBox.Height > iMaxVal)) continue;
                     j++;
-                    //Point p1 = new Point(vRect.X, vRect.Y);
-                    //Point p2 = new Point(vRect.X + vRect.Width, vRect.Y + vRect.Height);
-
-                    Mat vResult = new Mat(BgrImage, vRect);
-
-                    vResult.SaveImage(cExportDir + cFileID + "_" + j.ToString() + ".jpg");
-                    //ImageList.Add(vResult);
-                    //String cFileName = DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + i.ToString();
-                    //vResult.Save(cExportDir + "\\" + i + ".jpg");
-                    //ImageList.Add(cExportDir + "\\" + i + ".jpg");
-                    Cv2.Rectangle(BgrImage, vRect, new Scalar(255, 0, 0));
+                    CvInvoke.Rectangle(BgrImage, BoundingBox, new MCvScalar(255, 0, 0, 0), 3);
+                    Image<Bgr, Byte> vResult = BgrImage.GetSubRect(BoundingBox);
+                    String cExportFileName = cFileID + "_" + j.ToString();
+                    vResult.Save(cExportDir + cExportFileName + ".jpg");
 
                     KeyValue rowKey = new KeyValue();
-                    rowKey.Text = cExportDir + cFileID + "_" + j.ToString() + ".jpg";
-                    rowKey.Val = JsonLib.ToJSON(vRect);
+                    rowKey.Text = cExportFileName;
+                    rowKey.Val = JsonLib.ToJSON(BoundingBox);
                     ImageList.Add(rowKey);
                 }
-                BgrImage.SaveImage("D:\\IMG04.jpg");
+                BgrImage.Save("D:\\IMG04.jpg");
+
+                return ImageList;
             }
             catch (Exception ex)
             {
                 log4net.WriteTextLog("报错，原因为：" + ex);
+                return null;
             }
-            return ImageList;
         }
 
     }

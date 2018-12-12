@@ -6,18 +6,18 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using OpenCvSharp;
 using TLKJ.Utils;
+using Emgu.CV;
 
 namespace GTWS_BD
 {
     public partial class frmBD : Form
     {
         public int ImageCount = 0;
-        public OpenCvSharp.Size ImageSize;
-        public OpenCvSharp.Size BoardSize;
+        public Size ImageSize;
+        public Size BoardSize;
         public String[] FileList = null;
-        public Point2f[][] CPointList;
+        public ver[][] CPointList;
         public Point3f[][] GPointList;
         public frmBD()
         {
@@ -36,7 +36,7 @@ namespace GTWS_BD
             if (FileList.Length > 0)
             {
                 String cFileName = FileList[0];
-                Cv2.ImRead(cFileName);
+                CvInvoke.Imread(cFileName);
                 this.pictureBox1.Load(cFileName);
             }
         }
@@ -49,8 +49,8 @@ namespace GTWS_BD
             {
                 String cFileName = FileList[i];
                 WriteMessage("开始读取第(" + (i + 1) + ")个文件:" + cFileName);
-                Mat vImage = Cv2.ImRead(cFileName, ImreadModes.AnyColor);
-                Mat vGrayImage = Cv2.ImRead(cFileName, ImreadModes.Grayscale);
+                Mat vImage = CvInvoke.ImRead(cFileName, ImreadModes.AnyColor);
+                Mat vGrayImage = CvInvoke.ImRead(cFileName, ImreadModes.Grayscale);
 
                 if (i == 0)
                 {

@@ -19,7 +19,7 @@ namespace GTWS_BD
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             INIConfig.setConfigFile(Application.StartupPath + @"\Config.ini");
-            Application.Run(new frmBD());
+            Application.Run(new frmCut());
         }
     }
 }

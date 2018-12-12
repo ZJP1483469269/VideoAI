@@ -875,6 +875,7 @@ namespace GTWS_TASK.UI
                 {
                     log4net.WriteTextLog("IVS_SDK_LocalSnapshot成功！" + cFileName);
                     String cKeyText = IMGAI.getImageText(cFileName);
+
                     List<String> sqls = new List<string>();
                     String cDayTime = DateTime.Now.ToString("yyyyMMddHHmmss");
                     String cFileDir = "/images/" + cKeyID + ".jpg";
