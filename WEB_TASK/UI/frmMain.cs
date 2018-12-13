@@ -12,13 +12,16 @@ using System.IO;
 using NSoup;
 using NSoup.Nodes;
 using NSoup.Select;
+using System.Threading;
+using System.Web.UI;
 
 namespace WEB_TASK
 {
     public partial class frmMain : Form
     {
-        List<KeyValue> ResultList = new List<KeyValue>();
+        List<JHref> ResultList = new List<JHref>();
         List<String> HrefList = new List<String>();
+
         public frmMain()
         {
             InitializeComponent();
@@ -51,10 +54,7 @@ namespace WEB_TASK
             if (vDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 List<String> UrlList = FileLib.getFileLines(vDialog.FileName);
-                for (int i = 0; i < UrlList.Count; i++)
-                {
-                    TaskList.Items.Add(UrlList[i]);
-                }
+
             }
         }
         private String getHtmlValue(String cPage, String cStr)
@@ -71,12 +71,54 @@ namespace WEB_TASK
             }
         }
 
+        private void btnAnalyse2_Click(object sender, EventArgs e)
+        {
+        }
+
         private void btnAnalyse_Click(object sender, EventArgs e)
         {
-            txtPageHtml.Text = getPageHtml(this.txtUrl.Text);
-            Document doc = NSoupClient.Parse(txtPageHtml.Text);
-            var rs = doc.Select(this.txtMatch.Text);
+            JHref vTask = new JHref();
+            vTask.Url = this.txtUrl.Text;
+            vTask.Text = "0";
+            vTask.Layer = 0;
+            vTask.Prefix = this.txtHeader.Text;
+            AddHref(1, vTask);
+            Thread vThread = new Thread(ExecuteHref);
+            vThread.Start();
+        }
 
+        public List<List<JHref>> PageList = new List<List<JHref>>();
+        public int AddHref(int iLayer, JHref rowKey)
+        {
+            log4net.WriteLogFile("第" + iLayer + "层，添加链接" + rowKey.Text);
+            PageList[iLayer - 1].Add(rowKey);
+            return PageList[iLayer - 1].Count - 1;
+        }
+        public int AddHref(int iLayer, List<JHref> rowKey)
+        {
+            log4net.WriteLogFile("第" + iLayer + "层，添加链接" + rowKey.Count);
+            PageList[iLayer - 1].AddRange(rowKey);
+            return PageList[iLayer - 1].Count - 1;
+        }
+        public void InitPageList(int iLayer)
+        {
+            for (int i = 0; i < iLayer; i++)
+            {
+                PageList.Add(new List<JHref>());
+            }
+        }
+        public List<JHref> getPageHrefList(int iLayer)
+        {
+            return PageList[iLayer];
+
+        }
+        public List<JHref> getHerfList(JHref vTask)
+        {
+            String cUrl = vTask.Url;
+            String cPageHtml = getPageHtml(cUrl);
+            Document doc = NSoupClient.Parse(cPageHtml);
+            var rs = doc.Select(this.txtMatch.Text);
+            List<JHref> KeyList = new List<JHref>();
             for (int i = 0; i < rs.Count; i++)
             {
                 var voKey = rs[i];
@@ -84,41 +126,134 @@ namespace WEB_TASK
                 if (!String.IsNullOrWhiteSpace(cLINK_TEXT))
                 {
                     String cLINK_HREF = StringEx.getString(voKey.Attr("abs:href"));
+                    if (String.IsNullOrEmpty(cLINK_HREF))
+                    {
+                        continue;
+                    }
+                    if (!cLINK_HREF.StartsWith(vTask.Prefix))
+                    {
+                        continue;
+                    }
                     if (HrefList.IndexOf(cLINK_HREF) == -1)
                     {
                         HrefList.Add(cLINK_HREF);
-                        KeyValue rowKey = new KeyValue();
+                        JHref rowKey = new JHref();
                         rowKey.Text = cLINK_TEXT;
-                        rowKey.Val = cLINK_HREF;
-                        String cPageHtml = getPageHtml(cLINK_HREF);
-                        rowKey.Tag = getHtmlValue(cPageHtml, "#content");
-                        ResultList.Add(rowKey);
+                        rowKey.Prefix = vTask.Prefix;
+                        rowKey.Url = cLINK_HREF;
+                        log4net.WriteLogFile(cLINK_HREF + ":" + cLINK_TEXT);
+                        rowKey.Layer = vTask.Layer + 1;
+                        KeyList.Add(rowKey);
                     }
                 }
             }
+            return KeyList;
         }
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < TaskList.Items.Count; i++)
+            int iLayer = StringEx.getInt(this.txtDepth.Text);
+            InitPageList(iLayer);
+            btnAnalyse_Click(null, null);
+        }
+        int iReply = 1;
+        int iMax = 5;
+        public void ExecuteHref()
+        {
+            while (iReply < iMax)
             {
-                String cStr = StringEx.getString(TaskList.Items[i]);
-                this.txtUrl.Text = cStr;
-                btnAnalyse_Click(null, null);
+                log4net.WriteLogFile("第层" + iReply + "任务，开始！");
+                List<JHref> KeyList = PageList[iReply - 1];
+                for (int i = KeyList.Count - 1; i >= 0; i--)
+                {
+                    JHref vTask = KeyList[i];
+                    String cUrl = vTask.Url;
+                    String cPageHtml = getPageHtml(cUrl);
+                    List<JHref> rs = getHerfList(vTask);
+                    AddHref(iReply + 1, rs);
+                    try
+                    {
+                        Thread.Sleep(100);
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
+                }
+                log4net.WriteLogFile("第层" + iReply + "任务，结束！");
+                PageList[iReply - 1].Clear();
+                iReply++;
+                try
+                {
+                    Thread.Sleep(100);
+                }
+                catch (Exception ex)
+                {
+
+                }
             }
         }
 
         private void btnResult_Click(object sender, EventArgs e)
         {
             StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < ResultList.Count; i++)
+            for (int i = 0; i < PageList.Count; i++)
             {
                 String cLINK_TEXT = ResultList[i].Text;
-                String cLINK_HREF = ResultList[i].Val;
+                String cLINK_HREF = ResultList[i].Url;
 
                 sb.AppendLine(cLINK_TEXT + ":" + cLINK_HREF);
             }
             this.txtPageUrl.Text = sb.ToString();
+        }
+        private string ExecuteScript(string cExpr)
+        {
+            return StringEx.getString(Z.Expressions.Eval.Execute(cExpr));
+        }
+        private void button5_Click(object sender, EventArgs e)
+        {
+
+            String cPAGE_VAL = this.textBox1.Text;
+            int iLayer = StringEx.getInt(this.txtDepth.Text);
+            for (int i = 0; i < iLayer; i++)
+            {
+                cPAGE_VAL = cPAGE_VAL.Replace("{PAGE_NO}", i.ToString());
+                cPAGE_VAL = ExecuteScript(cPAGE_VAL);
+                JHref vTask = new JHref();
+                vTask.Url = this.txtUrl.Text;
+                vTask.Url = vTask.Url.Replace("{PAGE_NO}", cPAGE_VAL);
+                vTask.Text = "0";
+                vTask.Layer = i + 1;
+                vTask.Prefix = this.txtHeader.Text;
+                List<JHref> rs = getHerfList(vTask);
+                for (int k = 0; k < rs.Count; k++)
+                {
+                    var voKey = rs[k];
+                    String cLINK_TEXT = StringEx.getString(voKey.Text);
+                    if (!String.IsNullOrWhiteSpace(cLINK_TEXT))
+                    {
+                        String cLINK_HREF = StringEx.getString(voKey.Url);
+                        if (String.IsNullOrEmpty(cLINK_HREF))
+                        {
+                            continue;
+                        }
+                        if (!cLINK_HREF.StartsWith(vTask.Prefix))
+                        {
+                            continue;
+                        }
+                        if (HrefList.IndexOf(cLINK_HREF) == -1)
+                        {
+                            HrefList.Add(cLINK_HREF);
+                            JHref rowKey = new JHref();
+                            rowKey.Text = cLINK_TEXT;
+                            rowKey.Prefix = vTask.Prefix;
+                            rowKey.Url = cLINK_HREF;
+                            log4net.WriteLogFile(cLINK_HREF + ":" + cLINK_TEXT);
+                            rowKey.Layer = vTask.Layer + 1;
+                        }
+                    }
+                }
+            }
         }
     }
 }
