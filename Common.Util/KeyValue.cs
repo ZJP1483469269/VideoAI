@@ -10,6 +10,7 @@ namespace TLKJ.Utils
     {
         public String Text;
         public String Val;
+        public String Tag;
         public KeyValue()
         {
             //
