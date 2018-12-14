@@ -4,6 +4,7 @@ using System;
 using System.Web;
 using System.Data;
 using System.Text;
+using TLKJ.Utils;
 using TLKJ.DB;
 using TLKJ.DAO;
 
@@ -39,7 +40,7 @@ public class export : IHttpHandler
         }
 
         String cAppDir = ctx.Server.MapPath("~/");
-        DataTable dtRows = DbManager.GetDataTable("*", "xt_jb", cWhereParm);
+        DataTable dtRows = DbManager.QueryData("*", "xt_jb", cWhereParm);
         String JBList = TLKJ.DAO.PackUtil.Pack(cTABLE_ID, dtRows, cAppDir, "WEB");
         ctx.Response.Write(JBList);                                    //返回文件数据给客户端下载
         ctx.Response.Flush();

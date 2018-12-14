@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="index2.aspx.cs" Inherits="Admin_index2" %>
+<%@ Import Namespace="TLKJ.Utils" %>
 
 <!doctype html>
 <html lang="en">

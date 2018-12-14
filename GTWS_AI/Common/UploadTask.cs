@@ -60,11 +60,11 @@ namespace TLKJ_IVS
                         aMaster.ClearField();
                         aMaster.AddField("UPLOAD_FLAG", 1);
                         aMaster.AddField("ALARM_FLAG", 0);
-                        log4net.WriteTextLog("REC_ID为：" + cREC_ID + "的图片上传成功！");
+                        log4net.WriteLogFile("REC_ID为：" + cREC_ID + "的图片上传成功！");
                         int iCode = DbManager.ExecSQL(aMaster.getUpdateSQL(" REC_ID='" + cREC_ID + "' "));
                         if (iCode > 0)
                         {
-                            log4net.WriteTextLog("REC_ID为：" + cREC_ID + "的图片抠图成功！");
+                            log4net.WriteLogFile("REC_ID为：" + cREC_ID + "的图片抠图成功！");
                         }
                         isUpload = true;
                     }
@@ -117,13 +117,13 @@ namespace TLKJ_IVS
                         int iCode = DbManager.ExecSQL(aMaster.getUpdateSQL(" REC_ID='" + cREC_ID + "' "));
                         if (iCode > 0)
                         {
-                            log4net.WriteTextLog("REC_ID为：" + cREC_ID + "的图片抠图成功！");
+                            log4net.WriteLogFile("REC_ID为：" + cREC_ID + "的图片抠图成功！");
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    log4net.WriteTextLog("图片上传异常: " + ex);
+                    log4net.WriteLogFile("图片上传异常: " + ex);
                 }
             }
         }
@@ -168,7 +168,7 @@ namespace TLKJ_IVS
                     }
                     catch (Exception ex)
                     {
-                        log4net.WriteTextLog(ex.Message);
+                        log4net.WriteLogFile(ex.Message);
                     }
                 }
             }
@@ -182,7 +182,7 @@ namespace TLKJ_IVS
             }
             catch (Exception ex)
             {
-                log4net.WriteTextLog(ex.Message);
+                log4net.WriteLogFile(ex.Message);
             }
             return true;
         }
@@ -194,7 +194,7 @@ namespace TLKJ_IVS
             }
             catch (Exception ex)
             {
-                log4net.WriteTextLog(ex.Message);
+                log4net.WriteLogFile(ex.Message);
             }
             return true;
         }
@@ -252,7 +252,7 @@ namespace TLKJ_IVS
             }
             catch (Exception ex)
             {
-                log4net.WriteTextLog(ex.Message);
+                log4net.WriteLogFile(ex.Message);
                 sftp = null;
                 return false;
             }
@@ -267,7 +267,7 @@ namespace TLKJ_IVS
                     }
                     catch (Exception ex)
                     {
-                        log4net.WriteTextLog(ex.Message);
+                        log4net.WriteLogFile(ex.Message);
                     }
                 }
             }

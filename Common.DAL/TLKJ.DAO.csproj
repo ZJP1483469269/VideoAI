@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7E3A69E0-0F1C-4246-A2C3-7D3AF082F65F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TLKJ.DAO</RootNamespace>
+    <AssemblyName>TLKJ.DAO</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\Web\doc\lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Dao\BaseDao.cs" />
+    <Compile Include="Dao\MessageDAO.cs" />
+    <Compile Include="Email\Email.cs" />
+    <Compile Include="Email\EmailService.cs" />
+    <Compile Include="Email\Email_sendDao.cs" />
+    <Compile Include="Util\PackUtil.cs" />
+    <Compile Include="ZFJC_DAO\JCTBDao.cs" />
+    <Compile Include="ZFJC_DAO\WebJBDao.cs" />
+    <Compile Include="ZFJC_DAO\XT_IMG_SCREEN_Dao.cs" />
+    <Compile Include="ZFJC_DAO\XT_JB_FEEDBACK_Dao.cs" />
+    <Compile Include="ZFJC_DAO\XT_DJInfo_Dao.cs" />
+    <Compile Include="ZFJC_DAO\XT_MOBILE_USER_Dao.cs" />
+    <Compile Include="ZFJC_DAO\XT_JB_SEND_Dao.cs" />
+    <Compile Include="ZFJC_MODEL\XT_IMG_SCREEN.cs" />
+    <Compile Include="ZFJC_MODEL\xt_jctb.cs" />
+    <Compile Include="ZFJC_MODEL\webjb.cs" />
+    <Compile Include="ZFJC_DAO\XT_JB_Dao.cs" />
+    <Compile Include="ZFJC_DAO\S_DICTS_Dao.cs" />
+    <Compile Include="ZFJC_DAO\XT_JB_RESULT_Dao.cs" />
+    <Compile Include="ZFJC_DAO\DB_Dao.cs" />
+    <Compile Include="ZFJC_DAO\WX_USER_Dao.cs" />
+    <Compile Include="ZFJC_DAO\WX_RECV_MSG_Dao.cs" />
+    <Compile Include="ZFJC_MODEL\S_DICTS.cs" />
+    <Compile Include="ZFJC_MODEL\XT_JB_RESULT.cs" />
+    <Compile Include="ZFJC_DAO\S_NODES_Dao.cs" />
+    <Compile Include="ZFJC_MODEL\S_NODES.cs" />
+    <Compile Include="ZFJC_MODEL\XT_JB.cs" />
+    <Compile Include="ZFJC_MODEL\XT_NOTICE.cs" />
+    <Compile Include="ZFJC_DAO\XT_NOTICE_Dao.cs" />
+    <Compile Include="ZFJC_MODEL\WX_USER.cs" />
+    <Compile Include="ZFJC_MODEL\WX_RECV_MSG.cs" />
+    <Compile Include="ZFJC_MODEL\XT_JB_FEEDBACK.cs" />
+    <Compile Include="ZFJC_MODEL\XT_DJInfo.cs" />
+    <Compile Include="ZFJC_MODEL\XT_MOBILE_USER.cs" />
+    <Compile Include="ZFJC_MODEL\XT_JB_SEND.cs" />
+    <Compile Include="ZFJC_MODEL\XT_GXQ_XQBJ.cs" />
+    <Compile Include="ZFJC_SERVICE\DBService.cs" />
+    <Compile Include="Service\IService.cs" />
+    <Compile Include="Service\SYSService.cs" />
+    <Compile Include="ZFJC_SERVICE\DictService.cs" />
+    <Compile Include="ZFJC_SERVICE\WebService.cs" />
+    <Compile Include="ZFJC_SERVICE\XT_IMG_SCREENService.cs" />
+    <Compile Include="ZFJC_SERVICE\WFJBService.cs" />
+    <Compile Include="ZFJC_SERVICE\WLJBService.cs" />
+    <Compile Include="ZFJC_SERVICE\WXJBService.cs" />
+    <Compile Include="ZFJC_DAO\XT_CAMERA_Dao.cs" />
+    <Compile Include="ZFJC_DAO\XT_ORG_Dao.cs" />
+    <Compile Include="ZFJC_DAO\XT_ORG_WX_CONFIG_Dao.cs" />
+    <Compile Include="ZFJC_DAO\XT_USER_Dao.cs" />
+    <Compile Include="ZFJC_DAO\XT_RECEIVE_SMS_Dao.cs" />
+    <Compile Include="ZFJC_MODEL\XT_CAMERA.cs" />
+    <Compile Include="ZFJC_MODEL\XT_ORG.cs" />
+    <Compile Include="ZFJC_MODEL\XT_ORG_WX_CONFIG.cs" />
+    <Compile Include="ZFJC_MODEL\XT_USER.cs" />
+    <Compile Include="ZFJC_MODEL\XT_RECEIVE_SMS.cs" />
+    <Compile Include="ZFJC_SERVICE\CameraService.cs" />
+    <Compile Include="ZFJC_SERVICE\NoticeService.cs" />
+    <Compile Include="ZFJC_SERVICE\OrgInfService.cs" />
+    <Compile Include="ZFJC_SERVICE\OrgWXConfigService.cs" />
+    <Compile Include="ZFJC_SERVICE\UserInfService.cs" />
+    <Compile Include="ZFJC_SERVICE\ReceiveSMSService.cs" />
+    <Compile Include="ZFJC_SERVICE\OrgConfigService.cs" />
+    <Compile Include="ZFJC_SERVICE\WXUSERService.cs" />
+    <Compile Include="ZFJC_SERVICE\RECV_MSGService.cs" />
+    <Compile Include="ZFJC_SERVICE\FEEDBACKService.cs" />
+    <Compile Include="ZFJC_SERVICE\SQLDBService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util\RequestUtil.cs" />
+    <Compile Include="ZFJC_SERVICE\DJService.cs" />
+    <Compile Include="ZFJC_SERVICE\JCTBService.cs" />
+    <Compile Include="ZFJC_SERVICE\MOBILE_USERService.cs" />
+    <Compile Include="ZFJC_SERVICE\ASSIGNService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common.DB\TLKJ.DB.csproj">
+      <Project>{B6E0B7D2-692C-4505-83AA-45EFFE080C38}</Project>
+      <Name>TLKJ.DB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common.Util\TLKJ.Util.csproj">
+      <Project>{9C69D4E3-5A02-41C0-B4DB-A356C443B65C}</Project>
+      <Name>TLKJ.Util</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

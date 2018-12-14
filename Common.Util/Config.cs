@@ -42,7 +42,7 @@ namespace TLKJ.Utils
             }
             catch (Exception ex)
             {
-                 log4net.WriteTextLog(ex.Message);
+                log4net.WriteLogFile(ex.Message); 
                 result = cDefVal;
             }
             result = (result == null) ? "" : result.Trim();

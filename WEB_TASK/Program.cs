@@ -18,7 +18,7 @@ namespace WEB_TASK
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             INIConfig.setConfigFile(Application.StartupPath + @"\Config.ini");
-            Application.Run(new frmMain());
+            Application.Run(new frmCMain());
         }
     }
 }

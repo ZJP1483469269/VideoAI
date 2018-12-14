@@ -21,11 +21,11 @@ public class DefaultAspx : IHttpHandler
         context.Response.ContentType = "text/plain";
         this.response = context.Response;
         this.request = context.Request;
-        log4net.WriteTextLog("参数传递错误，action_method为空！");
+        log4net.WriteLogFile("参数传递错误，action_method为空！");
         Url_ActionTypeID = StringEx.getString(context.Request["action_method"]);
         if (Url_ActionTypeID.Length == 0)
         {
-            log4net.WriteTextLog("参数传递错误，action_method为空！");
+            log4net.WriteLogFile("参数传递错误，action_method为空！");
             response.Write(ActiveResult.Valid("action_method", "不能为空").toJSONString());
             response.End();
             return;
@@ -34,7 +34,7 @@ public class DefaultAspx : IHttpHandler
         System.Reflection.MethodInfo mv = t.GetMethod(Url_ActionTypeID);
         if (mv == null)
         {
-            log4net.WriteTextLog("未发现方法" + Url_ActionTypeID + "！");
+            log4net.WriteLogFile("未发现方法" + Url_ActionTypeID + "！");
             response.Write(ActiveResult.Valid("action_method", Url_ActionTypeID + "未发现").toJSONString());
             response.End();
             return;
@@ -56,28 +56,28 @@ public class DefaultAspx : IHttpHandler
             String cDeviceId = StringEx.getString(request["deviceid"]); //设备ID
 
             string sql = "select count(1) from XT_MOBILE_USER where USER_COUNT='" + cUserCount + "' and PASS_WORD='" + cUserPassw + "' AND IS_ACTIVE='1'";
-            int iCode = DbManager.GetCount(sql);
+            int iCode = StringEx.getInt(DbManager.GetStrValue(sql));
             ActiveResult vert = ActiveResult.Valid(iCode);
             if (iCode == 1)
             {//登录成功
                 String currentStr = DateTime.Now.ToLocalTime().ToString();
                 sql = "update XT_MOBILE_USER set APPVER='" + cCurVersion + "',DEVICEID='" + cDeviceId + "',ANDRIOD_ID='" + cAndroidVer + "',UPDATETIME='" + currentStr + "' where PHONE_NUM = '" + cUserCount + "'";
-                ExecSqlResult EXQ = DbManager.ExeSql(sql);
-                if (!(EXQ.Code > 0))
+                iCode = DbManager.ExecSQL(sql);
+                if (iCode == 0)
                 {
-                    log4net.WriteTextLog("手机版本号更新错误");
+                    log4net.WriteLogFile("手机版本号更新错误");
                     response.Write(ActiveResult.Valid("app_ver", "客户端版本更新失败").toJSONString());
                     return;
                 }
                 sql = "select ORG_ID from XT_MOBILE_USER where USER_COUNT='" + cUserCount + "'";
-                DataTable dt_table_userInfo = DbManager.GetDataTable(sql);
+                DataTable dt_table_userInfo = DbManager.QueryData(sql);
                 Hashtable ht = new Hashtable();
                 if (dt_table_userInfo != null && dt_table_userInfo.Rows.Count > 0)
                 {
                     ht.Add("usre_org", StringEx.getString(dt_table_userInfo, 0, "ORG_ID"));
                     vert.info = ht;
                 }
-                DataTable dt_table_userOrgInfo = DbManager.GetDataTable("select ORG_NAME from xt_org where ORG_ID in(select ORG_ID from XT_MOBILE_USER where USER_COUNT ='" + cUserCount + "')");
+                DataTable dt_table_userOrgInfo = DbManager.QueryData("select ORG_NAME from xt_org where ORG_ID in(select ORG_ID from XT_MOBILE_USER where USER_COUNT ='" + cUserCount + "')");
                 if (dt_table_userOrgInfo != null && dt_table_userOrgInfo.Rows.Count > 0)
                 {
                     ht.Add("org_name", StringEx.getString(dt_table_userOrgInfo, 0, "ORG_NAME"));
@@ -89,7 +89,7 @@ public class DefaultAspx : IHttpHandler
             {
                 sql = "select * from XT_MOBILE_USER where USER_COUNT =" + cUserCount;
                 DataTable dt_table = null;
-                dt_table = DbManager.GetDataTable(sql);
+                dt_table = DbManager.QueryData(sql);
                 if (dt_table.Rows.Count <= 0)
                 {
                     response.Write(ActiveResult.Valid("USER_COUNT", "账号不存在").toJSONString());
@@ -103,7 +103,7 @@ public class DefaultAspx : IHttpHandler
         }
         catch (Exception ex)
         {
-            log4net.WriteTextLog("手机端登陆时候：" + ex.Message);
+            log4net.WriteLogFile("手机端登陆时候：" + ex.Message);
         }
     }
 
@@ -121,11 +121,11 @@ public class DefaultAspx : IHttpHandler
             int starSign = cRefreshSain + 1;
             int endSign = cRefreshSain + 10;
             sql = "select ORG_ID from XT_MOBILE_USER where USER_COUNT=" + cUserCount;
-            String userOrg = DbManager.GetValue(sql);
+            String userOrg = DbManager.GetStrValue(sql);
             //sql = "select  * from(select  *, ROW_NUMBER() over(order by time desc) as rows from XT_JB)aa where rows BETWEEN '" + starSign + "' and '" + endSign + "' AND ISNULL(IS_HC,'0') = '0' and  XIANQU  = " + userOrg;
             sql = "select  *,(SELECT STUFF((select ',' + URL  from S_UPLOAD a, XT_JB b where charindex( Rtrim(a.ID) ,b.FILES_ID )>0 and aa.ID =b.id FOR XML PATH('')),1,1,'')AS T) as urls_path from(select  *, ROW_NUMBER() over(order by time desc) as rows from XT_JB)aa where rows BETWEEN '" + starSign + "' and '" + endSign + "'  AND ISNULL(IS_HC,'0') = '0' and  XIANQU  ='" + userOrg + "'";
 
-            DataTable dt_tbale = DbManager.GetDataTable(sql);
+            DataTable dt_tbale = DbManager.QueryData(sql);
             ActiveResult acts = new ActiveResult();
             Hashtable hts = new Hashtable();
             hts.Add("base", getTableHash(dt_tbale));
@@ -136,7 +136,7 @@ public class DefaultAspx : IHttpHandler
         }
         catch (Exception ex)
         {
-            log4net.WriteTextLog("返回列表数据时候：" + ex.Message);
+            log4net.WriteLogFile("返回列表数据时候：" + ex.Message);
         }
     }
 
@@ -155,14 +155,14 @@ public class DefaultAspx : IHttpHandler
     //        int starSign = cRefreshSain + 1;
     //        int endSign = cRefreshSain + 10;
     //        sql = "select ORG_ID from XT_MOBILE_USER where USER_COUNT=" + cUserCount;
-    //        String userOrg = DbManager.GetValue(sql);
+    //        String userOrg = DbManager.GetStrValue(sql);
     //        sql = "select  * from(select  *, ROW_NUMBER() over(order by time desc) as rows from XT_JB)aa where rows BETWEEN '" + starSign + "' and '" + endSign + "' AND ISNULL(IS_HC,'0') = '0' and  XIANQU  = " + userOrg;
-    //        DataTable dt_Tagble = DbManager.GetDataTable(sql);
+    //        DataTable dt_Tagble = DbManager.QueryData(sql);
     //        response.Write(ActiveResult.Query(dt_Tagble).toJSONString());
     //    }
     //    catch (Exception ex)
     //    {
-    //        log4net.WriteTextLog("返回列表数据时候：" + ex.Message);
+    //        log4net.WriteLogFile("返回列表数据时候：" + ex.Message);
     //    }
     //}
 
@@ -175,7 +175,7 @@ public class DefaultAspx : IHttpHandler
     //    String sql = "";
     //    sql = "select * from xt_jb where id ='" + cJb_id + "'";
     //    DataTable dt_tbale = null;
-    //    dt_tbale = DbManager.GetDataTable(sql);
+    //    dt_tbale = DbManager.QueryData(sql);
 
     //    string[] ars;
     //    ActiveResult acts = new ActiveResult();
@@ -188,7 +188,7 @@ public class DefaultAspx : IHttpHandler
     //        {
     //            sql = "select url from S_UPLOAD where id ='" + ars[j] + "'";
 
-    //            string strTemps = DbManager.GetValue(sql);
+    //            string strTemps = DbManager.GetStrValue(sql);
     //            ht.Add("filse" + j, strTemps);
     //        }
 
@@ -222,7 +222,7 @@ public class DefaultAspx : IHttpHandler
         List<String> arr = new List<string>();
         String sql = "";
         HttpFileCollection files = request.Files;
-        log4net.WriteTextLog("上传文件个数：" + files.Count.ToString());
+        log4net.WriteLogFile("上传文件个数：" + files.Count.ToString());
         if (files != null)
         {
             int iFileLen = files.Count;
@@ -285,7 +285,7 @@ public class DefaultAspx : IHttpHandler
             arr.Add(sql);
             //sql = "select * from ";
         }
-        int iCode = DbManager.ExeSql(arr).Code;
+        int iCode = DbManager.ExecSQL(arr);
         ActiveResult vert = ActiveResult.Valid(iCode);
         response.Write(vert.toJSONString());
     }
@@ -303,7 +303,7 @@ public class DefaultAspx : IHttpHandler
             String cMbilePosi_y = StringEx.getString(request["pos_y"]);
             String currentTimeStr = DateTime.Now.ToLocalTime().ToString();
             sql = "select * from XT_MOBILE_POS where PHONE_NUM = " + cUserCount;
-            DataTable dt_tbale = DbManager.GetDataTable(sql);
+            DataTable dt_tbale = DbManager.QueryData(sql);
             if (dt_tbale.Rows.Count > 0)
             {
                 sql = "update XT_MOBILE_POS set POS_X='" + cMbilePosi_x + "',POS_Y='" + cMbilePosi_y + "' ,UPDATETIME='" + currentTimeStr + "' where PHONE_NUM =" + cUserCount;
@@ -313,13 +313,13 @@ public class DefaultAspx : IHttpHandler
                 sql = "insert into XT_MOBILE_POS(POS_X,POS_Y,UPDATETIME,PHONE_NUM) values('" + cMbilePosi_x + "','" + cMbilePosi_y + "','" + currentTimeStr + "','" + cUserCount + "') ";
             }
 
-            int iCode = DbManager.ExeSql(sql).Code;
+            int iCode = DbManager.ExecSQL(sql);
             ActiveResult vert = ActiveResult.Valid(iCode);
             response.Write(vert.toJSONString());
         }
         catch (Exception ex)
         {
-            log4net.WriteTextLog("更新移动端坐时： sql语句" + sql + "错误内容" + ex);
+            log4net.WriteLogFile("更新移动端坐时： sql语句" + sql + "错误内容" + ex);
         }
     }
 

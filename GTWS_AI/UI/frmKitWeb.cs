@@ -69,7 +69,7 @@ namespace GTWS_TASK.UI
 
             if (vDialog != null)
             {
-                log4net.WriteTextLog(cUrl);
+                log4net.WriteLogFile(cUrl);
                 vDialog.ShowInTaskbar = false;
 
                 vDialog.ShowDialog();

@@ -15,15 +15,12 @@ namespace TLKJ.Utils
             // TODO: Add constructor logic here
             //
         }
-        public static void WriteLogFile(String errMSG, int iLogLevel)
+        public static void WriteLogFile(String cStr, int iLogLevel)
         {
-            WriteTextLog(errMSG);
+            WriteLogFile(cStr);
         }
-        public static void WriteLogFile(String errMSG )
-        {
-            WriteTextLog(errMSG);
-        }
-        public static void WriteTextLog(String errMSG)
+
+        public static void WriteLogFile(String cStr)
         {
             String cAppDir = AppDomain.CurrentDomain.BaseDirectory;
             String cLogDir = cAppDir + "logs";
@@ -67,9 +64,9 @@ namespace TLKJ.Utils
 
                     }
                 }
-                if (errMSG != "")
+                if (cStr != "")
                 {
-                    sw.WriteLine("操作内容：" + errMSG);
+                    sw.WriteLine("操作内容：" + cStr);
                 }
                 sw.Flush();
                 sw.Close();

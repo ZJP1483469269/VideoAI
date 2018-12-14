@@ -78,7 +78,7 @@ namespace GTWS_TASK.UI
 
         public void WriteLogText(String cStr)
         {
-            log4net.WriteTextLog(ActiveCameraName + "[" + ActiveCameraCode + "]" + cStr);
+            log4net.WriteLogFile(ActiveCameraName + "[" + ActiveCameraCode + "]" + cStr);
         }
         private void btnEndReal_Click(object sender, EventArgs e)
         {
@@ -116,7 +116,7 @@ namespace GTWS_TASK.UI
             }
             catch (Exception ex)
             {
-                log4net.WriteTextLog("IVS_SDK_StopRealPlay失败！");
+                log4net.WriteLogFile("IVS_SDK_StopRealPlay失败！");
             }
 
             try
@@ -124,7 +124,7 @@ namespace GTWS_TASK.UI
                 String cORG_ID = INIConfig.ReadString("Config", AppConfig.ORG_ID);
                 if (getTaskCameraCode(cORG_ID))
                 {
-                    log4net.WriteTextLog("剩余任务:" + ActiveLeftCount + ",当前任务:" + ActiveDevice_ID);
+                    log4net.WriteLogFile("剩余任务:" + ActiveLeftCount + ",当前任务:" + ActiveDevice_ID);
                     int idx = CAMEAR_ID_LIST.IndexOf(ActiveDevice_ID);
                     Object objInfo = CAMEAR_INF_LIST[idx];
                     CameraNameList.SelectedIndex = idx;
@@ -158,7 +158,7 @@ namespace GTWS_TASK.UI
             }
             catch (Exception ex)
             {
-                log4net.WriteTextLog(ActiveCameraName + "[" + ActiveCameraCode + "]" + ":" + ex.Message);
+                log4net.WriteLogFile(ActiveCameraName + "[" + ActiveCameraCode + "]" + ":" + ex.Message);
             }
             finally
             {
@@ -212,11 +212,11 @@ namespace GTWS_TASK.UI
             iCode = IVS_API.IVS_SDK_Login(ref info, ref ApplicationEvent.iSession);
             if (iCode == 0)
             {
-                log4net.WriteTextLog("用户登录视频服务器成功！");
+                log4net.WriteLogFile("用户登录视频服务器成功！");
             }
             else
             {
-                log4net.WriteTextLog("IVS_SDK_Login:" + iCode + " 调用失败");
+                log4net.WriteLogFile("IVS_SDK_Login:" + iCode + " 调用失败");
             }
             return iCode;
         }
@@ -340,7 +340,7 @@ namespace GTWS_TASK.UI
             }
             catch (Exception ex)
             {
-                log4net.WriteTextLog("查询预置位失败");
+                log4net.WriteLogFile("查询预置位失败");
             }
             return KeyList;
         }
@@ -355,7 +355,7 @@ namespace GTWS_TASK.UI
             }
             else
             {
-                log4net.WriteTextLog("IVS_SDK_DelPTZPreset:" + iCode + " 调用失败");
+                log4net.WriteLogFile("IVS_SDK_DelPTZPreset:" + iCode + " 调用失败");
                 return AppConfig.FAILURE;
             }
         }
@@ -371,7 +371,7 @@ namespace GTWS_TASK.UI
             }
             else
             {
-                log4net.WriteTextLog("IVS_SDK_PtzControl:" + iCode + " 调用失败");
+                log4net.WriteLogFile("IVS_SDK_PtzControl:" + iCode + " 调用失败");
                 MessageBox.Show("调用预置位失败");
                 return AppConfig.FAILURE;
             }
@@ -484,7 +484,7 @@ namespace GTWS_TASK.UI
             int iCode = IVS_API.IVS_SDK_PtzControl(ApplicationEvent.iSession, ActiveCameraCode, iControlCode, "2", "3", ref pLockStatus);
             if (iCode != 0)
             {
-                log4net.WriteTextLog("IVS_SDK_PtzControl控制失败");
+                log4net.WriteLogFile("IVS_SDK_PtzControl控制失败");
                 MessageBox.Show("IVS_SDK_PtzControl控制失败");
             }
         }
@@ -495,7 +495,7 @@ namespace GTWS_TASK.UI
             int iCode = IVS_API.IVS_SDK_PtzControl(ApplicationEvent.iSession, ActiveCameraCode, 1, "2", "3", ref pLockStatus);
             if (iCode != 0)
             {
-                log4net.WriteTextLog("IVS_SDK_PtzControl控制失败");
+                log4net.WriteLogFile("IVS_SDK_PtzControl控制失败");
                 MessageBox.Show("IVS_SDK_PtzControl控制失败");
             }
         }
@@ -521,7 +521,7 @@ namespace GTWS_TASK.UI
             int iCode = IVS_API.IVS_SDK_PtzControl(ApplicationEvent.iSession, ActiveCameraCode, iControlCode, "2", "3", ref pLockStatus);
             if (iCode != 0)
             {
-                log4net.WriteTextLog("IVS_SDK_PtzControl:" + iCode + " 调用失败");
+                log4net.WriteLogFile("IVS_SDK_PtzControl:" + iCode + " 调用失败");
                 MessageBox.Show("IVS_SDK_PtzControl控制失败");
             }
         }
@@ -547,7 +547,7 @@ namespace GTWS_TASK.UI
             int iCode = IVS_API.IVS_SDK_PtzControl(ApplicationEvent.iSession, ActiveCameraCode, iControlCode, "2", "3", ref pLockStatus);
             if (iCode != 0)
             {
-                log4net.WriteTextLog("IVS_SDK_PtzControl:" + iCode + " 调用失败");
+                log4net.WriteLogFile("IVS_SDK_PtzControl:" + iCode + " 调用失败");
                 MessageBox.Show("IVS_SDK_PtzControl控制失败");
             }
         }
@@ -573,7 +573,7 @@ namespace GTWS_TASK.UI
             int iCode = IVS_API.IVS_SDK_PtzControl(ApplicationEvent.iSession, ActiveCameraCode, iControlCode, "3", "3", ref pLockStatus);
             if (iCode != 0)
             {
-                log4net.WriteTextLog("IVS_SDK_PtzControl" + iCode + "控制失败");
+                log4net.WriteLogFile("IVS_SDK_PtzControl" + iCode + "控制失败");
                 MessageBox.Show((sender as Button).Name + "控制失败！");
             }
         }
@@ -618,7 +618,7 @@ namespace GTWS_TASK.UI
             }
             else
             {
-                log4net.WriteTextLog("IVS_SDK_LocalSnapshot:" + iCode);
+                log4net.WriteLogFile("IVS_SDK_LocalSnapshot:" + iCode);
             }
         }
 
@@ -639,7 +639,7 @@ namespace GTWS_TASK.UI
             }
             else
             {
-                log4net.WriteTextLog("IVS_SDK_LocalSnapshot:" + iCode);
+                log4net.WriteLogFile("IVS_SDK_LocalSnapshot:" + iCode);
             }
         }
 
@@ -722,7 +722,7 @@ namespace GTWS_TASK.UI
                         aMaster.ClearField();
                         aMaster.AddField("UPLOAD_FLAG", 1);
                         aMaster.AddField("ALARM_FLAG", 2);
-                        log4net.WriteTextLog("REC_ID为：" + cREC_ID + "的图片不存在跳过！");
+                        log4net.WriteLogFile("REC_ID为：" + cREC_ID + "的图片不存在跳过！");
                         int iCode = DbManager.ExecSQL(aMaster.getUpdateSQL(" REC_ID='" + cREC_ID + "' "));
                         if (iCode > 0)
                         {
@@ -779,7 +779,7 @@ namespace GTWS_TASK.UI
                         aMaster.AddField("UPLOAD_FLAG", 1);
                         aMaster.AddField("ALARM_FLAG", 0);
                         int iCode = DbManager.ExecSQL(aMaster.getUpdateSQL(" REC_ID='" + cREC_ID + "' "));
-                        log4net.WriteTextLog("REC_ID为：" + cREC_ID + "的图片，已处理！");
+                        log4net.WriteLogFile("REC_ID为：" + cREC_ID + "的图片，已处理！");
                     }
                     else
                     {
@@ -788,7 +788,7 @@ namespace GTWS_TASK.UI
                         aMaster.AddField("ALARM_FLAG", 2);
                         int iCode = DbManager.ExecSQL(aMaster.getUpdateSQL(" REC_ID='" + cREC_ID + "' "));
                         UploadTask.RemoveFile(cFileName);
-                        log4net.WriteTextLog("REC_ID为：" + cREC_ID + "的图片，已处理完成！");
+                        log4net.WriteLogFile("REC_ID为：" + cREC_ID + "的图片，已处理完成！");
                     }
                 }
                 try
@@ -820,7 +820,7 @@ namespace GTWS_TASK.UI
                     iCode = IVS_API.IVS_SDK_PtzControl(ApplicationEvent.iSession, ActiveCameraCode, 11, vPreset.cPresetName, "3", ref pLockStatus);
                     if (iCode > 0)
                     {
-                        log4net.WriteTextLog("调用预置位失败");
+                        log4net.WriteLogFile("调用预置位失败");
                         return;
                     }
                     else
@@ -873,7 +873,7 @@ namespace GTWS_TASK.UI
 
                 if (iCode == 0)
                 {
-                    log4net.WriteTextLog("IVS_SDK_LocalSnapshot成功！" + cFileName);
+                    log4net.WriteLogFile("IVS_SDK_LocalSnapshot成功！" + cFileName);
                     String cKeyText = IMGAI.getImageText(cFileName);
                     List<String> sqls = new List<string>();
                     String cDayTime = DateTime.Now.ToString("yyyyMMddHHmmss");
@@ -905,18 +905,18 @@ namespace GTWS_TASK.UI
                     iCode = DbManager.ExecSQL(sqls);
                     if (iCode > 0)
                     {
-                        log4net.WriteTextLog(cKeyID + "插入数据库成功");
+                        log4net.WriteLogFile(cKeyID + "插入数据库成功");
                     }
                 }
                 else
                 {
-                    log4net.WriteTextLog("IVS_SDK_LocalSnapshot失败！");
+                    log4net.WriteLogFile("IVS_SDK_LocalSnapshot失败！");
                 }
                 Application.DoEvents();
             }
             catch (Exception ex)
             {
-                log4net.WriteTextLog("Camera_YZW_List失败！" + ex.Message);
+                log4net.WriteLogFile("Camera_YZW_List失败！" + ex.Message);
             }
             finally
             {

@@ -175,8 +175,8 @@ namespace TLKJ.DB
                 }
                 else
                 {
-                    sbValueList.Append(",@" + cFieldName + "");
-                    sbValueList.Append(",'" + cFieldValue + "'");
+                    sbFieldList.Append("," + cFieldName + "");
+                    sbValueList.Append(" @" + cFieldName + "");
                     ParmList.Add(cFieldValue);
                 }
             }

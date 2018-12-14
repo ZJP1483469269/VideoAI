@@ -1230,7 +1230,6 @@
     <Content Include="Config.ini">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="License-LGPL.txt" />
     <Content Include="Model\IMG01.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -1343,7 +1342,6 @@
     <Folder Include="bin\x86\Debug\tr\" />
     <Folder Include="bin\x86\Debug\zh-cn\" />
     <Folder Include="bin\x86\Debug\zh-tw\" />
-    <Folder Include="doc\" />
     <Folder Include="images\" />
     <Folder Include="Properties\" />
   </ItemGroup>
@@ -1397,6 +1395,7 @@
     <None Include="bin\x86\Debug\Skin\Skin.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="doc\readme.txt" />
     <None Include="packages.config" />
     <Content Include="tessdata\eng.cube.bigrams">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

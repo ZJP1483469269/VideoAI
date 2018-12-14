@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
-using TLKJ.DAO;
-using System.Data;
-using TLKJ.WebSys;
-using TLKJ.Utils;
+using System.Web.UI.WebControls; 
+using System.Data; 
+using TLKJ.Utils; 
 using System.Text;
 using TLKJ.DB;
+using TLKJ.DAO;
+using TLKJ.Core; 
 
 public partial class Admin_top : System.Web.UI.UserControl
 {
@@ -26,5 +26,7 @@ public partial class Admin_top : System.Web.UI.UserControl
         cOrg_Full_Name = vUserInf.ORG_FULL_NAME;
         cUser_Name = vUserInf.USER_NAME;
        
-    }    
+    }
+
+    
 }

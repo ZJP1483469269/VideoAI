@@ -152,7 +152,7 @@ namespace TLKJ.Utils
         public String toJSONString()
         {
             String cStr = JsonLib.ToJSON(this);
-             log4net.WriteTextLog("ActiveResult：" + cStr);
+            log4net.WriteLogFile("ActiveResult：" + cStr);
             return JsonLib.ToJSON(this);
         }
     }

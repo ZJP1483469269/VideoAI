@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
-using TLKJ.WebSys;
+using System.Web.UI.WebControls; 
 using TLKJ.Utils;
 using TLKJ.DB;
 using TLKJ.DAO;
 using System.Data;
+using TLKJ.Core;
 
 public partial class Admin_index2 : PageEx
 {
@@ -33,7 +33,7 @@ public partial class Admin_index2 : PageEx
             sql.Append("INSERT INTO S_TOKEN(user_id,token,create_date) ");
             sql.Append(" VALUES('" + cUserCode + "','" + cToken + "','" + cDayTime + "')");
             sqls.Add(sql.ToString());
-            DbManager.ExeSql(sqls);
+            DbManager.ExecSQL(sqls);
             Session["TOKEN"] = cToken;
         }
         this.usercode.Value = cUserCode;
@@ -45,6 +45,6 @@ public partial class Admin_index2 : PageEx
         cOrg_Full_Name = vUserInf.ORG_FULL_NAME;
         cUser_Name = vUserInf.USER_NAME;
 
-        log4net.WriteTextLog("TOKEN的值是" + Session["TOKEN"]);
+        log4net.WriteLogFile("TOKEN的值是" + Session["TOKEN"]);
     }
 }

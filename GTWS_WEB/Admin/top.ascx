@@ -1,8 +1,28 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="top.ascx.cs" Inherits="Admin_top" %>
+<%@ Import Namespace="TLKJ.Utils" %>
+<script type="text/javascript">
+    $(function () {
+        $(".imgPlayer2").imgPlayer({
+            iconOpacity: '0.7', 	 //图标显示的透明度
+            activeIconOpacity: '0.7', //激活时图标显示的透明度
+            iconColor: '#fff',  //图标的颜色
+            iconFontColor: '#fff', //图标字体的颜色
+            activeIconColor: '#e70012'//激活时图标的颜色
+        });
+    })
+</script>
 <div id="main" align="center" style="height: 170px; overflow: hidden;">
     <div id="topBg" style="height: 119px; background: url(/static/images/top/topBg.png) no-repeat;">
         <div style="position: absolute; top: 30px; left: 20px; z-index: 9999;">
             <img id="imgLogo" src="/static/images/top/864114_header.png" style="border-width: 0px;" />
+        </div>
+        <div style="position: absolute; top: 0px; right: 0px; color: #fff; padding: 0px 0px;
+            color: #000" id="divChange">
+            <div class="imgPlayer2">
+                <img src="../images/top/tu001.png" />
+                <img src="../images/top/tu002.png" />
+                <img src="../images/top/tu004.png" />
+            </div>
         </div>
     </div>
     <div style="clear: both;">

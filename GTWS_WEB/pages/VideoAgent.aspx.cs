@@ -31,7 +31,7 @@ public partial class VideoAgent : PageEx
         voConf.Add("USER_ID", cUSER_ID);
         voConf.Add("DAYTIME", cDayTime);
         ID = cKeyMD;
-        vMessage.MESSAGE = JsonLib.toJSONString(voConf);
+        vMessage.MESSAGE = JsonLib.ToJSON(voConf);
         //ActiveMQ_Producer.SendMessage(cORG_ID, cUSER_ID, vMessage);
     }
 }

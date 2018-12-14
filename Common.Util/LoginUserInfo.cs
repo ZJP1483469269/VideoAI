@@ -19,6 +19,13 @@ namespace TLKJ.Utils
         public String ACTIVE_BATCH_NAME;
 
         public String XZQDM_LIST;
-        public String XZQMC_LIST;        
+        public String XZQMC_LIST;
+        public String ORG_TYPE;
+        public string USER_CODE;
+        public string APPID;
+        public string WX_ID;
+
+        public double X;
+        public double Y;        
     }
 }

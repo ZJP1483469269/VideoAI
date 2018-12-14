@@ -49,6 +49,6 @@ public partial class gtws_Default : PageEx
             vo.Add("isParent", "true");
             KeyList.Add(vo);
         }
-        ROOT_LIST = JsonLib.toJSONString(KeyList);
+        ROOT_LIST = JsonLib.ToJSON(KeyList);
     }
 }

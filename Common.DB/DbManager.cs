@@ -88,7 +88,7 @@ namespace TLKJ.DB
                 DbConnectionPool.ReturnConnect(db);
             }
 
-        } 
+        }
 
         public static String ServerDateTime()
         {
@@ -111,7 +111,17 @@ namespace TLKJ.DB
                 DbConnectionPool.ReturnConnect(db);
             }
         }
-
+        public static DataTable QueryData(string cFieldList, string cTableName, string cWhereParm)
+        {
+            StringBuilder sql = new StringBuilder();
+            sql.Append("SELECT " + cFieldList);
+            sql.Append(" FROM " + cTableName);
+            if (String.IsNullOrWhiteSpace(cWhereParm))
+            {
+                sql.Append(" WHERE " + cWhereParm);
+            }
+            return QueryData(sql.ToString());
+        }
         public static DataTable QueryData(string strSQL)
         {
             JDBBASE db = DbConnectionPool.Instance();
@@ -142,7 +152,7 @@ namespace TLKJ.DB
         }
 
         public static int ExecSQL(List<String> sqls)
-        {            
+        {
             return ExecSQL(sqls, null);
         }
         public static int ExecSQL(string[] sqlStrlist)
@@ -203,6 +213,16 @@ namespace TLKJ.DB
             vret.dtrows = QueryData(sql.ToString());
             return vret;
         }
+        public static int ExecSQL(string sql, object[] parmList)
+        {
+            List<String> sqls = new List<string>();
+            sqls.Add(sql);
+
+            List<Object[]> Parms = new List<object[]>();
+            Parms.Add(parmList);
+
+            return ExecSQL(sqls, Parms);
+        }
 
         public static int ExecSQL(List<string> sqls, List<object[]> parmList)
         {
@@ -233,5 +253,7 @@ namespace TLKJ.DB
                 DbConnectionPool.ReturnConnect(db);
             }
         }
+
+
     }
 }

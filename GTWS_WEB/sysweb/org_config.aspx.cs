@@ -26,8 +26,8 @@ public partial class sysweb_org_config : PageEx
             sql.Append(" SELECT '" + vUserInf.ORG_ID + "',KEYNAME,DEFVAL ");
             sql.Append(" FROM  S_CONSTANT T ");
             sql.Append(" WHERE NOT EXISTS(SELECT 1 FROM XT_ORG_CONFIG  X WHERE T.KEYNAME= X.KEYNAME) ");
-            DbManager.ExeSql(sql.ToString());
-            dtRows = DbManager.GetDataTable("SELECT A.*,B.DEFVAL,KEYDESC,TYPE_ID FROM XT_ORG_CONFIG A,S_CONSTANT B WHERE A.KEYNAME=B.KEYNAME AND A.ORG_ID='" + vUserInf.ORG_ID + "'");
+            DbManager.ExecSQL(sql.ToString());
+            dtRows = DbManager.QueryData("SELECT A.*,B.DEFVAL,KEYDESC,TYPE_ID FROM XT_ORG_CONFIG A,S_CONSTANT B WHERE A.KEYNAME=B.KEYNAME AND A.ORG_ID='" + vUserInf.ORG_ID + "'");
         }
     }
 }

@@ -28,7 +28,7 @@ namespace TLKJ.Utils
             }
             catch (Exception ex)
             {
-                log4net.WriteTextLog(ex.Message);
+                log4net.WriteLogFile(ex.Message);
                 return null;
             }
         }
@@ -79,7 +79,7 @@ namespace TLKJ.Utils
             }
             catch (Exception ex)
             {
-                log4net.WriteTextLog(ex.Message);
+                log4net.WriteLogFile(ex.Message);
                 return false;
             }
             finally

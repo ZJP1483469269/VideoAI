@@ -204,7 +204,7 @@ namespace TLKJ.DB
             string sql = "";
             try
             {
-                SqlConnection cn =(SqlConnection) dbConnect;
+                SqlConnection cn = (SqlConnection)dbConnect;
                 SqlCommand cmd = cn.CreateCommand();
                 trans = cn.BeginTransaction();
                 cmd.Transaction = trans;
@@ -240,8 +240,8 @@ namespace TLKJ.DB
             }
             catch (Exception ex)
             {
-                log4net.WriteTextLog("SQL：" + ex.Message);
-                log4net.WriteTextLog("执行：" + sql);
+                log4net.WriteLogFile("SQL：" + ex.Message);
+                log4net.WriteLogFile("执行：" + sql);
 
                 #region
                 if (trans != null) trans.Rollback();

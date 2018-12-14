@@ -32,7 +32,7 @@ public class Handler : IHttpHandler, IRequiresSessionState
             String vUserCount = StringEx.getString(Request["user_id"]);
             String vPassWord = StringEx.getString(Request["user_pass"]);
             sql = "SELECT COUNT(1) FROM S_USER_INF WHERE USER_CODE='" + vUserCount + "' AND USER_PASS = " + vPassWord;
-            String sqlValue = DbManager.GetValue(sql);
+            String sqlValue = DbManager.GetStrValue(sql);
             int iRSCount = StringEx.getInt(sqlValue);
             if (iRSCount > 0)
             {
@@ -55,7 +55,7 @@ public class Handler : IHttpHandler, IRequiresSessionState
                 + " ,a.NEIRONG as a_neirong,a.PEOPLE as a_people,a.PHONE as a_phone,a.EMAIL as a_email,a.JBTYPE as a_jbtype "
                 + " ,a.XMDISC as a_xmdisc,a.TIME as a_time ,a.SD_RESULT as a_sd_reslut, a.FILES_ID as a_files_id,b.URL as url "
                 + " ,b.TEXT as texts from XT_JB a left join S_UPLOAD b on CHARINDEX ( Rtrim(b.ID),Rtrim(a.FILES_ID))>0 " + cWhereParm;
-            DataTable dt_table = DbManager.GetDataTable(sql);
+            DataTable dt_table = DbManager.QueryData(sql);
             vret = ActiveResult.Query(dt_table);
             Response.Write(vret.toJSONString());
         }
@@ -64,8 +64,8 @@ public class Handler : IHttpHandler, IRequiresSessionState
             String cCVal = StringEx.getString(Request["cVal"]);
             String vSelectVal = StringEx.getString(Request["shenheEffect"]);
             sql = "update xt_jb set SD_RESULT='" + vSelectVal + "' where id='" + cCVal + "'";
-            ExecSqlResult exq = DbManager.ExeSql(sql);
-            Response.Write(exq.Code);
+            int iCode = DbManager.ExecSQL(sql);
+            Response.Write(iCode);
         }
         else if (cActionMethod.Equals("WLJB_SAVE"))
         {
@@ -106,8 +106,8 @@ public class Handler : IHttpHandler, IRequiresSessionState
                 delStr[1] = "insert into S_UPLOAD (ID,TEXT,URL,ORG_ID,RES_ID) VALUES ('" + vFiles_Id + "','蓝天卫士举报'," + cUrls + ",'" + cORG_ID + "','" + vFiles_Id + "')";
                 delStr[2] = "update XT_IMAGE_LIST set ISHANDS ='1' where id ='" + vImg_id + "' ";
             }
-            ExecSqlResult backCoed = DbManager.ExeSql(delStr);
-            if (backCoed.Code > 0)
+            int iCode= DbManager.ExecSQL(delStr);
+            if (iCode > 0)
             {
                 Response.Write(guid);
             }
@@ -123,11 +123,11 @@ public class Handler : IHttpHandler, IRequiresSessionState
             {
                 String vImg_id = StringEx.getString(Request["img_id"]);
                 sql = "update XT_IMAGE_LIST set ISHANDS ='1' where id ='" + vImg_id + "' ";
-                ExecSqlResult backCoed = DbManager.ExeSql(sql);
-                Response.Write(backCoed.Code);
+                int iCode= DbManager.ExecSQL(sql);
+                Response.Write(iCode);
             }
             catch(Exception ex) {
-                 log4net.WriteTextLog("api/handler-uneffectclick-sql" + sql + ex.Message);
+                 log4net.WriteLogFile("api/handler-uneffectclick-sql" + sql + ex.Message);
             }
             
             

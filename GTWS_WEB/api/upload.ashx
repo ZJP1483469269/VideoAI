@@ -83,7 +83,7 @@ public class Upload : IHttpHandler, IRequiresSessionState
                 }
             }
         }
-        int iCode = DbManager.ExeSql(sqls).Code;
+        int iCode = DbManager.ExecSQL(sqls);
 
         if (iCode > 0)
         {
@@ -142,7 +142,7 @@ public class Upload : IHttpHandler, IRequiresSessionState
                     + " VALUES('" + cFileID + "','" + cCameraID + "','" + cORG_ID + "','" + cUrl + "','" + cFileID.Substring(0, 14) + "')");
             }
         }
-        int iCode = DbManager.ExeSql(sqls).Code;
+        int iCode = DbManager.ExecSQL(sqls);
 
         if (iCode > 0)
         {

@@ -8,6 +8,7 @@
     <link href="/static/css/bootstrap.css" rel="stylesheet" type="text/css" />
     <script src="/static/js/jquery.js" type="text/javascript"></script>
     <script src="/static/js/work/index.js" type="text/javascript"></script>
+    <script src="../static/js/jQuery.imgPlayer.js" type="text/javascript"></script>
     <script type="text/javascript">
         function oa_tool() {
             var vtop = 0;

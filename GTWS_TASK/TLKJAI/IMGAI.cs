@@ -33,9 +33,9 @@ namespace TLKJAI
                 }
                 catch (Exception ex)
                 {
-                    log4net.WriteTextLog(ex.Message);
+                    log4net.WriteLogFile(ex.Message);
                 }
-                log4net.WriteTextLog(cStr);
+                log4net.WriteLogFile(cStr);
                 return "";
             }
         }
@@ -216,7 +216,7 @@ namespace TLKJAI
             }
             catch (Exception ex)
             {
-                log4net.WriteTextLog("报错，原因为：" + ex);
+                log4net.WriteLogFile("报错，原因为：" + ex);
                 return null;
             }
         }

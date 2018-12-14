@@ -68,7 +68,7 @@ namespace GTWS_TASK.UI
 
         public void WriteLogText(String cStr)
         {
-            log4net.WriteTextLog(ActiveCameraName + "[" + ActiveCameraCode + "]" + cStr);
+            log4net.WriteLogFile(ActiveCameraName + "[" + ActiveCameraCode + "]" + cStr);
         }
         private void btnEndReal_Click(object sender, EventArgs e)
         {
@@ -129,11 +129,11 @@ namespace GTWS_TASK.UI
             iCode = IVS_API.IVS_SDK_Login(ref info, ref ApplicationEvent.iSession);
             if (iCode == 0)
             {
-                log4net.WriteTextLog("用户登录视频服务器成功！");
+                log4net.WriteLogFile("用户登录视频服务器成功！");
             }
             else
             {
-                log4net.WriteTextLog("IVS_SDK_Login:" + iCode + " 调用失败");
+                log4net.WriteLogFile("IVS_SDK_Login:" + iCode + " 调用失败");
             }
             return iCode;
         }
@@ -210,7 +210,7 @@ namespace GTWS_TASK.UI
             int iCode = IVS_API.IVS_SDK_PtzControl(ApplicationEvent.iSession, ActiveCameraCode, iControlCode, "2", "3", ref pLockStatus);
             if (iCode != 0)
             {
-                log4net.WriteTextLog("IVS_SDK_PtzControl控制失败");
+                log4net.WriteLogFile("IVS_SDK_PtzControl控制失败");
                 MessageBox.Show("IVS_SDK_PtzControl控制失败");
             }
         }
@@ -221,7 +221,7 @@ namespace GTWS_TASK.UI
             int iCode = IVS_API.IVS_SDK_PtzControl(ApplicationEvent.iSession, ActiveCameraCode, 1, "2", "3", ref pLockStatus);
             if (iCode != 0)
             {
-                log4net.WriteTextLog("IVS_SDK_PtzControl控制失败");
+                log4net.WriteLogFile("IVS_SDK_PtzControl控制失败");
                 MessageBox.Show("IVS_SDK_PtzControl控制失败");
             }
         }
@@ -247,7 +247,7 @@ namespace GTWS_TASK.UI
             int iCode = IVS_API.IVS_SDK_PtzControl(ApplicationEvent.iSession, ActiveCameraCode, iControlCode, "2", "3", ref pLockStatus);
             if (iCode != 0)
             {
-                log4net.WriteTextLog("IVS_SDK_PtzControl:" + iCode + " 调用失败");
+                log4net.WriteLogFile("IVS_SDK_PtzControl:" + iCode + " 调用失败");
                 MessageBox.Show("IVS_SDK_PtzControl控制失败");
             }
         }
@@ -273,7 +273,7 @@ namespace GTWS_TASK.UI
             int iCode = IVS_API.IVS_SDK_PtzControl(ApplicationEvent.iSession, ActiveCameraCode, iControlCode, "2", "3", ref pLockStatus);
             if (iCode != 0)
             {
-                log4net.WriteTextLog("IVS_SDK_PtzControl:" + iCode + " 调用失败");
+                log4net.WriteLogFile("IVS_SDK_PtzControl:" + iCode + " 调用失败");
                 MessageBox.Show("IVS_SDK_PtzControl控制失败");
             }
         }
@@ -299,7 +299,7 @@ namespace GTWS_TASK.UI
             int iCode = IVS_API.IVS_SDK_PtzControl(ApplicationEvent.iSession, ActiveCameraCode, iControlCode, "3", "3", ref pLockStatus);
             if (iCode != 0)
             {
-                log4net.WriteTextLog("IVS_SDK_PtzControl" + iCode + "控制失败");
+                log4net.WriteLogFile("IVS_SDK_PtzControl" + iCode + "控制失败");
                 MessageBox.Show((sender as Button).Name + "控制失败！");
             }
         }
@@ -334,7 +334,7 @@ namespace GTWS_TASK.UI
             }
             else
             {
-                log4net.WriteTextLog("IVS_SDK_LocalSnapshot:" + iCode);
+                log4net.WriteLogFile("IVS_SDK_LocalSnapshot:" + iCode);
             }
         }
 

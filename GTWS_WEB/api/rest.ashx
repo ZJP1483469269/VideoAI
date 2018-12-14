@@ -26,7 +26,7 @@ public class rest : IHttpHandler, IRequiresSessionState
         ActiveResult ret = null;
         if (cActionType.Length == 0)
         {
-             log4net.WriteTextLog("参数传递错误:action_type" + cActionType);
+             log4net.WriteLogFile("参数传递错误:action_type" + cActionType);
             ret = ActiveResult.Valid("参数传递错误:action_type" + cActionType);
             Response.Write(ret.toJSONString());
             return;
@@ -34,7 +34,7 @@ public class rest : IHttpHandler, IRequiresSessionState
 
         if (cActionMethod.Length == 0)
         {
-             log4net.WriteTextLog("参数传递错误:action_method" + cActionType);
+             log4net.WriteLogFile("参数传递错误:action_method" + cActionType);
             ret = ActiveResult.Valid("参数传递错误:action_method" + cActionType);
             Response.Write(ret.toJSONString());
             return;
@@ -46,7 +46,7 @@ public class rest : IHttpHandler, IRequiresSessionState
         ActionType = asm.GetType(cActionClass);
         if (ActionType == null)
         {
-             log4net.WriteTextLog("未找到对应的类" + cActionClass + "错误!");
+             log4net.WriteLogFile("未找到对应的类" + cActionClass + "错误!");
             ret = ActiveResult.Valid("未找到对应的类" + cActionClass + "错误!");
             Response.Write(ret.toJSONString());
             return;
@@ -73,7 +73,7 @@ public class rest : IHttpHandler, IRequiresSessionState
         }
         catch (Exception ex)
         {
-             log4net.WriteTextLog(cActionType + "未找到对应 " + cActionMethod + "方法错误!");
+             log4net.WriteLogFile(cActionType + "未找到对应 " + cActionMethod + "方法错误!");
             ret = ActiveResult.Valid(cActionType + "未找到对应 " + cActionMethod + "方法错误!");
             return;
         }

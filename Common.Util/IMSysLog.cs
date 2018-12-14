@@ -51,7 +51,7 @@ namespace TLKJ.Utils
         /// 返回参数列表
         /// </summary>
         /// <returns></returns>
-        public List<DbParameter> GetParmList()
+        public List<DbParameter> getParmList()
         {
             List<DbParameter> parameters = new List<DbParameter>(4);
             SqlParameter p = new SqlParameter("@ID", SqlDbType.VarChar, 26);
@@ -75,8 +75,6 @@ namespace TLKJ.Utils
             parameters.Add(p);
 
             return parameters;
-        }
-
-
+        } 
     }
 }
