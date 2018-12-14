@@ -75,7 +75,7 @@ namespace TLKJ_IVS
             }
             catch (Exception ex)
             {
-                log4net.WriteTextLog(ex.Message);
+                log4net.WriteLogFile(ex.Message);
             }
             return dtRows;
         }
