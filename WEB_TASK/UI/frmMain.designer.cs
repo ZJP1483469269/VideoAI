@@ -89,7 +89,7 @@
             this.txtPageUrl.Multiline = true;
             this.txtPageUrl.Name = "txtPageUrl";
             this.txtPageUrl.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtPageUrl.Size = new System.Drawing.Size(767, 249);
+            this.txtPageUrl.Size = new System.Drawing.Size(754, 118);
             this.txtPageUrl.TabIndex = 4;
             // 
             // txtUrl
@@ -174,6 +174,7 @@
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "文书下载系统";
+            this.Load += new System.EventHandler(this.frmMain_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

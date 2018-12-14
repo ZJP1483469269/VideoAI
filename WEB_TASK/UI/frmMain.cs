@@ -78,7 +78,7 @@ namespace WEB_TASK
         private void btnAnalyse_Click(object sender, EventArgs e)
         {
             JHref vTask = new JHref();
-            vTask.Url = this.txtUrl.Text;
+            vTask.Url = this.txtUrl.Text.Replace("{PAGE_NO}", "");
             vTask.Text = "0";
             vTask.Layer = 0;
             vTask.Prefix = this.txtHeader.Text;
@@ -255,5 +255,23 @@ namespace WEB_TASK
                 }
             }
         }
+
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+
+        }
+        //public ChromiumWebBrowser chromeBrowser;
+
+        //public void InitializeChromium()
+        //{
+        //    CefSettings settings = new CefSettings(); 
+        //    // Create a browser component 
+        //    chromeBrowser = new ChromiumWebBrowser("http://www.baidu.com/");
+
+        //    // Add it to the form and fill it to the form window.
+        //    this.Controls.Add(chromeBrowser);
+        //    chromeBrowser.Dock = DockStyle.Fill;
+ 
+        //} 
     }
 }
