@@ -178,8 +178,7 @@ namespace TLKJ.DB
                 }
                 else
                 {
-                    //获得一个连接,如果当前或缺的链接无效，则重新申请一个
-
+                    //获得一个连接,如果当前或缺的链接无效，则重新申请一个 
                     JDBBASE mydb = (JDBBASE)Connects.Dequeue();
                     if ((mydb == null) || (!mydb.Connectd))
                     {

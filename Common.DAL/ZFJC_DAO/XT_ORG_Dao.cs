@@ -9,14 +9,14 @@ using System.Data;
 
 namespace TLKJ.DAO
 {
-    public class XT_ORG_Dao : BaseDao<XT_ORG>
+    public class S_ORG_INF_Dao : BaseDao<S_ORG_INF>
     {
         public void init(HttpRequest res, HttpResponse rep)
         {
             request = res;
             response = rep;
         }
-        public int save(XT_ORG vo, String cKeyID)
+        public int save(S_ORG_INF vo, String cKeyID)
         {
             ActiveResult vret = new ActiveResult();
             List<String> sqls = new List<string>();
@@ -36,14 +36,14 @@ namespace TLKJ.DAO
         }
         public DBResult Query(String cWhereParm, String cOrderBy, int iPageNo, int iPageSize)
         {
-            return DbManager.Query("*", "xt_org", cWhereParm, cOrderBy, iPageNo, iPageSize);
+            return DbManager.Query("*", "S_ORG_INF", cWhereParm, cOrderBy, iPageNo, iPageSize);
         }
 
         public int del_item(String cDBKey)
         {
             ActiveResult vret = new ActiveResult();
             string sql = "";
-            sql = "DELETE FROM xt_org WHERE org_id='" + cDBKey + "'";
+            sql = "DELETE FROM S_ORG_INF WHERE org_id='" + cDBKey + "'";
             int iCode= DbManager.ExecSQL(sql);
             return iCode;
         }
@@ -52,7 +52,7 @@ namespace TLKJ.DAO
             String[] KeyList = cKeyList.Split(',');
             ActiveResult vret = new ActiveResult();
             StringBuilder sql = new StringBuilder();
-            sql.Append(" DELETE FROM xt_org ");
+            sql.Append(" DELETE FROM S_ORG_INF ");
             sql.Append(" WHERE org_id IN (");
             for (int i = 0; i < KeyList.Length; i++)
             {
@@ -70,13 +70,13 @@ namespace TLKJ.DAO
             return DbManager.ExecSQL(sql.ToString());
         }
 
-        public XT_ORG FindOne(string cDBKey)
+        public S_ORG_INF FindOne(string cDBKey)
         {
-            XT_ORG vPhone = null;
-            DataTable dtRows = DbManager.QueryData("SELECT * FROM xt_org WHERE org_id='" + cDBKey + "'");
+            S_ORG_INF vPhone = null;
+            DataTable dtRows = DbManager.QueryData("SELECT * FROM S_ORG_INF WHERE org_id='" + cDBKey + "'");
             if ((dtRows != null) && (dtRows.Rows.Count > 0))
             {
-                vPhone = new XT_ORG();
+                vPhone = new S_ORG_INF();
                 ReadDB(vPhone, dtRows);
             }
             return vPhone;

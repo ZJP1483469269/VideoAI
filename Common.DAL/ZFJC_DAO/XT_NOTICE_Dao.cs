@@ -88,7 +88,7 @@ namespace TLKJ.DAO
         public XT_NOTICE FindLast()
         {
             XT_NOTICE vo = null;
-            DBResult ret = DbManager.Query("*", "xt_notice", "", "notice_id desc ", 1, 1);
+            DBResult ret = DbManager.Query("*", "xt_notice", "", "order by notice_id desc ", 1, 1);
             DataTable dtRows = ret.dtrows;
             if ((dtRows != null) && (dtRows.Rows.Count > 0))
             {

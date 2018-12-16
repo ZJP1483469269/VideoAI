@@ -9,14 +9,14 @@ using System.Data;
 
 namespace TLKJ.DAO
 {
-    public class XT_ORG_WX_CONFIG_Dao : BaseDao<XT_ORG_WX_CONFIG>
+    public class S_ORG_INF_WX_CONFIG_Dao : BaseDao<S_ORG_INF_WX_CONFIG>
     {
         public void init(HttpRequest res, HttpResponse rep)
         {
             request = res;
             response = rep;
         }
-        public int save(XT_ORG_WX_CONFIG vo, string cKeyID)
+        public int save(S_ORG_INF_WX_CONFIG vo, string cKeyID)
         {
             List<String> sqls = new List<string>();
             string sql = null;
@@ -35,14 +35,14 @@ namespace TLKJ.DAO
         public int del_item(String cDBKey)
         {
             string sql = "";
-            sql = "DELETE FROM XT_ORG_WX_CONFIG WHERE org_id='" + cDBKey + "'";
+            sql = "DELETE FROM S_ORG_INF_WX_CONFIG WHERE org_id='" + cDBKey + "'";
             return DbManager.ExecSQL(sql);
         }
 
         public DataTable Query(String cWhereParm)
         {
             StringBuilder sql = new StringBuilder();
-            sql.Append(" SELECT * FROM XT_ORG_WX_CONFIG ");
+            sql.Append(" SELECT * FROM S_ORG_INF_WX_CONFIG ");
             if (!String.IsNullOrEmpty(cWhereParm))
             {
                 sql.Append(" WHERE " + cWhereParm);
@@ -55,7 +55,7 @@ namespace TLKJ.DAO
             String[] KeyList = cKeyList.Split(',');
             ActiveResult vret = new ActiveResult();
             StringBuilder sql = new StringBuilder();
-            sql.Append(" DELETE FROM XT_ORG_WX_CONFIG ");
+            sql.Append(" DELETE FROM S_ORG_INF_WX_CONFIG ");
             sql.Append(" WHERE org_id IN (");
             for (int i = 0; i < KeyList.Length; i++)
             {
@@ -75,16 +75,16 @@ namespace TLKJ.DAO
 
         public DBResult Query(String cWhereParm, String cOrderBy, int iPageNo, int iPageSize)
         {
-            return DbManager.Query("*", "XT_ORG_WX_CONFIG", cWhereParm, cOrderBy, iPageNo, iPageSize);
+            return DbManager.Query("*", "S_ORG_INF_WX_CONFIG", cWhereParm, cOrderBy, iPageNo, iPageSize);
         }
 
-        public XT_ORG_WX_CONFIG FindOne(string cDBKey)
+        public S_ORG_INF_WX_CONFIG FindOne(string cDBKey)
         {
-            XT_ORG_WX_CONFIG vo = null;
-            DataTable dtRows = DbManager.QueryData("SELECT * FROM XT_ORG_WX_CONFIG WHERE org_id='" + cDBKey + "'");
+            S_ORG_INF_WX_CONFIG vo = null;
+            DataTable dtRows = DbManager.QueryData("SELECT * FROM S_ORG_INF_WX_CONFIG WHERE org_id='" + cDBKey + "'");
             if ((dtRows != null) && (dtRows.Rows.Count > 0))
             {
-                vo = new XT_ORG_WX_CONFIG();
+                vo = new S_ORG_INF_WX_CONFIG();
                 ReadDB(vo, dtRows);
             }
             return vo;

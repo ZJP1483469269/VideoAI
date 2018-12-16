@@ -11,7 +11,7 @@ namespace TLKJ.DAO
 {
     public class OrgInfService : IService
     {
-        XT_ORG_Dao dao = new XT_ORG_Dao();
+        S_ORG_INF_Dao dao = new S_ORG_INF_Dao();
         public void init(HttpRequest res, HttpResponse rep)
         {
             request = res;
@@ -45,7 +45,7 @@ namespace TLKJ.DAO
             }
             else
             {
-                XT_ORG vInfo = dao.FindOne(cORG_ID);
+                S_ORG_INF vInfo = dao.FindOne(cORG_ID);
                 vret = ActiveResult.returnObject(vInfo);
             }
             response.Write(vret.toJSONString());
@@ -75,8 +75,8 @@ namespace TLKJ.DAO
             String cAREA_ID = StringEx.getString(request["AREA_ID"]);
             cAREA_ID = cAREA_ID.Replace("00", "");
 
-            XT_ORG vo = new XT_ORG();
-            vo = (XT_ORG)RequestUtil.readFromRequest(request, vo);
+            S_ORG_INF vo = new S_ORG_INF();
+            vo = (S_ORG_INF)RequestUtil.readFromRequest(request, vo);
 
             if (String.IsNullOrEmpty(cORG_ID))
             {

@@ -53,6 +53,8 @@ namespace TLKJ.Utils
         public static readonly string DB_URL = "DB_URL";
         public static readonly string DB_MAX = "DB_MAX";
 
+        public static readonly string IS_DEBUG = "IS_DEBUG";
+        
 
         //public readonly static string COOKIE_COOKIEUSERNAME = "COOKIE_COOKIEUSERNAME";
 

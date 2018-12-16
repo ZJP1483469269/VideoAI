@@ -11,7 +11,7 @@ namespace TLKJ.DAO
 {
     public class OrgWXConfigService : IService
     {
-        XT_ORG_WX_CONFIG_Dao dao = new XT_ORG_WX_CONFIG_Dao();
+        S_ORG_INF_WX_CONFIG_Dao dao = new S_ORG_INF_WX_CONFIG_Dao();
         public void init(HttpRequest res, HttpResponse rep)
         {
             request = res;
@@ -49,7 +49,7 @@ namespace TLKJ.DAO
             }
             else
             {
-                XT_ORG_WX_CONFIG vo = dao.FindOne(cORG_ID);
+                S_ORG_INF_WX_CONFIG vo = dao.FindOne(cORG_ID);
                 vret = ActiveResult.returnObject(vo);
             }
             response.Write(vret.toJSONString());
@@ -59,8 +59,8 @@ namespace TLKJ.DAO
         {
             ActiveResult vret = new ActiveResult();
             String cKeyID = StringEx.getString(request["ORG_ID"]);
-            XT_ORG_WX_CONFIG vo = new XT_ORG_WX_CONFIG();
-            vo = (XT_ORG_WX_CONFIG)RequestUtil.readFromRequest(request, vo);
+            S_ORG_INF_WX_CONFIG vo = new S_ORG_INF_WX_CONFIG();
+            vo = (S_ORG_INF_WX_CONFIG)RequestUtil.readFromRequest(request, vo);
             int iCode = dao.save(vo, cKeyID);
             vret = ActiveResult.Valid(iCode);
             response.Write(vret.toJSONString());
@@ -88,7 +88,7 @@ namespace TLKJ.DAO
         {
             ActiveResult vret = new ActiveResult();
             String cDBKey = StringEx.getString(request[AppConfig.__DBKEY]);
-            XT_ORG_WX_CONFIG vo = dao.FindOne(cDBKey);
+            S_ORG_INF_WX_CONFIG vo = dao.FindOne(cDBKey);
             vret = ActiveResult.returnObject(vo);
             response.Write(vret.toJSONString());
         }

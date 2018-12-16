@@ -29,7 +29,36 @@ namespace TLKJ.WebSys
             String cGXQID = vUserInf.ORG_ID;
             return getOrgID(cGXQID).Length;
         }
+        public String getClientID()
+        {
+            string DEF_ID;
+            String cORG_ID = StringEx.getString(Request.QueryString["ORG_ID"]);
+            if (String.IsNullOrWhiteSpace(cORG_ID))
+            {
+                LoginUserInfo vUserInf = getLoginUserInfo();
+                if (vUserInf != null)
+                {
+                    cORG_ID = vUserInf.ORG_ID;
+                }
+            }
 
+            if (!String.IsNullOrWhiteSpace(cORG_ID))
+            {
+                if (cORG_ID.Length > 0)
+                {
+                    DEF_ID = cORG_ID.Substring(0, 6);
+                }
+                else
+                {
+                    DEF_ID = cORG_ID;
+                }
+            }
+            else
+            {
+                DEF_ID = "8641";
+            }
+            return DEF_ID;
+        }
         public string getOrgID(String cGXQ_ID)
         {
             return cGXQ_ID.Replace("00", "");
@@ -69,18 +98,19 @@ namespace TLKJ.WebSys
             {
                 try
                 {
-                    DataTable dtRows = DbManager.QueryData("SELECT * FROM XT_USER WHERE USERCODE='" + cUserCode + "'");
+                    DataTable dtRows = DbManager.QueryData("SELECT * FROM S_USER_INF WHERE USER_CODE='" + cUserCode + "'");
                     LoginUserInfo vUser = new LoginUserInfo();
                     vUser.USER_CODE = cUserCode;
                     vUser.ORG_ID = StringEx.getString(dtRows, 0, "ORG_ID");
-                    vUser.USER_NAME = StringEx.getString(dtRows, 0, "USERNAME");
-                    dtRows = DbManager.QueryData("SELECT ORG_NAME,ORG_FULL_NAME,X,Y FROM XT_ORG WHERE ORG_ID='" + vUser.ORG_ID + "'");
+                    vUser.USER_NAME = StringEx.getString(dtRows, 0, "USER_NAME");
+                    dtRows = DbManager.QueryData("SELECT ORG_NAME,ORG_FULL_NAME,X,Y FROM S_ORG_INF WHERE ORG_ID='" + vUser.ORG_ID + "'");
                     vUser.ORG_NAME = StringEx.getString(dtRows, 0, "ORG_NAME");
                     vUser.ORG_FULL_NAME = StringEx.getString(dtRows, 0, "ORG_FULL_NAME");
                     vUser.X = StringEx.GetDouble(dtRows, 0, "X");
                     vUser.Y = StringEx.GetDouble(dtRows, 0, "Y");
-                    vUser.APPID = DbManager.GetStrValue("SELECT WX_APPID FROM XT_ORG_WX_CONFIG WHERE ORG_ID='" + vUser.ORG_ID + "'");
-                    vUser.WX_ID = DbManager.GetStrValue("SELECT WX_ID FROM XT_ORG_WX_CONFIG WHERE ORG_ID='" + vUser.ORG_ID + "'");
+                    DBConfig vConf = new DBConfig();
+                    vUser.APPID = vConf.getOrgKey(vUser.ORG_ID, "WX_APPID");
+                    vUser.WX_ID = vConf.getOrgKey(vUser.ORG_ID, "WX_ID");
                     return vUser;
                 }
                 catch (Exception ex)

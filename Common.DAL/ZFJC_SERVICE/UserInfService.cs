@@ -11,7 +11,7 @@ namespace TLKJ.DAO
 {
     public class UserInfService : IService
     {
-        XT_USER_Dao dao = new XT_USER_Dao();
+        S_USER_INF_Dao dao = new S_USER_INF_Dao();
         public void init(HttpRequest res, HttpResponse rep)
         {
             request = res;
@@ -39,7 +39,7 @@ namespace TLKJ.DAO
             ActiveResult vret = ActiveResult.Valid(AppConfig.FAILURE);
             String vUserCount = StringEx.getString(request["user_id"]);
             String vPassWord = StringEx.getString(request["user_pass"]);
-            String sql = "SELECT COUNT(1) FROM XT_USER WHERE USERCODE='" + vUserCount + "' AND PASSWORD = " + vPassWord;
+            String sql = "SELECT COUNT(1) FROM S_USER_INF WHERE USER_CODE='" + vUserCount + "' AND USER_PASS = " + vPassWord;
 
             String sqlValue = DbManager.GetStrValue(sql);
             int iRSCount = StringEx.getInt(sqlValue);
@@ -65,7 +65,7 @@ namespace TLKJ.DAO
             }
             else
             {
-                XT_USER vInfo = dao.FindOne(cORG_ID);
+                S_USER_INF vInfo = dao.FindOne(cORG_ID);
                 vret = ActiveResult.returnObject(vInfo);
             }
             response.Write(vret.toJSONString());

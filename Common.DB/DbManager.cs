@@ -209,7 +209,7 @@ namespace TLKJ.DB
                 sql.Append("    where " + cWhereParm);
             }
             sql.Append(" ) tab");
-            sql.Append(" where rownumber>" + iStart + " and rownumber<" + iFinish);
+            sql.Append(" where rownumber>" + iStart + " and rownumber<=" + iFinish);
             vret.dtrows = QueryData(sql.ToString());
             return vret;
         }

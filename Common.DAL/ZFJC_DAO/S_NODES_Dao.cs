@@ -22,7 +22,7 @@ namespace TLKJ.DAO
         public DataTable QueryList(String cORG_ID, String cTypeID)
         {
             ActiveResult vret = new ActiveResult();
-            string sql = "SELECT * FROM S_NODES A,XT_ORG_NODES B "
+            string sql = "SELECT * FROM S_NODES A,S_ORG_INF_NODES B "
                     + " WHERE (A.ID=B.NODE_ID) "
                     + " AND (ORG_ID='" + cORG_ID + "') "
                     + " AND (A.ISACTIVE=1) "

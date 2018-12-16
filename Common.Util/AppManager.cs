@@ -5,9 +5,9 @@ using System.Text;
 using System.IO;
 using System.Configuration;
 using System.Data;
-using System.Collections; 
+using System.Collections;
 using System.Collections.Specialized;
-using System.Text.RegularExpressions; 
+using System.Text.RegularExpressions;
 using System.Web.UI.WebControls;
 
 namespace TLKJ.Utils
@@ -33,7 +33,7 @@ namespace TLKJ.Utils
             }
             return arKeys;
         }
-  
+
         public static String getCookieValue(HttpRequest request, String cKeyName)
         {
             String cStr = "";
@@ -52,7 +52,7 @@ namespace TLKJ.Utils
         public static int getAreaType(String cOrgID)
         {
             String cAreaID = getAreaHeader(cOrgID);
-            return cAreaID.Length;             
+            return cAreaID.Length;
         }
 
         public static String getAreaHeader(String cOrgID)
@@ -71,7 +71,7 @@ namespace TLKJ.Utils
                 return cAreaID;
             }
         }
-        
+
 
         /// <summary>
         /// 将数据集的一行转成HashTable
@@ -93,6 +93,7 @@ namespace TLKJ.Utils
             }
             return vo;
         }
+         
 
         /// <summary>
         /// 输出
@@ -124,6 +125,5 @@ namespace TLKJ.Utils
                 vList.Items.Add(new ListItem(cItemText, cItemID));
             }
         }
-
     }
 }

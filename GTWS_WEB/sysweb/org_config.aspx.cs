@@ -22,12 +22,12 @@ public partial class sysweb_org_config : PageEx
             LoginUserInfo vUserInf = getLoginUserInfo();
             //XM
             StringBuilder sql = new StringBuilder();
-            sql.Append(" INSERT INTO XT_ORG_CONFIG(ORG_ID,KEYNAME,KEYVALUE) ");
+            sql.Append(" INSERT INTO S_ORG_CONFIG(ORG_ID,KEYNAME,KEYVALUE) ");
             sql.Append(" SELECT '" + vUserInf.ORG_ID + "',KEYNAME,DEFVAL ");
             sql.Append(" FROM  S_CONSTANT T ");
-            sql.Append(" WHERE NOT EXISTS(SELECT 1 FROM XT_ORG_CONFIG  X WHERE T.KEYNAME= X.KEYNAME) ");
+            sql.Append(" WHERE NOT EXISTS(SELECT 1 FROM S_ORG_CONFIG  X WHERE T.KEYNAME= X.KEYNAME) ");
             DbManager.ExecSQL(sql.ToString());
-            dtRows = DbManager.QueryData("SELECT A.*,B.DEFVAL,KEYDESC,TYPE_ID FROM XT_ORG_CONFIG A,S_CONSTANT B WHERE A.KEYNAME=B.KEYNAME AND A.ORG_ID='" + vUserInf.ORG_ID + "'");
+            dtRows = DbManager.QueryData("SELECT A.*,B.DEFVAL,KEYDESC,TYPE_ID FROM S_ORG_CONFIG A,S_CONSTANT B WHERE A.KEYNAME=B.KEYNAME AND A.ORG_ID='" + vUserInf.ORG_ID + "'");
         }
     }
 }

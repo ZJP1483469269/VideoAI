@@ -131,7 +131,7 @@
             <%-- <h1 style="text-align: left; margin-left: 240px; position: relative; top: 80px; font-size: 35pt">
             商丘市国土资源执法监察监管外网平台--%>
             <h1>
-                <img src="../static/images/top/864114_header.png" style="position: absolute; width: 880px; /*font-size: 35pt; */ top: 60px; left: 20px; z-index: 9999;" />
+                <img src="../static/images/top/<%= getClientID() %>.png" style="position: absolute; width: 880px; /*font-size: 35pt; */ top: 60px; left: 20px; z-index: 9999;" />
             </h1>
         </div>
         <div class="login" id="login">
@@ -139,11 +139,11 @@
                 <div class="r">
                     <p>
                         <span style="width: 100px; font-size: 21px; font-family: '宋体';">账号：</span>
-                        <input type="text" class="input" size="9" id="user_id" name="user_id" />
+                        <asp:TextBox ID="user_id" runat="server"></asp:TextBox>
                     </p>
                     <p>
                         <span style="width: 100px; font-size: 21px; font-family: '宋体';">密码：</span>
-                        <input type="password" class="input" size="9" id="user_pass" name="user_pass" />
+                        <asp:TextBox ID="user_pass" runat="server" TextMode="Password"></asp:TextBox>
                     </p>
                     <p style="text-align: right;">
                         <img src="../static/images/loginbt.png" width="100" height="32" onclick="liogin()"

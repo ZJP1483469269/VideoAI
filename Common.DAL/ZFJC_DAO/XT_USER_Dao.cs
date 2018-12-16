@@ -9,14 +9,14 @@ using System.Data;
 
 namespace TLKJ.DAO
 {
-    public class XT_USER_Dao : BaseDao<XT_USER>
+    public class S_USER_INF_Dao : BaseDao<S_USER_INF>
     {
         public void init(HttpRequest res, HttpResponse rep)
         {
             request = res;
             response = rep;
         }
-        public int save(XT_USER vo, String cKeyID)
+        public int save(S_USER_INF vo, String cKeyID)
         {
             ActiveResult vret = new ActiveResult();
             List<String> sqls = new List<string>();
@@ -36,13 +36,13 @@ namespace TLKJ.DAO
         }
         public DBResult Query(String cWhereParm, String cOrderBy, int iPageNo, int iPageSize)
         {
-            return DbManager.Query("*", "XT_USER", cWhereParm, cOrderBy, iPageNo, iPageSize);
+            return DbManager.Query("*", "S_USER_INF", cWhereParm, cOrderBy, iPageNo, iPageSize);
         }
         public int del_item(String cDBKey)
         {
             ActiveResult vret = new ActiveResult();
             string sql = "";
-            sql = "DELETE FROM XT_USER WHERE user_id='" + cDBKey + "'";
+            sql = "DELETE FROM S_USER_INF WHERE user_id='" + cDBKey + "'";
             int iCode= DbManager.ExecSQL(sql);
             return iCode;
         }
@@ -51,7 +51,7 @@ namespace TLKJ.DAO
             String[] KeyList = cKeyList.Split(',');
             ActiveResult vret = new ActiveResult();
             StringBuilder sql = new StringBuilder();
-            sql.Append(" DELETE FROM XT_USER ");
+            sql.Append(" DELETE FROM S_USER_INF ");
             sql.Append(" WHERE user_id IN (");
             for (int i = 0; i < KeyList.Length; i++)
             {
@@ -69,13 +69,13 @@ namespace TLKJ.DAO
             return DbManager.ExecSQL(sql.ToString());
         }
 
-        public XT_USER FindOne(string cDBKey)
+        public S_USER_INF FindOne(string cDBKey)
         {
-            XT_USER vPhone = null;
-            DataTable dtRows = DbManager.QueryData("SELECT * FROM XT_USER WHERE user_id='" + cDBKey + "'");
+            S_USER_INF vPhone = null;
+            DataTable dtRows = DbManager.QueryData("SELECT * FROM S_USER_INF WHERE user_id='" + cDBKey + "'");
             if ((dtRows != null) && (dtRows.Rows.Count > 0))
             {
-                vPhone = new XT_USER();
+                vPhone = new S_USER_INF();
                 ReadDB(vPhone, dtRows);
             }
             return vPhone;

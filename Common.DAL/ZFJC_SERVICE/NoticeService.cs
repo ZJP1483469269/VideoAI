@@ -22,8 +22,9 @@ namespace TLKJ.DAO
         public void query()
         {
             ActiveResult vret = new ActiveResult();
-            DBResult dbret = dao.Query(null, null, iPageNo, iPageSize);
-            vret = ActiveResult.returnObject(dbret);
+            DBResult dbret = dao.Query(null, "ORDER BY NOTICE_ID DESC", iPageNo, iPageSize);
+            vret = ActiveResult.Query(dbret.dtrows);
+            vret.total = dbret.ROW_COUNT;
             response.Write(vret.toJSONString());
         }
 
@@ -31,8 +32,11 @@ namespace TLKJ.DAO
         {
             ActiveResult vret = new ActiveResult();
             String cKeyID = StringEx.getString(request[AppConfig.__DBKEY]);
+            String cORG_ID = StringEx.getString(request[AppConfig.ORG_ID]);
             XT_NOTICE vo = new XT_NOTICE();
             vo = (XT_NOTICE)RequestUtil.readFromRequest(request, vo);
+            vo.notice_date = vo.notice_date.Replace("-", "");
+            vo.notice_id = AutoID.getAutoID(cORG_ID);
             int iCode = dao.save(vo, cKeyID);
             vret = ActiveResult.Valid(iCode);
             response.Write(vret.toJSONString());

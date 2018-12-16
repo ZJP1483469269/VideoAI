@@ -21,10 +21,10 @@ namespace TLKJ.DAO
         public void InitOrgConfig(String cOrgID)
         {
             StringBuilder sql = new StringBuilder();
-            sql.Append(" INSERT INTO XT_ORG_CONFIG(ORG_ID,KEYNAME,KEYVALUE) ");
+            sql.Append(" INSERT INTO S_ORG_INF_CONFIG(ORG_ID,KEYNAME,KEYVALUE) ");
             sql.Append(" SELECT '" + cOrgID + "',KEYNAME,DEFVAL ");
             sql.Append(" FROM  S_CONSTANT T ");
-            sql.Append(" WHERE NOT EXISTS(SELECT 1 FROM XT_ORG_CONFIG  X WHERE T.KEYNAME= X.KEYNAME) ");
+            sql.Append(" WHERE NOT EXISTS(SELECT 1 FROM S_ORG_INF_CONFIG  X WHERE T.KEYNAME= X.KEYNAME) ");
             DbManager.ExecSQL(sql.ToString());
         }
 
@@ -34,7 +34,7 @@ namespace TLKJ.DAO
             InitOrgConfig(cORG_ID);
 
             ActiveResult vret = ActiveResult.Valid(AppConfig.FAILURE);
-            DataTable dtRows = DbManager.QueryData("SELECT A.*,B.DEFVAL,KEYDESC,TYPE_ID FROM XT_ORG_CONFIG A,S_CONSTANT B WHERE A.KEYNAME=B.KEYNAME AND A.ORG_ID='" + cORG_ID + "'");
+            DataTable dtRows = DbManager.QueryData("SELECT A.*,B.DEFVAL,KEYDESC,TYPE_ID FROM S_ORG_INF_CONFIG A,S_CONSTANT B WHERE A.KEYNAME=B.KEYNAME AND A.ORG_ID='" + cORG_ID + "'");
             vret = ActiveResult.Query(dtRows);
             response.Write(vret.toJSONString());
         }
@@ -60,7 +60,7 @@ namespace TLKJ.DAO
             else
             {
                 StringBuilder sql = new StringBuilder();
-                sql.Append(" UPDATE XT_ORG_CONFIG ");
+                sql.Append(" UPDATE S_ORG_INF_CONFIG ");
                 sql.Append(" SET KEYVALUE='" + cKEYVALUE + "'");
                 sql.Append(" WHERE ORG_ID='" + cORG_ID + "'");
                 sql.Append(" AND KEYNAME='" + cKEYNAME + "'");

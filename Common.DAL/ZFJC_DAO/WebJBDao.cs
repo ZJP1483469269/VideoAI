@@ -19,7 +19,7 @@ namespace TLKJ.DAO
 
         public DBResult Quertys(String cWhereParm, String cOrderBy, int iPageNo, int iPageSize)
         {
-            return DbManager.Query("*,(SELECT ORG_NAME FROM XT_ORG WHERE ORG_ID=A.XIANQU) AS XIANQU_NAME", "XT_JB A", cWhereParm, cOrderBy, iPageNo, iPageSize);
+            return DbManager.Query("*,(SELECT ORG_NAME FROM S_ORG_INF WHERE ORG_ID=A.XIANQU) AS XIANQU_NAME", "XT_JB A", cWhereParm, cOrderBy, iPageNo, iPageSize);
         }
     }
 }

@@ -77,7 +77,7 @@ public class DefaultAspx : IHttpHandler
                     ht.Add("usre_org", StringEx.getString(dt_table_userInfo, 0, "ORG_ID"));
                     vert.info = ht;
                 }
-                DataTable dt_table_userOrgInfo = DbManager.QueryData("select ORG_NAME from xt_org where ORG_ID in(select ORG_ID from XT_MOBILE_USER where USER_COUNT ='" + cUserCount + "')");
+                DataTable dt_table_userOrgInfo = DbManager.QueryData("select ORG_NAME from S_ORG_INF where ORG_ID in(select ORG_ID from XT_MOBILE_USER where USER_COUNT ='" + cUserCount + "')");
                 if (dt_table_userOrgInfo != null && dt_table_userOrgInfo.Rows.Count > 0)
                 {
                     ht.Add("org_name", StringEx.getString(dt_table_userOrgInfo, 0, "ORG_NAME"));

@@ -32,9 +32,9 @@ namespace TLKJ.DAO
             set { _notice_content = value; }
         }
 
-        private DateTime _notice_date;
+        private String _notice_date;
         [FieldAttr(FieldDesc = "通知时间")]
-        public DateTime notice_date
+        public String notice_date
         {
             get { return _notice_date; }
             set { _notice_date = value; }

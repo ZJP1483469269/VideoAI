@@ -6,7 +6,7 @@ using TLKJ.Utils;
 
 namespace TLKJ.DAO
 {
-    public class XT_USER
+    public class S_USER_INF
     {
         private String _user_id;
         [FieldAttr(isKey = true, FieldDesc = "用户编码", DBLength = 60)]
@@ -26,7 +26,7 @@ namespace TLKJ.DAO
 
         private String _usercode;
         [FieldAttr(FieldDesc = "登录账号", DBLength = 60)]
-        public String usercode
+        public String user_code
         {
             get { return _usercode; }
             set { _usercode = value; }
@@ -34,7 +34,7 @@ namespace TLKJ.DAO
 
         private String _username;
         [FieldAttr(FieldDesc = "用户姓名", DBLength = 60)]
-        public String username
+        public String user_name
         {
             get { return _username; }
             set { _username = value; }
@@ -63,7 +63,7 @@ namespace TLKJ.DAO
             get { return _isactive; }
             set { _isactive = value; }
         }
-        public XT_USER()
+        public S_USER_INF()
         {
 
         }

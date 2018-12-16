@@ -6,7 +6,7 @@ using TLKJ.Utils;
 
 namespace TLKJ.DAO
 {
-    public class XT_ORG
+    public class S_ORG_INF
     {
         private int _org_id;
         [FieldAttr(isKey = true, FieldDesc = "用户编码", DBLength = 30)]
@@ -69,7 +69,7 @@ namespace TLKJ.DAO
             set { _ploygn = value; }
         }
 
-        public XT_ORG()
+        public S_ORG_INF()
         {
 
         }

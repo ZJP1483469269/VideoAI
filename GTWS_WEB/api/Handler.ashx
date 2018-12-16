@@ -128,12 +128,8 @@ public class Handler : IHttpHandler, IRequiresSessionState
             }
             catch(Exception ex) {
                  log4net.WriteLogFile("api/handler-uneffectclick-sql" + sql + ex.Message);
-            }
-            
-            
-        }
-
-
+            } 
+        } 
     }
 
     public bool IsReusable

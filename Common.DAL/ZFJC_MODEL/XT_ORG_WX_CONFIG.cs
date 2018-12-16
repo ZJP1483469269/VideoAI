@@ -6,7 +6,7 @@ using TLKJ.Utils;
 
 namespace TLKJ.DAO
 {
-    public class XT_ORG_WX_CONFIG
+    public class S_ORG_INF_WX_CONFIG
     {
         private String _org_id;
         [FieldAttr(isKey = true, FieldDesc = "单位编码", DBLength = 6)]
@@ -63,7 +63,7 @@ namespace TLKJ.DAO
             set { _isactive = value; }
         }
 
-        public XT_ORG_WX_CONFIG()
+        public S_ORG_INF_WX_CONFIG()
         {
 
         }
