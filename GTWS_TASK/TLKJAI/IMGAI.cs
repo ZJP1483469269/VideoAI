@@ -19,23 +19,31 @@ namespace TLKJAI
     {
         public static String getImageText(String cFileName)
         {
-            Image<Gray, byte> vBmp = getPTXImage(cFileName);
-            String cStr = getImageText(vBmp);
-            if ((cStr.IndexOf("P") != -1) && (cStr.IndexOf("T") != -1) && (cStr.IndexOf("X") != -1))
-                return cStr;
-            else
+            try
             {
-                String cPTXName = cFileName.Replace("images", "ptx");
-                try
+                Image<Gray, byte> vBmp = getPTXImage(cFileName);
+                String cStr = getImageText(vBmp);
+                if ((cStr.IndexOf("P") != -1) && (cStr.IndexOf("T") != -1) && (cStr.IndexOf("X") != -1))
+                    return cStr;
+                else
                 {
-                    vBmp.Save(cPTXName);
-                    vBmp.Dispose();
+                    String cPTXName = cFileName.Replace("images", "ptx");
+                    try
+                    {
+                        vBmp.Save(cPTXName);
+                        vBmp.Dispose();
+                    }
+                    catch (Exception ex)
+                    {
+                        log4net.WriteLogFile(ex.Message);
+                    }
+                    log4net.WriteLogFile(cStr);
+                    return "";
                 }
-                catch (Exception ex)
-                {
-                    log4net.WriteLogFile(ex.Message);
-                }
-                log4net.WriteLogFile(cStr);
+            }
+            catch (Exception ex)
+            {
+                log4net.WriteLogFile(ex.Message);
                 return "";
             }
         }

@@ -4,8 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using TLKJ.WebSys;
 
-public partial class alarm_Default : System.Web.UI.Page
+public partial class alarm_Default : PageEx
 {
     protected void Page_Load(object sender, EventArgs e)
     {

@@ -106,6 +106,7 @@
     <Compile Include="ExportRow.cs" />
     <Compile Include="FieldAttr.cs" />
     <Compile Include="FileLib.cs" />
+    <Compile Include="HttpUtil.cs" />
     <Compile Include="IMMessage.cs" />
     <Compile Include="IMMessageType.cs" />
     <Compile Include="IMRecvMSG.cs" />

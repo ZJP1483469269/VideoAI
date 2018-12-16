@@ -104,6 +104,8 @@
   <ItemGroup>
     <Compile Include="Common\ApplicationEvent.cs" />
     <Compile Include="Common\Const.cs" />
+    <Compile Include="Common\CutTask.cs" />
+    <Compile Include="Common\CopyUtil.cs" />
     <Compile Include="TLKJAI\GPSAI.cs" />
     <Compile Include="TLKJAI\IMGAI.cs" />
     <Compile Include="Common\IVS_API.cs" />
@@ -148,8 +150,14 @@
     <Compile Include="UI\frmCut.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\frmCut.designer.cs">
+    <Compile Include="UI\frmCut.Designer.cs">
       <DependentUpon>frmCut.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\frmTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmTest.designer.cs">
+      <DependentUpon>frmTest.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\frmDTConfig.cs">
       <SubType>Form</SubType>
@@ -175,11 +183,11 @@
     <Compile Include="UI\frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\frmTask.cs">
+    <Compile Include="UI\frmTake.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\frmTask.Designer.cs">
-      <DependentUpon>frmTask.cs</DependentUpon>
+    <Compile Include="UI\frmTake.Designer.cs">
+      <DependentUpon>frmTake.cs</DependentUpon>
     </Compile>
     <Content Include="bin\x86\Debug\ACE.dll" />
     <Content Include="bin\x86\Debug\Apache.NMS.ActiveMQ.dll" />
@@ -1365,6 +1373,9 @@
     <EmbeddedResource Include="UI\frmCut.resx">
       <DependentUpon>frmCut.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\frmTest.resx">
+      <DependentUpon>frmTest.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\frmDTConfig.resx">
       <DependentUpon>frmDTConfig.cs</DependentUpon>
     </EmbeddedResource>
@@ -1377,8 +1388,8 @@
     <EmbeddedResource Include="UI\frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\frmTask.resx">
-      <DependentUpon>frmTask.cs</DependentUpon>
+    <EmbeddedResource Include="UI\frmTake.resx">
+      <DependentUpon>frmTake.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -7,12 +7,14 @@
     <link href="/static/css/bootstrap.min.css" rel="stylesheet" />
     <script type="text/javascript" src="../static/js/jquery.js"></script>
     <script type="text/javascript" src="../static/js/layer/layer.js"></script>
+    <script type="text/javascript" src="../static/js/jquery.form.js"></script>
     <script type="text/javascript" src="../static/js/default.js"></script>
     <script type="text/javascript" src="../static/kindeditor/kindeditor.js"></script>
     <script type="text/javascript" src="../static/kindeditor/lang/zh_CN.js"></script>
 
     <script type="text/javascript">
         $(document).ready(function () {
+
             LoadInitValue();
         });
 

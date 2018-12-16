@@ -33,7 +33,7 @@ namespace TLKJ.DAO
             }
             else
             {
-                sql = Update(vo, "DX_ID='" + cKeyID + "'");
+                sql = Update(vo, "KEYID='" + cKeyID + "'");
             }
             sqls.Add(sql);
             return DbManager.ExecSQL(sqls);
@@ -47,7 +47,7 @@ namespace TLKJ.DAO
         public int del_item(String cDBKey)
         {
             string sql = "";
-            sql = "DELETE FROM xt_dicts WHERE DX_ID='" + cDBKey + "'";
+            sql = "DELETE FROM S_DICTS WHERE KEYID='" + cDBKey + "'";
             return DbManager.ExecSQL(sql);
         }
 
@@ -61,8 +61,8 @@ namespace TLKJ.DAO
             String[] KeyList = cKeyList.Split(',');
             ActiveResult vret = new ActiveResult();
             StringBuilder sql = new StringBuilder();
-            sql.Append(" DELETE FROM xt_dicts ");
-            sql.Append(" WHERE GXQ_ID IN (");
+            sql.Append(" DELETE FROM S_DICTS ");
+            sql.Append(" WHERE KEYID IN (");
             for (int i = 0; i < KeyList.Length; i++)
             {
                 String cUserID = KeyList[i].Trim();
@@ -89,7 +89,7 @@ namespace TLKJ.DAO
         /// <returns></returns>
         public DBResult Query(String cWhereParm, String cOrderBy, int iPageNo, int iPageSize)
         {
-            return DbManager.Query("*", "xt_dicts", cWhereParm, cOrderBy, iPageNo, iPageSize);
+            return DbManager.Query("*", "S_DICTS", cWhereParm, cOrderBy, iPageNo, iPageSize);
         }
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace TLKJ.DAO
         public S_DICTS FindOne(string cDBKey)
         {
             S_DICTS vo = null;
-            DataTable dtRows = DbManager.QueryData("SELECT * FROM xt_dicts WHERE role_id='" + cDBKey + "'");
+            DataTable dtRows = DbManager.QueryData("SELECT * FROM S_DICTS WHERE KEYID='" + cDBKey + "'");
             if ((dtRows != null) && (dtRows.Rows.Count > 0))
             {
                 vo = new S_DICTS();

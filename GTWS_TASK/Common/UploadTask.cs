@@ -53,7 +53,7 @@ namespace TLKJ_IVS
                     }
                     else
                     {
-                        UploadFlag = CopyFile(cFileName, cUPLOAD_PATH);
+                        UploadFlag = CopyUtil.CopyFile(cFileName, cUPLOAD_PATH);
                     }
                     if (UploadFlag)
                     {
@@ -85,7 +85,7 @@ namespace TLKJ_IVS
                             }
                             else
                             {
-                                UploadFlag = CopyFile(cImageFileName, cUPLOAD_PATH);
+                                UploadFlag = CopyUtil.CopyFile(cImageFileName, cUPLOAD_PATH);
                             }
 
                             if (UploadFlag)
@@ -139,13 +139,23 @@ namespace TLKJ_IVS
             String cDFS_PATH = INIConfig.ReadString(cType, "DFS_PATH", "");
             String cDFSType = INIConfig.ReadString(cType, "DFS_TYPE", "");
 
-            if (!cDFSType.Equals("SSH"))
+            if (cDFSType.Equals("SSH"))
             {
-                return CopyFile(cFileName, cDFS_PATH);
+                return CopyUtil.SSH_Upload(cFileName, cType);
+            }
+            else if (cDFSType.Equals("POST"))
+            { 
+                String cDFSUrl = "http://" + cDFS_PATH + "/api/dfs.ashx";
+                return CopyUtil.PostFile(cFileName, cDFSUrl);
+            }
+            else if (cDFSType.Equals("COPY"))
+            {
+                return CopyUtil.CopyFile(cFileName, cDFS_PATH);
             }
             else
             {
-                return SSH_Upload(cFileName, cType);
+                log4net.WriteLogFile("参数配置错误！");
+                return false;
             }
         }
         public static Boolean RemoveFileList(List<KeyValue> ImageList)
@@ -197,93 +207,6 @@ namespace TLKJ_IVS
                 log4net.WriteLogFile(ex.Message);
             }
             return true;
-        }
-        public static Boolean SSH_Upload(String cFileName, String cDFSType)
-        {
-            String cDFS_PATH = INIConfig.ReadString(cDFSType, "DFS_PATH", "");
-            Boolean isConnected = false;
-            if (sftp != null)
-            {
-                try
-                {
-
-                    sftp.Connect();
-                    isConnected = true;
-                }
-                catch (Exception ex)
-                {
-                    sftp = null;
-                }
-            }
-
-
-            if (!isConnected)
-            {
-                String cDFS_HOST = INIConfig.ReadString(cDFSType, "DFS_HOST", "");
-                String cDFS_PORT = INIConfig.ReadString(cDFSType, "DFS_PORT", "22");
-                int iDFS_PORT = StringEx.getInt(cDFS_PORT);
-                String cDFS_USER = INIConfig.ReadString(cDFSType, "DFS_USER", "root");
-                String cDFS_PASS = INIConfig.ReadString(cDFSType, "DFS_PASS", "");
-
-
-                sftp = new SftpClient(cDFS_HOST, iDFS_PORT, cDFS_USER, cDFS_PASS);
-            }
-            FileStream fs = null;
-            try
-            {
-                sftp.Connect();
-                fs = new FileStream(cFileName, FileMode.Open);
-                String cStr = Path.GetFileName(cFileName);
-                try
-                {
-                    sftp.CreateDirectory(cDFS_PATH);
-                }
-                catch (Exception ex)
-                {
-
-                }
-                String cDFSPath = cDFS_PATH;
-                if (!cDFSPath.EndsWith("/"))
-                {
-                    cDFSPath = cDFSPath + "/";
-                }
-                sftp.UploadFile(fs, cDFSPath + cFileName);
-                return true;
-            }
-            catch (Exception ex)
-            {
-                log4net.WriteLogFile(ex.Message);
-                sftp = null;
-                return false;
-            }
-            finally
-            {
-                if (fs != null)
-                {
-                    try
-                    {
-                        fs.Close();
-                        fs = null;
-                    }
-                    catch (Exception ex)
-                    {
-                        log4net.WriteLogFile(ex.Message);
-                    }
-                }
-            }
-        }
-
-        public static bool CopyFile(string cFileName, string cDFS_PATH)
-        {
-            try
-            {
-                File.Copy(cFileName, cDFS_PATH + Path.GetFileName(cFileName));
-                return true;
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
-        }
+        } 
     }
 }

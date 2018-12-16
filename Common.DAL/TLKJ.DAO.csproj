@@ -49,12 +49,14 @@
     <Compile Include="Email\Email_sendDao.cs" />
     <Compile Include="Util\PackUtil.cs" />
     <Compile Include="ZFJC_DAO\JCTBDao.cs" />
+    <Compile Include="ZFJC_DAO\XT_NEWS_Dao.cs" />
     <Compile Include="ZFJC_DAO\WebJBDao.cs" />
     <Compile Include="ZFJC_DAO\XT_IMG_SCREEN_Dao.cs" />
     <Compile Include="ZFJC_DAO\XT_JB_FEEDBACK_Dao.cs" />
     <Compile Include="ZFJC_DAO\XT_DJInfo_Dao.cs" />
     <Compile Include="ZFJC_DAO\XT_MOBILE_USER_Dao.cs" />
     <Compile Include="ZFJC_DAO\XT_JB_SEND_Dao.cs" />
+    <Compile Include="ZFJC_MODEL\XT_NEWS.cs" />
     <Compile Include="ZFJC_MODEL\XT_IMG_SCREEN.cs" />
     <Compile Include="ZFJC_MODEL\xt_jctb.cs" />
     <Compile Include="ZFJC_MODEL\webjb.cs" />
@@ -83,6 +85,7 @@
     <Compile Include="Service\SYSService.cs" />
     <Compile Include="ZFJC_SERVICE\DictService.cs" />
     <Compile Include="ZFJC_SERVICE\WebService.cs" />
+    <Compile Include="ZFJC_SERVICE\XT_NEWSService.cs" />
     <Compile Include="ZFJC_SERVICE\XT_IMG_SCREENService.cs" />
     <Compile Include="ZFJC_SERVICE\WFJBService.cs" />
     <Compile Include="ZFJC_SERVICE\WLJBService.cs" />

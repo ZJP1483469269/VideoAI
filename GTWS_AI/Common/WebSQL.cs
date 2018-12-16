@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using TLKJ.Utils;
-using System.Data;
-using TLKJ.WebSys;
+using System.Data; 
 
 namespace TLKJ_IVS
 {

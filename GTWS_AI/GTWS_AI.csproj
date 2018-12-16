@@ -121,7 +121,6 @@
   <ItemGroup>
     <Compile Include="Common\ApplicationEvent.cs" />
     <Compile Include="Common\Const.cs" />
-    <Compile Include="Common\HttpUtil.cs" />
     <Compile Include="Common\WebJS.cs" />
     <Compile Include="Common\WebSQL.cs" />
     <Compile Include="TLKJAI\GPSAI.cs" />

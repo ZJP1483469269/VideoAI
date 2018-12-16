@@ -11,5 +11,6 @@ public partial class news_gj_edit : PageEx
     protected void Page_Load(object sender, EventArgs e)
     {
         CheckLogin();
+        this.org_id.Value = getLoginUserInfo().ORG_ID;
     }
 }

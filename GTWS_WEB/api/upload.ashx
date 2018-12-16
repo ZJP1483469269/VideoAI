@@ -138,7 +138,7 @@ public class Upload : IHttpHandler, IRequiresSessionState
                 int iFileLength = Request.Files[i].ContentLength;
                 Request.Files[i].SaveAs(cFileUrl);
 
-                sqls.Add("insert into XT_IMAGE_LIST(ID,CAMERA_ID,ORG_ID,URL,CREATETIME) "
+                sqls.Add("insert into XT_IMAGE_REC(ID,CAMERA_ID,ORG_ID,URL,CREATETIME) "
                     + " VALUES('" + cFileID + "','" + cCameraID + "','" + cORG_ID + "','" + cUrl + "','" + cFileID.Substring(0, 14) + "')");
             }
         }
