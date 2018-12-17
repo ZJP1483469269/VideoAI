@@ -1,12 +1,13 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ImageList.aspx.cs" Inherits="alarm_ImageList" %>
 
+
 <%@ Import Namespace="TLKJ.Utils" %>
 <%@ Import Namespace="TLKJ.DB" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+<head id="Head1" runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="../static/css/bootstrap.css" />
     <script type="text/javascript" src="../static/js/jquery-3.2.0.min.js"></script>
