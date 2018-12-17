@@ -25,10 +25,12 @@ namespace WEB_TASK
         List<String> HrefList = new List<String>();
 
         public delegate void AppendHref_delegate(JHref rowKey);
+        Sunisoft.IrisSkin.SkinEngine iskin = new Sunisoft.IrisSkin.SkinEngine();
 
         public frmCMain()
         {
             InitializeComponent();
+            iskin.SkinFile = "skins/PageColor2.ssk";
         }
 
         private void AppendHref(JHref rowKey)
@@ -315,6 +317,25 @@ namespace WEB_TASK
                 DbManager.ExecSQL(sql);
             }
 
+        }
+        String[] FileList = null;
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if (FileList == null)
+            {
+                FileList = Directory.GetFiles(@"D:\VideoAI\WEB_TASK\Skins");
+            }
+            for (int i = 0; i < FileList.Length; i++)
+            {
+                if (FileList[i] != null)
+                {
+                    String cFileName = FileList[i];
+                    iskin.SkinFile = cFileName;
+                    this.txtUrl.Text = cFileName;
+                    FileList[i] = null;
+                    break;
+                }
+            }
         }
         //public ChromiumWebBrowser chromeBrowser;
 
