@@ -30,23 +30,24 @@ public class dfs : IHttpHandler, IRequiresSessionState
             int iCode = 0;
             if (iLength > 0)
             {
-                String cFilePath = Request.Files[0].FileName;
-                String cFileExt = System.IO.Path.GetExtension(cFilePath);
-                String cRootDir = ctx.Server.MapPath("~/dfs");
-                AppConfig.CheckDir(cRootDir);
+                String cUploadField = StringEx.getString(Request.QueryString["UPLOAD_FIELD"]);
+                String cFileName = Request.Files[0].FileName;
+                cFileName = Path.GetFileName(cFileName);
+                String cFileExt = System.IO.Path.GetExtension(cFileName);
+                String cAbsUrl = ctx.Server.MapPath("~/dfs");
+                AppConfig.CheckDir(cFileExt);
 
-                String cFileName = Path.GetFileName(cFilePath);
+
                 String cREC_ID = cFileName.Replace(cFileExt, "");
-                Request.Files[0].SaveAs(cRootDir + @"\" + cFileName);
-                sql = "UPDATE XT_IMG_REC SET UPLOAD_FLAG=1 WHERE REC_ID='" + cREC_ID + "'";
-                iCode = DbManager.ExecSQL(sql);
-            }
+                Request.Files[0].SaveAs(cAbsUrl + @"\" + cFileName);
 
-            if (iCode > 0)
-            {
-                Response.Clear();
+                String cFilePath = cAbsUrl + @"\" + cREC_ID.Substring(0, 8);
+                AppConfig.CheckDir(cFilePath);
+
+                File.Copy(cAbsUrl + @"\" + cFileName, cFilePath + "\\" + cFileName);
+                sql = "UPDATE XT_IMG_REC SET " + cUploadField + "=1 WHERE REC_ID='" + cREC_ID + "'";
+                iCode = DbManager.ExecSQL(sql);
                 Response.Write(AppConfig.SUCCESS);
-                Response.End();
             }
             else
             {
