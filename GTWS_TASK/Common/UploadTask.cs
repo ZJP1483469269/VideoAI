@@ -10,11 +10,13 @@ using TLKJ.DB;
 using TLKJ.Utils;
 using Renci.SshNet;
 using TLKJAI;
+using System.Threading;
 
 namespace TLKJ_IVS
 {
     public class UploadTask
     {
+    
         public static void Execute()
         {
             int iMinVal = StringEx.getInt(INIConfig.ReadString("Config", AppConfig.IMAGE_MIN, "0"));
@@ -24,110 +26,67 @@ namespace TLKJ_IVS
             int iGrayMaxVal = StringEx.getInt(INIConfig.ReadString("Config", AppConfig.GRAY_MAX, "0"));
             int iEXPORT_IMAGE = StringEx.getInt(INIConfig.ReadString("Config", AppConfig.EXPORT_IMAGE, "0"));
 
-            String cDFS_PATH = INIConfig.ReadString("UPLOAD", "DFS_PATH", "0");
-            String cUPLOAD_PATH = INIConfig.ReadString("UPLOAD", "UPLOAD_PATH", "");
+            int iALARM_ALLOW = INIConfig.ReadInt("ALARM", "DFS_ALLOW");
+            String cALARM_PATH = INIConfig.ReadString("ANALYSE", "DFS_PATH", "0");
 
-            int iDFS_FLAG = StringEx.getInt(INIConfig.ReadString("Config", "DFS_FLAG", "0"));
-
-            DataTable dtRows = DbManager.QueryData(" select TOP 5 *  from XT_IMG_REC where UPLOAD_FLAG=0  ");
             String cAppDir = Application.StartupPath;
-            Boolean isUpload = false;
+
             JActiveTable aMaster = new JActiveTable();
             JActiveTable aSlave = new JActiveTable();
             aSlave.TableName = "XT_IMG_LIST";
             aMaster.TableName = "XT_IMG_REC";
-
-            for (int i = 0; (dtRows != null) && (i < dtRows.Rows.Count); i++)
+            List<String> FileList = new List<string>();
+            while (!ApplicationEvent.isUploadAbort)
             {
-                Application.DoEvents();
-                try
+                Boolean isUpload = false;
+                DataTable dtRows = DbManager.QueryData(" select TOP 1 *  from XT_IMG_REC where UPLOAD_FLAG=0  ");
+                for (int i = 0; (dtRows != null) && (i < dtRows.Rows.Count); i++)
                 {
                     String cREC_ID = StringEx.getString(dtRows, i, "REC_ID");
                     String cFILE_URL = StringEx.getString(dtRows, i, "FILE_URL");
-
+                    FileList.Clear();
                     String cFileName = cAppDir + cFILE_URL;
                     Boolean UploadFlag = false;
-                    if (iDFS_FLAG == 1)
+                    if (!File.Exists(cFileName))
                     {
-                        UploadFlag = Upload(cFileName, cDFS_PATH);
+                        aMaster.ClearField();
+                        aMaster.AddField("UPLOAD_FLAG", 1);
+                        aMaster.AddField("ALARM_FLAG", 2);
+                        log4net.WriteLogFile("REC_ID为：" + cREC_ID + "的图片不存在跳过！");
+                        int iCode = DbManager.ExecSQL(aMaster.getUpdateSQL(" REC_ID='" + cREC_ID + "' "));
+                        if (iCode > 0)
+                        {
+                            continue;
+                        }
                     }
-                    else
-                    {
-                        UploadFlag = CopyUtil.CopyFile(cFileName, cUPLOAD_PATH);
-                    }
+
+                    UploadFlag = UploadTask.Upload(cFileName, "ALARM");
                     if (UploadFlag)
                     {
                         aMaster.ClearField();
                         aMaster.AddField("UPLOAD_FLAG", 1);
                         aMaster.AddField("ALARM_FLAG", 0);
-                        log4net.WriteLogFile("REC_ID为：" + cREC_ID + "的图片上传成功！");
                         int iCode = DbManager.ExecSQL(aMaster.getUpdateSQL(" REC_ID='" + cREC_ID + "' "));
-                        if (iCode > 0)
+                        log4net.WriteLogFile("REC_ID为：" + cREC_ID + "的图片，已处理！");
+                        try
                         {
-                            log4net.WriteLogFile("REC_ID为：" + cREC_ID + "的图片抠图成功！");
+                            File.Delete(cFileName);
                         }
-                        isUpload = true;
-                    }
-                    Application.DoEvents();
-                    isUpload = false;
-                    if (iEXPORT_IMAGE > 0)
-                    {
-                        List<KeyValue> ImageList = IMGAI.getImageList(cFileName, iMinVal, iMaxVal, iGrayMinVal, iGrayMaxVal);
-                        List<String> sqls = new List<string>();
-                        for (int k = 0; (ImageList != null) && (k < ImageList.Count); k++)
+                        catch (Exception ex)
                         {
-                            Application.DoEvents();
-                            KeyValue rowKey = ImageList[k];
-                            String cImageFileName = rowKey.Text;
-                            if (iDFS_FLAG == 1)
-                            {
-                                UploadFlag = Upload(cImageFileName, cDFS_PATH);
-                            }
-                            else
-                            {
-                                UploadFlag = CopyUtil.CopyFile(cImageFileName, cUPLOAD_PATH);
-                            }
-
-                            if (UploadFlag)
-                            {
-                                isUpload = true;
-                                aSlave.ClearField();
-                                aSlave.AddField("AI_FLAG", 1);
-                                String cKeyID = StringEx.getString(k + 1000);
-                                aSlave.AddField("ID", AutoID.getAutoID() + "_" + cKeyID);
-                                aSlave.AddField("REC_ID", cREC_ID);
-                                aSlave.AddField("CAMERA_ID", cREC_ID);
-                                aSlave.AddField("FILE_URL", cDFS_PATH + cImageFileName);
-                                aSlave.AddField("CREATE_TIME", DateUtils.getDayTimeNum());
-                                aSlave.AddField("POINT_LIST", rowKey.Val);
-                                sqls.Add(aSlave.getInsertSQL());
-                            }
-                        }
-                        int iCode = DbManager.ExecSQL(sqls);
-                        if (iCode > 0)
-                        {
-                            isUpload = true;
+                            log4net.WriteLogFile(ex.Message);
                         }
                     }
-
-                    if (isUpload)
-                    {
-                        aMaster.ClearField();
-                        aSlave.AddField("AI_FLAG", 1);
-                        int iCode = DbManager.ExecSQL(aMaster.getUpdateSQL(" REC_ID='" + cREC_ID + "' "));
-                        if (iCode > 0)
-                        {
-                            log4net.WriteLogFile("REC_ID为：" + cREC_ID + "的图片抠图成功！");
-                        }
-                    }
+                }
+                try
+                {
+                    Thread.Sleep(200);
                 }
                 catch (Exception ex)
                 {
-                    log4net.WriteLogFile("图片上传异常: " + ex);
                 }
             }
         }
-
 
         private static SftpClient sftp = null;
         public static Boolean Upload(String cFileName, String cType)
@@ -141,16 +100,16 @@ namespace TLKJ_IVS
 
             if (cDFSType.Equals("SSH"))
             {
-                return CopyUtil.SSH_Upload(cFileName, cType);
+                return CopyUnit.SSH_Upload(cFileName, cType);
             }
             else if (cDFSType.Equals("POST"))
-            { 
+            {
                 String cDFSUrl = "http://" + cDFS_PATH + "/api/dfs.ashx";
-                return CopyUtil.PostFile(cFileName, cDFSUrl);
+                return CopyUnit.PostFile(cFileName, cDFSUrl);
             }
             else if (cDFSType.Equals("COPY"))
             {
-                return CopyUtil.CopyFile(cFileName, cDFS_PATH);
+                return CopyUnit.CopyFile(cFileName, cDFS_PATH);
             }
             else
             {
@@ -207,6 +166,6 @@ namespace TLKJ_IVS
                 log4net.WriteLogFile(ex.Message);
             }
             return true;
-        } 
+        }
     }
 }

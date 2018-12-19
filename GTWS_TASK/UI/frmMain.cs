@@ -843,7 +843,7 @@ namespace GTWS_TASK.UI
                     String cKeyText = IMGAI.getImageText(cFileName);
                     List<String> sqls = new List<string>();
                     String cDayTime = DateTime.Now.ToString("yyyyMMddHHmmss");
-                    String cFileDir = "/Images/" + cKeyID + ".jpg";
+                    String cFileDir = "/images/" + cKeyID + ".jpg";
                     JActiveTable aMaster = new JActiveTable();
                     aMaster.TableName = "XT_IMG_REC";
                     aMaster.AddField("REC_ID", cKeyID);
@@ -1003,6 +1003,11 @@ namespace GTWS_TASK.UI
             {
 
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

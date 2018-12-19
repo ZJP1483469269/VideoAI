@@ -51,6 +51,7 @@
             this.btnRight = new System.Windows.Forms.Button();
             this.btnUP = new System.Windows.Forms.Button();
             this.pnlPlay = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.timAfter = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.系统管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -319,6 +320,16 @@
             this.pnlPlay.Size = new System.Drawing.Size(711, 505);
             this.pnlPlay.TabIndex = 70;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(502, 571);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 29);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // timAfter
             // 
             this.timAfter.Tick += new System.EventHandler(this.timAfter_Tick);
@@ -480,11 +491,12 @@
             this.CameraNameList.TabIndex = 64;
             this.CameraNameList.DoubleClick += new System.EventHandler(this.CameraNameList_DoubleClick);
             // 
-            // frmTask
+            // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(975, 612);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.GBList);
             this.Controls.Add(this.txtCAMERA_NAME);
             this.Controls.Add(this.LB_MSG);
@@ -498,7 +510,7 @@
             this.Controls.Add(this.btnTake);
             this.Controls.Add(this.btnStartReal);
             this.Controls.Add(this.YWZ_TXT_LIST);
-            this.Name = "frmTask";
+            this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "国土智能监控取证系统";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -556,5 +568,6 @@
         private System.Windows.Forms.ToolStripMenuItem 任务时间ToolStripMenuItem;
         private System.Windows.Forms.GroupBox GBList;
         private System.Windows.Forms.ListBox CameraNameList;
+        private System.Windows.Forms.Button button1;
     }
 }

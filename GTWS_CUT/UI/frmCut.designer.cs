@@ -60,6 +60,7 @@
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnStart);
             this.Name = "frmCut";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmCut";
             this.Load += new System.EventHandler(this.frmCut_Load);
             this.ResumeLayout(false);

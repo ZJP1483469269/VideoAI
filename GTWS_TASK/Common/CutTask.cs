@@ -10,6 +10,7 @@ using TLKJ.DB;
 using TLKJ.Utils;
 using Renci.SshNet;
 using TLKJAI;
+using System.Threading;
 
 namespace TLKJ_IVS
 {
@@ -24,10 +25,8 @@ namespace TLKJ_IVS
             int iGrayMaxVal = StringEx.getInt(INIConfig.ReadString("Config", AppConfig.GRAY_MAX, "0"));
             int iEXPORT_IMAGE = StringEx.getInt(INIConfig.ReadString("Config", AppConfig.EXPORT_IMAGE, "0"));
 
-            String cDFS_PATH = INIConfig.ReadString("UPLOAD", "DFS_PATH", "0");
-            String cUPLOAD_PATH = INIConfig.ReadString("UPLOAD", "UPLOAD_PATH", "");
-
-            int iDFS_FLAG = StringEx.getInt(INIConfig.ReadString("Config", "DFS_FLAG", "0"));
+            String cUPLOAD_PATH = INIConfig.ReadString("ANALYSE", "DFS_PATH", "");
+            String cDFS_TYPE = INIConfig.ReadString("ANALYSE", "DFS_TYPE", "");
 
             String cAppDir = Application.StartupPath;
             Boolean isUpload = false;
@@ -35,86 +34,120 @@ namespace TLKJ_IVS
             JActiveTable aSlave = new JActiveTable();
             aSlave.TableName = "XT_IMG_LIST";
             aMaster.TableName = "XT_IMG_REC";
-            String cFileName = getFileName();
-            String cFileExt = Path.GetExtension(cFileName);
-            String cREC_ID = Path.GetFileName(cFileName).Replace(cFileExt, "");
-            if (String.IsNullOrWhiteSpace(cFileName))
+            while (!ApplicationEvent.isImgCutAbort)
             {
-                Boolean UploadFlag = false;
-
-                List<KeyValue> ImageList = IMGAI.getImageList(cFileName, iMinVal, iMaxVal, iGrayMinVal, iGrayMaxVal);
-                List<String> sqls = new List<string>();
-                for (int k = 0; (ImageList != null) && (k < ImageList.Count); k++)
+                log4net.WriteLogFile("分析线程正在运行中......");
+                String cFileName = getFileName();
+                if (String.IsNullOrWhiteSpace(cFileName))
                 {
-                    Application.DoEvents();
-                    KeyValue rowKey = ImageList[k];
-                    String cImageFileName = rowKey.Text;
-                    if (iDFS_FLAG == 1)
-                    {
-                        UploadFlag = CopyUtil.Upload(cImageFileName, cDFS_PATH);
-                    }
-                    else
-                    {
-                        UploadFlag = CopyUtil.CopyFile(cImageFileName, cUPLOAD_PATH);
-                    }
+                    break;
+                }
 
-                    if (UploadFlag)
+                String cFileExt = Path.GetExtension(cFileName);
+                String cREC_ID = Path.GetFileName(cFileName).Replace(cFileExt, "");
+                List<KeyValue> ImageList = IMGAI.getImageList(cFileName, iMinVal, iMaxVal, iGrayMinVal, iGrayMaxVal);
+                String cExportFileName = Application.StartupPath + "\\" + cREC_ID + ".zip";
+                if (ImageList == null)
+                {
+                    continue;
+                }
+                List<String> sqls = new List<string>();
+                if (ImageList.Count > 0)
+                {
+                    if (File.Exists(cExportFileName))
                     {
-                        isUpload = true;
+                        isUpload = CopyUnit.SSH_Upload(cExportFileName, "ANALYSE");
+                    }
+                }
+                int iCode = 0;
+                if (isUpload)
+                {
+
+                    for (int k = 0; (ImageList != null) && (k < ImageList.Count); k++)
+                    {
+                        Application.DoEvents();
+                        KeyValue rowKey = ImageList[k];
                         aSlave.ClearField();
-                        aSlave.AddField("AI_FLAG", 1);
                         String cKeyID = StringEx.getString(k + 1000);
                         aSlave.AddField("ID", AutoID.getAutoID() + "_" + cKeyID);
+                        aSlave.AddField("ALARM_FLAG", 0);
                         aSlave.AddField("REC_ID", cREC_ID);
-                        aSlave.AddField("FILE_URL", cDFS_PATH + cImageFileName);
                         aSlave.AddField("CREATE_TIME", DateUtils.getDayTimeNum());
                         aSlave.AddField("POINT_LIST", rowKey.Val);
                         sqls.Add(aSlave.getInsertSQL());
                     }
+                    iCode = DbManager.ExecSQL(sqls);
+
                 }
-                int iCode = DbManager.ExecSQL(sqls);
+
+
                 if (iCode > 0)
                 {
-                    isUpload = true;
+                    try
+                    {
+                        File.Delete(cFileName);
+                    }
+                    catch (Exception ex)
+                    {
+                        log4net.WriteLogFile(ex.Message);
+                    }
+                    try
+                    {
+                        File.Delete(cExportFileName);
+                    }
+                    catch (Exception ex)
+                    {
+                        log4net.WriteLogFile(ex.Message);
+                    }
                 }
-            }
 
-            if (isUpload)
-            {
                 aMaster.ClearField();
-                aSlave.AddField("AI_FLAG", 1);
-                int iCode = DbManager.ExecSQL(aMaster.getUpdateSQL(" REC_ID='" + cREC_ID + "' "));
+                aMaster.AddField("AI_FLAG", 1);
+                iCode = DbManager.ExecSQL(aMaster.getUpdateSQL(" REC_ID='" + cREC_ID + "' "));
                 if (iCode > 0)
                 {
                     log4net.WriteLogFile("REC_ID为：" + cREC_ID + "的图片抠图成功！");
                 }
+
+                try
+                {
+                    Thread.Sleep(100);
+                }
+                catch (Exception ex)
+                {
+                    log4net.WriteLogFile(ex.Message);
+                }
             }
         }
-        public static Queue<String> ImageList = null;
+        public static Queue<String> ImageQueueList = null;
         public static String getFileName()
         {
-            if (ImageList == null)
+            if (ImageQueueList == null)
             {
-                ImageList = new Queue<string>();
+                ImageQueueList = new Queue<string>();
             }
 
-            if (ImageList.Count == 0)
+            if (ImageQueueList.Count == 0)
             {
-                String cDFS_PATH = INIConfig.ReadString("Config", "DFS_PATH");
+                String cDFS_PATH = INIConfig.ReadString("ANALYSE", "FILE_PATH");
+                if (!Directory.Exists(cDFS_PATH))
+                {
+                    return null;
+                }
                 String[] FileList = Directory.GetFiles(cDFS_PATH);
                 for (int i = 0; i < FileList.Length; i++)
                 {
                     String cFileName = FileList[i];
-                    ImageList.Enqueue(cFileName);
+                    ImageQueueList.Enqueue(cFileName);
                     if (i > 10)
                     {
                         break;
                     }
                 }
             }
-            if (ImageList.Count > 0)
+            if (ImageQueueList.Count > 0)
             {
-                String cFileName = ImageList.Dequeue();
+                String cFileName = ImageQueueList.Dequeue();
                 return cFileName;
             }
             else

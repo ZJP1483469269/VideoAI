@@ -72,6 +72,10 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DotNetZip, Version=1.13.0.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetZip.1.13.0\lib\net40\DotNetZip.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\GTWS_BD\bin\x86\Debug\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -107,19 +111,19 @@
     <Compile Include="FieldAttr.cs" />
     <Compile Include="FileLib.cs" />
     <Compile Include="HttpUtil.cs" />
-    <Compile Include="IMMessage.cs" />
-    <Compile Include="IMMessageType.cs" />
-    <Compile Include="IMRecvMSG.cs" />
-    <Compile Include="IMSysLog.cs" />
+    <Compile Include="WX\IMMessage.cs" />
+    <Compile Include="WX\IMMessageType.cs" />
+    <Compile Include="WX\IMRecvMSG.cs" />
+    <Compile Include="WX\IMSysLog.cs" />
     <Compile Include="INIConfig.cs" />
     <Compile Include="JsonLib.cs" />
     <Compile Include="GPSXY.cs" />
     <Compile Include="KeyInfo.cs" />
     <Compile Include="KeyValue.cs" />
     <Compile Include="log4net.cs" />
-    <Compile Include="LoginUserInfo.cs" />
-    <Compile Include="OrgType.cs" />
-    <Compile Include="RoleType.cs" />
+    <Compile Include="SYS\LoginUserInfo.cs" />
+    <Compile Include="SYS\OrgType.cs" />
+    <Compile Include="SYS\RoleType.cs" />
     <Compile Include="StringEx.cs" />
     <Compile Include="UploadFileInfo.cs" />
     <Compile Include="UploadResult.cs" />
@@ -127,6 +131,9 @@
     <Compile Include="Wav2Amr.cs" />
     <Compile Include="G_MSG.cs" />
     <Compile Include="JHref.cs" />
+    <Compile Include="WebUpload.cs" />
+    <Compile Include="ZIP.cs" />
+    <Compile Include="CutResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
@@ -154,7 +161,11 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="lib\ICSharpCode.SharpZipLib.dll" />
     <Content Include="lib\Newtonsoft.Json.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

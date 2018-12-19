@@ -37,12 +37,35 @@ public class dfs : IHttpHandler, IRequiresSessionState
                 String cAbsUrl = ctx.Server.MapPath("~/dfs");
                 AppConfig.CheckDir(cFileExt);
 
+                if (File.Exists(cAbsUrl + @"\" + cFileName))
+                {
+                    try
+                    {
+                        File.Delete(cAbsUrl + @"\" + cFileName);
+                    }
+                    catch (Exception ex)
+                    {
+                        log4net.WriteLogFile(ex.Message);
+                    }
 
+                }
                 String cREC_ID = cFileName.Replace(cFileExt, "");
                 Request.Files[0].SaveAs(cAbsUrl + @"\" + cFileName);
 
                 String cFilePath = cAbsUrl + @"\" + cREC_ID.Substring(0, 8);
                 AppConfig.CheckDir(cFilePath);
+
+                if (File.Exists(cFilePath + "\\" + cFileName))
+                {
+                    try
+                    {
+                        File.Delete(cFilePath + "\\" + cFileName);
+                    }
+                    catch (Exception ex)
+                    {
+                        log4net.WriteLogFile(ex.Message);
+                    }
+                }
 
                 File.Copy(cAbsUrl + @"\" + cFileName, cFilePath + "\\" + cFileName);
                 sql = "UPDATE XT_IMG_REC SET " + cUploadField + "=1 WHERE REC_ID='" + cREC_ID + "'";

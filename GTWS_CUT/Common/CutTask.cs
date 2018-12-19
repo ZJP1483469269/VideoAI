@@ -90,6 +90,14 @@ namespace TLKJ_IVS
 
                     if (isUpload)
                     {
+                        try
+                        {
+                            File.Delete(cFileName);
+                        }
+                        catch (Exception ex)
+                        {
+                            log4net.WriteLogFile(ex.Message);
+                        }
                         aMaster.ClearField();
                         aSlave.AddField("AI_FLAG", 1);
                         iCode = DbManager.ExecSQL(aMaster.getUpdateSQL(" REC_ID='" + cREC_ID + "' "));
@@ -105,7 +113,7 @@ namespace TLKJ_IVS
                 }
                 catch (Exception ex)
                 {
-
+                    log4net.WriteLogFile(ex.Message);
                 }
             }
         }

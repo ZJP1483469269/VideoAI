@@ -13,8 +13,8 @@ using TLKJAI;
 
 namespace TLKJ_IVS
 {
-    public class CopyUtil
-    { 
+    public class CopyUnit
+    {
         private static SftpClient sftp = null;
         public static Boolean Upload(String cFileName, String cType)
         {
@@ -30,7 +30,7 @@ namespace TLKJ_IVS
                 return SSH_Upload(cFileName, cType);
             }
             else if (cDFSType.Equals("POST"))
-            { 
+            {
                 String cDFSUrl = "http://" + cDFS_PATH + "/api/dfs.ashx";
                 return PostFile(cFileName, cDFSUrl);
             }
@@ -44,6 +44,77 @@ namespace TLKJ_IVS
                 return false;
             }
         }
+
+        public static Boolean SSH_Upload(String cFileName, String cDFSType)
+        {
+            if (sftp == null)
+            {
+                String cDFS_HOST = INIConfig.ReadString(cDFSType, "DFS_HOST", "");
+                String cDFS_PORT = INIConfig.ReadString(cDFSType, "DFS_PORT", "22");
+                int iDFS_PORT = StringEx.getInt(cDFS_PORT);
+                String cDFS_USER = INIConfig.ReadString(cDFSType, "DFS_USER", "root");
+                String cDFS_PASS = INIConfig.ReadString(cDFSType, "DFS_PASS", "");
+                sftp = new SftpClient(cDFS_HOST, iDFS_PORT, cDFS_USER, cDFS_PASS);
+                try
+                {
+                    sftp.Connect();
+                }
+                catch (Exception ex)
+                {
+                    sftp = null;
+                }
+            }
+
+            if (sftp == null)
+            {
+                return false;
+            }
+
+            FileStream fs = null;
+            try
+            {
+                String cDFS_PATH = INIConfig.ReadString(cDFSType, "DFS_PATH", "");
+                fs = new FileStream(cFileName, FileMode.Open);
+                String cStr = Path.GetFileName(cFileName);
+                try
+                {
+                    sftp.CreateDirectory(cDFS_PATH);
+                }
+                catch (Exception ex)
+                {
+
+                }
+                String cDFSPath = cDFS_PATH;
+                if (!cDFSPath.EndsWith("/"))
+                {
+                    cDFSPath = cDFSPath + "/";
+                }
+                sftp.UploadFile(fs, cDFSPath + cStr);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                log4net.WriteLogFile(ex.Message);
+                sftp = null;
+                return false;
+            }
+            finally
+            {
+                if (fs != null)
+                {
+                    try
+                    {
+                        fs.Close();
+                        fs = null;
+                    }
+                    catch (Exception ex)
+                    {
+                        log4net.WriteLogFile(ex.Message);
+                    }
+                }
+            }
+        }
+
         public static Boolean RemoveFileList(List<KeyValue> ImageList)
         {
             String cFileDir = "";
@@ -94,81 +165,7 @@ namespace TLKJ_IVS
             }
             return true;
         }
-        public static Boolean SSH_Upload(String cFileName, String cDFSType)
-        {
-            String cDFS_PATH = INIConfig.ReadString(cDFSType, "DFS_PATH", "");
-            Boolean isConnected = false;
-            if (sftp != null)
-            {
-                try
-                {
-
-                    sftp.Connect();
-                    isConnected = true;
-                }
-                catch (Exception ex)
-                {
-                    sftp = null;
-                }
-            }
-
-
-            if (!isConnected)
-            {
-                String cDFS_HOST = INIConfig.ReadString(cDFSType, "DFS_HOST", "");
-                String cDFS_PORT = INIConfig.ReadString(cDFSType, "DFS_PORT", "22");
-                int iDFS_PORT = StringEx.getInt(cDFS_PORT);
-                String cDFS_USER = INIConfig.ReadString(cDFSType, "DFS_USER", "root");
-                String cDFS_PASS = INIConfig.ReadString(cDFSType, "DFS_PASS", "");
-
-
-                sftp = new SftpClient(cDFS_HOST, iDFS_PORT, cDFS_USER, cDFS_PASS);
-            }
-            FileStream fs = null;
-            try
-            {
-                sftp.Connect();
-                fs = new FileStream(cFileName, FileMode.Open);
-                String cStr = Path.GetFileName(cFileName);
-                try
-                {
-                    sftp.CreateDirectory(cDFS_PATH);
-                }
-                catch (Exception ex)
-                {
-
-                }
-                String cDFSPath = cDFS_PATH;
-                if (!cDFSPath.EndsWith("/"))
-                {
-                    cDFSPath = cDFSPath + "/";
-                }
-                sftp.UploadFile(fs, cDFSPath + cStr);
-                return true;
-            }
-            catch (Exception ex)
-            {
-                log4net.WriteLogFile(ex.Message);
-                sftp = null;
-                return false;
-            }
-            finally
-            {
-                if (fs != null)
-                {
-                    try
-                    {
-                        fs.Close();
-                        fs = null;
-                    }
-                    catch (Exception ex)
-                    {
-                        log4net.WriteLogFile(ex.Message);
-                    }
-                }
-            }
-        }
-
+         
         public static bool CopyFile(string cFileName, string cDFS_PATH)
         {
             try

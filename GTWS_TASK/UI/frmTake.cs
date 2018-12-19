@@ -671,135 +671,31 @@ namespace GTWS_TASK.UI
             //    }
             //}
         }
-        Thread UploadThread = null;
-        static Boolean isAbort = false;
+
         public void InitUploadThread()
         {
             int iALARM = StringEx.getInt(INIConfig.ReadString("ALARM", "DFS_ALLOW", "0"));
+            if (iALARM > 0)
+            {
+                if (ApplicationEvent.UploadThread == null)
+                {
+                    ApplicationEvent.UploadThread = new Thread(UploadTask.Execute);
+                    ApplicationEvent.UploadThread.Start();
+                }
+            }
+
             int iANALYSE = StringEx.getInt(INIConfig.ReadString("ANALYSE", "DFS_ALLOW", "0"));
-            if (iALARM > 0 || iANALYSE > 0)
+            if (iANALYSE > 0)
             {
-                UploadThread = new Thread(Upload_Execute);
-                UploadThread.Start();
+                if (ApplicationEvent.CutThread == null)
+                {
+                    ApplicationEvent.CutThread = new Thread(CutTask.Execute);
+                    ApplicationEvent.CutThread.Start();
+                }
             }
         }
 
-        public static void Upload_Execute()
-        {
-            int iMinVal = StringEx.getInt(INIConfig.ReadString("Config", AppConfig.IMAGE_MIN, "0"));
-            int iMaxVal = StringEx.getInt(INIConfig.ReadString("Config", AppConfig.IMAGE_MAX, "0"));
 
-            int iGrayMinVal = StringEx.getInt(INIConfig.ReadString("Config", AppConfig.GRAY_MIN, "0"));
-            int iGrayMaxVal = StringEx.getInt(INIConfig.ReadString("Config", AppConfig.GRAY_MAX, "0"));
-            int iEXPORT_IMAGE = StringEx.getInt(INIConfig.ReadString("Config", AppConfig.EXPORT_IMAGE, "0"));
-
-            int iALARM_ALLOW = INIConfig.ReadInt("ALARM", "DFS_ALLOW");
-            String cALARM_PATH = INIConfig.ReadString("ANALYSE", "DFS_PATH", "0");
-
-            int iANALYSE_ALLOW = INIConfig.ReadInt("ANALYSE", "DFS_ALLOW");
-            String cANALYSE_PATH = INIConfig.ReadString("ANALYSE", "DFS_PATH", "0");
-
-            String cAppDir = Application.StartupPath;
-
-            JActiveTable aMaster = new JActiveTable();
-            JActiveTable aSlave = new JActiveTable();
-            aSlave.TableName = "XT_IMG_LIST";
-            aMaster.TableName = "XT_IMG_REC";
-            List<String> FileList = new List<string>();
-            while (!isAbort)
-            {
-                Boolean isUpload = false;
-                DataTable dtRows = DbManager.QueryData(" select TOP 1 *  from XT_IMG_REC where UPLOAD_FLAG=0  ");
-                for (int i = 0; (dtRows != null) && (i < dtRows.Rows.Count); i++)
-                {
-                    String cREC_ID = StringEx.getString(dtRows, i, "REC_ID");
-                    String cFILE_URL = StringEx.getString(dtRows, i, "FILE_URL");
-                    FileList.Clear();
-                    String cFileName = cAppDir + cFILE_URL;
-                    Boolean UploadFlag = false;
-                    if (!File.Exists(cFileName))
-                    {
-                        aMaster.ClearField();
-                        aMaster.AddField("UPLOAD_FLAG", 1);
-                        aMaster.AddField("ALARM_FLAG", 2);
-                        log4net.WriteLogFile("REC_ID为：" + cREC_ID + "的图片不存在跳过！");
-                        int iCode = DbManager.ExecSQL(aMaster.getUpdateSQL(" REC_ID='" + cREC_ID + "' "));
-                        if (iCode > 0)
-                        {
-                            continue;
-                        }
-                    }
-
-                    if (iANALYSE_ALLOW > 0)
-                    {
-                        List<KeyValue> ImageList = IMGAI.getImageList(cFileName, iMinVal, iMaxVal, iGrayMinVal, iGrayMaxVal);
-                        List<String> sqls = new List<string>();
-
-                        List<Object[]> ParmList = new List<object[]>();
-                        for (int k = 0; (ImageList != null) && (k < ImageList.Count); k++)
-                        {
-                            KeyValue rowKey = ImageList[k];
-                            String cImageFileName = rowKey.Text;
-                            FileList.Add(cImageFileName);
-                            UploadFlag = UploadTask.Upload(cImageFileName, "ANALYSE");
-
-                            if (UploadFlag)
-                            {
-                                FileList.Add(cImageFileName);
-                                isUpload = true;
-                                aSlave.ClearField();
-                                aSlave.AddField("ALARM_FLAG", 0);
-                                String cKeyID = StringEx.getString(k + 1000);
-                                aSlave.AddField("ID", AutoID.getAutoID() + "_" + cKeyID);
-                                aSlave.AddField("REC_ID", cREC_ID);
-                                aSlave.AddField("CAMERA_ID", cREC_ID);
-                                aSlave.AddField("FILE_URL", cANALYSE_PATH + cREC_ID + "/" + Path.GetFileName(cImageFileName));
-                                aSlave.AddField("CREATE_TIME", DateUtils.getDayTimeNum());
-                                aSlave.AddField("POINT_LIST", rowKey.Val);
-                                sqls.Add(aSlave.getInsertSQL());
-                                ParmList.Add(aSlave.getParmList());
-                            }
-                        }
-                        int iCode = DbManager.ExecSQL(sqls, ParmList);
-                        if (iCode > 0)
-                        {
-                            isUpload = true;
-                            if (isUpload)
-                            {
-                                UploadTask.RemoveFileList(ImageList);
-                                UploadTask.RemoveFileDir(cFileName);
-                            }
-                        }
-                    }
-
-                    if (iALARM_ALLOW > 0)
-                    {
-                        UploadFlag = UploadTask.Upload(cFileName, "ALARM");
-                        aMaster.ClearField();
-                        aMaster.AddField("UPLOAD_FLAG", 1);
-                        aMaster.AddField("ALARM_FLAG", 0);
-                        int iCode = DbManager.ExecSQL(aMaster.getUpdateSQL(" REC_ID='" + cREC_ID + "' "));
-                        log4net.WriteLogFile("REC_ID为：" + cREC_ID + "的图片，已处理！");
-                    }
-                    else
-                    {
-                        aMaster.ClearField();
-                        aMaster.AddField("UPLOAD_FLAG", 2);
-                        aMaster.AddField("ALARM_FLAG", 2);
-                        int iCode = DbManager.ExecSQL(aMaster.getUpdateSQL(" REC_ID='" + cREC_ID + "' "));
-                        UploadTask.RemoveFile(cFileName);
-                        log4net.WriteLogFile("REC_ID为：" + cREC_ID + "的图片，已处理完成！");
-                    }
-                }
-                try
-                {
-                    Thread.Sleep(200);
-                }
-                catch (Exception ex)
-                {
-                }
-            }
-        }
         private void timPreset_Tick(object sender, EventArgs e)
         {
             timPreset.Enabled = false;
@@ -873,6 +769,25 @@ namespace GTWS_TASK.UI
 
                 if (iCode == 0)
                 {
+                    int iDFS_ALLOW = INIConfig.ReadInt("ANALYSE", "DFS_ALLOW");
+                    if (iDFS_ALLOW > 0)
+                    {
+                        String cAnalyseFile = cFileName.Replace("images", "analyse");
+                        try
+                        {
+                            String cFilePath = Path.GetDirectoryName(cAnalyseFile);
+                            if (!Directory.Exists(cFilePath))
+                            {
+                                Directory.CreateDirectory(cFilePath);
+                            }
+                            File.Copy(cFileName, cAnalyseFile);
+                        }
+                        catch (Exception ex)
+                        {
+                            log4net.WriteLogFile(ex.Message);
+                        }
+                    }
+
                     log4net.WriteLogFile("IVS_SDK_LocalSnapshot成功！" + cFileName);
                     String cKeyText = IMGAI.getImageText(cFileName);
 
@@ -897,9 +812,8 @@ namespace GTWS_TASK.UI
                     String cMasterSQL = aMaster.getInsertSQL();
                     JActiveTable aSlave = new JActiveTable();
                     aSlave.TableName = "XT_CAMERA_STATUS";
-                    aSlave.AddField("FILE_URL", cFileDir);
                     aSlave.AddField("UPDATE_TIME", cDayTime);
-                    String cSlaveSQL = aSlave.getUpdateSQL("CAMERA_ID = '" + ActiveCameraCode + "' AND PRESET_ID = '" + StringEx.getString(iPRESET_ID) + "'");
+                    String cSlaveSQL = aSlave.getUpdateSQL("CAMERA_ID = '" + ActiveCameraCode + "' ");
 
                     sqls.Add(cMasterSQL);
                     sqls.Add(cSlaveSQL);
@@ -985,6 +899,10 @@ namespace GTWS_TASK.UI
                 btnLoad_Click(null, null);
                 timAfter.Enabled = true;
             }
+            else
+            {
+                InitUploadThread();
+            }
         }
 
         private void 任务时间ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1049,6 +967,53 @@ namespace GTWS_TASK.UI
             }
 
             this.timAfter.Enabled = true;
+        }
+
+        private void frmTake_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (ApplicationEvent.UploadThread != null)
+            {
+                ApplicationEvent.isImgCutAbort = true;
+                ApplicationEvent.isUploadAbort = true;
+                try
+                {
+
+                    Thread.Sleep(1000);
+                }
+                catch (Exception ex)
+                {
+
+                }
+                try
+                {
+                    ApplicationEvent.UploadThread.Abort();
+                    ApplicationEvent.UploadThread = null;
+                }
+                catch (Exception ex)
+                {
+
+                }
+
+            }
+
+            if (ApplicationEvent.CutThread != null)
+            {
+                try
+                {
+                    ApplicationEvent.CutThread.Abort();
+                    ApplicationEvent.CutThread = null;
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Zip vo = new Zip();
+            vo.ZipDir(@"D:\ai\images\base", @"C:\a.zip");
         }
     }
 }
