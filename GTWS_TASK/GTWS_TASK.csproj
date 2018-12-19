@@ -2,7 +2,7 @@
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\OpenCvSharp3-AnyCPU.4.0.0.20181129\build\OpenCvSharp3-AnyCPU.props" Condition="Exists('..\packages\OpenCvSharp3-AnyCPU.4.0.0.20181129\build\OpenCvSharp3-AnyCPU.props')" />
   <PropertyGroup>
-    <StartupObject>GTWS_BD.Program</StartupObject>
+    <StartupObject>GTWS_TASK.Program</StartupObject>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -88,6 +88,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -149,12 +151,6 @@
     <Compile Include="UI\frmConfig.Designer.cs">
       <DependentUpon>frmConfig.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\frmCut.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\frmCut.Designer.cs">
-      <DependentUpon>frmCut.cs</DependentUpon>
-    </Compile>
     <Compile Include="UI\frmTest.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -178,12 +174,6 @@
     </Compile>
     <Compile Include="UI\frmPreset.Designer.cs">
       <DependentUpon>frmPreset.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\frmMain.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\frmMain.Designer.cs">
-      <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\frmTake.cs">
       <SubType>Form</SubType>
@@ -906,16 +896,15 @@
     <Folder Include="bin\x86\Debug\zh-cn\" />
     <Folder Include="bin\x86\Debug\zh-tw\" />
     <Folder Include="images\" />
-    <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common.DB\TLKJ.DB.csproj">
-      <Project>{B6E0B7D2-692C-4505-83AA-45EFFE080C38}</Project>
-      <Name>TLKJ.DB</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Common.Util\TLKJ.Util.csproj">
       <Project>{9C69D4E3-5A02-41C0-B4DB-A356C443B65C}</Project>
       <Name>TLKJ.Util</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WEB_SYS\TLKJ.SYS.csproj">
+      <Project>{1180BA09-F329-455A-A9B2-19AF9D092B10}</Project>
+      <Name>TLKJ.SYS</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -924,9 +913,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\frmConfig.resx">
       <DependentUpon>frmConfig.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\frmCut.resx">
-      <DependentUpon>frmCut.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\frmTest.resx">
       <DependentUpon>frmTest.cs</DependentUpon>
@@ -939,9 +925,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\frmPreset.resx">
       <DependentUpon>frmPreset.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\frmMain.resx">
-      <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\frmTake.resx">
       <DependentUpon>frmTake.cs</DependentUpon>
@@ -963,6 +946,7 @@
     </None>
     <None Include="doc\readme.txt" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\System.Data.DataTable.datasource" />
     <Content Include="tessdata\eng.cube.bigrams">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -993,6 +977,9 @@
     <Content Include="Config_SQ.ini">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

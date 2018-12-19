@@ -111,6 +111,8 @@
     <Compile Include="FieldAttr.cs" />
     <Compile Include="FileLib.cs" />
     <Compile Include="HttpUtil.cs" />
+    <Compile Include="JActiveField.cs" />
+    <Compile Include="JActiveTable.cs" />
     <Compile Include="WX\IMMessage.cs" />
     <Compile Include="WX\IMMessageType.cs" />
     <Compile Include="WX\IMRecvMSG.cs" />

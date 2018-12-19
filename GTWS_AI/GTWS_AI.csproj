@@ -122,13 +122,9 @@
     <Compile Include="Common\ApplicationEvent.cs" />
     <Compile Include="Common\Const.cs" />
     <Compile Include="Common\WebJS.cs" />
-    <Compile Include="Common\WebSQL.cs" />
-    <Compile Include="TLKJAI\GPSAI.cs" />
-    <Compile Include="TLKJAI\IMGAI.cs" />
     <Compile Include="Common\IVS_API.cs" />
     <Compile Include="Common\ShellAPI.cs" />
     <Compile Include="Common\TVNode.cs" />
-    <Compile Include="Common\UploadTask.cs" />
     <Compile Include="IVS_Struct\IVS_ALARM_EVENT.cs" />
     <Compile Include="IVS_Struct\IVS_ALARM_NOTIFY.cs" />
     <Compile Include="IVS_Struct\IVS_ALARM_OPERATE_INFO.cs" />
@@ -164,12 +160,6 @@
     <Compile Include="UI\frmConfig.Designer.cs">
       <DependentUpon>frmConfig.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\frmCut.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\frmCut.designer.cs">
-      <DependentUpon>frmCut.cs</DependentUpon>
-    </Compile>
     <Compile Include="UI\frmDTConfig.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -188,29 +178,23 @@
     <Compile Include="UI\frmImage.Designer.cs">
       <DependentUpon>frmImage.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\frmPreset.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\frmPreset.Designer.cs">
-      <DependentUpon>frmPreset.cs</DependentUpon>
-    </Compile>
     <Compile Include="UI\frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\frmPreset.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmPreset.Designer.cs">
+      <DependentUpon>frmPreset.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\frmViewer.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\frmViewer.Designer.cs">
       <DependentUpon>frmViewer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\frmTask.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\frmTask.Designer.cs">
-      <DependentUpon>frmTask.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\frmKitWeb.cs">
       <SubType>Form</SubType>
@@ -228,7 +212,6 @@
     <Content Include="Config.ini">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="doc\Newtonsoft.Json.dll" />
     <Content Include="Model\IMG01.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -270,14 +253,11 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="doc\" />
     <Folder Include="images\" />
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common.DB\TLKJ.DB.csproj">
-      <Project>{B6E0B7D2-692C-4505-83AA-45EFFE080C38}</Project>
-      <Name>TLKJ.DB</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Common.Util\TLKJ.Util.csproj">
       <Project>{9C69D4E3-5A02-41C0-B4DB-A356C443B65C}</Project>
       <Name>TLKJ.Util</Name>
@@ -290,9 +270,6 @@
     <EmbeddedResource Include="UI\frmConfig.resx">
       <DependentUpon>frmConfig.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\frmCut.resx">
-      <DependentUpon>frmCut.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="UI\frmDTConfig.resx">
       <DependentUpon>frmDTConfig.cs</DependentUpon>
     </EmbeddedResource>
@@ -302,17 +279,14 @@
     <EmbeddedResource Include="UI\frmImage.resx">
       <DependentUpon>frmImage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\frmPreset.resx">
-      <DependentUpon>frmPreset.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="UI\frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\frmPreset.resx">
+      <DependentUpon>frmPreset.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\frmViewer.resx">
       <DependentUpon>frmViewer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\frmTask.resx">
-      <DependentUpon>frmTask.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\frmKitWeb.resx">
       <DependentUpon>frmKitWeb.cs</DependentUpon>

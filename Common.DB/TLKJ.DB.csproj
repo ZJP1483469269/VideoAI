@@ -96,8 +96,6 @@
     <Compile Include="ExecSqlResult.cs" />
     <Compile Include="DbManager.cs" />
     <Compile Include="IDBBASE.cs" />
-    <Compile Include="JActiveTable.cs" />
-    <Compile Include="JActiveField.cs" />
     <Compile Include="JDBBASE.cs" />
   </ItemGroup>
   <ItemGroup>
