@@ -13,10 +13,8 @@ using System.Runtime.InteropServices;
 using TLKJ.Utils;
 using System.IO;
 using System.Threading;
-using System.Drawing.Imaging;
-using TLKJ.DB;
-using Renci.SshNet;
-using TLKJAI;
+using System.Drawing.Imaging; 
+using Renci.SshNet; 
 
 namespace GTWS_TASK.UI
 {

@@ -6,16 +6,15 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using GTWS;
-using TLKJ_IVS;
 using System.Collections;
 using System.Runtime.InteropServices;
-using TLKJ.Utils;
 using System.IO;
 using System.Threading;
-using System.Drawing.Imaging;
-using TLKJ.DB;
+using System.Drawing.Imaging; 
 using Renci.SshNet;
+using GTWS;
+using TLKJ_IVS;
+using TLKJ.Utils;
 using TLKJAI;
 
 namespace GTWS_TASK.UI
@@ -169,12 +168,12 @@ namespace GTWS_TASK.UI
         public Boolean getTaskCameraCode(String cOrgID)
         {
             String sql = "SELECT TOP 1 DEVICE_ID,(SELECT COUNT(1) FROM  XT_TASK_LIST X WHERE X.ORG_ID='" + cOrgID + "') AS LEFT_TASK FROM XT_TASK_LIST WHERE ORG_ID='" + cOrgID + "' ";
-            DataTable dtRows = DbManager.QueryData(sql);
+            DataTable dtRows = WebDB.QueryData(sql);
             if (dtRows != null && dtRows.Rows.Count > 0)
             {
                 ActiveDevice_ID = StringEx.getString(dtRows, 0, "DEVICE_ID");
                 ActiveLeftCount = StringEx.getString(dtRows, 0, "LEFT_TASK");
-                DbManager.ExecSQL(" DELETE FROM XT_TASK_LIST WHERE ORG_ID='" + cOrgID + "' AND DEVICE_ID='" + ActiveDevice_ID + "'");
+                WebDB.ExecSQL(" DELETE FROM XT_TASK_LIST WHERE ORG_ID='" + cOrgID + "' AND DEVICE_ID='" + ActiveDevice_ID + "'");
                 return true;
             }
             return false;
@@ -817,7 +816,7 @@ namespace GTWS_TASK.UI
 
                     sqls.Add(cMasterSQL);
                     sqls.Add(cSlaveSQL);
-                    iCode = DbManager.ExecSQL(sqls);
+                    iCode = WebDB.ExecSQL(sqls);
                     if (iCode > 0)
                     {
                         log4net.WriteLogFile(cKeyID + "插入数据库成功");
@@ -867,11 +866,11 @@ namespace GTWS_TASK.UI
                         aTable.AddField("TASK_DAY", cDay);
                         aTable.AddField("ORG_ID", cORG_ID);
                         String sql = aTable.getUpdateSQL(" ORG_ID='" + cORG_ID + "' AND TASK_ID='" + cTaskID + "'");
-                        int iCode = DbManager.ExecSQL(sql);
+                        int iCode = WebDB.ExecSQL(sql);
                         if (iCode == 0)
                         {
                             sql = aTable.getInsertSQL();
-                            iCode = DbManager.ExecSQL(sql);
+                            iCode = WebDB.ExecSQL(sql);
                         }
                         INIConfig.Write("TASK", cTaskID + "_DAY", cDay);
                         return iCode > 0;
@@ -938,13 +937,13 @@ namespace GTWS_TASK.UI
         private void btnAutoTake_Click(object sender, EventArgs e)
         {
             String cORG_ID = INIConfig.ReadString("Config", AppConfig.ORG_ID);
-            String cRSCount = DbManager.GetStrValue("SELECT COUNT(1) FROM XT_TASK_LIST WHERE ORG_ID='" + cORG_ID + "'");
+            String cRSCount = WebDB.GetStrValue("SELECT COUNT(1) FROM XT_TASK_LIST WHERE ORG_ID='" + cORG_ID + "'");
             int iRSCount = StringEx.getInt(cRSCount);
             if (iRSCount > 0)
             {
                 if (MessageBox.Show("还剩余" + StringEx.getString(cRSCount) + "个任务没有执行完毕，是否重置任务！", "采集任务", MessageBoxButtons.YesNo) == DialogResult.OK)
                 {
-                    int iCode = DbManager.ExecSQL("INSERT INTO XT_TASK_LIST(DEVICE_ID,ORG_ID) "
+                    int iCode = WebDB.ExecSQL("INSERT INTO XT_TASK_LIST(DEVICE_ID,ORG_ID) "
                      + " SELECT DEVICE_ID,ORG_ID "
                      + " FROM XT_CAMERA WHERE ORG_ID='" + cORG_ID + "' "
                      + " AND NOT EXISTS(SELECT 1 FROM XT_TASK_LIST X WHERE X.DEVICE_ID=XT_CAMERA.DEVICE_ID AND X.ORG_ID='" + cORG_ID + "') ");
@@ -956,7 +955,7 @@ namespace GTWS_TASK.UI
             }
             else
             {
-                int iCode = DbManager.ExecSQL("INSERT INTO XT_TASK_LIST(DEVICE_ID,ORG_ID) "
+                int iCode = WebDB.ExecSQL("INSERT INTO XT_TASK_LIST(DEVICE_ID,ORG_ID) "
                       + " SELECT DEVICE_ID,ORG_ID "
                       + " FROM XT_CAMERA WHERE ORG_ID='" + cORG_ID + "' "
                       + " AND NOT EXISTS(SELECT 1 FROM XT_TASK_LIST X WHERE X.DEVICE_ID=XT_CAMERA.DEVICE_ID AND X.ORG_ID='" + cORG_ID + "') ");

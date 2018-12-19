@@ -49,8 +49,8 @@ namespace GTWS_TASK.UI
             }
             else if (iTYPEID == 2)
             {
-                frmMain vItem = new frmMain();
-                vDialog = vItem;
+                //frmMain vItem = new frmMain();
+                //vDialog = vItem;
             }
             else if (iTYPEID == 3)
             {

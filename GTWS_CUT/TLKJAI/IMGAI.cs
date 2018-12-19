@@ -177,10 +177,7 @@ namespace TLKJAI
 
                 List<KeyValue> ImageList = new List<KeyValue>();
                 String cExportDir = Application.StartupPath + "\\export\\";
-                if (!Directory.Exists(cExportDir))
-                {
-                    Directory.CreateDirectory(cExportDir); //不存在文件夹，创建
-                }
+                ResetDirectory(cExportDir);
 
                 //调取图片
                 BgrImage = new Image<Bgr, byte>(cFileName);
@@ -194,7 +191,7 @@ namespace TLKJAI
 
                 BinaryImage.Save("D:\\IMG03.jpg");
 
-                String cFileID = Path.GetFileName(cFileName).Replace(".jpg", "");
+                String cREC_ID = Path.GetFileName(cFileName).Replace(".jpg", "");
 
                 VectorOfVectorOfPoint rvs = new VectorOfVectorOfPoint();
                 CvInvoke.FindContours(BinaryImage, rvs, null, RetrType.List, ChainApproxMethod.ChainApproxSimple);
@@ -209,21 +206,23 @@ namespace TLKJAI
                     j++;
                     CvInvoke.Rectangle(BgrImage, BoundingBox, new MCvScalar(255, 0, 0, 0), 3);
                     Image<Bgr, Byte> vResult = BgrImage.GetSubRect(BoundingBox);
-                    String cExportFileName = cExportDir + cFileID + "_" + j.ToString() + ".jpg";
-                    if (File.Exists(cExportFileName))
-                    {
-                        File.Delete(cExportFileName);
-                    }
-                    vResult.Save(cExportFileName);
+                    String cExportFileName = cREC_ID + "_" + j.ToString() + ".jpg";
+                    vResult.Save(cExportDir + cExportFileName);
 
                     KeyValue rowKey = new KeyValue();
-                    rowKey.Text = cExportFileName;
+                    rowKey.Text = cExportDir + cExportFileName;
                     rowKey.Val = JsonLib.ToJSON(BoundingBox);
                     ImageList.Add(rowKey);
                 }
+
+                String cZipFileName = Application.StartupPath + "\\" + cREC_ID + ".zip";
+                Zip vo = new Zip();
+                vo.ZipDir(cExportDir, cZipFileName);
+
                 BgrImage.Save("D:\\IMG04.jpg");
 
                 return ImageList;
+
             }
             catch (Exception ex)
             {
@@ -231,7 +230,30 @@ namespace TLKJAI
                 return null;
             }
         }
+        public static void ResetDirectory(String cDir)
+        {
+            if (!Directory.Exists(cDir))
+            {
+                Directory.CreateDirectory(cDir); //不存在文件夹，创建
+                return;
+            }
+            String[] FileList = Directory.GetFiles(cDir);
+            for (int i = FileList.Length - 1; i >= 0; i--)
+            {
+                String cFileName = FileList[i];
+                if (File.Exists(cFileName))
+                {
+                    try
+                    {
+                        File.Delete(cFileName);
+                    }
+                    catch (Exception ex)
+                    {
 
+                    }
+                }
+            }
+        } 
     }
 }
 

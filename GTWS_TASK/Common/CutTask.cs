@@ -5,8 +5,7 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Windows.Forms;
-using TLKJ.DB;
+using System.Windows.Forms; 
 using TLKJ.Utils;
 using Renci.SshNet;
 using TLKJAI;
@@ -47,41 +46,35 @@ namespace TLKJ_IVS
                 String cREC_ID = Path.GetFileName(cFileName).Replace(cFileExt, "");
                 List<KeyValue> ImageList = IMGAI.getImageList(cFileName, iMinVal, iMaxVal, iGrayMinVal, iGrayMaxVal);
                 String cExportFileName = Application.StartupPath + "\\" + cREC_ID + ".zip";
-                if (ImageList == null)
+                int iCode = 0;
+                if ((ImageList != null) && (ImageList.Count > 0))
                 {
-                    continue;
-                }
-                List<String> sqls = new List<string>();
-                if (ImageList.Count > 0)
-                {
+                    List<String> sqls = new List<string>();
                     if (File.Exists(cExportFileName))
                     {
                         isUpload = CopyUnit.SSH_Upload(cExportFileName, "ANALYSE");
                     }
-                }
-                int iCode = 0;
-                if (isUpload)
-                {
 
-                    for (int k = 0; (ImageList != null) && (k < ImageList.Count); k++)
+                    if (isUpload)
                     {
-                        Application.DoEvents();
-                        KeyValue rowKey = ImageList[k];
-                        aSlave.ClearField();
-                        String cKeyID = StringEx.getString(k + 1000);
-                        aSlave.AddField("ID", AutoID.getAutoID() + "_" + cKeyID);
-                        aSlave.AddField("ALARM_FLAG", 0);
-                        aSlave.AddField("REC_ID", cREC_ID);
-                        aSlave.AddField("CREATE_TIME", DateUtils.getDayTimeNum());
-                        aSlave.AddField("POINT_LIST", rowKey.Val);
-                        sqls.Add(aSlave.getInsertSQL());
+                        for (int k = 0; (ImageList != null) && (k < ImageList.Count); k++)
+                        {
+                            Application.DoEvents();
+                            KeyValue rowKey = ImageList[k];
+                            aSlave.ClearField();
+                            String cKeyID = StringEx.getString(k + 1000);
+                            aSlave.AddField("ID", AutoID.getAutoID() + "_" + cKeyID);
+                            aSlave.AddField("ALARM_FLAG", 0);
+                            aSlave.AddField("REC_ID", cREC_ID);
+                            aSlave.AddField("CREATE_TIME", DateUtils.getDayTimeNum());
+                            aSlave.AddField("POINT_LIST", rowKey.Val);
+                            sqls.Add(aSlave.getInsertSQL());
+                        }
+                        iCode =WebDB.ExecSQL(sqls);
                     }
-                    iCode = DbManager.ExecSQL(sqls);
-
                 }
 
-
-                if (iCode > 0)
+                if (iCode > 0 || ImageList == null || ImageList.Count == 0)
                 {
                     try
                     {
@@ -103,7 +96,7 @@ namespace TLKJ_IVS
 
                 aMaster.ClearField();
                 aMaster.AddField("AI_FLAG", 1);
-                iCode = DbManager.ExecSQL(aMaster.getUpdateSQL(" REC_ID='" + cREC_ID + "' "));
+                iCode = WebDB.ExecSQL(aMaster.getUpdateSQL(" REC_ID='" + cREC_ID + "' "));
                 if (iCode > 0)
                 {
                     log4net.WriteLogFile("REC_ID为：" + cREC_ID + "的图片抠图成功！");
@@ -118,6 +111,7 @@ namespace TLKJ_IVS
                     log4net.WriteLogFile(ex.Message);
                 }
             }
+            ApplicationEvent.CutThread = null;
         }
         public static Queue<String> ImageQueueList = null;
         public static String getFileName()

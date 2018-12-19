@@ -1,4 +1,4 @@
-﻿namespace GTWS_BD
+﻿namespace GTWS_TASK
 {
     partial class frmTest
     {

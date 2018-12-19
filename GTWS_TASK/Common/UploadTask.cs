@@ -5,8 +5,7 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Windows.Forms;
-using TLKJ.DB;
+using System.Windows.Forms; 
 using TLKJ.Utils;
 using Renci.SshNet;
 using TLKJAI;
@@ -16,7 +15,7 @@ namespace TLKJ_IVS
 {
     public class UploadTask
     {
-    
+
         public static void Execute()
         {
             int iMinVal = StringEx.getInt(INIConfig.ReadString("Config", AppConfig.IMAGE_MIN, "0"));
@@ -39,7 +38,12 @@ namespace TLKJ_IVS
             while (!ApplicationEvent.isUploadAbort)
             {
                 Boolean isUpload = false;
-                DataTable dtRows = DbManager.QueryData(" select TOP 1 *  from XT_IMG_REC where UPLOAD_FLAG=0  ");
+                DataTable dtRows = WebDB.QueryData(" select TOP 1 *  from XT_IMG_REC where UPLOAD_FLAG=0  ");
+                int iLength = (dtRows != null) ? dtRows.Rows.Count : 0;
+                if (iLength == 0)
+                {
+                    break;
+                }
                 for (int i = 0; (dtRows != null) && (i < dtRows.Rows.Count); i++)
                 {
                     String cREC_ID = StringEx.getString(dtRows, i, "REC_ID");
@@ -53,7 +57,7 @@ namespace TLKJ_IVS
                         aMaster.AddField("UPLOAD_FLAG", 1);
                         aMaster.AddField("ALARM_FLAG", 2);
                         log4net.WriteLogFile("REC_ID为：" + cREC_ID + "的图片不存在跳过！");
-                        int iCode = DbManager.ExecSQL(aMaster.getUpdateSQL(" REC_ID='" + cREC_ID + "' "));
+                        int iCode = WebDB.ExecSQL(aMaster.getUpdateSQL(" REC_ID='" + cREC_ID + "' "));
                         if (iCode > 0)
                         {
                             continue;
@@ -66,7 +70,7 @@ namespace TLKJ_IVS
                         aMaster.ClearField();
                         aMaster.AddField("UPLOAD_FLAG", 1);
                         aMaster.AddField("ALARM_FLAG", 0);
-                        int iCode = DbManager.ExecSQL(aMaster.getUpdateSQL(" REC_ID='" + cREC_ID + "' "));
+                        int iCode = WebDB.ExecSQL(aMaster.getUpdateSQL(" REC_ID='" + cREC_ID + "' "));
                         log4net.WriteLogFile("REC_ID为：" + cREC_ID + "的图片，已处理！");
                         try
                         {
@@ -86,6 +90,7 @@ namespace TLKJ_IVS
                 {
                 }
             }
+            ApplicationEvent.UploadThread = null;
         }
 
         private static SftpClient sftp = null;

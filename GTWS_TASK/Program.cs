@@ -6,7 +6,7 @@ using System.Linq;
 using System.Windows.Forms;
 using TLKJ.Utils;
 
-namespace GTWS_BD
+namespace GTWS_TASK
 {
     static class Program
     {

@@ -6,8 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using TLKJ.Utils;
-using TLKJ.DB;
+using TLKJ.Utils; 
 using System.Runtime.InteropServices;
 
 namespace GTWS_TASK.UI

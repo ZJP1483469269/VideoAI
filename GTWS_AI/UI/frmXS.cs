@@ -9,7 +9,6 @@ using System.Windows.Forms;
 using System.Web; 
 using TLKJ.Utils; 
 using System.IO;
-using TLKJ.DB;
 using GTWS_TASK.UI; 
 
 namespace TLKJ_IVS.UI

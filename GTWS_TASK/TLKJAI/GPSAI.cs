@@ -8,7 +8,7 @@ using System.Windows.Forms;
 using TLKJ.Utils;
 using System.IO;
 using System.Data;
-using TLKJ.DB;
+using TLKJ_IVS; 
 
 namespace TLKJAI
 {
@@ -19,7 +19,7 @@ namespace TLKJAI
         {
             StringBuilder sql = new StringBuilder();
             sql.Append("SELECT * FROM XT_CAMERA_CONFIG WHERE DEVICE_ID='" + cCameraID + "'");
-            DataTable dtRows = DbManager.QueryData(sql.ToString());
+            DataTable dtRows = WebDB.QueryData(sql.ToString());
             if (dtRows != null && dtRows.Rows.Count > 0)
             {
                 GPSXY vGPS = new GPSXY();
