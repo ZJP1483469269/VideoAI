@@ -1,7 +1,12 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.168
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GTWS_TASK", "GTWS_TASK\GTWS_TASK.csproj", "{4A68E7C2-2452-4237-ACF6-301E482AB78E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1F00376D-4CB4-4279-8DCC-C48B9DBFEE01} = {1F00376D-4CB4-4279-8DCC-C48B9DBFEE01}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TLKJ.DB", "Common.DB\TLKJ.DB.csproj", "{B6E0B7D2-692C-4505-83AA-45EFFE080C38}"
 EndProject
@@ -30,11 +35,12 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "GTWS_WEB", "GTWS_WEB\", "{1
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "15355"
+		SlnRelativePath = "GTWS_WEB\"
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TLKJ.DAO", "Common.DAL\TLKJ.DAO.csproj", "{7E3A69E0-0F1C-4246-A2C3-7D3AF082F65F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TLKJ.WebSys", "WEB_CORE\TLKJ.WebSys.csproj", "{1180BA09-F329-455A-A9B2-19AF9D092B10}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TLKJ.SYS", "WEB_SYS\TLKJ.SYS.csproj", "{1180BA09-F329-455A-A9B2-19AF9D092B10}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -121,11 +127,15 @@ Global
 		{1180BA09-F329-455A-A9B2-19AF9D092B10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1180BA09-F329-455A-A9B2-19AF9D092B10}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1180BA09-F329-455A-A9B2-19AF9D092B10}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1180BA09-F329-455A-A9B2-19AF9D092B10}.Debug|x64.Build.0 = Debug|Any CPU
 		{1180BA09-F329-455A-A9B2-19AF9D092B10}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1180BA09-F329-455A-A9B2-19AF9D092B10}.Debug|x86.Build.0 = Debug|Any CPU
 		{1180BA09-F329-455A-A9B2-19AF9D092B10}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1180BA09-F329-455A-A9B2-19AF9D092B10}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1180BA09-F329-455A-A9B2-19AF9D092B10}.Release|x64.ActiveCfg = Release|Any CPU
+		{1180BA09-F329-455A-A9B2-19AF9D092B10}.Release|x64.Build.0 = Release|Any CPU
 		{1180BA09-F329-455A-A9B2-19AF9D092B10}.Release|x86.ActiveCfg = Release|Any CPU
+		{1180BA09-F329-455A-A9B2-19AF9D092B10}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

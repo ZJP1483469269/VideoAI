@@ -40,14 +40,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>.\Apache.NMS.ActiveMQ.dll</HintPath>
     </Reference>
-    <Reference Include="DocX, Version=1.0.0.22, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\DocX.dll</HintPath>
-    </Reference>
-    <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.4.369, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
-      <HintPath>..\packages\ICSharpCode.SharpZipLib.dll.0.85.4.369\lib\net20\ICSharpCode.SharpZipLib.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Web\doc\lib\Newtonsoft.Json.dll</HintPath>
@@ -62,6 +54,9 @@
     <Reference Include="System.Web" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
+    <Reference Include="Xceed.Words.NET, Version=1.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocX.1.2.1\lib\Xceed.Words.NET.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActiveMQ_Consumer.cs" />
@@ -93,6 +88,7 @@
     <Content Include="Apache.NMS.dll" />
     <Content Include="bin\Debug\DocX.dll" />
     <Content Include="bin\Debug\Newtonsoft.Json.dll" />
+    <None Include="packages.config" />
     <None Include="Properties\DataSources\System.Data.DataTable.datasource" />
     <None Include="Service References\WebSQL\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
@@ -122,7 +118,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
