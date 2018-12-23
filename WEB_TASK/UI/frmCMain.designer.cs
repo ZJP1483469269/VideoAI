@@ -41,6 +41,7 @@
             this.button4 = new System.Windows.Forms.Button();
             this.txtUrlID = new System.Windows.Forms.TextBox();
             this.button6 = new System.Windows.Forms.Button();
+            this.geckoWebBrowser1 = new Gecko.GeckoWebBrowser();
             this.SuspendLayout();
             // 
             // button1
@@ -129,7 +130,7 @@
             this.lstUrls.ItemHeight = 12;
             this.lstUrls.Location = new System.Drawing.Point(13, 102);
             this.lstUrls.Name = "lstUrls";
-            this.lstUrls.Size = new System.Drawing.Size(614, 424);
+            this.lstUrls.Size = new System.Drawing.Size(588, 136);
             this.lstUrls.TabIndex = 10;
             // 
             // button4
@@ -152,7 +153,7 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(675, 247);
+            this.button6.Location = new System.Drawing.Point(705, 168);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(75, 23);
             this.button6.TabIndex = 13;
@@ -160,11 +161,23 @@
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
+            // geckoWebBrowser1
+            // 
+            this.geckoWebBrowser1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.geckoWebBrowser1.Location = new System.Drawing.Point(12, 244);
+            this.geckoWebBrowser1.Name = "geckoWebBrowser1";
+            this.geckoWebBrowser1.Size = new System.Drawing.Size(785, 289);
+            this.geckoWebBrowser1.TabIndex = 14;
+            this.geckoWebBrowser1.UseHttpActivityObserver = false;
+            // 
             // frmCMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(809, 545);
+            this.Controls.Add(this.geckoWebBrowser1);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.txtUrlID);
             this.Controls.Add(this.button4);
@@ -202,6 +215,7 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.TextBox txtUrlID;
         private System.Windows.Forms.Button button6;
+        private Gecko.GeckoWebBrowser geckoWebBrowser1;
     }
 }
 

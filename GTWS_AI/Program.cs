@@ -1,12 +1,11 @@
-﻿
-using GTWS_TASK.UI;
+﻿using GTWS_TASK.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using TLKJ.Utils;
 
-namespace GTWS_BD
+namespace GTWS_AI
 {
     static class Program
     {
@@ -16,10 +15,10 @@ namespace GTWS_BD
         [STAThread]
         static void Main()
         {
+            INIConfig.setConfigFile(Application.StartupPath + @"\Config.ini");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            INIConfig.setConfigFile(Application.StartupPath + @"\Config.ini");
-            Application.Run(new frmKitWeb());
+            Application.Run(new frmMain());
         }
     }
 }

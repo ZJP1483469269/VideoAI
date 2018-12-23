@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using TLKJ.Utils;
-using TLKJ.WebSys;
+using TLKJ.WEB;
 
 public partial class Admin_Login : PageEx
 {

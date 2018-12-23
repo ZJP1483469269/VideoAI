@@ -1,0 +1,15 @@
+D:\VideoAI\Common.DB\bin\Release\Newtonsoft.Json.dll
+D:\VideoAI\Common.DB\bin\Release\DotNetZip.dll
+D:\VideoAI\Common.DB\bin\Release\DotNetZip.pdb
+D:\VideoAI\Common.DB\bin\Release\DotNetZip.xml
+D:\VideoAI\Common.DB\obj\Release\TLKJ.DB.csprojAssemblyReference.cache
+D:\VideoAI\Common.DB\obj\Release\TLKJ.DB.csproj.CoreCompileInputs.cache
+D:\VideoAI\Common.DB\obj\Release\TLKJ.DB.csproj.CopyComplete
+D:\VideoAI\Common.DB\bin\Release\Newtonsoft.Json.pdb
+D:\VideoAI\Common.DB\bin\Release\Newtonsoft.Json.xml
+D:\VideoAI\Common.DB\bin\Release\TLKJ.DB.dll
+D:\VideoAI\Common.DB\bin\Release\TLKJ.DB.pdb
+D:\VideoAI\Common.DB\bin\Release\TLKJ.Util.dll
+D:\VideoAI\Common.DB\bin\Release\TLKJ.Util.pdb
+D:\VideoAI\Common.DB\obj\Release\TLKJ.DB.dll
+D:\VideoAI\Common.DB\obj\Release\TLKJ.DB.pdb

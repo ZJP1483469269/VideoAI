@@ -38,9 +38,20 @@ namespace TLKJ.DAO
         public void query_alarm()
         {
             String cORG_ID = StringEx.getString(request["ORG_ID"]);
+            String cADDR = StringEx.getString(request["ADDR"]);
+            String cALARM_CHECKED = StringEx.getString(request["ALARM_CHECKED"]);
             ActiveResult vret = ActiveResult.Valid(AppConfig.FAILURE);
 
-            String cWhereParm = " EXISTS( SELECT 1 FROM XT_CAMERA X WHERE X.ORG_ID='" + cORG_ID + "' AND X.DEVICE_ID=CAMERA_ID)";
+            String cWhereParm = " EXISTS( SELECT 1 FROM XT_CAMERA X WHERE X.ORG_ID='" + cORG_ID + "' AND X.DEVICE_ID=CAMERA_ID ";
+            if (!String.IsNullOrWhiteSpace(cADDR))
+            {
+                cWhereParm = cWhereParm + " AND (ADDR LIKE '%" + cADDR + "%')";
+            }
+            cWhereParm = cWhereParm + " )";
+            if (!String.IsNullOrWhiteSpace(cALARM_CHECKED))
+            {
+                cWhereParm = cWhereParm + " AND ALARM_CHECKED='" + cALARM_CHECKED + "'";
+            }
 
             String cOrderBy = "ORDER BY REC_ID ASC";
             DBResult dbret = dao.Query("*,(SELECT ADDR FROM XT_CAMERA X WHERE X.DEVICE_ID=CAMERA_ID) AS ADDR ", "XT_IMG_REC T", cWhereParm, cOrderBy, iPageNo, iPageSize);

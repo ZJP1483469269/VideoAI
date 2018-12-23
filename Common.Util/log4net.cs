@@ -15,26 +15,26 @@ namespace TLKJ.Utils
             // TODO: Add constructor logic here
             //
         }
-        public static void WriteLogFile(String cStr, int iLogLevel)
-        {
-            WriteLogFile(cStr);
-        }
-
         public static void WriteLogFile(String cStr)
         {
-            String cAppDir = AppDomain.CurrentDomain.BaseDirectory;
-            String cLogDir = cAppDir + "logs";
-            if (!Directory.Exists(cLogDir))
-            {
-                Directory.CreateDirectory(cLogDir);
-            }
-            String cLogName = "WPZF.txt";
-            string curDT = System.DateTime.Now.ToString("yyyyMMdd");
-            String logFile = cLogDir + "\\" + curDT + cLogName;
+            WriteLogFile(cStr, 1);
+        }
+        public static void WriteLogFile(String cStr, int iLogLevel)
+        {
             StreamWriter sw = null;
-
             try
             {
+                String cAppDir = AppDomain.CurrentDomain.BaseDirectory;
+                String cLogDir = cAppDir + "logs";
+                if (!Directory.Exists(cLogDir))
+                {
+                    Directory.CreateDirectory(cLogDir);
+                }
+                String cLogName = "log_" + iLogLevel.ToString() + ".txt";
+                string curDT = System.DateTime.Now.ToString("yyyyMMdd");
+                String logFile = cLogDir + "\\" + curDT + cLogName;
+
+
                 if (File.Exists(logFile))
                 {
                     sw = File.AppendText(logFile);
@@ -43,7 +43,7 @@ namespace TLKJ.Utils
                 {
                     sw = File.CreateText(logFile);
                 }
-                sw.WriteLine("登录时间：" + System.DateTime.Now.ToLongDateString() + " " + System.DateTime.Now.ToLongTimeString());
+                sw.WriteLine("--------" + System.DateTime.Now.ToLongDateString() + " " + System.DateTime.Now.ToLongTimeString() + "--------");
                 HttpContext ctx = HttpContext.Current;
                 if (ctx != null)
                 {
@@ -73,7 +73,10 @@ namespace TLKJ.Utils
                 sw.Dispose();
                 sw = null;
             }
-            catch (Exception ex) { }
+            catch (Exception ex)
+            {
+
+            }
             finally
             {
                 if (sw != null)

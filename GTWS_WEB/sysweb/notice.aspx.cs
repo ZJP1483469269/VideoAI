@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using TLKJ.DB;
-using TLKJ.WebSys;
+using TLKJ.WEB;
 
 public partial class notice : PageEx
 {

@@ -1,0 +1,39 @@
+--------2018年12月23日星期日 10:25:20--------
+访问地址：/api/rest.ashx?action_type=SQLDB&action_method=GetStrValue&SQL=select%20*%20from%20s_user_inf
+用户地址：::1
+操作内容：SQLDB未找到对应 GetStrValue方法错误!
+--------2018年12月23日星期日 10:25:27--------
+访问地址：/api/Handler.ashx
+用户地址：::1
+登陆页面：http://localhost:15355/Admin/login.aspx
+操作内容：初始化数据库连接
+--------2018年12月23日星期日 10:25:28--------
+访问地址：/Admin/index.aspx
+用户地址：::1
+登陆页面：http://localhost:15355/Admin/login.aspx
+操作内容：TOKEN的值是51d7dd4e8f40a463cb5fc7162489a70
+--------2018年12月23日星期日 10:26:22--------
+访问地址：/api/rest.ashx?action_type=SQLDB&action_method=GetStrValue&SQL=select%20*%20from%20s_user_inf
+用户地址：::1
+操作内容：SQLDB未找到对应 GetStrValue方法错误!
+--------2018年12月23日星期日 10:26:32--------
+操作内容：系统关闭...
+--------2018年12月23日星期日 10:26:59--------
+--------2018年12月23日星期日 10:26:59--------
+访问地址：/Admin/login.aspx
+用户地址：::1
+操作内容：Admin_Login
+--------2018年12月23日星期日 10:27:12--------
+访问地址：/api/rest.ashx?action_type=SQLDB&action_method=GetStrValue&SQL=select%20*%20from%20s_user_inf
+用户地址：::1
+操作内容：初始化数据库连接
+--------2018年12月23日星期日 10:27:12--------
+访问地址：/api/rest.ashx?action_type=SQLDB&action_method=GetStrValue&SQL=select%20*%20from%20s_user_inf
+用户地址：::1
+操作内容：ActiveResult：{"result":1,"total":0,"rows":[],"validfield":"","validmessage":"","info":"41102501    ","isLock":0}
+--------2018年12月23日星期日 10:27:48--------
+访问地址：/api/rest.ashx?action_type=SQLDB&action_method=QueryData&SQL=select%20*%20from%20s_user_inf
+用户地址：::1
+操作内容：ActiveResult：{"result":1,"total":0,"rows":[],"validfield":"","validmessage":"","info":"[{\"USER_ID\":\"41102501    \",\"ORG_ID\":\"411025\",\"USER_CODE\":\"cggt\",\"USER_NAME\":\"管理员\",\"USER_PASS\":\"8888\",\"ROLE_ID\":null,\"ISACTIVE\":1,\"user_status\":1},{\"USER_ID\":\"41140001\",\"ORG_ID\":\"411400\",\"USER_CODE\":\"sqgt\",\"USER_NAME\":\"管理员\",\"USER_PASS\":\"8888\",\"ROLE_ID\":null,\"ISACTIVE\":1,\"user_status\":1}]","isLock":0}
+--------2018年12月23日星期日 10:28:14--------
+操作内容：系统关闭...

@@ -3,7 +3,7 @@
 using System;
 using System.Web;
 using System.Web.SessionState;
-using TLKJ.WebSys;
+using TLKJ.WEB;
 using System.Text;
 using System.Collections;
 using TLKJ.DB;

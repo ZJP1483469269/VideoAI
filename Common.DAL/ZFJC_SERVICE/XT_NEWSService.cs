@@ -26,7 +26,7 @@ namespace TLKJ.DAO
 
             String cWhereParm = "ORG_ID like '" + cORG_ID + "%'";
 
-            String cOrderBy = "ORDER BY USER_COUNT ASC";
+            String cOrderBy = "ORDER BY ID DESC";
             DBResult dbret = dao.Query(cWhereParm, cOrderBy, iPageNo, iPageSize);
             DataTable dtRows = dbret.dtrows;
             int iRowsCount = dbret.ROW_COUNT;

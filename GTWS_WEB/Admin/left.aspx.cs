@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 using TLKJ.DAO;
 using System.Data;
 using TLKJ.Utils;
-using TLKJ.WebSys;
+using TLKJ.WEB;
 
 public partial class Admin_left : PageEx
 {

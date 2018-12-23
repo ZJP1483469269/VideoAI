@@ -54,41 +54,41 @@
                         , title: '预制位'
                         , align: 'center'
                     },
-                   {
-                       field: 'create_time'
+                    {
+                        field: 'create_time'
                         , title: '报警时间'
                         , align: 'center'
                         , formatter: function (value, row, index) {
                             return getDayTime(value);
                         }
-                   },
-                     {
-                         field: 'p'
+                    },
+                    {
+                        field: 'p'
                         , title: 'P'
                         , align: 'center'
-                     },
-                     {
-                         field: 't'
+                    },
+                    {
+                        field: 't'
                         , title: 'T'
                         , align: 'center'
-                     },
-                     {
-                         field: 'x'
+                    },
+                    {
+                        field: 'x'
                         , title: 'X'
                         , align: 'center'
-                     },
-                         {
-                             field: 'alarm_checked'
+                    },
+                    {
+                        field: 'alarm_checked'
                         , title: '处理状态'
                         , align: 'center'
-                       , formatter: function (value, row, index) {
-                           if (value == '1') {
-                               return "已处理";
-                           } else {
-                               return "未处理";
-                           }
-                       }
-                         },
+                        , formatter: function (value, row, index) {
+                            if (value == '1') {
+                                return "已处理";
+                            } else {
+                                return "未处理";
+                            }
+                        }
+                    },
                     {
                         field: ''
                         , title: '操作'
@@ -113,12 +113,15 @@
                 offset: params.offset, //页码
                 maxrows: params.limit,
                 pageindex: params.pageNumber,
-                ORG_ID: "<%=getLoginUserInfo().ORG_ID %>"
+                ORG_ID: "<%=getLoginUserInfo().ORG_ID %>",
+                ADDR: $("#ADDR").val(),
+                ALARM_CHECKED: $("#ALARM_CHECKED").val(),
             };
             return temp;
         };
 
         function LoadList(cREC_ID) {
+            $("#IMAGE_LIST").empty();
             var vUrl = "/api/rest.ashx?action_type=XT_IMG_REC&action_method=query_list";
             var cValue = "REC_ID=" + cREC_ID;
             $.ajax({
@@ -128,62 +131,61 @@
                 cache: false,
                 data: cValue + "&no-cache=" + Math.round(Math.random() * 10000),
                 success: function (vret) {
-                    $("#IMAGE_LIST").empty();
                     if (vret.result == 1) {
                         var rs = vret.rows;
                         for (var i = 0; rs.length; i++) {
                             var rowKey = rs[i];
-                            var vImageUrl = "<img src='" + rowKey.file_url + "'>";
+                            var vImageUrl = "<img src='" + rowKey.file_url + "' width= '300px' height='200px'>";
                             $("#IMAGE_LIST").append("<td>" + vImageUrl + "</td>");
                         }
                     }
                 }
             });
         }
+        function doQuery() {
+
+        }
     </script>
 </head>
 <body>
     <form id="form1" runat="server">
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-            <h3 class="panel-title">
-                系统管理-报警管理</h3>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">系统管理-报警管理</h3>
+            </div>
+            <div>
+                <table>
+                    <tr>
+                        <td>摄像机
+                        </td>
+                        <td>
+                            <input type="text" id="ADDR" name="ADDR" class="form-control" style="width: 300px; height: 28px" />
+                        </td>
+                        <td>状态
+                        </td>
+                        <td>
+                            <select class="form-control" id="ALARM_CHECKED" name="ALARM_CHECKED" style="width: 200px">
+                                <option value="1">已处理</option>
+                                <option value="">--全部--</option>
+                                <option value="0">未处理</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="button" value="查询" class="btn-sm btn-info" onclick="doQuery();" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="panel-body">
+                <table id="DBGrid">
+                </table>
+            </div>
         </div>
-        <div>
-            <table>
-                <tr>
-                    <td>
-                        摄像机
-                    </td>
-                    <td>
-                        <input type="text" id="ADDR" name="ADDR" class="form-control" style="width: 300px;
-                            height: 28px" />
-                    </td>
-                    <td>
-                        状态
-                    </td>
-                    <td>
-                        <select class="form-control" style="width: 200px">
-                            <option>已处理</option>
-                            <option>未处理</option>
-                        </select>
-                    </td>
-                    <td>
-                        <input type="button" value="查询" class="btn-sm btn-info" />
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div class="panel-body">
-            <table id="DBGrid">
-            </table>
-        </div>
-    </div>
-    <table class="panel panel-primary">
-        <tr id="IMAGE_LIST">
-        </tr>
-    </table>
-    <input type="hidden" id="action_type" name="action_type" value="XT_IMG_REC" />
+        <table class="panel panel-primary">
+            <tr id="IMAGE_LIST">
+            </tr>
+        </table>
+        <input type="hidden" id="action_type" name="action_type" value="XT_IMG_REC" />
     </form>
 </body>
 </html>

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using TLKJ.WebSys;
+using TLKJ.WEB;
 
 public partial class news_df_list : PageEx
 {

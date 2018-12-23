@@ -7,7 +7,7 @@ using System.Collections;
 using System.Configuration;
 using TLKJ.Utils;
 using TLKJ.DB;
-using TLKJ.WebSys;
+using TLKJ.WEB;
 using System.Data;
 using System.Text;
 using System.Collections.Generic;

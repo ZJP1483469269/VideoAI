@@ -129,7 +129,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlPlay.Location = new System.Drawing.Point(12, 39);
             this.pnlPlay.Name = "pnlPlay";
-            this.pnlPlay.Size = new System.Drawing.Size(776, 480);
+            this.pnlPlay.Size = new System.Drawing.Size(777, 480);
             this.pnlPlay.TabIndex = 70;
             // 
             // LB_MSG

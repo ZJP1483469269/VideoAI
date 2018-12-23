@@ -80,52 +80,23 @@ namespace TLKJ.DB
                 return -1;
             }
         }
-        public DataTable GetDataTable(String sql)
+       
+        public object GetValue(String strSQL)
         {
             DbCommand Cmd = dbConnect.CreateCommand();
-            Cmd.CommandText = sql;
+            Cmd.CommandText = strSQL;
             try
             {
-                IDataReader dr = Cmd.ExecuteReader();
-                DataSet ds = new DataSet();
-                DataTable dt = new DataTable();
-                ds.Tables.Add(dt);
-                ds.Load(dr, LoadOption.OverwriteChanges, dt);
-                ds.EnforceConstraints = false;
-                try
-                {
-                    dr.Close();
-                }
-                catch (Exception ex)
-                {
-
-                }
-                return dt;
+                Object obj   = Cmd.ExecuteScalar(); 
+                return obj;
             }
             catch (Exception ex)
             {
-                log4net.WriteLogFile(sql, 1);
+                log4net.WriteLogFile(strSQL, 1);
                 log4net.WriteLogFile("执行SQL集合异常:" + ex.Message, 3);
                 return null;
             }
-        }
-
-        public object GetValue(string strSQL)
-        {
-            if (strSQL.Trim().Equals(""))
-                return null;
-            try
-            {
-                DataTable dt = GetDataTable(strSQL);
-                return dt.Rows[0][0].ToString();
-            }
-            catch (Exception ex)
-            {
-                log4net.WriteLogFile(ex.Message, 1);
-                log4net.WriteLogFile("执行语句" + strSQL, 3);
-                return null;
-            }
-        }
+        } 
 
         public String GetStrValue(string strSQL)
         {

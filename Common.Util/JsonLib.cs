@@ -33,7 +33,12 @@ namespace TLKJ.Utils
                 cRetStr = Newtonsoft.Json.JsonConvert.SerializeObject(obj);
             }
             return cRetStr;
+        }
 
+        public static T ToObject<T>(String cStr)
+        {
+            T obj = Newtonsoft.Json.JsonConvert.DeserializeObject<T>(cStr);
+            return obj;
         }
 
         /// <summary>

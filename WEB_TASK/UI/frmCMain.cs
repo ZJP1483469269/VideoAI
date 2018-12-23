@@ -26,10 +26,11 @@ namespace WEB_TASK
 
         public delegate void AppendHref_delegate(JHref rowKey);
         Sunisoft.IrisSkin.SkinEngine iskin = new Sunisoft.IrisSkin.SkinEngine();
-
+      
         public frmCMain()
         {
             InitializeComponent();
+            Xpcom.Initialize(Environment.CurrentDirectory + @"\xulrunner");
             iskin.SkinFile = "skins/PageColor2.ssk";
         }
 
@@ -296,7 +297,7 @@ namespace WEB_TASK
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-
+            this.geckoWebBrowser1.Navigate("http://www.baidu.com/");
         }
 
         private void button4_Click(object sender, EventArgs e)

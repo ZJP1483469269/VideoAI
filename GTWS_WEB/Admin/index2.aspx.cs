@@ -7,8 +7,8 @@ using System.Web.UI.WebControls;
 using TLKJ.Utils;
 using TLKJ.DB;
 using TLKJ.DAO;
-using System.Data; 
-using TLKJ.WebSys;
+using System.Data;
+using TLKJ.WEB;
 
 public partial class Admin_index2 : PageEx
 {

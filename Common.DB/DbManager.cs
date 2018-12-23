@@ -129,7 +129,8 @@ namespace TLKJ.DB
             {
                 if (db != null)
                 {
-                    return db.GetDataTable(strSQL); ;
+                    IDBBASE vDB = (IDBBASE)db;
+                    return vDB.Query(strSQL); ;
                 }
                 else
                 {

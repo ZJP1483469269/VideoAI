@@ -1,0 +1,476 @@
+{
+  "version": 3,
+  "targets": {
+    ".NETFramework,Version=v4.0": {
+      "geckofx-core/33.0.5.1": {
+        "type": "package",
+        "compile": {
+          "lib/net40/geckofx-core.dll": {}
+        },
+        "runtime": {
+          "lib/net40/geckofx-core.dll": {}
+        }
+      },
+      "geckofx-winforms/33.0.5.1": {
+        "type": "package",
+        "dependencies": {
+          "geckofx-core": "33.0.0"
+        },
+        "compile": {
+          "lib/net40/geckofx-winforms.dll": {}
+        },
+        "runtime": {
+          "lib/net40/geckofx-winforms.dll": {}
+        }
+      },
+      "NSoup/0.8.0": {
+        "type": "package",
+        "compile": {
+          "lib/net40/NSoup.dll": {}
+        },
+        "runtime": {
+          "lib/net40/NSoup.dll": {}
+        }
+      },
+      "System.Data.SQLite.Core/1.0.109.2": {
+        "type": "package",
+        "compile": {
+          "lib/net40/System.Data.SQLite.dll": {}
+        },
+        "runtime": {
+          "lib/net40/System.Data.SQLite.dll": {}
+        },
+        "build": {
+          "build/net40/System.Data.SQLite.Core.targets": {}
+        },
+        "runtimeTargets": {
+          "runtimes/linux-x64/native/netstandard2.0/SQLite.Interop.dll": {
+            "assetType": "native",
+            "rid": "linux-x64"
+          },
+          "runtimes/osx-x64/native/netstandard2.0/SQLite.Interop.dll": {
+            "assetType": "native",
+            "rid": "osx-x64"
+          },
+          "runtimes/win-x64/native/netstandard2.0/SQLite.Interop.dll": {
+            "assetType": "native",
+            "rid": "win-x64"
+          },
+          "runtimes/win-x86/native/netstandard2.0/SQLite.Interop.dll": {
+            "assetType": "native",
+            "rid": "win-x86"
+          }
+        }
+      },
+      "TLKJ.DB/1.0.0": {
+        "type": "project",
+        "dependencies": {
+          "TLKJ.Util": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/TLKJ.DB.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TLKJ.DB.dll": {}
+        }
+      },
+      "TLKJ.Util/1.0.0": {
+        "type": "project",
+        "compile": {
+          "bin/placeholder/TLKJ.Util.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TLKJ.Util.dll": {}
+        }
+      }
+    },
+    ".NETFramework,Version=v4.0/win": {
+      "geckofx-core/33.0.5.1": {
+        "type": "package",
+        "compile": {
+          "lib/net40/geckofx-core.dll": {}
+        },
+        "runtime": {
+          "lib/net40/geckofx-core.dll": {}
+        }
+      },
+      "geckofx-winforms/33.0.5.1": {
+        "type": "package",
+        "dependencies": {
+          "geckofx-core": "33.0.0"
+        },
+        "compile": {
+          "lib/net40/geckofx-winforms.dll": {}
+        },
+        "runtime": {
+          "lib/net40/geckofx-winforms.dll": {}
+        }
+      },
+      "NSoup/0.8.0": {
+        "type": "package",
+        "compile": {
+          "lib/net40/NSoup.dll": {}
+        },
+        "runtime": {
+          "lib/net40/NSoup.dll": {}
+        }
+      },
+      "System.Data.SQLite.Core/1.0.109.2": {
+        "type": "package",
+        "compile": {
+          "lib/net40/System.Data.SQLite.dll": {}
+        },
+        "runtime": {
+          "lib/net40/System.Data.SQLite.dll": {}
+        },
+        "build": {
+          "build/net40/System.Data.SQLite.Core.targets": {}
+        }
+      },
+      "TLKJ.DB/1.0.0": {
+        "type": "project",
+        "dependencies": {
+          "TLKJ.Util": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/TLKJ.DB.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TLKJ.DB.dll": {}
+        }
+      },
+      "TLKJ.Util/1.0.0": {
+        "type": "project",
+        "compile": {
+          "bin/placeholder/TLKJ.Util.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TLKJ.Util.dll": {}
+        }
+      }
+    },
+    ".NETFramework,Version=v4.0/win-x64": {
+      "geckofx-core/33.0.5.1": {
+        "type": "package",
+        "compile": {
+          "lib/net40/geckofx-core.dll": {}
+        },
+        "runtime": {
+          "lib/net40/geckofx-core.dll": {}
+        }
+      },
+      "geckofx-winforms/33.0.5.1": {
+        "type": "package",
+        "dependencies": {
+          "geckofx-core": "33.0.0"
+        },
+        "compile": {
+          "lib/net40/geckofx-winforms.dll": {}
+        },
+        "runtime": {
+          "lib/net40/geckofx-winforms.dll": {}
+        }
+      },
+      "NSoup/0.8.0": {
+        "type": "package",
+        "compile": {
+          "lib/net40/NSoup.dll": {}
+        },
+        "runtime": {
+          "lib/net40/NSoup.dll": {}
+        }
+      },
+      "System.Data.SQLite.Core/1.0.109.2": {
+        "type": "package",
+        "compile": {
+          "lib/net40/System.Data.SQLite.dll": {}
+        },
+        "runtime": {
+          "lib/net40/System.Data.SQLite.dll": {}
+        },
+        "native": {
+          "runtimes/win-x64/native/netstandard2.0/SQLite.Interop.dll": {}
+        },
+        "build": {
+          "build/net40/System.Data.SQLite.Core.targets": {}
+        }
+      },
+      "TLKJ.DB/1.0.0": {
+        "type": "project",
+        "dependencies": {
+          "TLKJ.Util": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/TLKJ.DB.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TLKJ.DB.dll": {}
+        }
+      },
+      "TLKJ.Util/1.0.0": {
+        "type": "project",
+        "compile": {
+          "bin/placeholder/TLKJ.Util.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TLKJ.Util.dll": {}
+        }
+      }
+    },
+    ".NETFramework,Version=v4.0/win-x86": {
+      "geckofx-core/33.0.5.1": {
+        "type": "package",
+        "compile": {
+          "lib/net40/geckofx-core.dll": {}
+        },
+        "runtime": {
+          "lib/net40/geckofx-core.dll": {}
+        }
+      },
+      "geckofx-winforms/33.0.5.1": {
+        "type": "package",
+        "dependencies": {
+          "geckofx-core": "33.0.0"
+        },
+        "compile": {
+          "lib/net40/geckofx-winforms.dll": {}
+        },
+        "runtime": {
+          "lib/net40/geckofx-winforms.dll": {}
+        }
+      },
+      "NSoup/0.8.0": {
+        "type": "package",
+        "compile": {
+          "lib/net40/NSoup.dll": {}
+        },
+        "runtime": {
+          "lib/net40/NSoup.dll": {}
+        }
+      },
+      "System.Data.SQLite.Core/1.0.109.2": {
+        "type": "package",
+        "compile": {
+          "lib/net40/System.Data.SQLite.dll": {}
+        },
+        "runtime": {
+          "lib/net40/System.Data.SQLite.dll": {}
+        },
+        "native": {
+          "runtimes/win-x86/native/netstandard2.0/SQLite.Interop.dll": {}
+        },
+        "build": {
+          "build/net40/System.Data.SQLite.Core.targets": {}
+        }
+      },
+      "TLKJ.DB/1.0.0": {
+        "type": "project",
+        "dependencies": {
+          "TLKJ.Util": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/TLKJ.DB.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TLKJ.DB.dll": {}
+        }
+      },
+      "TLKJ.Util/1.0.0": {
+        "type": "project",
+        "compile": {
+          "bin/placeholder/TLKJ.Util.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TLKJ.Util.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "geckofx-core/33.0.5.1": {
+      "sha512": "r7hEefC9WyroWORlkI2VII+W01PvrGcxH3ehxjroRUUIpoETAexasZ0zgFdzH7gM7TE0JhAr1kB0coIvNKcGhw==",
+      "type": "package",
+      "path": "geckofx-core/33.0.5.1",
+      "files": [
+        ".nupkg.metadata",
+        "geckofx-core.33.0.5.1.nupkg.sha512",
+        "geckofx-core.nuspec",
+        "lib/net40/Geckofx-Core.dll.config",
+        "lib/net40/geckofx-core.dll",
+        "lib/net40/geckofx-core.pdb"
+      ]
+    },
+    "geckofx-winforms/33.0.5.1": {
+      "sha512": "khZOtpNG5ZL/0l7YG8dUVJlJ6WM3yQWvpcjgRk8A/KDSN+VKLoFXUFUV0cx54jW0itkLgEez3pcDwFCV5ppsuw==",
+      "type": "package",
+      "path": "geckofx-winforms/33.0.5.1",
+      "files": [
+        ".nupkg.metadata",
+        "geckofx-winforms.33.0.5.1.nupkg.sha512",
+        "geckofx-winforms.nuspec",
+        "lib/net40/geckofx-winforms.dll",
+        "lib/net40/geckofx-winforms.pdb"
+      ]
+    },
+    "NSoup/0.8.0": {
+      "sha512": "prlsDPRtYQBrkTwDtf0EOKK1L8+OFfRqkH6UN3wW0fAErLRQCCHQZ/Y80bQrcCing+rLH/AUWXXrLGR/KR6F0Q==",
+      "type": "package",
+      "path": "nsoup/0.8.0",
+      "files": [
+        ".nupkg.metadata",
+        "lib/net40/NSoup.dll",
+        "nsoup.0.8.0.nupkg.sha512",
+        "nsoup.nuspec"
+      ]
+    },
+    "System.Data.SQLite.Core/1.0.109.2": {
+      "sha512": "c/81hTKf3iOR38329an1Ol0CB89t+MpL/J9Btz1WaZ/64hBXKmzFWV/qfclNtZmZoErgq6XcW9XgKpFnHqfhAg==",
+      "type": "package",
+      "path": "system.data.sqlite.core/1.0.109.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "build/net20/System.Data.SQLite.Core.targets",
+        "build/net20/x64/SQLite.Interop.dll",
+        "build/net20/x86/SQLite.Interop.dll",
+        "build/net40/System.Data.SQLite.Core.targets",
+        "build/net40/x64/SQLite.Interop.dll",
+        "build/net40/x86/SQLite.Interop.dll",
+        "build/net45/System.Data.SQLite.Core.targets",
+        "build/net45/x64/SQLite.Interop.dll",
+        "build/net45/x86/SQLite.Interop.dll",
+        "build/net451/System.Data.SQLite.Core.targets",
+        "build/net451/x64/SQLite.Interop.dll",
+        "build/net451/x86/SQLite.Interop.dll",
+        "build/net46/System.Data.SQLite.Core.targets",
+        "build/net46/x64/SQLite.Interop.dll",
+        "build/net46/x86/SQLite.Interop.dll",
+        "lib/net20/System.Data.SQLite.dll",
+        "lib/net20/System.Data.SQLite.dll.config",
+        "lib/net20/System.Data.SQLite.xml",
+        "lib/net40/System.Data.SQLite.dll",
+        "lib/net40/System.Data.SQLite.dll.config",
+        "lib/net40/System.Data.SQLite.xml",
+        "lib/net45/System.Data.SQLite.dll",
+        "lib/net45/System.Data.SQLite.dll.config",
+        "lib/net45/System.Data.SQLite.xml",
+        "lib/net451/System.Data.SQLite.dll",
+        "lib/net451/System.Data.SQLite.dll.config",
+        "lib/net451/System.Data.SQLite.xml",
+        "lib/net46/System.Data.SQLite.dll",
+        "lib/net46/System.Data.SQLite.dll.config",
+        "lib/net46/System.Data.SQLite.xml",
+        "lib/netstandard2.0/System.Data.SQLite.dll",
+        "lib/netstandard2.0/System.Data.SQLite.dll.config",
+        "lib/netstandard2.0/System.Data.SQLite.xml",
+        "runtimes/linux-x64/native/netstandard2.0/SQLite.Interop.dll",
+        "runtimes/osx-x64/native/netstandard2.0/SQLite.Interop.dll",
+        "runtimes/win-x64/native/netstandard2.0/SQLite.Interop.dll",
+        "runtimes/win-x86/native/netstandard2.0/SQLite.Interop.dll",
+        "system.data.sqlite.core.1.0.109.2.nupkg.sha512",
+        "system.data.sqlite.core.nuspec"
+      ]
+    },
+    "TLKJ.DB/1.0.0": {
+      "type": "project",
+      "path": "../Common.DB/TLKJ.DB.csproj",
+      "msbuildProject": "../Common.DB/TLKJ.DB.csproj"
+    },
+    "TLKJ.Util/1.0.0": {
+      "type": "project",
+      "path": "../Common.Util/TLKJ.Util.csproj",
+      "msbuildProject": "../Common.Util/TLKJ.Util.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    ".NETFramework,Version=v4.0": [
+      "NSoup >= 0.8.0",
+      "System.Data.SQLite.Core >= 1.0.109.2",
+      "TLKJ.DB >= 1.0.0",
+      "TLKJ.Util >= 1.0.0",
+      "geckofx-winforms >= 33.0.5.1"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\Administrator\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "D:\\VideoAI\\WEB_TASK\\WEB_TASK.csproj",
+      "projectName": "WEB_TASK",
+      "projectPath": "D:\\VideoAI\\WEB_TASK\\WEB_TASK.csproj",
+      "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
+      "outputPath": "D:\\VideoAI\\WEB_TASK\\obj\\",
+      "projectStyle": "PackageReference",
+      "skipContentFileWrite": true,
+      "configFilePaths": [
+        "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net40"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net40": {
+          "projectReferences": {
+            "D:\\VideoAI\\Common.DB\\TLKJ.DB.csproj": {
+              "projectPath": "D:\\VideoAI\\Common.DB\\TLKJ.DB.csproj"
+            },
+            "D:\\VideoAI\\Common.Util\\TLKJ.Util.csproj": {
+              "projectPath": "D:\\VideoAI\\Common.Util\\TLKJ.Util.csproj"
+            }
+          }
+        }
+      }
+    },
+    "frameworks": {
+      "net40": {
+        "dependencies": {
+          "NSoup": {
+            "target": "Package",
+            "version": "[0.8.0, )"
+          },
+          "System.Data.SQLite.Core": {
+            "target": "Package",
+            "version": "[1.0.109.2, )"
+          },
+          "geckofx-winforms": {
+            "target": "Package",
+            "version": "[33.0.5.1, )"
+          }
+        }
+      }
+    },
+    "runtimes": {
+      "win": {
+        "#import": []
+      },
+      "win-x64": {
+        "#import": []
+      },
+      "win-x86": {
+        "#import": []
+      }
+    }
+  },
+  "logs": [
+    {
+      "code": "NU1603",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "geckofx-winforms 33.0.5.1 依赖于 geckofx-core (>= 33.0.0)，但找不到 geckofx-core 33.0.0。 已解决 geckofx-core 33.0.5.1 的近似最佳匹配。 ",
+      "libraryId": "geckofx-core",
+      "targetGraphs": [
+        ".NETFramework,Version=v4.0",
+        ".NETFramework,Version=v4.0/win",
+        ".NETFramework,Version=v4.0/win-x64",
+        ".NETFramework,Version=v4.0/win-x86"
+      ]
+    }
+  ]
+}

@@ -8,7 +8,7 @@ using TLKJ.DAO;
 using System.IO;
 using TLKJ.Utils;
 using TLKJ.DB;
-using TLKJ.WebSys;
+using TLKJ.WEB;
 
 public partial class bluesky_jb : PageEx
 {

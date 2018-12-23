@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
-using TLKJ.WebSys;
+using TLKJ.WEB;
 
 public partial class pages_ImgList : PageEx
 {

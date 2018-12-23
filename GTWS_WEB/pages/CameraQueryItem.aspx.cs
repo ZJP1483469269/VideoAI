@@ -6,7 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using TLKJ.DB;
-using TLKJ.WebSys;
+using TLKJ.WEB;
 using TLKJ.Utils;
 
 public partial class CameraQueryItem : PageEx

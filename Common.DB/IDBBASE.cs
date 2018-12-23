@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Collections;
 using System.ComponentModel;
 using System.Collections.Generic;
+using TLKJ.Utils;
 
 namespace TLKJ.DB
 {

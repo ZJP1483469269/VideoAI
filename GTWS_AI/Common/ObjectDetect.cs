@@ -6,7 +6,6 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using TLKJ.DB;
 using Emgu.CV;
 using Emgu.CV.Structure;
 using Emgu.CV.Util;
@@ -65,7 +64,7 @@ namespace TLKJ_IVS
             }
             catch (Exception ex)
             {
-                log4net.WriteTextLog("报错，原因为：" + ex);
+                log4net.WriteLogFile("报错，原因为：" + ex);
             }
             return ImageList;
         }

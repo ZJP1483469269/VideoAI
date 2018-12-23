@@ -133,70 +133,34 @@ namespace TLKJ.DB
         /// <returns></returns>
         public static JDBBASE Instance()
         {
-            if ((Connects == null) || (Connects.Count == 0))
+            if (Connects == null)
             {
                 Connects = new Queue();
+            }
+
+            if (Connects.Count == 0)
+            {
                 initPool();
             }
 
-            //没有连接生成一个新的链接
-
             try
             {
-                object Connect = null;
-                if (Connects.Count == 0)
+                JDBBASE mydb = (JDBBASE)Connects.Dequeue();
+                if ((mydb != null) && (mydb.Connectd))
                 {
-                    if (iDB_TYPE == 1)
-                    {
-                        Connect = new DBMSSQL(cConnString);
-                    }
-                    else if (iDB_TYPE == 2)
-                    {
-                        Connect = new DBMSSQL(cConnString);
-                    }
-                    else if (iDB_TYPE == 3)
-                    {
-                        Connect = new DBMySQL(cConnString);
-                    }
-
-                    if (Connect != null)
-                    {
-                        Connects.Enqueue(Connect);
-                    }
-
-                    //如果只有一个连接时
-                    JDBBASE mydb = (JDBBASE)Connects.Dequeue();
-                    if ((mydb == null) || (!mydb.Connectd))
-                    {
-                        ClearPool();
-                        return null;
-                    }
-                    else
-                    {
-                        return mydb;
-                    }
+                    return mydb;
                 }
                 else
                 {
-                    //获得一个连接,如果当前或缺的链接无效，则重新申请一个 
-                    JDBBASE mydb = (JDBBASE)Connects.Dequeue();
-                    if ((mydb == null) || (!mydb.Connectd))
-                    {
-                        mydb = DbConnectionPool.Instance();
-                        return mydb;
-                    }
-                    else
-                    {
-                        ActiveCount++;
-                        return mydb;
-                    }
+                    return Instance();
                 }
             }
             catch (Exception ex)
             {
-                log4net.WriteLogFile(ex.Message, 3);
+                log4net.WriteLogFile(ex.Message);
                 return null;
             }
+
         }
 
         /// <summary>

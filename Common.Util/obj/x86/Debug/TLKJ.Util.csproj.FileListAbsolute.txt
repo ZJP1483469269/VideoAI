@@ -1,6 +1,12 @@
-D:\VideoAI\Common.Util\bin\x86\Debug\Common.Util.dll
-D:\VideoAI\Common.Util\bin\x86\Debug\Common.Util.pdb
+D:\VideoAI\Common.Util\bin\x86\Debug\TLKJ.Util.dll
+D:\VideoAI\Common.Util\bin\x86\Debug\TLKJ.Util.pdb
+D:\VideoAI\Common.Util\bin\x86\Debug\DotNetZip.dll
 D:\VideoAI\Common.Util\bin\x86\Debug\Newtonsoft.Json.dll
+D:\VideoAI\Common.Util\bin\x86\Debug\DotNetZip.pdb
+D:\VideoAI\Common.Util\bin\x86\Debug\DotNetZip.xml
+D:\VideoAI\Common.Util\bin\x86\Debug\Newtonsoft.Json.pdb
 D:\VideoAI\Common.Util\bin\x86\Debug\Newtonsoft.Json.xml
-D:\VideoAI\Common.Util\obj\x86\Debug\Common.Util.dll
-D:\VideoAI\Common.Util\obj\x86\Debug\Common.Util.pdb
+D:\VideoAI\Common.Util\obj\x86\Debug\TLKJ.Util.csproj.CoreCompileInputs.cache
+D:\VideoAI\Common.Util\obj\x86\Debug\TLKJ.Util.csproj.CopyComplete
+D:\VideoAI\Common.Util\obj\x86\Debug\TLKJ.Util.dll
+D:\VideoAI\Common.Util\obj\x86\Debug\TLKJ.Util.pdb

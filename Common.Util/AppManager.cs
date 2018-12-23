@@ -45,8 +45,36 @@ namespace TLKJ.Utils
                     cStr = vCookie.Value;
                 }
             }
-            return StringEx.getString(cStr);
+            return StringEx.getString(cStr); 
+        } 
 
+        public static NameValueCollection ParseUrl(string cUrl)
+        {
+            NameValueCollection nvc = new NameValueCollection();
+            if (cUrl == null)
+            {
+                return nvc;
+            }
+
+            int questionMarkIndex = cUrl.IndexOf('?');
+            if (questionMarkIndex == -1)
+            {
+                return nvc;
+            }
+            String baseUrl = cUrl.Substring(0, questionMarkIndex);
+            if (questionMarkIndex == cUrl.Length - 1)
+            {
+                return nvc;
+            }
+            string ps = cUrl.Substring(questionMarkIndex + 1);
+            // 开始分析参数对  
+            Regex re = new Regex(@"(^|&)?(\w+)=([^&]+)(&|$)?", RegexOptions.Compiled);
+            MatchCollection mc = re.Matches(ps);
+            foreach (Match m in mc)
+            {
+                nvc.Add(m.Result("$2").ToLower(), m.Result("$3"));
+            }
+            return nvc;
         }
 
         public static int getAreaType(String cOrgID)
@@ -93,7 +121,7 @@ namespace TLKJ.Utils
             }
             return vo;
         }
-         
+
 
         /// <summary>
         /// 输出

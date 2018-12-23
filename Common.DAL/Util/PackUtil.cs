@@ -60,14 +60,14 @@ namespace TLKJ.DAO
                 }
                 arKeys.Add(vo);
             }
-            return Newtonsoft.Json.JsonConvert.SerializeObject(arKeys);
+            return JsonLib.ToJSON(arKeys);
         }
 
         public static List<ExportObject> Explain(String cStr)
         {
             try
             {
-                return Newtonsoft.Json.JsonConvert.DeserializeObject<List<ExportObject>>(cStr);
+                return JsonLib.ToObject<List<ExportObject>>(cStr);
             }
             catch (Exception ex)
             {

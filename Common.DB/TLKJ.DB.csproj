@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{B6E0B7D2-692C-4505-83AA-45EFFE080C38}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Common.DB</RootNamespace>
-    <AssemblyName>Common.DB</AssemblyName>
+    <RootNamespace>TLKJ.DB</RootNamespace>
+    <AssemblyName>TLKJ.DB</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -90,7 +90,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DbConnectionPool.cs" />
-    <Compile Include="DBResult.cs" />
     <Compile Include="DBMySQL.cs" />
     <Compile Include="DBMSSQL.cs" />
     <Compile Include="ExecSqlResult.cs" />

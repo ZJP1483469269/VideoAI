@@ -1,0 +1,17 @@
+D:\VideoAI\Common.DAL\bin\Release\TLKJ.DAO.dll
+D:\VideoAI\Common.DAL\bin\Release\TLKJ.DAO.pdb
+D:\VideoAI\Common.DAL\bin\Release\Newtonsoft.Json.dll
+D:\VideoAI\Common.DAL\bin\Release\DotNetZip.dll
+D:\VideoAI\Common.DAL\bin\Release\DotNetZip.pdb
+D:\VideoAI\Common.DAL\bin\Release\DotNetZip.xml
+D:\VideoAI\Common.DAL\obj\Release\TLKJ.DAO.csprojAssemblyReference.cache
+D:\VideoAI\Common.DAL\obj\Release\TLKJ.DAO.csproj.CoreCompileInputs.cache
+D:\VideoAI\Common.DAL\obj\Release\TLKJ.DAO.csproj.CopyComplete
+D:\VideoAI\Common.DAL\obj\Release\TLKJ.DAO.dll
+D:\VideoAI\Common.DAL\obj\Release\TLKJ.DAO.pdb
+D:\VideoAI\Common.DAL\bin\Release\Newtonsoft.Json.pdb
+D:\VideoAI\Common.DAL\bin\Release\Newtonsoft.Json.xml
+D:\VideoAI\Common.DAL\bin\Release\TLKJ.DB.dll
+D:\VideoAI\Common.DAL\bin\Release\TLKJ.Util.dll
+D:\VideoAI\Common.DAL\bin\Release\TLKJ.DB.pdb
+D:\VideoAI\Common.DAL\bin\Release\TLKJ.Util.pdb

@@ -9,7 +9,7 @@ using TLKJ.Utils;
 using System.Text;
 using TLKJ.DB;
 using TLKJ.DAO;
-using TLKJ.WebSys;
+using TLKJ.WEB;
 
 public partial class Admin_top : System.Web.UI.UserControl
 {
