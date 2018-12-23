@@ -70,7 +70,6 @@
     <Compile Include="Common\ApplicationEvent.cs" />
     <Compile Include="Common\Const.cs" />
     <Compile Include="Common\CopyUnit.cs" />
-    <Compile Include="Common\CutTask.cs" />
     <Compile Include="Common\IVS_API.cs" />
     <Compile Include="Common\ObjectDetect.cs" />
     <Compile Include="Common\ShellAPI.cs" />
@@ -133,6 +132,12 @@
     <Compile Include="UI\frmImage.designer.cs">
       <DependentUpon>frmImage.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\frmAuto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmAuto.Designer.cs">
+      <DependentUpon>frmAuto.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\frmTake.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -169,6 +174,12 @@
     <Compile Include="UI\frmXS.designer.cs">
       <DependentUpon>frmXS.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\WebGis.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\WebGis.Designer.cs">
+      <DependentUpon>WebGis.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -193,6 +204,9 @@
     <EmbeddedResource Include="UI\frmImage.resx">
       <DependentUpon>frmImage.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\frmAuto.resx">
+      <DependentUpon>frmAuto.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\frmTake.resx">
       <DependentUpon>frmTake.cs</DependentUpon>
     </EmbeddedResource>
@@ -211,10 +225,14 @@
     <EmbeddedResource Include="UI\frmXS.resx">
       <DependentUpon>frmXS.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\WebGis.resx">
+      <DependentUpon>WebGis.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="app.config" />
     <Content Include="Config.ini">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Config_SQ.ini" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -449,15 +467,33 @@
     <Content Include="Skins\XPSilver.ssk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="tessdata\eng.cube.bigrams" />
-    <None Include="tessdata\eng.cube.fold" />
-    <None Include="tessdata\eng.cube.lm" />
-    <None Include="tessdata\eng.cube.nn" />
-    <None Include="tessdata\eng.cube.params" />
-    <None Include="tessdata\eng.cube.size" />
-    <None Include="tessdata\eng.cube.word-freq" />
-    <None Include="tessdata\eng.tesseract_cube.nn" />
-    <None Include="tessdata\eng.traineddata" />
+    <Content Include="tessdata\eng.cube.bigrams">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tessdata\eng.cube.fold">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tessdata\eng.cube.lm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tessdata\eng.cube.nn">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tessdata\eng.cube.params">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tessdata\eng.cube.size">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tessdata\eng.cube.word-freq">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tessdata\eng.tesseract_cube.nn">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="tessdata\eng.traineddata">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="xulrunner\crashreporter.ini">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

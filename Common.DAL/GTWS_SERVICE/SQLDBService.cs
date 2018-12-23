@@ -23,24 +23,42 @@ namespace TLKJ.DAO
         /// </summary>
         public void GetStrValue()
         {
-            String sql = StringEx.getString(request["SQL"]);
             ActiveResult vret = ActiveResult.Valid(AppConfig.FAILURE);
-            String cStr = DbManager.GetStrValue(sql);
-            vret = ActiveResult.returnObject(cStr);
+            String sql = StringEx.getString(request["SQL"]);
+            log4net.WriteLogFile("SQL:" + sql, LogType.DEBUG);
+            if (String.IsNullOrWhiteSpace(sql))
+            {
+                vret = ActiveResult.Valid("SQL语句不能为空！");
+            }
+            else
+            {
+                String cStr = DbManager.GetStrValue(sql);
+                vret = ActiveResult.returnObject(cStr);
+            }
             response.Write(vret.toJSONString());
         }
 
         public void QueryData()
         {
-            String sql = StringEx.getString(request["SQL"]);
             ActiveResult vret = ActiveResult.Valid(AppConfig.FAILURE);
-            DataTable dtRows = DbManager.QueryData(sql);
-            String cStr = JsonLib.ToJSON(dtRows);
-            vret = ActiveResult.returnObject(cStr);
+            String sql = StringEx.getString(request["SQL"]);
+            log4net.WriteLogFile("SQL:" + sql, LogType.DEBUG);
+            if (String.IsNullOrWhiteSpace(sql))
+            {
+                vret = ActiveResult.Valid("SQL语句不能为空！");
+            }
+            else
+            {
+                DataTable dtRows = DbManager.QueryData(sql);
+                String cStr = JsonLib.ToJSON(dtRows);
+                vret = ActiveResult.returnObject(cStr);
+            }
+
             response.Write(vret.toJSONString());
         }
         public void Query()
         {
+            ActiveResult vret = ActiveResult.Valid(AppConfig.FAILURE);
             String cFileList = StringEx.getString(request["FILELIST"]);
             String cWhereParm = StringEx.getString(request["WHEREPARM"]);
             String cTableName = StringEx.getString(request["TABLENAME"]);
@@ -48,23 +66,34 @@ namespace TLKJ.DAO
 
             String cPAGENO = StringEx.getString(request["PAGENO"]);
             String cPAGESIZE = StringEx.getString(request["PAGESIZE"]);
-
-            int iPageNo = 1;
-            int iPageSize = 15;
-
-            if (!String.IsNullOrWhiteSpace(cPAGENO))
+            log4net.WriteLogFile("FileList--" + cFileList + ":WhereParm--" + cWhereParm + ":TableName--" + cTableName, LogType.DEBUG);
+            if (String.IsNullOrWhiteSpace(cTableName))
             {
-                iPageNo = StringEx.getInt(cPAGENO);
+                vret = ActiveResult.Valid("数据表不能为空！");
             }
-
-            if (!String.IsNullOrWhiteSpace(cPAGESIZE))
+            else if (String.IsNullOrWhiteSpace(cFileList))
             {
-                iPageSize = StringEx.getInt(cPAGESIZE);
+                vret = ActiveResult.Valid("数据字段不能为空！");
             }
-            ActiveResult vret = ActiveResult.Valid(AppConfig.FAILURE);
-            DBResult rs = DbManager.Query(cFileList, cTableName, cWhereParm, cOrderBy, iPageNo, iPageSize);
-            vret = ActiveResult.returnObject(rs.dtrows);
-            vret.total = rs.ROW_COUNT;
+            else
+            {
+
+                int iPageNo = 1;
+                int iPageSize = 15;
+
+                if (!String.IsNullOrWhiteSpace(cPAGENO))
+                {
+                    iPageNo = StringEx.getInt(cPAGENO);
+                }
+
+                if (!String.IsNullOrWhiteSpace(cPAGESIZE))
+                {
+                    iPageSize = StringEx.getInt(cPAGESIZE);
+                }
+                DBResult rs = DbManager.Query(cFileList, cTableName, cWhereParm, cOrderBy, iPageNo, iPageSize);
+                vret = ActiveResult.returnObject(rs.dtrows);
+                vret.total = rs.ROW_COUNT;
+            }
             response.Write(vret.toJSONString());
         }
 
@@ -75,16 +104,18 @@ namespace TLKJ.DAO
         {
             List<String> sqls = new List<string>();
             List<Object[]> objs = new List<Object[]>();
-            for (int i = 0; i < 1000; i++)
+            for (int i = 1; i < 1000; i++)
             {
                 String cSQL = StringEx.getString(request["SQL_" + i]);
                 String cPARM = StringEx.getString(request["PARM_" + i]);
-                if (cSQL.Length > 0)
+                if (!String.IsNullOrWhiteSpace(cSQL))
                 {
                     sqls.Add(cSQL);
-                    if (cPARM.Length > 0)
+                    log4net.WriteLogFile("SQL--" + cSQL, LogType.DEBUG);
+                    if (!String.IsNullOrWhiteSpace(cPARM))
                     {
                         Object[] parmList = JsonLib.ToObject<Object[]>(cPARM);
+                        log4net.WriteLogFile("PARM--" + cPARM, LogType.DEBUG);
                         objs.Add(parmList);
                     }
                     else

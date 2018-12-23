@@ -6,6 +6,7 @@ using System.Web;
 using TLKJ.Utils;
 using TLKJ.DB;
 using System.Data;
+using System.Drawing;
 
 namespace TLKJ.DAO
 {
@@ -84,6 +85,19 @@ namespace TLKJ.DAO
                 ReadDB(vPhone, dtRows);
             }
             return vPhone;
+        }
+
+        public List<Rectangle> FindRectangle(string cDBKey)
+        {
+            List<Rectangle> KeyList = new List<Rectangle>();
+            DataTable dtRows = DbManager.QueryData("SELECT POINT_LIST FROM XT_IMG_LIST WHERE REC_ID='" + cDBKey + "' and ALARM_FLAG=1 ");
+            for (int i = 0; i < dtRows.Rows.Count; i++)
+            {
+                String cPOINT_LIST = StringEx.getString(dtRows, i, "POINT_LIST");
+                Rectangle vf = JsonLib.ToObject<Rectangle>(cPOINT_LIST);
+                KeyList.Add(vf);
+            }
+            return KeyList;
         }
     }
 }

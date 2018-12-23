@@ -17,8 +17,9 @@ namespace TLKJ.Utils
         }
         public static void WriteLogFile(String cStr)
         {
-            WriteLogFile(cStr, 1);
+            WriteLogFile(cStr, LogType.DEBUG);
         }
+
         public static void WriteLogFile(String cStr, int iLogLevel)
         {
             StreamWriter sw = null;

@@ -112,6 +112,7 @@
     <Compile Include="HttpUtil.cs" />
     <Compile Include="JActiveField.cs" />
     <Compile Include="JActiveTable.cs" />
+    <Compile Include="LogType.cs" />
     <Compile Include="MD5.cs" />
     <Compile Include="SMSUtil.cs" />
     <Compile Include="StatField.cs" />

@@ -23,11 +23,20 @@ namespace TLKJAI
             {
                 Image<Gray, byte> vBmp = getPTXImage(cFileName);
                 String cStr = getImageText(vBmp);
+                if (String.IsNullOrWhiteSpace(cStr))
+                {
+                    log4net.WriteLogFile("PTX分析失败:" + Path.GetFileName(cFileName));
+                }
                 if ((cStr.IndexOf("P") != -1) && (cStr.IndexOf("T") != -1) && (cStr.IndexOf("X") != -1))
                     return cStr;
                 else
                 {
                     String cPTXName = cFileName.Replace("images", "ptx");
+                    String cDir = Path.GetDirectoryName(cPTXName);
+                    if (!Directory.Exists(cDir))
+                    {
+                        Directory.CreateDirectory(cDir);
+                    }
                     try
                     {
                         vBmp.Save(cPTXName);
@@ -89,7 +98,7 @@ namespace TLKJAI
             int idxX = cStr.IndexOf("X");
             try
             {
-                String cVal = StringEx.getString(cStr.Substring(idxT + 1, idxX - 1)).Trim();
+                String cVal = StringEx.getString(cStr.Substring(idxT + 1, idxX - idxT - 1)).Trim();
                 return StringEx.getFloat(cVal);
             }
             catch (Exception ex)
@@ -130,6 +139,7 @@ namespace TLKJAI
             }
             catch (Exception ex)
             {
+                log4net.WriteLogFile(ex.Message);
                 cStr = null;
             }
             if (!String.IsNullOrEmpty(cStr))
@@ -171,7 +181,7 @@ namespace TLKJAI
             ResultGrayImage = new Image<Gray, byte>(vRectImage.Width, vRectImage.Height);
             CvInvoke.Threshold(GrayImage, ResultGrayImage, iBINARY_MIN, iBINARY_MAX, Emgu.CV.CvEnum.ThresholdType.Binary);
 
-            return GrayImage;
+            return ResultGrayImage;
         }
 
         public static List<KeyValue> getImageList(String cFileName)

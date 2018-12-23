@@ -1,4 +1,5 @@
-﻿using GTWS_TASK.UI;
+﻿using Gecko;
+using GTWS_TASK.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,9 @@ namespace GTWS_AI
         [STAThread]
         static void Main()
         {
+            string xulrunnerPath = Application.StartupPath + "/xulrunner";
             INIConfig.setConfigFile(Application.StartupPath + @"\Config.ini");
+            Xpcom.Initialize(xulrunnerPath);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new frmMain());

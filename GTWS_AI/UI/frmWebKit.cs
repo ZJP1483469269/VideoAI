@@ -21,11 +21,11 @@ namespace GTWS_TASK.UI
         private bool LOAD_LAST_FLAG = false;
         private bool LOAD_TOKEN_FLAG = false;
         private bool IS_HOME = false;
-        private readonly string xulrunnerPath = Application.StartupPath + "/xulrunner";
+       
         public frmMain()
         {
             InitializeComponent();
-            Xpcom.Initialize(xulrunnerPath);
+           
         }
         public void OpenWinUrl(String vUrl)
         {
@@ -82,24 +82,18 @@ namespace GTWS_TASK.UI
                     string cToken = js.getFieldValue("token");
                     ApplicationEvent.Token = cToken;
                     LOAD_TOKEN_FLAG = true;
+                    timAfter_Tick(null, null);
                 }
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void timAfter_Tick(object sender, EventArgs e)
         {
-            frmTake vDialog = new frmTake();
-            try
-            {
-                if (vDialog.ShowDialog() == DialogResult.OK)
-                {
-
-                }
-            }
-            finally
-            {
-                vDialog.Close();
-            }
+            timAfter.Enabled = false;
+            frmAuto vDialog = new frmAuto();
+            vDialog.ShowInTaskbar = false;
+            vDialog.btnAutoTake_Click(null, null);
+            vDialog.Hide();
         }
     }
 }

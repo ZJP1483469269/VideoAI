@@ -13,8 +13,8 @@ using System.Runtime.InteropServices;
 using TLKJ.Utils;
 using System.IO;
 using System.Threading;
-using System.Drawing.Imaging; 
-using Renci.SshNet; 
+using System.Drawing.Imaging;
+using Renci.SshNet;
 
 namespace GTWS_TASK.UI
 {
@@ -304,15 +304,19 @@ namespace GTWS_TASK.UI
 
 
         private void frmTask_Load(object sender, EventArgs e)
-        {
-            INIConfig.setConfigFile(Application.StartupPath + @"\Config.ini");
-            Application.Idle += new EventHandler(onIdle_Event);
-            btnLoad_Click(null, null); 
+        { 
+            Application.Idle += onIdle_Event;
         }
 
+        Boolean LOAD_FLAG = false;
         private void onIdle_Event(object sender, EventArgs e)
         {
-
+            if (!LOAD_FLAG)
+            {
+                LOAD_FLAG = true;
+                InitCameraLogin();
+                btnStartReal_Click(null, null);
+            }
         }
 
         private void btnTake_Click(object sender, EventArgs e)
@@ -339,9 +343,6 @@ namespace GTWS_TASK.UI
         private int ActivePresetIndex = 0;
 
 
-
-
-
         private void 任务时间ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmDTConfig vDialog = new frmDTConfig();
@@ -353,12 +354,6 @@ namespace GTWS_TASK.UI
             {
 
             }
-        }
-
-        private void btnLoad_Click(object sender, EventArgs e)
-        {
-            InitCameraLogin();
-
-        }
+        } 
     }
 }

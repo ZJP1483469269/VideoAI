@@ -5,7 +5,7 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Windows.Forms; 
+using System.Windows.Forms;
 using TLKJ.Utils;
 using Renci.SshNet;
 using TLKJAI;
@@ -14,64 +14,16 @@ namespace TLKJ_IVS
 {
     public class CopyUnit
     {
-        private static SftpClient sftp = null;
-        public static Boolean Upload(String cFileName, String cType)
-        {
-            if (!File.Exists(cFileName))
-            {
-                return false;
-            }
-            String cDFS_PATH = INIConfig.ReadString(cType, "DFS_PATH", "");
-            String cDFSType = INIConfig.ReadString(cType, "DFS_TYPE", "");
-
-            if (cDFSType.Equals("SSH"))
-            {
-                return SSH_Upload(cFileName, cType);
-            }
-            else if (cDFSType.Equals("POST"))
-            {
-                String cDFSUrl = "http://" + cDFS_PATH + "/api/dfs.ashx";
-                return PostFile(cFileName, cDFSUrl);
-            }
-            else if (cDFSType.Equals("COPY"))
-            {
-                return CopyFile(cFileName, cDFS_PATH);
-            }
-            else
-            {
-                log4net.WriteLogFile("参数配置错误！");
-                return false;
-            }
-        }
-
-        public static Boolean SSH_Upload(String cFileName, String cDFSType)
+        public static Boolean SSH_Upload(SftpClient sftp, String cFileName, String cDFSType)
         {
             if (sftp == null)
             {
-                String cDFS_HOST = INIConfig.ReadString(cDFSType, "DFS_HOST", "");
-                String cDFS_PORT = INIConfig.ReadString(cDFSType, "DFS_PORT", "22");
-                int iDFS_PORT = StringEx.getInt(cDFS_PORT);
-                String cDFS_USER = INIConfig.ReadString(cDFSType, "DFS_USER", "root");
-                String cDFS_PASS = INIConfig.ReadString(cDFSType, "DFS_PASS", "");
-                sftp = new SftpClient(cDFS_HOST, iDFS_PORT, cDFS_USER, cDFS_PASS);
-                try
-                {
-                    sftp.Connect();
-                }
-                catch (Exception ex)
-                {
-                    sftp = null;
-                }
-            }
-
-            if (sftp == null)
-            {
                 return false;
             }
-
             FileStream fs = null;
             try
             {
+                sftp.Connect(); 
                 String cDFS_PATH = INIConfig.ReadString(cDFSType, "DFS_PATH", "");
                 fs = new FileStream(cFileName, FileMode.Open);
                 String cStr = Path.GetFileName(cFileName);
@@ -81,7 +33,7 @@ namespace TLKJ_IVS
                 }
                 catch (Exception ex)
                 {
-
+                    log4net.WriteLogFile("CopyUnit.CreateDirectory:" + ex.Message, LogType.ERROR);
                 }
                 String cDFSPath = cDFS_PATH;
                 if (!cDFSPath.EndsWith("/"))
@@ -93,7 +45,7 @@ namespace TLKJ_IVS
             }
             catch (Exception ex)
             {
-                log4net.WriteLogFile(ex.Message);
+                log4net.WriteLogFile("CopyUnit..UploadFile." + ex.Message, LogType.ERROR);
                 sftp = null;
                 return false;
             }
@@ -108,7 +60,7 @@ namespace TLKJ_IVS
                     }
                     catch (Exception ex)
                     {
-                        log4net.WriteLogFile(ex.Message);
+                        log4net.WriteLogFile("CopyUnit.." + ex.Message, LogType.ERROR);
                     }
                 }
             }
@@ -134,7 +86,7 @@ namespace TLKJ_IVS
                     }
                     catch (Exception ex)
                     {
-                        log4net.WriteLogFile(ex.Message);
+                        log4net.WriteLogFile("CopyUnit.." + ex.Message);
                     }
                 }
             }
@@ -160,11 +112,11 @@ namespace TLKJ_IVS
             }
             catch (Exception ex)
             {
-                log4net.WriteLogFile(ex.Message);
+                log4net.WriteLogFile("CopyUnit.." + ex.Message);
             }
             return true;
         }
-         
+
         public static bool CopyFile(string cFileName, string cDFS_PATH)
         {
             try

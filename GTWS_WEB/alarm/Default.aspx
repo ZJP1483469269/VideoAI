@@ -122,7 +122,7 @@
 
         function LoadList(cREC_ID) {
             $("#IMAGE_LIST").empty();
-            var vUrl = "/api/rest.ashx?action_type=XT_IMG_REC&action_method=query_list";
+            var vUrl = "/api/alarm.ashx?action_type=XT_IMG_REC&action_method=query_list";
             var cValue = "REC_ID=" + cREC_ID;
             $.ajax({
                 type: "POST",

@@ -39,6 +39,7 @@
             this.LB_MSG = new System.Windows.Forms.Label();
             this.btnTake = new System.Windows.Forms.Button();
             this.txtCAMERA_NAME = new System.Windows.Forms.TextBox();
+            this.splitter1 = new System.Windows.Forms.Splitter();
             this.SuspendLayout();
             // 
             // btnClose
@@ -129,7 +130,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlPlay.Location = new System.Drawing.Point(12, 39);
             this.pnlPlay.Name = "pnlPlay";
-            this.pnlPlay.Size = new System.Drawing.Size(777, 480);
+            this.pnlPlay.Size = new System.Drawing.Size(449, 480);
             this.pnlPlay.TabIndex = 70;
             // 
             // LB_MSG
@@ -160,14 +161,23 @@
             this.txtCAMERA_NAME.Location = new System.Drawing.Point(12, 12);
             this.txtCAMERA_NAME.Name = "txtCAMERA_NAME";
             this.txtCAMERA_NAME.ReadOnly = true;
-            this.txtCAMERA_NAME.Size = new System.Drawing.Size(777, 21);
+            this.txtCAMERA_NAME.Size = new System.Drawing.Size(773, 21);
             this.txtCAMERA_NAME.TabIndex = 79;
+            // 
+            // splitter1
+            // 
+            this.splitter1.Location = new System.Drawing.Point(0, 0);
+            this.splitter1.Name = "splitter1";
+            this.splitter1.Size = new System.Drawing.Size(3, 566);
+            this.splitter1.TabIndex = 81;
+            this.splitter1.TabStop = false;
             // 
             // frmViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(794, 566);
+            this.Controls.Add(this.splitter1);
             this.Controls.Add(this.txtCAMERA_NAME);
             this.Controls.Add(this.LB_MSG);
             this.Controls.Add(this.pnlPlay);
@@ -201,5 +211,6 @@
         private System.Windows.Forms.Label LB_MSG;
         private System.Windows.Forms.Button btnTake;
         private System.Windows.Forms.TextBox txtCAMERA_NAME;
+        private System.Windows.Forms.Splitter splitter1;
     }
 }

@@ -3,11 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GTWS_TASK", "GTWS_TASK\GTWS_TASK.csproj", "{4A68E7C2-2452-4237-ACF6-301E482AB78E}"
-	ProjectSection(ProjectDependencies) = postProject
-		{1F00376D-4CB4-4279-8DCC-C48B9DBFEE01} = {1F00376D-4CB4-4279-8DCC-C48B9DBFEE01}
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TLKJ.DB", "Common.DB\TLKJ.DB.csproj", "{B6E0B7D2-692C-4505-83AA-45EFFE080C38}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TLKJ.Util", "Common.Util\TLKJ.Util.csproj", "{9C69D4E3-5A02-41C0-B4DB-A356C443B65C}"
@@ -57,18 +52,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4A68E7C2-2452-4237-ACF6-301E482AB78E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4A68E7C2-2452-4237-ACF6-301E482AB78E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4A68E7C2-2452-4237-ACF6-301E482AB78E}.Debug|x64.ActiveCfg = Debug|x64
-		{4A68E7C2-2452-4237-ACF6-301E482AB78E}.Debug|x64.Build.0 = Debug|x64
-		{4A68E7C2-2452-4237-ACF6-301E482AB78E}.Debug|x86.ActiveCfg = Debug|x86
-		{4A68E7C2-2452-4237-ACF6-301E482AB78E}.Debug|x86.Build.0 = Debug|x86
-		{4A68E7C2-2452-4237-ACF6-301E482AB78E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4A68E7C2-2452-4237-ACF6-301E482AB78E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4A68E7C2-2452-4237-ACF6-301E482AB78E}.Release|x64.ActiveCfg = Release|x64
-		{4A68E7C2-2452-4237-ACF6-301E482AB78E}.Release|x64.Build.0 = Release|x64
-		{4A68E7C2-2452-4237-ACF6-301E482AB78E}.Release|x86.ActiveCfg = Release|x86
-		{4A68E7C2-2452-4237-ACF6-301E482AB78E}.Release|x86.Build.0 = Release|x86
 		{B6E0B7D2-692C-4505-83AA-45EFFE080C38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B6E0B7D2-692C-4505-83AA-45EFFE080C38}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6E0B7D2-692C-4505-83AA-45EFFE080C38}.Debug|x64.ActiveCfg = Debug|x86

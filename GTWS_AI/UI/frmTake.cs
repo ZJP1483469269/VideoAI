@@ -688,7 +688,7 @@ namespace GTWS_TASK.UI
             {
                 if (ApplicationEvent.CutThread == null)
                 {
-                    ApplicationEvent.CutThread = new Thread(CutTask.Execute);
+                   // ApplicationEvent.CutThread = new Thread(CutTask.Execute);
                     ApplicationEvent.CutThread.Start();
                 }
             }
@@ -792,11 +792,18 @@ namespace GTWS_TASK.UI
 
                     List<String> sqls = new List<string>();
                     String cDayTime = DateTime.Now.ToString("yyyyMMddHHmmss");
-                    String cFileDir = "/images/" + cKeyID + ".jpg";
+                    String cFileDir = "/dfs/" + cKeyID.Substring(0, 8) + "/" + cKeyID + ".jpg";
                     JActiveTable aMaster = new JActiveTable();
                     aMaster.TableName = "XT_IMG_REC";
                     aMaster.AddField("REC_ID", cKeyID);
                     aMaster.AddField("CAMERA_ID", ActiveCameraCode);
+
+                    aMaster.AddField("AI_FLAG", 0);
+                    aMaster.AddField("ALARM_FLAG", 0);
+                    aMaster.AddField("ALARM_CHECKED", 0);
+                    aMaster.AddField("IMAGE_REDRAW", 0);
+
+
                     aMaster.AddField("PRESET_ID", iPRESET_ID);
                     if (!String.IsNullOrEmpty(cKeyText))
                     {
@@ -882,7 +889,6 @@ namespace GTWS_TASK.UI
             {
                 return false;
             }
-
         }
 
         private void timTask_Tick(object sender, EventArgs e)

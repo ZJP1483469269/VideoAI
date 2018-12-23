@@ -8,7 +8,7 @@ using System.Data;
 using System.Collections;
 using System.Collections.Specialized;
 using System.Text.RegularExpressions;
-using System.Web.UI.WebControls;
+using System.Drawing;
 
 namespace TLKJ.Utils
 {
@@ -33,7 +33,31 @@ namespace TLKJ.Utils
             }
             return arKeys;
         }
+        public static Boolean RedrawImage(String cFileName, List<Rectangle> vRects)
+        {
+            Bitmap vImage = (Bitmap)Bitmap.FromFile(cFileName);
+            try
+            {
+                Graphics g = Graphics.FromImage(vImage);
+                for (int i = 0; i < vRects.Count; i++)
+                {
+                    Rectangle vRect = vRects[i];
+                    g.DrawLine(new Pen(Color.Red), vRect.Left, vRect.Top, vRect.Right, vRect.Top);
+                    g.DrawLine(new Pen(Color.Red), vRect.Left, vRect.Bottom, vRect.Right, vRect.Bottom);
 
+                    g.DrawLine(new Pen(Color.Red), vRect.Left, vRect.Top, vRect.Left, vRect.Bottom);
+                    g.DrawLine(new Pen(Color.Red), vRect.Right, vRect.Top, vRect.Right, vRect.Bottom);
+                }
+                g.Save();
+                vImage.Save(cFileName);
+                vImage.Dispose();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
         public static String getCookieValue(HttpRequest request, String cKeyName)
         {
             String cStr = "";
@@ -45,8 +69,8 @@ namespace TLKJ.Utils
                     cStr = vCookie.Value;
                 }
             }
-            return StringEx.getString(cStr); 
-        } 
+            return StringEx.getString(cStr);
+        }
 
         public static NameValueCollection ParseUrl(string cUrl)
         {
@@ -142,16 +166,6 @@ namespace TLKJ.Utils
         public static string GetString(DataTable tbl, int iRowIdx, string colName)
         {
             return tbl.Rows[iRowIdx][colName].ToString();
-        }
-
-        public static void FillDropList(ListControl vList, DataTable dtRows, string cKeyID, string cKeyText)
-        {
-            for (int i = 0; (dtRows != null) && (i < dtRows.Rows.Count); i++)
-            {
-                String cItemID = StringEx.getString(dtRows, i, cKeyID);
-                String cItemText = StringEx.getString(dtRows, i, cKeyText);
-                vList.Items.Add(new ListItem(cItemText, cItemID));
-            }
-        }
+        } 
     }
 }
