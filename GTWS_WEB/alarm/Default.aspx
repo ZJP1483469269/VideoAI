@@ -12,13 +12,15 @@
     <script type="text/javascript" src="/static/js/layer/layer.js"></script>
     <script type="text/javascript" src="/static/js/default.js"></script>
     <script type="text/javascript">
+        var vREC_ID = null;
         $(document).ready(function () {
             InitGrid();
         });
         function InitGrid() {
             $('#DBGrid').bootstrapTable({
                 url: '/api/rest.ashx?action_type=XT_IMG_REC&action_method=query_alarm',         //请求后台的URL（*）
-                method: 'get',             //请求方式（*）
+                method: 'POST',             //请求方式（*）
+                contentType: "application/x-www-form-urlencoded",
                 striped: true,              //是否显示行间隔色
                 cache: false,               //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
                 pagination: true,           //是否显示分页（*）
@@ -40,6 +42,10 @@
                         , title: '序号'
                         , align: 'center'
                         , formatter: function (value, row, index) {
+                            if (vREC_ID == null) {
+                                vREC_ID = value;
+                                LoadList(vREC_ID);
+                            }
                             return index + 1;
                         }
                     },
@@ -115,7 +121,7 @@
                 pageindex: params.pageNumber,
                 ORG_ID: "<%=getLoginUserInfo().ORG_ID %>",
                 ADDR: $("#ADDR").val(),
-                ALARM_CHECKED: $("#ALARM_CHECKED").val(),
+                ALARM_CHECKED: $("#ALARM_CHECKED").val()
             };
             return temp;
         };
@@ -143,7 +149,8 @@
             });
         }
         function doQuery() {
-
+            vREC_ID = null;
+            $('#DBGrid').bootstrapTable('refresh')
         }
     </script>
 </head>
@@ -165,9 +172,9 @@
                         </td>
                         <td>
                             <select class="form-control" id="ALARM_CHECKED" name="ALARM_CHECKED" style="width: 200px">
-                                <option value="1">已处理</option>
                                 <option value="">--全部--</option>
                                 <option value="0">未处理</option>
+                                <option value="1">已处理</option>
                             </select>
                         </td>
                         <td>
@@ -180,6 +187,11 @@
                 <table id="DBGrid">
                 </table>
             </div>
+        </div>
+        <div>
+            <input type="button" value="实时情况" class="btn-sm btn-primary" onclick="doQuery();" />
+            <input type="button" value="违法交办" class="btn-sm btn-primary" onclick="doQuery();" />
+            <input type="button" value="解除报警" class="btn-sm btn-primary" onclick="doQuery();" />
         </div>
         <table class="panel panel-primary">
             <tr id="IMAGE_LIST">

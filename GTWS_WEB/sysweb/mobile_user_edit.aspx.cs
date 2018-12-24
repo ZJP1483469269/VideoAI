@@ -18,6 +18,6 @@ public partial class mobile_user_edit : PageEx
         AREA_ID.Value = AppManager.getAreaHeader(vUserInf.ORG_ID);
         DataTable dtRows = DbManager.QueryData("SELECT ORG_ID,ORG_NAME FROM S_ORG_INF "
             + " WHERE (ORG_ID<>'" + vUserInf.ORG_ID + "') AND (ORG_ID LIKE '" + vUserInf.ORG_ID + "%') ");
-        AppManager.FillDropList(org_id, dtRows, "ORG_ID", "ORG_NAME");
+        FillDropList(org_id, dtRows, "ORG_ID", "ORG_NAME");
     }
 }

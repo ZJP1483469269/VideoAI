@@ -42,7 +42,8 @@ namespace TLKJ.DAO
             String cALARM_CHECKED = StringEx.getString(request["ALARM_CHECKED"]);
             ActiveResult vret = ActiveResult.Valid(AppConfig.FAILURE);
 
-            String cWhereParm = " EXISTS( SELECT 1 FROM XT_CAMERA X WHERE X.ORG_ID='" + cORG_ID + "' AND X.DEVICE_ID=CAMERA_ID ";
+            String cWhereParm = " (ALARM_FLAG=1) ";
+            cWhereParm= cWhereParm+" AND EXISTS( SELECT 1 FROM XT_CAMERA X WHERE X.ORG_ID='" + cORG_ID + "' AND X.DEVICE_ID=CAMERA_ID ";
             if (!String.IsNullOrWhiteSpace(cADDR))
             {
                 cWhereParm = cWhereParm + " AND (ADDR LIKE '%" + cADDR + "%')";

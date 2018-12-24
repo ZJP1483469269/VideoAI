@@ -98,12 +98,6 @@
     <Compile Include="JDBBASE.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common.Util\TLKJ.Util.csproj">
-      <Project>{9C69D4E3-5A02-41C0-B4DB-A356C443B65C}</Project>
-      <Name>TLKJ.Util</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4 %28x86 和 x64%29</ProductName>
@@ -124,6 +118,12 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common.Util\TLKJ.Util.csproj">
+      <Project>{9c69d4e3-5a02-41c0-b4db-a356c443b65c}</Project>
+      <Name>TLKJ.Util</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

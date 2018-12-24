@@ -86,16 +86,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common.DAL\TLKJ.DAO.csproj">
-      <Project>{7E3A69E0-0F1C-4246-A2C3-7D3AF082F65F}</Project>
-      <Name>TLKJ.DAO</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Common.Util\TLKJ.Util.csproj">
-      <Project>{9C69D4E3-5A02-41C0-B4DB-A356C443B65C}</Project>
-      <Name>TLKJ.Util</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
@@ -105,6 +95,12 @@
     <EmbeddedResource Include="UI\frmBase.resx">
       <DependentUpon>frmBase.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common.Util\TLKJ.Util.csproj">
+      <Project>{9c69d4e3-5a02-41c0-b4db-a356c443b65c}</Project>
+      <Name>TLKJ.Util</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

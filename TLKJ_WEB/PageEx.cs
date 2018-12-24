@@ -10,7 +10,8 @@ using TLKJ.DAO;
 using Newtonsoft.Json;
 using System.IO;
 using System.Text;
-using System.Web.UI; 
+using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace TLKJ.WEB
 {
@@ -28,6 +29,11 @@ namespace TLKJ.WEB
             LoginUserInfo vUserInf = getLoginUserInfo();
             String cGXQID = vUserInf.ORG_ID;
             return getOrgID(cGXQID).Length;
+        }
+
+        public void FillDropList(ListControl org_id, DataTable dtRows, String cKeyField, String cValField)
+        {
+             
         }
         public String getClientID()
         {

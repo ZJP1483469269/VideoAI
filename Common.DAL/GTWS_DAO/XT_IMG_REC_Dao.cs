@@ -35,6 +35,19 @@ namespace TLKJ.DAO
             return iCode;
 
         }
+        public List<Rectangle> FindRectangle(String cREC_ID)
+        {
+            List<Rectangle> KeyList = new List<Rectangle>();
+            DataTable dtRows = DbManager.QueryData("SELECT POINT_LIST FROM XT_IMG_LIST WHERE ALARM_FLAG=1 AND REC_ID='" + cREC_ID + "'");
+            for (int i = 0; i < dtRows.Rows.Count; i++)
+            {
+                String cPOINT_LIST = StringEx.getString(dtRows, i, "POINT_LIST");
+                Rectangle rf = JsonLib.ToObject<Rectangle>(cPOINT_LIST);
+                KeyList.Add(rf);
+            }
+            return KeyList;
+        }
+
         public DBResult Query(String cWhereParm, String cOrderBy, int iPageNo, int iPageSize)
         {
             return DbManager.Query("*", "XT_IMG_REC", cWhereParm, cOrderBy, iPageNo, iPageSize);
@@ -85,19 +98,6 @@ namespace TLKJ.DAO
                 ReadDB(vPhone, dtRows);
             }
             return vPhone;
-        }
-
-        public List<Rectangle> FindRectangle(string cDBKey)
-        {
-            List<Rectangle> KeyList = new List<Rectangle>();
-            DataTable dtRows = DbManager.QueryData("SELECT POINT_LIST FROM XT_IMG_LIST WHERE REC_ID='" + cDBKey + "' and ALARM_FLAG=1 ");
-            for (int i = 0; i < dtRows.Rows.Count; i++)
-            {
-                String cPOINT_LIST = StringEx.getString(dtRows, i, "POINT_LIST");
-                Rectangle vf = JsonLib.ToObject<Rectangle>(cPOINT_LIST);
-                KeyList.Add(vf);
-            }
-            return KeyList;
         }
     }
 }

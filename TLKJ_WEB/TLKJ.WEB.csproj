@@ -81,24 +81,24 @@
     <None Include="Properties\DataSources\System.Data.DataTable.datasource" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common.DAL\TLKJ.DAO.csproj">
-      <Project>{7E3A69E0-0F1C-4246-A2C3-7D3AF082F65F}</Project>
-      <Name>TLKJ.DAO</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Common.DB\TLKJ.DB.csproj">
-      <Project>{B6E0B7D2-692C-4505-83AA-45EFFE080C38}</Project>
-      <Name>TLKJ.DB</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Common.Util\TLKJ.Util.csproj">
-      <Project>{9C69D4E3-5A02-41C0-B4DB-A356C443B65C}</Project>
-      <Name>TLKJ.Util</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="lib\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common.DAL\TLKJ.DAO.csproj">
+      <Project>{7e3a69e0-0f1c-4246-a2c3-7d3af082f65f}</Project>
+      <Name>TLKJ.DAO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common.DB\TLKJ.DB.csproj">
+      <Project>{b6e0b7d2-692c-4505-83aa-45effe080c38}</Project>
+      <Name>TLKJ.DB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common.Util\TLKJ.Util.csproj">
+      <Project>{9c69d4e3-5a02-41c0-b4db-a356c443b65c}</Project>
+      <Name>TLKJ.Util</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
