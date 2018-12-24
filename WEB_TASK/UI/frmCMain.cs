@@ -15,7 +15,8 @@ using NSoup.Select;
 using System.Threading;
 using System.Web.UI;
 using Gecko;
-using TLKJ.DB;
+using TLKJ_IVS;
+using WEB_TASK.UI;
 
 namespace WEB_TASK
 {
@@ -26,7 +27,7 @@ namespace WEB_TASK
 
         public delegate void AppendHref_delegate(JHref rowKey);
         Sunisoft.IrisSkin.SkinEngine iskin = new Sunisoft.IrisSkin.SkinEngine();
-      
+
         public frmCMain()
         {
             InitializeComponent();
@@ -98,14 +99,15 @@ namespace WEB_TASK
         {
         }
 
+        JHref ActiveHref = null;
         private void btnAnalyse_Click(object sender, EventArgs e)
         {
             JHref vTask = new JHref();
             vTask.Url = this.txtUrl.Text.Replace("{PAGE_NO}", "");
             vTask.Text = "0";
             vTask.Layer = 1;
-            vTask.UrlID = StringEx.getString(this.txtUrlID.Text);
-            vTask.Prefix = this.txtHeader.Text;
+            vTask.UrlID = StringEx.getString(ActiveHref.UrlID);
+            vTask.Prefix = ActiveHref.Prefix;
             AddHref(1, vTask);
             Thread vThread = new Thread(ExecuteHref);
             vThread.Start();
@@ -145,7 +147,7 @@ namespace WEB_TASK
             String cUrl = vTask.Url;
             String cPageHtml = getPageHtml(cUrl);
             Document doc = NSoupClient.Parse(cPageHtml);
-            var rs = doc.Select(this.txtMatch.Text);
+            var rs = doc.Select(ActiveHref.Match);
             List<JHref> KeyList = new List<JHref>();
             for (int i = 0; i < rs.Count; i++)
             {
@@ -201,7 +203,7 @@ namespace WEB_TASK
         }
         private void btnStart_Click(object sender, EventArgs e)
         {
-            int iLayer = StringEx.getInt(this.txtDepth.Text);
+            int iLayer = StringEx.getInt(this.ActiveHref.Layer);
             InitPageList(iLayer);
             btnAnalyse_Click(null, null);
         }
@@ -250,9 +252,8 @@ namespace WEB_TASK
         }
         private void button5_Click(object sender, EventArgs e)
         {
-
-            String cPAGE_VAL = this.textBox1.Text;
-            int iLayer = StringEx.getInt(this.txtDepth.Text);
+            String cPAGE_VAL = ActiveHref.PageVal;
+            int iLayer = StringEx.getInt(this.ActiveHref.Layer);
             for (int i = 0; i < iLayer; i++)
             {
                 cPAGE_VAL = cPAGE_VAL.Replace("{PAGE_NO}", i.ToString());
@@ -262,7 +263,7 @@ namespace WEB_TASK
                 vTask.Url = vTask.Url.Replace("{PAGE_NO}", cPAGE_VAL);
                 vTask.Text = "0";
                 vTask.Layer = i + 1;
-                vTask.Prefix = this.txtHeader.Text;
+                vTask.Prefix = this.ActiveHref.Prefix;
                 List<JHref> rs = getHerfList(vTask);
                 for (int k = 0; k < rs.Count; k++)
                 {
@@ -315,27 +316,22 @@ namespace WEB_TASK
                 aTable.AddField("pubDate", this.getPageContent(rowKey, "#pubDate"));
                 String sql = aTable.getInsertSQL();
                 //Object[] ParmList = aTable.getParmList();
-                DbManager.ExecSQL(sql);
+                WebSQL.ExecSQL(sql);
             }
 
         }
         String[] FileList = null;
         private void button6_Click(object sender, EventArgs e)
         {
-            if (FileList == null)
+
+        }
+
+        private void btnConfigLayer_Click(object sender, EventArgs e)
+        {
+            frmRule vDialog = new frmRule();
+            if (vDialog.ShowDialog() == DialogResult.OK)
             {
-                FileList = Directory.GetFiles(@"D:\VideoAI\WEB_TASK\Skins");
-            }
-            for (int i = 0; i < FileList.Length; i++)
-            {
-                if (FileList[i] != null)
-                {
-                    String cFileName = FileList[i];
-                    iskin.SkinFile = cFileName;
-                    this.txtUrl.Text = cFileName;
-                    FileList[i] = null;
-                    break;
-                }
+                
             }
         }
         //public ChromiumWebBrowser chromeBrowser;

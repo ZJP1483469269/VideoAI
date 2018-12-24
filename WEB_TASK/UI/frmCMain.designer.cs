@@ -29,24 +29,19 @@
         private void InitializeComponent()
         {
             this.button1 = new System.Windows.Forms.Button();
-            this.txtMatch = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.txtUrl = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
-            this.txtDepth = new System.Windows.Forms.TextBox();
-            this.txtHeader = new System.Windows.Forms.TextBox();
             this.button5 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.lstUrls = new System.Windows.Forms.ListBox();
             this.button4 = new System.Windows.Forms.Button();
-            this.txtUrlID = new System.Windows.Forms.TextBox();
-            this.button6 = new System.Windows.Forms.Button();
             this.geckoWebBrowser1 = new Gecko.GeckoWebBrowser();
+            this.btnConfigLayer = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(461, 73);
+            this.button1.Location = new System.Drawing.Point(705, 93);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 0;
@@ -54,17 +49,9 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // txtMatch
-            // 
-            this.txtMatch.Location = new System.Drawing.Point(461, 44);
-            this.txtMatch.Name = "txtMatch";
-            this.txtMatch.Size = new System.Drawing.Size(140, 21);
-            this.txtMatch.TabIndex = 2;
-            this.txtMatch.Text = "a";
-            // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(552, 73);
+            this.button2.Location = new System.Drawing.Point(705, 42);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 0;
@@ -76,7 +63,7 @@
             // 
             this.txtUrl.Location = new System.Drawing.Point(13, 15);
             this.txtUrl.Name = "txtUrl";
-            this.txtUrl.Size = new System.Drawing.Size(588, 21);
+            this.txtUrl.Size = new System.Drawing.Size(676, 21);
             this.txtUrl.TabIndex = 1;
             this.txtUrl.Text = "https://www.henan.gov.cn/ywdt/hnyw/";
             // 
@@ -90,22 +77,6 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.btnStart_Click);
             // 
-            // txtDepth
-            // 
-            this.txtDepth.Location = new System.Drawing.Point(13, 44);
-            this.txtDepth.Name = "txtDepth";
-            this.txtDepth.Size = new System.Drawing.Size(140, 21);
-            this.txtDepth.TabIndex = 2;
-            this.txtDepth.Text = "5";
-            // 
-            // txtHeader
-            // 
-            this.txtHeader.Location = new System.Drawing.Point(179, 44);
-            this.txtHeader.Name = "txtHeader";
-            this.txtHeader.Size = new System.Drawing.Size(214, 21);
-            this.txtHeader.TabIndex = 8;
-            this.txtHeader.Text = "https://www.henan.gov.cn/";
-            // 
             // button5
             // 
             this.button5.Location = new System.Drawing.Point(705, 71);
@@ -116,21 +87,13 @@
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(13, 73);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(197, 21);
-            this.textBox1.TabIndex = 2;
-            this.textBox1.Text = "{PAGE_NO}<1?\'\':\'_{PAGE_NO}\'";
-            // 
             // lstUrls
             // 
             this.lstUrls.FormattingEnabled = true;
             this.lstUrls.ItemHeight = 12;
-            this.lstUrls.Location = new System.Drawing.Point(13, 102);
+            this.lstUrls.Location = new System.Drawing.Point(13, 339);
             this.lstUrls.Name = "lstUrls";
-            this.lstUrls.Size = new System.Drawing.Size(588, 136);
+            this.lstUrls.Size = new System.Drawing.Size(676, 196);
             this.lstUrls.TabIndex = 10;
             // 
             // button4
@@ -143,51 +106,38 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // txtUrlID
-            // 
-            this.txtUrlID.Location = new System.Drawing.Point(234, 73);
-            this.txtUrlID.Name = "txtUrlID";
-            this.txtUrlID.Size = new System.Drawing.Size(100, 21);
-            this.txtUrlID.TabIndex = 12;
-            this.txtUrlID.Text = "NEWS";
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(705, 168);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 23);
-            this.button6.TabIndex = 13;
-            this.button6.Text = "button6";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
-            // 
             // geckoWebBrowser1
             // 
             this.geckoWebBrowser1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.geckoWebBrowser1.Location = new System.Drawing.Point(12, 244);
+            this.geckoWebBrowser1.Location = new System.Drawing.Point(12, 44);
             this.geckoWebBrowser1.Name = "geckoWebBrowser1";
-            this.geckoWebBrowser1.Size = new System.Drawing.Size(785, 289);
+            this.geckoWebBrowser1.Size = new System.Drawing.Size(677, 289);
             this.geckoWebBrowser1.TabIndex = 14;
             this.geckoWebBrowser1.UseHttpActivityObserver = false;
+            // 
+            // btnConfigLayer
+            // 
+            this.btnConfigLayer.Location = new System.Drawing.Point(705, 167);
+            this.btnConfigLayer.Name = "btnConfigLayer";
+            this.btnConfigLayer.Size = new System.Drawing.Size(75, 23);
+            this.btnConfigLayer.TabIndex = 15;
+            this.btnConfigLayer.Text = "设定规则";
+            this.btnConfigLayer.UseVisualStyleBackColor = true;
+            this.btnConfigLayer.Click += new System.EventHandler(this.btnConfigLayer_Click);
             // 
             // frmCMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(809, 545);
+            this.Controls.Add(this.btnConfigLayer);
             this.Controls.Add(this.geckoWebBrowser1);
-            this.Controls.Add(this.button6);
-            this.Controls.Add(this.txtUrlID);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.lstUrls);
             this.Controls.Add(this.button5);
-            this.Controls.Add(this.txtHeader);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.txtDepth);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.txtMatch);
             this.Controls.Add(this.txtUrl);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -203,19 +153,14 @@
         #endregion
 
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox txtMatch;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox txtUrl;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.TextBox txtDepth;
-        private System.Windows.Forms.TextBox txtHeader;
         private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.TextBox textBox1;
         public System.Windows.Forms.ListBox lstUrls;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.TextBox txtUrlID;
-        private System.Windows.Forms.Button button6;
         private Gecko.GeckoWebBrowser geckoWebBrowser1;
+        private System.Windows.Forms.Button btnConfigLayer;
     }
 }
 
