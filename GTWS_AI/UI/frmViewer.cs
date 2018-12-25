@@ -21,9 +21,9 @@ namespace GTWS_TASK.UI
     public partial class frmViewer : frmBase
     {
 
-        public String ActiveCameraText;
-        public String ActiveCameraCode;
-        public String ActiveCameraName;
+        public String ActiveCameraText = "6cf5156252d2443bbe08944111478953";
+        public String ActiveCameraCode = "93740217427001000101#6cf5156252d2443bbe08944111478953";
+        public String ActiveCameraName = "93740217427001000101";
 
 
         ulong ulReplayHandle = 0;
@@ -55,19 +55,16 @@ namespace GTWS_TASK.UI
             if (result == 0)
             {
                 isPlay = true;
+                timAuto.Enabled = true;
             }
             else
             {
                 isPlay = false;
                 LB_MSG.Text = "播放实况失败";
-                WriteLogText("播放实况失败");
+                log4net.WriteLogFile("播放实况失败", LogType.ERROR);
             }
         }
 
-        public void WriteLogText(String cStr)
-        {
-            log4net.WriteLogFile(ActiveCameraName + "[" + ActiveCameraCode + "]" + cStr);
-        }
         private void btnEndReal_Click(object sender, EventArgs e)
         {
             try
@@ -84,7 +81,7 @@ namespace GTWS_TASK.UI
             }
             catch (Exception ex)
             {
-                WriteLogText("停止实况失败");
+                log4net.WriteLogFile("停止实况失败", LogType.ERROR);
             }
         }
 
@@ -94,7 +91,27 @@ namespace GTWS_TASK.UI
         }
 
         private IVS_CAMERA_BRIEF_INFO ActiveCamera;
+        public void setView(int iTypeID)
+        {
+            pnlPlay.Visible = false;
+            geckoWebBrowser1.Visible = false;
+            pictureBox1.Visible = false;
 
+            if (iTypeID == 1)
+            {
+                pnlPlay.Visible = true;
+                pnlPlay.Width = this.Width - 10;
+            }
+            else if (iTypeID == 2)
+            {
+                pnlPlay.Visible = true;
+                pictureBox1.Visible = true;
+                pictureBox1.Top = pnlPlay.Top;
+                pictureBox1.Height = pnlPlay.Height;
+                pnlPlay.Width = this.Width - 20 - pictureBox1.Width;
+                pictureBox1.Anchor = AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
+            }
+        }
         public int InitCameraLogin()
         {
             //VIDEO_HOST=111.6.99.50
@@ -304,8 +321,10 @@ namespace GTWS_TASK.UI
 
 
         private void frmTask_Load(object sender, EventArgs e)
-        { 
+        {
             Application.Idle += onIdle_Event;
+            pictureBox1.Load(@"D:\VideoAI_1220\GTWS_TASK\Model\IMG06.jpg");
+            geckoWebBrowser1.Navigate("http://www.baidu.com/");
         }
 
         Boolean LOAD_FLAG = false;
@@ -354,6 +373,38 @@ namespace GTWS_TASK.UI
             {
 
             }
-        } 
+        }
+
+        private void btnView_Click(object sender, EventArgs e)
+        {
+            setView(StringEx.getInt(this.textBox1.Text));
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void timAuto_Tick(object sender, EventArgs e)
+        {
+            String cAppDir = Path.GetDirectoryName(Application.ExecutablePath) + "\\AI\\";
+            if (Directory.Exists(cAppDir))
+            {
+                Directory.CreateDirectory(cAppDir);
+            }
+            String cImageFileName = cAppDir + "01.jpg";
+            int iCode = IVS_API.IVS_SDK_LocalSnapshot(ApplicationEvent.iSession, (UInt32)ulRealPlayHandle, 1, cImageFileName);
+            if (iCode == 0)
+            {
+                Stream s = new FileStream(cImageFileName, FileMode.Open, FileAccess.Read, FileShare.Read);
+                Image img = new Bitmap(s);
+                s.Close();
+                pictureBox1.Image = img;
+            }
+            else
+            {
+                log4net.WriteLogFile("IVS_SDK_LocalSnapshot:" + iCode);
+            }
+        }
     }
 }

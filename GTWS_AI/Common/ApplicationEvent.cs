@@ -10,11 +10,9 @@ namespace TLKJ_IVS
     public class ApplicationEvent
     {
         public static string Token;
-
-        public static Boolean isImgCutAbort = false;
+         
         public static Boolean isUploadAbort = false;
-        public static Thread UploadThread = null;
-        public static Thread CutThread = null;
+        public static Thread UploadThread = null; 
 
         public static void setUserCode(String cUserCode)
         {

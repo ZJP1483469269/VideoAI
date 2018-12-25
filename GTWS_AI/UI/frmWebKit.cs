@@ -21,11 +21,11 @@ namespace GTWS_TASK.UI
         private bool LOAD_LAST_FLAG = false;
         private bool LOAD_TOKEN_FLAG = false;
         private bool IS_HOME = false;
-       
+        Sunisoft.IrisSkin.SkinEngine iskin = new Sunisoft.IrisSkin.SkinEngine();
         public frmMain()
         {
             InitializeComponent();
-           
+            iskin.SkinFile = "skins/PageColor2.ssk";
         }
         public void OpenWinUrl(String vUrl)
         {
@@ -91,6 +91,7 @@ namespace GTWS_TASK.UI
         {
             timAfter.Enabled = false;
             frmAuto vDialog = new frmAuto();
+            vDialog.InitStart();
             vDialog.ShowInTaskbar = false;
             vDialog.btnAutoTake_Click(null, null);
             vDialog.Hide();

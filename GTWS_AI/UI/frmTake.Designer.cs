@@ -62,7 +62,6 @@
             this.CameraNameList = new System.Windows.Forms.ListBox();
             this.btnAutoTake = new System.Windows.Forms.Button();
             this.btnLoad = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.GBList.SuspendLayout();
             this.SuspendLayout();
@@ -303,9 +302,9 @@
             // 
             // pnlPlay
             // 
-            this.pnlPlay.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlPlay.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlPlay.Location = new System.Drawing.Point(258, 39);
             this.pnlPlay.Name = "pnlPlay";
             this.pnlPlay.Size = new System.Drawing.Size(711, 526);
@@ -353,8 +352,8 @@
             // 
             // txtCAMERA_NAME
             // 
-            this.txtCAMERA_NAME.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCAMERA_NAME.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCAMERA_NAME.Location = new System.Drawing.Point(258, 12);
             this.txtCAMERA_NAME.Name = "txtCAMERA_NAME";
             this.txtCAMERA_NAME.ReadOnly = true;
@@ -369,8 +368,8 @@
             // 
             // GBList
             // 
-            this.GBList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.GBList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.GBList.Controls.Add(this.CameraNameList);
             this.GBList.Location = new System.Drawing.Point(12, 5);
             this.GBList.Name = "GBList";
@@ -380,8 +379,8 @@
             // 
             // CameraNameList
             // 
-            this.CameraNameList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.CameraNameList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.CameraNameList.FormattingEnabled = true;
             this.CameraNameList.ItemHeight = 12;
             this.CameraNameList.Location = new System.Drawing.Point(2, 20);
@@ -412,22 +411,11 @@
             this.btnLoad.UseVisualStyleBackColor = true;
             this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(345, 571);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 82;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // frmTake
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(975, 612);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnLoad);
             this.Controls.Add(this.btnAutoTake);
             this.Controls.Add(this.GBList);
@@ -490,6 +478,5 @@
         private System.Windows.Forms.ListBox CameraNameList;
         private System.Windows.Forms.Button btnAutoTake;
         private System.Windows.Forms.Button btnLoad;
-        private System.Windows.Forms.Button button1;
     }
 }

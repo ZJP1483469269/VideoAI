@@ -674,22 +674,13 @@ namespace GTWS_TASK.UI
         public void InitUploadThread()
         {
             int iALARM = StringEx.getInt(INIConfig.ReadString("ALARM", "DFS_ALLOW", "0"));
-            if (iALARM > 0)
+            int iANALYSE = StringEx.getInt(INIConfig.ReadString("ANALYSE", "DFS_ALLOW", "0"));
+            if (iALARM > 0 || iANALYSE > 0)
             {
                 if (ApplicationEvent.UploadThread == null)
                 {
                     ApplicationEvent.UploadThread = new Thread(UploadTask.Execute);
                     ApplicationEvent.UploadThread.Start();
-                }
-            }
-
-            int iANALYSE = StringEx.getInt(INIConfig.ReadString("ANALYSE", "DFS_ALLOW", "0"));
-            if (iANALYSE > 0)
-            {
-                if (ApplicationEvent.CutThread == null)
-                {
-                   // ApplicationEvent.CutThread = new Thread(CutTask.Execute);
-                    ApplicationEvent.CutThread.Start();
                 }
             }
         }
@@ -978,7 +969,6 @@ namespace GTWS_TASK.UI
         {
             if (ApplicationEvent.UploadThread != null)
             {
-                ApplicationEvent.isImgCutAbort = true;
                 ApplicationEvent.isUploadAbort = true;
                 try
                 {
@@ -999,19 +989,6 @@ namespace GTWS_TASK.UI
 
                 }
 
-            }
-
-            if (ApplicationEvent.CutThread != null)
-            {
-                try
-                {
-                    ApplicationEvent.CutThread.Abort();
-                    ApplicationEvent.CutThread = null;
-                }
-                catch (Exception ex)
-                {
-
-                }
             }
         }
 

@@ -10,7 +10,9 @@ namespace TLKJ.Utils
         public string UrlID;
         public string Prefix;
         public string Text;
+        public string Match;
         public string Url;
+        public string PageVal; 
 
         override
         public string ToString()

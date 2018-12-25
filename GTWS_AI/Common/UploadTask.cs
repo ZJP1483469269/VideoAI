@@ -15,17 +15,21 @@ namespace TLKJ_IVS
 {
     public class UploadTask
     {
-        private static int iMinVal;
-        private static int iMaxVal;
-        private static int iGrayMinVal;
-        private static int iGrayMaxVal;
-        private static int iALARM_ALLOW;
-        private static String cALARM_PATH;
 
-        private static int iANALYSE_ALLOW;
-        private static String cANALYSE_PATH;
-        private static String cAppDir = Application.StartupPath;
-        public static void Init()
+        private int iMinVal;
+        private int iMaxVal;
+        private int iGrayMinVal;
+        private int iGrayMaxVal;
+        private int iALARM_ALLOW;
+        private String cALARM_PATH;
+
+        private int iANALYSE_ALLOW;
+        private String cANALYSE_PATH;
+        private String cAppDir;
+
+        private static UploadTask instance = null;
+
+        private UploadTask()
         {
             iMinVal = StringEx.getInt(INIConfig.ReadString("Config", AppConfig.IMAGE_MIN, "0"));
             iMaxVal = StringEx.getInt(INIConfig.ReadString("Config", AppConfig.IMAGE_MAX, "0"));
@@ -38,16 +42,27 @@ namespace TLKJ_IVS
 
             iANALYSE_ALLOW = INIConfig.ReadInt("ANALYSE", "DFS_ALLOW");
             cANALYSE_PATH = INIConfig.ReadString("ANALYSE", "DFS_PATH", "");
+
+            cAppDir = Application.StartupPath;
         }
+
+        public static UploadTask getInstance()
+        {
+            if (instance == null)
+            {
+                instance = new UploadTask();
+            }
+            return instance;
+        }
+
         public static Queue<String> AlarmFileList = null;
         public static Queue<String> AnalyseFileList = null;
-        public static String getAlarmFile()
+        public String getAlarmFile()
         {
             if (cAppDir == null)
             {
                 cAppDir = Application.StartupPath;
             }
-            Init();
             if (AlarmFileList == null)
             {
                 AlarmFileList = new Queue<string>();
@@ -83,13 +98,12 @@ namespace TLKJ_IVS
             }
         }
 
-        public static String getAnalyseFile()
+        public String getAnalyseFile()
         {
             if (cAppDir == null)
             {
                 cAppDir = Application.StartupPath;
             }
-            Init();
             if (AnalyseFileList == null)
             {
                 AnalyseFileList = new Queue<string>();
@@ -123,15 +137,16 @@ namespace TLKJ_IVS
                 return null;
             }
         }
-        private static bool UpdateAlarmFile(String cFileName)
+        private bool UpdateAlarmFile(String cFileName)
         {
             JActiveTable aMaster = new JActiveTable();
             aMaster.TableName = "XT_IMG_REC";
 
             String cFileExt = Path.GetExtension(cFileName);
             String cREC_ID = Path.GetFileName(cFileName).Replace(cFileExt, "");
-
-            Boolean UploadFlag = UploadTask.Upload(cFileName, "ALARM", "UPLOAD_FLAG");
+            String cWebUrl = INIConfig.ReadString("Config", AppConfig.WEB_URL);
+            String cUrl = "http://" + cWebUrl + "/api/dfs.ashx?UPLOAD_FIELD=UPLOAD_FLAG";
+            Boolean UploadFlag = CopyUnit.PostFile(cFileName, cWebUrl);
             if (UploadFlag)
             {
                 log4net.WriteLogFile("REC_ID为：" + cREC_ID + "的图片，已上传！");
@@ -157,7 +172,7 @@ namespace TLKJ_IVS
             }
         }
 
-        public static bool UpdateAnalyseFile(String cFileName)
+        public bool UpdateAnalyseFile(String cFileName)
         {
             Boolean isUpload = false;
             JActiveTable aMaster = new JActiveTable();
@@ -254,11 +269,12 @@ namespace TLKJ_IVS
 
         public static void Execute()
         {
+            UploadTask Task = UploadTask.getInstance();
             while (!ApplicationEvent.isUploadAbort)
             {
                 Boolean Find_File_Flag = false;
                 log4net.WriteLogFile("UploadTask.Execute..", LogType.DEBUG);
-                String cFileName = getAlarmFile();
+                String cFileName = Task.getAlarmFile();
                 if (String.IsNullOrWhiteSpace(cFileName))
                 {
                     log4net.WriteLogFile("UploadTask.Execute..未发现图片", LogType.DEBUG);
@@ -266,7 +282,7 @@ namespace TLKJ_IVS
                 else
                 {
                     Find_File_Flag = true;
-                    UpdateAlarmFile(cFileName);
+                    Task.UpdateAlarmFile(cFileName);
                 }
                 try
                 {
@@ -277,14 +293,14 @@ namespace TLKJ_IVS
                     log4net.WriteLogFile("UploadTask.Sleep." + ex.Message);
                 }
 
-                cFileName = getAnalyseFile();
+                cFileName = Task.getAnalyseFile();
                 if (String.IsNullOrWhiteSpace(cFileName))
                 {
                     log4net.WriteLogFile("UploadTask.Execute..未发现图片", LogType.DEBUG);
                 }
                 else
                 {
-                    UpdateAnalyseFile(cFileName);
+                    Task.UpdateAnalyseFile(cFileName);
                     if (!Find_File_Flag)
                     {
                         Find_File_Flag = true;
@@ -316,7 +332,7 @@ namespace TLKJ_IVS
         }
 
         private static SftpClient AlarmClient = null;
-        public static SftpClient getAlarmClient()
+        public SftpClient getAlarmClient()
         {
             if (AlarmClient == null)
             {
@@ -328,12 +344,29 @@ namespace TLKJ_IVS
                 String cDFS_PASS = INIConfig.ReadString(cDFSType, "DFS_PASS", "");
                 AlarmClient = new SftpClient(cDFS_HOST, iDFS_PORT, cDFS_USER, cDFS_PASS);
             }
-            return AlarmClient;
+
+            if (!AlarmClient.IsConnected)
+            {
+                try
+                {
+                    AlarmClient.Connect();
+                    return AlarmClient;
+                }
+                catch (Exception ex)
+                {
+                    log4net.WriteLogFile(ex.Message);
+                    AlarmClient = null;
+                    return null;
+                }
+            }
+            else
+            {
+                return AlarmClient;
+            }
         }
 
-
         private static SftpClient AnalyseClient = null;
-        public static SftpClient getAnalyseClient()
+        public SftpClient getAnalyseClient()
         {
             if (AnalyseClient == null)
             {
@@ -345,36 +378,23 @@ namespace TLKJ_IVS
                 String cDFS_PASS = INIConfig.ReadString(cDFSType, "DFS_PASS", "");
                 AnalyseClient = new SftpClient(cDFS_HOST, iDFS_PORT, cDFS_USER, cDFS_PASS);
             }
-            return AnalyseClient;
-        }
-        public static Boolean Upload(String cFileName, String cType, String cFieldName)
-        {
-            if (!File.Exists(cFileName))
+            if (!AnalyseClient.IsConnected)
             {
-                log4net.WriteLogFile("UploadTask..文件不存在..." + cFileName);
-                return false;
-            }
-            String cDFS_PATH = INIConfig.ReadString(cType, "DFS_PATH", "");
-            String cDFSType = INIConfig.ReadString(cType, "DFS_TYPE", "");
-
-            if (cDFSType.Equals("SSH"))
-            {
-                SftpClient ftp = getAlarmClient();
-                return CopyUnit.SSH_Upload(AlarmClient, cFileName, cType);
-            }
-            else if (cDFSType.Equals("POST"))
-            {
-                String cDFSUrl = "http://" + cDFS_PATH + "/api/dfs.ashx?UPLOAD_FIELD=" + cFieldName;
-                return CopyUnit.PostFile(cFileName, cDFSUrl);
-            }
-            else if (cDFSType.Equals("COPY"))
-            {
-                return CopyUnit.CopyFile(cFileName, cDFS_PATH);
+                try
+                {
+                    AnalyseClient.Connect();
+                    return AnalyseClient;
+                }
+                catch (Exception ex)
+                {
+                    log4net.WriteLogFile(ex.Message);
+                    AnalyseClient = null;
+                    return null;
+                }
             }
             else
             {
-                log4net.WriteLogFile("UploadTask..参数配置错误！");
-                return false;
+                return AnalyseClient;
             }
         }
     }

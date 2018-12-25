@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.Button btnLoad;
             System.Windows.Forms.Button btnAutoTake;
-            System.Windows.Forms.Button btnAI;
             System.Windows.Forms.Button btnClose;
             System.Windows.Forms.Button btnEndReal;
             System.Windows.Forms.Button btnTake;
@@ -44,14 +43,80 @@
             this.txtCameraName = new System.Windows.Forms.TextBox();
             this.LB_KEY = new System.Windows.Forms.Label();
             this.LB_MSG = new System.Windows.Forms.Label();
+            this.CameraNameList = new System.Windows.Forms.ListBox();
             btnLoad = new System.Windows.Forms.Button();
             btnAutoTake = new System.Windows.Forms.Button();
-            btnAI = new System.Windows.Forms.Button();
             btnClose = new System.Windows.Forms.Button();
             btnEndReal = new System.Windows.Forms.Button();
             btnTake = new System.Windows.Forms.Button();
             btnStartReal = new System.Windows.Forms.Button();
             this.SuspendLayout();
+            // 
+            // btnLoad
+            // 
+            btnLoad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            btnLoad.Location = new System.Drawing.Point(530, 506);
+            btnLoad.Name = "btnLoad";
+            btnLoad.Size = new System.Drawing.Size(74, 29);
+            btnLoad.TabIndex = 87;
+            btnLoad.Text = "读取摄像机";
+            btnLoad.UseVisualStyleBackColor = true;
+            btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
+            // 
+            // btnAutoTake
+            // 
+            btnAutoTake.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            btnAutoTake.Location = new System.Drawing.Point(611, 506);
+            btnAutoTake.Name = "btnAutoTake";
+            btnAutoTake.Size = new System.Drawing.Size(62, 29);
+            btnAutoTake.TabIndex = 88;
+            btnAutoTake.Text = "自动巡航";
+            btnAutoTake.UseVisualStyleBackColor = true;
+            btnAutoTake.Click += new System.EventHandler(this.btnAutoTake_Click);
+            // 
+            // btnClose
+            // 
+            btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            btnClose.Location = new System.Drawing.Point(862, 506);
+            btnClose.Name = "btnClose";
+            btnClose.Size = new System.Drawing.Size(63, 29);
+            btnClose.TabIndex = 85;
+            btnClose.Text = "关闭";
+            btnClose.UseVisualStyleBackColor = true;
+            btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // btnEndReal
+            // 
+            btnEndReal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            btnEndReal.Location = new System.Drawing.Point(795, 506);
+            btnEndReal.Name = "btnEndReal";
+            btnEndReal.Size = new System.Drawing.Size(61, 29);
+            btnEndReal.TabIndex = 84;
+            btnEndReal.Text = "停止实况";
+            btnEndReal.UseVisualStyleBackColor = true;
+            btnEndReal.Click += new System.EventHandler(this.btnEndReal_Click);
+            // 
+            // btnTake
+            // 
+            btnTake.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            btnTake.Location = new System.Drawing.Point(679, 506);
+            btnTake.Name = "btnTake";
+            btnTake.Size = new System.Drawing.Size(43, 29);
+            btnTake.TabIndex = 82;
+            btnTake.Text = "拍照";
+            btnTake.UseVisualStyleBackColor = true;
+            btnTake.Click += new System.EventHandler(this.btnTake_Click);
+            // 
+            // btnStartReal
+            // 
+            btnStartReal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            btnStartReal.Location = new System.Drawing.Point(728, 506);
+            btnStartReal.Name = "btnStartReal";
+            btnStartReal.Size = new System.Drawing.Size(61, 29);
+            btnStartReal.TabIndex = 83;
+            btnStartReal.Text = "开始实况";
+            btnStartReal.UseVisualStyleBackColor = true;
+            btnStartReal.Click += new System.EventHandler(this.btnStartReal_Click);
             // 
             // pnlPlay
             // 
@@ -60,7 +125,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlPlay.Location = new System.Drawing.Point(252, 39);
             this.pnlPlay.Name = "pnlPlay";
-            this.pnlPlay.Size = new System.Drawing.Size(473, 340);
+            this.pnlPlay.Size = new System.Drawing.Size(673, 459);
             this.pnlPlay.TabIndex = 70;
             // 
             // timAfter
@@ -77,105 +142,30 @@
             this.timTask.Interval = 3000;
             this.timTask.Tick += new System.EventHandler(this.timTask_Tick);
             // 
-            // btnLoad
-            // 
-            btnLoad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            btnLoad.Location = new System.Drawing.Point(281, 387);
-            btnLoad.Name = "btnLoad";
-            btnLoad.Size = new System.Drawing.Size(74, 29);
-            btnLoad.TabIndex = 87;
-            btnLoad.Text = "读取摄像机";
-            btnLoad.UseVisualStyleBackColor = true;
-            btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
-            // 
-            // btnAutoTake
-            // 
-            btnAutoTake.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            btnAutoTake.Location = new System.Drawing.Point(362, 387);
-            btnAutoTake.Name = "btnAutoTake";
-            btnAutoTake.Size = new System.Drawing.Size(62, 29);
-            btnAutoTake.TabIndex = 88;
-            btnAutoTake.Text = "自动巡航";
-            btnAutoTake.UseVisualStyleBackColor = true;
-            btnAutoTake.Click += new System.EventHandler(this.btnAutoTake_Click);
-            // 
-            // btnAI
-            // 
-            btnAI.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            btnAI.Location = new System.Drawing.Point(430, 387);
-            btnAI.Name = "btnAI";
-            btnAI.Size = new System.Drawing.Size(49, 29);
-            btnAI.TabIndex = 86;
-            btnAI.Text = "分析";
-            btnAI.UseVisualStyleBackColor = true;
-            btnAI.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // btnClose
-            // 
-            btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            btnClose.Location = new System.Drawing.Point(668, 387);
-            btnClose.Name = "btnClose";
-            btnClose.Size = new System.Drawing.Size(63, 29);
-            btnClose.TabIndex = 85;
-            btnClose.Text = "关闭";
-            btnClose.UseVisualStyleBackColor = true;
-            btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
-            // btnEndReal
-            // 
-            btnEndReal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            btnEndReal.Location = new System.Drawing.Point(601, 387);
-            btnEndReal.Name = "btnEndReal";
-            btnEndReal.Size = new System.Drawing.Size(61, 29);
-            btnEndReal.TabIndex = 84;
-            btnEndReal.Text = "停止实况";
-            btnEndReal.UseVisualStyleBackColor = true;
-            btnEndReal.Click += new System.EventHandler(this.btnEndReal_Click);
-            // 
-            // btnTake
-            // 
-            btnTake.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            btnTake.Location = new System.Drawing.Point(485, 387);
-            btnTake.Name = "btnTake";
-            btnTake.Size = new System.Drawing.Size(43, 29);
-            btnTake.TabIndex = 82;
-            btnTake.Text = "拍照";
-            btnTake.UseVisualStyleBackColor = true;
-            btnTake.Click += new System.EventHandler(this.btnTake_Click);
-            // 
-            // btnStartReal
-            // 
-            btnStartReal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            btnStartReal.Location = new System.Drawing.Point(534, 387);
-            btnStartReal.Name = "btnStartReal";
-            btnStartReal.Size = new System.Drawing.Size(61, 29);
-            btnStartReal.TabIndex = 83;
-            btnStartReal.Text = "开始实况";
-            btnStartReal.UseVisualStyleBackColor = true;
-            btnStartReal.Click += new System.EventHandler(this.btnStartReal_Click);
-            // 
             // YWZ_TXT_LIST
             // 
-            this.YWZ_TXT_LIST.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.YWZ_TXT_LIST.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.YWZ_TXT_LIST.FormattingEnabled = true;
             this.YWZ_TXT_LIST.ItemHeight = 12;
-            this.YWZ_TXT_LIST.Location = new System.Drawing.Point(12, 39);
+            this.YWZ_TXT_LIST.Location = new System.Drawing.Point(14, 386);
             this.YWZ_TXT_LIST.Name = "YWZ_TXT_LIST";
-            this.YWZ_TXT_LIST.Size = new System.Drawing.Size(231, 340);
+            this.YWZ_TXT_LIST.Size = new System.Drawing.Size(231, 112);
             this.YWZ_TXT_LIST.TabIndex = 89;
             // 
             // txtCameraName
             // 
+            this.txtCameraName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCameraName.Location = new System.Drawing.Point(12, 12);
             this.txtCameraName.Name = "txtCameraName";
-            this.txtCameraName.Size = new System.Drawing.Size(713, 21);
+            this.txtCameraName.Size = new System.Drawing.Size(914, 21);
             this.txtCameraName.TabIndex = 90;
             // 
             // LB_KEY
             // 
+            this.LB_KEY.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.LB_KEY.AutoSize = true;
-            this.LB_KEY.Location = new System.Drawing.Point(183, 395);
+            this.LB_KEY.Location = new System.Drawing.Point(188, 522);
             this.LB_KEY.Name = "LB_KEY";
             this.LB_KEY.Size = new System.Drawing.Size(29, 12);
             this.LB_KEY.TabIndex = 91;
@@ -183,25 +173,38 @@
             // 
             // LB_MSG
             // 
+            this.LB_MSG.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.LB_MSG.AutoSize = true;
-            this.LB_MSG.Location = new System.Drawing.Point(12, 395);
+            this.LB_MSG.Location = new System.Drawing.Point(12, 522);
             this.LB_MSG.Name = "LB_MSG";
             this.LB_MSG.Size = new System.Drawing.Size(29, 12);
             this.LB_MSG.TabIndex = 91;
             this.LB_MSG.Text = "    ";
             // 
+            // CameraNameList
+            // 
+            this.CameraNameList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.CameraNameList.FormattingEnabled = true;
+            this.CameraNameList.ItemHeight = 12;
+            this.CameraNameList.Location = new System.Drawing.Point(14, 39);
+            this.CameraNameList.Name = "CameraNameList";
+            this.CameraNameList.Size = new System.Drawing.Size(231, 340);
+            this.CameraNameList.TabIndex = 92;
+            this.CameraNameList.DoubleClick += new System.EventHandler(this.CameraNameList_DoubleClick);
+            // 
             // frmAuto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(737, 420);
+            this.ClientSize = new System.Drawing.Size(937, 547);
+            this.Controls.Add(this.CameraNameList);
             this.Controls.Add(this.LB_MSG);
             this.Controls.Add(this.LB_KEY);
             this.Controls.Add(this.txtCameraName);
             this.Controls.Add(this.YWZ_TXT_LIST);
             this.Controls.Add(btnLoad);
             this.Controls.Add(btnAutoTake);
-            this.Controls.Add(btnAI);
             this.Controls.Add(btnClose);
             this.Controls.Add(btnEndReal);
             this.Controls.Add(btnTake);
@@ -211,7 +214,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "国土智能监控取证系统";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmTake_FormClosed);
-            this.Load += new System.EventHandler(this.frmTask_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -226,5 +228,6 @@
         public System.Windows.Forms.ListBox YWZ_TXT_LIST;
         private System.Windows.Forms.Label LB_KEY;
         private System.Windows.Forms.Label LB_MSG;
+        private System.Windows.Forms.ListBox CameraNameList;
     }
 }

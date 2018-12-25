@@ -23,18 +23,9 @@ namespace TLKJ_IVS
             FileStream fs = null;
             try
             {
-                sftp.Connect(); 
                 String cDFS_PATH = INIConfig.ReadString(cDFSType, "DFS_PATH", "");
                 fs = new FileStream(cFileName, FileMode.Open);
                 String cStr = Path.GetFileName(cFileName);
-                try
-                {
-                    sftp.CreateDirectory(cDFS_PATH);
-                }
-                catch (Exception ex)
-                {
-                    log4net.WriteLogFile("CopyUnit.CreateDirectory:" + ex.Message, LogType.ERROR);
-                }
                 String cDFSPath = cDFS_PATH;
                 if (!cDFSPath.EndsWith("/"))
                 {

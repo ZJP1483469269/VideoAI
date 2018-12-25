@@ -24,6 +24,7 @@ namespace TLKJ.Utils
         public readonly static string ACTIVE_MQ_HOST = "ACTIVE_MQ_HOST";
         public readonly static string ACTIVE_MQ_PORT = "ACTIVE_MQ_PORT";
         public readonly static string WEB_URL = "WEB_URL";
+        public readonly static string DFS_PATH = "DFS_PATH"; 
 
         public readonly static string CACHE_USER = "CACHE_USER";
 
