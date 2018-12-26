@@ -1,0 +1,847 @@
+﻿/* CSS Document */
+body
+{
+    margin: 0 auto;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+img, ul li
+{
+    border: 0;
+}
+
+li
+{
+    list-style: none;
+}
+
+a:link, a:visited, a:active
+{
+    color: #333;
+    text-decoration: none;
+}
+
+a:hover
+{
+    color: #999999;
+    text-decoration: none;
+}
+
+ul, dl, dd, h1, h2, h3, h4, h5, h6, form, p
+{
+    padding: 0;
+    margin: 0;
+    font-size: 12px;
+}
+
+td, span
+{
+    font-size: 12px;
+}
+
+
+/*layout*/
+
+#container
+{
+    width: 100%;
+    margin: 0 auto;
+    background-color: #FFFFFF;
+}
+
+#container .clearfloat
+{
+    clear: both;
+    height: 0;
+    font-size: 1px;
+    line-height: 0px;
+}
+
+#top
+{
+    width: 100%;
+    height: 35px;
+    background-color: #ebe3e1;
+}
+
+#top_c
+{
+    width: 1000px;
+    height: 35px;
+    margin: 0 auto;
+}
+
+.top_l
+{
+    width: 400px;
+    height: 35px;
+    float: left;
+    line-height: 35px;
+    text-align: left;
+    color: #333333;
+    font-size: 12px;
+}
+
+.top_r
+{
+    width: 600px;
+    height: 35px;
+    float: left;
+    line-height: 35px;
+    text-align: right;
+    color: #333333;
+    font-size: 12px;
+}
+
+#conment {
+    width: 100%;
+    height: 1710px;
+    background-image: url(/widget/images/bb.jpg);
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-color: #FFFFFF;
+}
+
+.neirong
+{
+    width: 1000px;
+    height: 1050px;
+    margin: 0 auto;
+}
+
+.banner
+{
+    width: 1000px;
+    height: 150px;
+    background-image: url(/widget/images/ban.png);
+    background-repeat: no-repeat;
+}
+
+.conment1
+{
+    width: 1000px;
+    height: 350px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    background-color: #FFFFFF;
+}
+
+.con_left
+{
+    width: 520px;
+    height: 350px;
+    float: left;
+    padding-right: 10px;
+}
+
+.con_cent
+{
+    width: 460px;
+    height: 350px;
+    float: left;
+    padding-right: 10px;
+}
+
+.con_right {
+    width: 282px;
+    height: 295px;
+    padding-top: 20px;
+    margin: 0px 0px 10px 15px;
+    border: 1px solid #CCCCCC;
+    background-image: url(/widget/images/td1.png);
+    background-repeat: no-repeat;
+}
+
+.conL_kuang
+{
+    width: 518px;
+    height: 308px;
+    border: 1px solid #CCC;
+}
+
+.conL_zi
+{
+    width: 510px;
+    padding: 0px 5px;
+    margin-bottom: 5px;
+    height: 35px;
+    line-height: 35px;
+    color: #333;
+    font-size: 14px;
+    text-align: center;
+    background-color: #dadbdb;
+}
+
+.conL_zi p
+{
+    font-size: 11px;
+}
+
+.conR1
+{
+    width: 252px;
+    height: 64px;
+    padding: 45px 15px 10px 15px;
+}
+
+.conR1_hang
+{
+    width: 252px;
+    height: 30px;
+    line-height: 30px;
+    border-bottom: 1px dashed #ccc;
+    text-align: left;
+    font-size: 14px;
+}
+
+.conR2
+{
+    width: 260px;
+    height: 159px;
+    margin: 0px 9px 10px 9px;
+    border: 1px solid #eedcaa;
+}
+
+.conR2_hang
+{
+    width: 250px;
+    height: 35px;
+    line-height: 35px;
+    margin: 5px;
+    border-bottom: 1px dashed #ccc;
+    text-align: left;
+    font-size: 14px;
+}
+
+.conR2_kuang
+{
+    width: 250px;
+    height: 103px;
+    padding: 10px 0px;
+}
+
+.conment2
+{
+    width: 1000px;
+    height: 800px;
+}
+
+.conment2_l
+{
+    width: 700px;
+    height: 800px;
+    float: left;
+}
+
+.conment2_r
+{
+    width: 300px;
+    height: 800px;
+    float: left;
+}
+
+.conment2lB
+{
+    width: 700px;
+    height: 110px;
+}
+
+.con2L_hang
+{
+    width: 700px;
+    height: 330px;
+    margin-top: 15px;
+}
+
+.com2L_kuang
+{
+    width: 338px;
+    height: 328px;
+    float: left;
+    border: 1px solid #cccccc;
+    margin-right: 10px;
+}
+
+.con2L_kuai
+{
+    width: 318px;
+    height: 275px;
+    padding: 10px;
+}
+
+.con2L_zi
+{
+    width: 318px;
+    height: 27px;
+    line-height: 27px;
+    font-size: 13px;
+    color: #333;
+}
+
+.con2R_kuang
+{
+    width: 283px;
+    height: 330px;
+    margin: 0px 0px 15px 15px;
+    border: 1px solid #cccccc;
+}
+
+.con2R_tu {
+    width: 253px;
+    height: 62px;
+    margin: 0px 0px 15px 15px;
+    border: 1px solid #ccc;
+    background-image: url(/widget/images/zxjb.jpg);
+    background-repeat: no-repeat;
+    padding: 60px 15px 0px 15px;
+    line-height: 24px;
+    color: #333;
+}
+
+.con2R_tu p
+{
+    font-size: 13px;
+}
+
+.con2R_kuang2
+{
+    width: 283px;
+    height: 256px;
+    margin: 0px 0px 0px 15px;
+    border: 1px solid #cccccc;
+}
+
+.con2R_kuai
+{
+    width: 263px;
+    height: 370px;
+    padding: 10px;
+}
+
+.con2R_zi
+{
+    width: 263px;
+    height: 28px;
+    line-height: 28px;
+    font-size: 13px;
+    color: #333;
+}
+
+.conment3
+{
+    width: 998px;
+    height: 238px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+}
+
+.more
+{
+    width: 90px;
+    float: right;
+    height: 37px;
+    line-height: 37px;
+    padding-right: 10px;
+    color: #fff;
+    text-align: right;
+    font-size: 12px;
+}
+
+#link {
+    width: 998px;
+    height: 80px;
+    margin-top: 14px;
+    border: 1px solid #17527c;
+    background-image: url(/widget/images/yqlj.gif);
+    background-repeat: no-repeat;
+    background-position: left center;
+}
+
+#footer
+{
+    width: 100%;
+    height: 120px;
+    background-color: #2470ae;
+    margin-top: 50px;
+}
+
+.footC
+{
+    width: 1000px;
+    height: 90px;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 30px;
+    line-height: 22px;
+    color: #fff;
+    font-size: 13px;
+}
+
+
+/* 列表页 */
+
+.nr {
+    width: 100%;
+    background-image: url(/widget/images/bb.jpg);
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-color: #FFFFFF;
+}
+
+.nr_c
+{
+    width: 1000px;
+    margin: 0 auto;
+}
+
+.nr_c2
+{
+    width: 1000px;
+    height: 1000px;
+    padding-top: 15px;
+    background-color: #fff;
+}
+
+.nr_c2l
+{
+    width: 698px;
+    float: left;
+    border: 1px solid #cccccc;
+    margin-bottom: 15px;
+}
+
+.nr_c2r
+{
+    width: 300px;
+    height: 900px;
+    float: left;
+}
+
+.nr_pos
+{
+    width: 400px;
+    height: 33px;
+    line-height: 33px;
+    float: right;
+    text-align: right;
+    color: #333;
+    font-size: 12px;
+    font-weight: 100;
+    margin-right: 10px;
+}
+
+.nr_kuang
+{
+    width: 678px;
+    height: 250px;
+    margin: 15px 10px 15px 10px;
+    border-bottom: 1px dashed #ccc;
+}
+
+.nr_page
+{
+    width: 678px;
+    height: 30px;
+    padding: 5px 10px 0px 10px;
+    text-align: center;
+    font-size: 14px;
+    color: #036;
+}
+
+.nr_tu
+{
+    width: 283px;
+    height: 350px;
+    margin: 0px 0px 15px 15px;
+    border: 1px solid #ccc;
+}
+
+.nr_more
+{
+    width: 90px;
+    float: right;
+    height: 33px;
+    line-height: 33px;
+    padding-right: 10px;
+    color: #666;
+    text-align: right;
+    font-size: 12px;
+    font-weight: 100;
+}
+
+.nr_nr
+{
+    width: 283px;
+    height: 327px;
+    padding-top: 5px;
+}
+
+.nr_tk
+{
+    width: 126px;
+    height: 138px;
+    padding: 10px 0px 0px 10px;
+    float: left;
+}
+
+.nr_tkt
+{
+    width: 124px;
+    height: 85px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+.nr_tkz
+{
+    width: 126px;
+    height: 55px;
+    padding-top: 5px;
+    line-height: 20px;
+    text-align: center;
+    font-size: 11px;
+}
+
+.xq_biao
+{
+    width: 698px;
+    height: 60px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 25px;
+    padding-top: 10px;
+}
+
+.xq_biao2
+{
+    width: 658px;
+    height: 30px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 30px;
+    border-bottom: 1px solid #ccc;
+    margin: 0px 20px;
+    color: #666;
+    padding-bottom: 10px;
+}
+
+.xq_biao3
+{
+    width: 698px;
+    height: 30px;
+    text-align: center;
+    font-size: 12px;
+    color: #999;
+    line-height: 30px;
+}
+
+.xq_nr
+{
+    width: 658px;
+    height: auto;
+    padding: 15px 20px;
+    text-align: left;
+}
+
+.xq_img
+{
+    width: 658px;
+    text-align: center;
+    padding-bottom: 15px;
+}
+
+.xq_nr p
+{
+    font-size: 14px;
+    line-height: 28px;
+    color: #333;
+    text-indent: 2em;
+}
+
+.xq_xx
+{
+    width: 658px;
+    height: 10px;
+    margin: 0px 15px;
+    border-bottom: 1px dashed #ccc;
+}
+
+.xq_next
+{
+    width: 628px;
+    height: 60px;
+    padding: 25px 30px 25px 30px;
+}
+
+.xq_next p
+{
+    line-height: 30px;
+    font-size: 14px;
+    color: #666;
+    text-align: left;
+}
+
+
+/* 导航菜单 */
+
+#navN {
+    width: 1000px;
+    height: 39px;
+    margin: 0 auto;
+    color: #FFFFFF;
+    line-height: 39px;
+    background-image: url(/widget/images/22_05.png);
+    background-repeat: repeat-x;
+}
+
+#navNs {
+    width: 1000px;
+    height: 39px;
+    margin: 0 auto;
+    color: #FFFFFF;
+    line-height: 39px;
+    background-image: url(/widget/images/22_03.jpg);
+    background-repeat: repeat-x;
+}
+
+#navNs ul
+{
+    list-style: none;
+    margin: 0px;
+}
+
+    #navNs ul li {
+        float: left;
+        display: block;
+        height: 39px;
+        color: #FFFFFF;
+        background-image: url(/widget/images/22_05.png);
+        background-repeat: repeat-x;
+    }
+
+#navNs ul li a
+{
+    padding-left: 23px;
+    padding-right: 23px;
+    line-height: 39px;
+    font-size: 16px;
+    display: block;
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+    #navNs ul li a:hover {
+        color: #FFFFFF;
+        background-image: url(/widget/images/22_03.jpg);
+        background-repeat: repeat-x;
+    }
+
+
+/*
+*/
+
+#navN ul
+{
+    list-style: none;
+    margin: 0px;
+}
+
+    #navN ul li {
+        float: left;
+        display: block;
+        height: 39px;
+        color: #FFFFFF;
+        background-image: url(/widget/images/22_05.png);
+        background-repeat: repeat-x;
+    }
+
+#navN ul li a
+{
+    padding-left: 23px;
+    padding-right: 23px;
+    line-height: 39px;
+    font-size: 16px;
+    display: block;
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+    #navN ul li a:hover {
+        color: #FFFFFF;
+        background-image: url(/widget/images/22_03.jpg);
+        background-repeat: repeat-x;
+    }
+
+
+/* 首页新闻TAB */
+
+*
+{
+    list-style-type: none;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+}
+
+.tab
+{
+    width: 460px;
+    height: 350px;
+    overflow: hidden;
+    text-align: left;
+    font-size: 13px;
+    color: #333;
+    line-height: 28px;
+}
+
+.tab_b
+{
+    overflow: hidden;
+    margin: 10px;
+    text-align: left;
+    font-size: 13px;
+}
+
+.menu
+{
+    overflow: hidden;
+    border-bottom: 2px #2b6893 solid;
+}
+
+.menu li
+{
+    display: block;
+    float: left;
+    display: list-item;
+    text-align: center;
+    width: 80px;
+    line-height: 40px;
+    font-size: 14px;
+}
+
+.menu li a
+{
+    display: block;
+}
+
+.menu_d
+{
+    border-bottom: 2px #00BAF3 solid;
+    background-color: #FFFFFF;
+    color: #333;
+    font-weight: bold;
+}
+
+.tab ul li.aaa
+{
+    background: #d0dbe5;
+    color: #333;
+}
+
+
+/* marqueeleft */
+
+.marqueeleft
+{
+    height: 180px;
+    width: 958px;
+    overflow: hidden;
+    margin: 15px auto 5px auto;
+}
+
+.marqueeleft ul
+{
+    float: left;
+}
+
+.marqueeleft li
+{
+    float: left;
+    margin: 0 11px;
+    display: inline;
+    width: 202px;
+    height: 180px;
+    overflow: hidden;
+}
+
+.marqueeleft li .pic
+{
+    display: block;
+    border: #ccc 1px solid;
+    width: 200px;
+    height: 150px;
+    overflow: hidden;
+}
+
+.marqueeleft li .txt
+{
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+}
+
+.z1
+{
+    margin: 0 auto;
+    width: 100%;
+    border: 1px solid #cccccc;
+    margin-bottom: 15px;
+}
+
+.nr_kuang1
+{
+    width: 100%;
+    height: 100%;
+    margin: 15px 10px 15px 0px;
+    border-bottom: 1px dashed #ccc;
+}
+
+
+/*二维码*/
+
+.client
+{
+    bottom: 228px;
+    width: 100px;
+    right: 0px;
+    font-size: 12px;
+    position: fixed;
+}
+
+.wechat
+{
+    bottom: 98px;
+    width: 100px;
+    right: 0px;
+    font-size: 12px;
+    position: fixed;
+}
+
+.weixin
+{
+    margin: 0px;
+    border-image: none;
+    width: 100px;
+}
+
+.report
+{
+    font-size: 12px;
+    border-top: #dedede 1px solid;
+    height: 134px;
+    border-right: #dedede 1px solid;
+    width: 98px;
+    right: 0px;
+    border-bottom: #dedede 1px solid;
+    position: fixed;
+    text-align: center;
+    border-left: #dedede 1px solid;
+    bottom: 98px;
+    background-color: #fff;
+}

@@ -1,0 +1,61 @@
+
+/* font */
+.fontR { color: #900; }
+
+/* 标题 */
+.tit_lan { height:33px; width: 328px; background-image:url(../images/tit2.png); background-repeat:no-repeat; line-height: 33px; font-size: 14px; color: #fff; font-weight: bold; padding-left: 10px; }
+.tit_hui { height:33px; background-image:url(../images/ping2.jpg); background-repeat:repeat-x; line-height: 33px; font-size: 12px; color: #333333; font-weight: bold; padding-left: 8px; }
+.title2 {height: 33px;font-size: 14px;line-height: 33px;font-weight: bold;color: #fff;background-color: #157cc7; padding-left: 20px;text-align: left;}
+.tit_blue { height: 33px; background-color: #d0dbe5; line-height: 33px; font-size: 12px; color: #333333; font-weight: bold; padding-left: 8px; }
+
+
+.td1 { width: 70px; height: 30px; line-height:30px; font-size: 14px; padding-left: 10px; }
+.tdLB3 { width:20px; height: 30px; line-height: 30px; text-align: center; font-size: 14px; }
+.tdLB1 { width:558px; height: 30px; line-height: 30px; text-align: left; font-size: 14px; }
+.tdLB2 { width: 100px; height: 30px; line-height: 30px; text-align: center; color: #999; font-size: 14px; }
+
+/* 链接 */
+.gd:link{color: #fff;text-decoration: none;}
+.gd:hover {color: #666;text-decoration: underline;}
+.gd:visited {color: #fff;text-decoration:none;}
+
+.ww:link{color: #fff;text-decoration: none;}
+.ww:hover {color: #fff;text-decoration: underline;}
+.ww:visited {color: #fff;text-decoration:none;}
+
+.br:link{color: #333;text-decoration: none;}
+.br:hover {color: #900;text-decoration: none;}
+.br:visited {color: #333;text-decoration:none;}
+
+.bg:link{color: #036;text-decoration: none;}
+.bg:hover {color: #999;text-decoration: none;}
+.bg:visited {color: #036;text-decoration:none;}
+
+.bl:link{color: #333;text-decoration: none;}
+.bl:hover {color: #036;text-decoration: underline;}
+.bl:visited {color: #333;text-decoration:none;}
+
+.lh:link{color: #036;text-decoration: none;}
+.lh:hover {color: #666;text-decoration: underline;}
+.lh:visited {color: #036;text-decoration:none;}
+
+
+
+
+.inp {
+	border: 1px solid #CCCCCC;
+	font-size: 13px;
+	line-height: 22px;
+	width:170px;
+	margin-right: 8px;
+}
+.btn_sear {
+	width:50px;
+	height:24px;
+	border:none;
+	cursor:pointer;
+	font-size: 13px;
+	color: #FFFFFF;
+	background: url(../images/13.gif);
+	font-weight: bold;
+}
