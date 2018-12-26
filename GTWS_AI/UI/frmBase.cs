@@ -36,7 +36,7 @@ namespace GTWS_TASK.UI
             Form vDialog = null;
             if (iTYPEID == 1)
             {
-                frmMain vItem = new frmMain();
+                frmWebKit vItem = new frmWebKit();
                 vItem.geckoWebBrowser1.Navigate(cUrl);
                 vDialog = vItem;
             }

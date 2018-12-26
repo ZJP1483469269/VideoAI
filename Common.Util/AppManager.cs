@@ -35,6 +35,10 @@ namespace TLKJ.Utils
         }
         public static Boolean RedrawImage(String cFileName, List<Rectangle> vRects)
         {
+            if (!File.Exists(cFileName))
+            {
+                return true;
+            }
             Bitmap vImage = (Bitmap)Bitmap.FromFile(cFileName);
             try
             {
@@ -166,6 +170,6 @@ namespace TLKJ.Utils
         public static string GetString(DataTable tbl, int iRowIdx, string colName)
         {
             return tbl.Rows[iRowIdx][colName].ToString();
-        } 
+        }
     }
 }

@@ -38,15 +38,15 @@ namespace TLKJ.DAO
         public void query_alarm()
         {
             String cORG_ID = StringEx.getString(request["ORG_ID"]);
-            String cADDR = StringEx.getString(request["ADDR"]);
+            String cCAMERA_NAME = StringEx.getString(request["CAMERA_NAME"]);
             String cALARM_CHECKED = StringEx.getString(request["ALARM_CHECKED"]);
             ActiveResult vret = ActiveResult.Valid(AppConfig.FAILURE);
 
             String cWhereParm = " (ALARM_FLAG=1) ";
-            cWhereParm= cWhereParm+" AND EXISTS( SELECT 1 FROM XT_CAMERA X WHERE X.ORG_ID='" + cORG_ID + "' AND X.DEVICE_ID=CAMERA_ID ";
-            if (!String.IsNullOrWhiteSpace(cADDR))
+            cWhereParm = cWhereParm + " AND EXISTS( SELECT 1 FROM XT_CAMERA X WHERE X.ORG_ID='" + cORG_ID + "' AND X.DEVICE_ID=CAMERA_ID ";
+            if (!String.IsNullOrWhiteSpace(cCAMERA_NAME))
             {
-                cWhereParm = cWhereParm + " AND (ADDR LIKE '%" + cADDR + "%')";
+                cWhereParm = cWhereParm + " AND (CAMERA_NAME LIKE '%" + cCAMERA_NAME + "%')";
             }
             cWhereParm = cWhereParm + " )";
             if (!String.IsNullOrWhiteSpace(cALARM_CHECKED))
@@ -55,7 +55,9 @@ namespace TLKJ.DAO
             }
 
             String cOrderBy = "ORDER BY REC_ID ASC";
-            DBResult dbret = dao.Query("*,(SELECT ADDR FROM XT_CAMERA X WHERE X.DEVICE_ID=CAMERA_ID) AS ADDR ", "XT_IMG_REC T", cWhereParm, cOrderBy, iPageNo, iPageSize);
+            DBResult dbret = dao.Query("*"
+                    + ",(SELECT CAMERA_NAME FROM XT_CAMERA X WHERE X.DEVICE_ID=CAMERA_ID) AS CAMERA_NAME"
+                    + ",(SELECT ADDR FROM XT_CAMERA X WHERE X.DEVICE_ID=CAMERA_ID) AS ADDR ", "XT_IMG_REC T", cWhereParm, cOrderBy, iPageNo, iPageSize);
             DataTable dtRows = dbret.dtrows;
             int iRowsCount = dbret.ROW_COUNT;
             vret = ActiveResult.Query(dtRows);

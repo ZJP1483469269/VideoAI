@@ -194,7 +194,70 @@ namespace TLKJAI
             int iEXPORT_IMAGE = StringEx.getInt(INIConfig.ReadString("Config", AppConfig.EXPORT_IMAGE, "0"));
             return getImageList(cFileName, iMinVal, iMaxVal, iGrayMinVal, iGrayMaxVal);
         }
+        public static Image getImage(String cImageFileName)
+        {
+            Stream s = new FileStream(cImageFileName, FileMode.Open, FileAccess.Read, FileShare.Read);
+            try
+            {
+                Image img = new Bitmap(s);
+                s.Close();
+                return img;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
 
+        public static List<Rectangle> getImageRect(String cFileName)
+        {
+            try
+            {
+                Image<Bgr, Byte> BgrImage = null;
+                Image<Gray, Byte> GrayImage = null;
+
+                List<Rectangle> ImageList = new List<Rectangle>();
+
+                int iMinVal = StringEx.getInt(INIConfig.ReadString("Config", AppConfig.IMAGE_MIN, "0"));
+                int iMaxVal = StringEx.getInt(INIConfig.ReadString("Config", AppConfig.IMAGE_MAX, "0"));
+
+                int iGrayMinVal = StringEx.getInt(INIConfig.ReadString("Config", AppConfig.GRAY_MIN, "0"));
+                int iGrayMaxVal = StringEx.getInt(INIConfig.ReadString("Config", AppConfig.GRAY_MAX, "0"));
+
+                //调取图片
+                BgrImage = new Image<Bgr, byte>(cFileName);
+                GrayImage = new Image<Gray, byte>(BgrImage.Width, BgrImage.Height);
+
+                //转灰度
+                CvInvoke.CvtColor(BgrImage, GrayImage, Emgu.CV.CvEnum.ColorConversion.Rgb2Gray);
+
+                //转黑白
+                Image<Gray, byte> BinaryImage = GrayImage.ThresholdToZeroInv(new Gray(iGrayMinVal));
+
+                VectorOfVectorOfPoint rvs = new VectorOfVectorOfPoint();
+                CvInvoke.FindContours(BinaryImage, rvs, null, RetrType.List, ChainApproxMethod.ChainApproxSimple);
+
+                int j = 10001;
+                for (int i = 0; i < rvs.Size; i++)
+                {
+                    var contour = rvs[i];
+                    Rectangle BoundingBox = CvInvoke.BoundingRectangle(contour);
+                    ImageList.Add(BoundingBox);
+                    if ((BoundingBox.Width < iMinVal) || (BoundingBox.Height < iMinVal)) continue;
+                    if ((BoundingBox.Width > iMaxVal) || (BoundingBox.Height > iMaxVal)) continue;
+                    j++;
+                    CvInvoke.Rectangle(BgrImage, BoundingBox, new MCvScalar(255, 0, 0, 0), 3);
+                }
+                BgrImage.Save(cFileName.Replace("01.jpg", "02.jpg"));
+                return ImageList;
+
+            }
+            catch (Exception ex)
+            {
+                log4net.WriteLogFile("报错，原因为：" + ex);
+                return null;
+            }
+        }
         public static List<KeyValue> getImageList(String cFileName, int iMinVal, int iMaxVal, int iGrayMinVal, int iGrayMaxVal)
         {
             try

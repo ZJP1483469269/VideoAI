@@ -195,30 +195,35 @@ namespace TLKJ_IVS
             if ((ImageList != null) && (ImageList.Count > 0))
             {
                 List<String> sqls = new List<string>();
-                if (File.Exists(cExportFileName))
+                for (int k = 0; (ImageList != null) && (k < ImageList.Count); k++)
                 {
-                    SftpClient ftp = getAnalyseClient();
-                    isUpload = CopyUnit.SSH_Upload(ftp, cExportFileName, "ANALYSE");
+                    Application.DoEvents();
+                    KeyValue rowKey = ImageList[k];
+                    aSlave.ClearField();
+                    String cKeyID = StringEx.getString(k + 1000);
+                    aSlave.AddField("ID", AutoID.getAutoID() + "_" + cKeyID);
+                    aSlave.AddField("ALARM_FLAG", 0);
+                    aSlave.AddField("REC_ID", cREC_ID);
+                    aSlave.AddField("CREATE_TIME", DateUtils.getDayTimeNum());
+                    aSlave.AddField("POINT_LIST", rowKey.Val);
+                    sqls.Add(aSlave.getInsertSQL());
                 }
+                sqls.Insert(0, "DELETE FROM XT_IMG_REC WHERE REC_ID='" + cREC_ID + "'");
+                iCode = WebSQL.ExecSQL(sqls);
 
+                if (iCode > 0)
+                {
+                    if (File.Exists(cExportFileName))
+                    {
+                        SftpClient ftp = getAnalyseClient();
+                        isUpload = CopyUnit.SSH_Upload(ftp, cExportFileName, "ANALYSE");
+                    }
+                }
                 if (isUpload)
                 {
                     MustRemoveFile = true;
                     log4net.WriteLogFile("UploadTask.文件上传成功！");
-                    for (int k = 0; (ImageList != null) && (k < ImageList.Count); k++)
-                    {
-                        Application.DoEvents();
-                        KeyValue rowKey = ImageList[k];
-                        aSlave.ClearField();
-                        String cKeyID = StringEx.getString(k + 1000);
-                        aSlave.AddField("ID", AutoID.getAutoID() + "_" + cKeyID);
-                        aSlave.AddField("ALARM_FLAG", 0);
-                        aSlave.AddField("REC_ID", cREC_ID);
-                        aSlave.AddField("CREATE_TIME", DateUtils.getDayTimeNum());
-                        aSlave.AddField("POINT_LIST", rowKey.Val);
-                        sqls.Add(aSlave.getInsertSQL());
-                    }
-                    iCode = WebSQL.ExecSQL(sqls);
+
                 }
                 else
                 {

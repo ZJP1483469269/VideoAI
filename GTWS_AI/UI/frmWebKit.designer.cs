@@ -1,6 +1,6 @@
 ﻿namespace GTWS_TASK.UI
 {
-    partial class frmMain
+    partial class frmWebKit
     {
         /// <summary>
         /// Required designer variable.

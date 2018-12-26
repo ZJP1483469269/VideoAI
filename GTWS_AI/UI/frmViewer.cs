@@ -15,16 +15,16 @@ using System.IO;
 using System.Threading;
 using System.Drawing.Imaging;
 using Renci.SshNet;
+using TLKJAI;
 
 namespace GTWS_TASK.UI
 {
     public partial class frmViewer : frmBase
     {
-
-        public String ActiveCameraText = "6cf5156252d2443bbe08944111478953";
-        public String ActiveCameraCode = "93740217427001000101#6cf5156252d2443bbe08944111478953";
-        public String ActiveCameraName = "93740217427001000101";
-
+        public String ActiveCameraCode = "93748851157001000101#6cf5156252d2443bbe08944111478953";
+        public String ActiveCameraName;
+        public double X;
+        public double Y;
 
         ulong ulReplayHandle = 0;
         ulong ulRealPlayHandle = 0;//实况
@@ -94,22 +94,17 @@ namespace GTWS_TASK.UI
         public void setView(int iTypeID)
         {
             pnlPlay.Visible = false;
-            geckoWebBrowser1.Visible = false;
-            pictureBox1.Visible = false;
+            geckoWeb.Visible = false;
+            picBox.Visible = false;
 
             if (iTypeID == 1)
             {
                 pnlPlay.Visible = true;
-                pnlPlay.Width = this.Width - 10;
             }
             else if (iTypeID == 2)
             {
+                picBox.Visible = true;
                 pnlPlay.Visible = true;
-                pictureBox1.Visible = true;
-                pictureBox1.Top = pnlPlay.Top;
-                pictureBox1.Height = pnlPlay.Height;
-                pnlPlay.Width = this.Width - 20 - pictureBox1.Width;
-                pictureBox1.Anchor = AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
             }
         }
         public int InitCameraLogin()
@@ -323,10 +318,18 @@ namespace GTWS_TASK.UI
         private void frmTask_Load(object sender, EventArgs e)
         {
             Application.Idle += onIdle_Event;
-            pictureBox1.Load(@"D:\VideoAI_1220\GTWS_TASK\Model\IMG06.jpg");
-            geckoWebBrowser1.Navigate("http://www.baidu.com/");
+            try
+            {
+                picBox.Load(@"D:\VideoAI_1220\GTWS_TASK\Model\IMG06.jpg");
+                geckoWeb.Navigate("http://www.baidu.com/");
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
+        private DataTable dtInfo = null;
         Boolean LOAD_FLAG = false;
         private void onIdle_Event(object sender, EventArgs e)
         {
@@ -334,13 +337,24 @@ namespace GTWS_TASK.UI
             {
                 LOAD_FLAG = true;
                 InitCameraLogin();
+                dtInfo = WebSQL.QueryData("SELECT * FROM XT_CAMERA WHERE DEVICE_ID='" + ActiveCameraCode + "'");
+                this.Text = StringEx.getString(dtInfo, 0, "CAMERA_NAME");
+
+                X = StringEx.GetDouble(dtInfo, 0, "X");
+                Y = StringEx.GetDouble(dtInfo, 0, "Y");
+                if (X > 0 && Y > 0)
+                {
+                    String cWebUrl = INIConfig.ReadString("Config", AppConfig.WEB_URL, "");
+                    String cUrl = "http://" + cWebUrl + "/pages/webgis.aspx?TOKEN=" + ApplicationEvent.Token + "&TYPE_ID=2&X=" + X.ToString() + "&Y=" + Y.ToString();
+                    geckoWeb.Navigate(cUrl);
+                }
                 btnStartReal_Click(null, null);
             }
         }
 
         private void btnTake_Click(object sender, EventArgs e)
         {
-            String cAppDir = Path.GetDirectoryName(Application.ExecutablePath) + "\\Images\\";
+            String cAppDir = Path.GetDirectoryName(Application.ExecutablePath) + "\\AI\\";
             if (Directory.Exists(cAppDir))
             {
                 Directory.CreateDirectory(cAppDir);
@@ -359,31 +373,8 @@ namespace GTWS_TASK.UI
             }
         }
 
+        private List<Rectangle> RectList = null;
         private int ActivePresetIndex = 0;
-
-
-        private void 任务时间ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frmDTConfig vDialog = new frmDTConfig();
-            try
-            {
-                vDialog.ShowDialog();
-            }
-            catch (Exception ex)
-            {
-
-            }
-        }
-
-        private void btnView_Click(object sender, EventArgs e)
-        {
-            setView(StringEx.getInt(this.textBox1.Text));
-        }
-
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
         private void timAuto_Tick(object sender, EventArgs e)
         {
@@ -399,12 +390,15 @@ namespace GTWS_TASK.UI
                 Stream s = new FileStream(cImageFileName, FileMode.Open, FileAccess.Read, FileShare.Read);
                 Image img = new Bitmap(s);
                 s.Close();
-                pictureBox1.Image = img;
+                picBox.Image = img;
+                RectList = IMGAI.getImageRect(cImageFileName);
+                picBox.Image = IMGAI.getImage(cImageFileName.Replace("01.jpg", "02.jpg"));
             }
             else
             {
                 log4net.WriteLogFile("IVS_SDK_LocalSnapshot:" + iCode);
             }
         }
+
     }
 }

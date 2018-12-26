@@ -13,6 +13,8 @@
     <script type="text/javascript" src="/static/js/default.js"></script>
     <script type="text/javascript">
         var vREC_ID = null;
+        var ccamera_id = null;
+        var cpreset_id = null;
         $(document).ready(function () {
             InitGrid();
         });
@@ -44,10 +46,17 @@
                         , formatter: function (value, row, index) {
                             if (vREC_ID == null) {
                                 vREC_ID = value;
+                                ccamera_id = row.camera_id;
+                                cpreset_id = row.preset_id;
                                 LoadList(vREC_ID);
                             }
                             return index + 1;
                         }
+                    },
+                    {
+                        field: 'camera_name',
+                        align: 'center'
+                        , title: '摄像机名称'
                     },
                     {
                         field: 'addr',
@@ -101,7 +110,6 @@
                         , align: 'center'
                         , formatter: function (value, row, index) {
                             var cStr = "<a href='#' onclick='LoadList(\"" + row.rec_id + "\");'>查看</a>";
-                            cStr = cStr + "  <a href='#' onclick='Modify_Event(" + row.device_id + ");'>定位</a>";
                             return cStr;
                         }
                     }
@@ -120,7 +128,7 @@
                 maxrows: params.limit,
                 pageindex: params.pageNumber,
                 ORG_ID: "<%=getLoginUserInfo().ORG_ID %>",
-                ADDR: $("#ADDR").val(),
+                CAMERA_NAME: $("#CAMERA_NAME").val(),
                 ALARM_CHECKED: $("#ALARM_CHECKED").val()
             };
             return temp;
@@ -139,7 +147,7 @@
                 success: function (vret) {
                     if (vret.result == 1) {
                         var rs = vret.rows;
-                        for (var i = 0; rs.length; i++) {
+                        for (var i = 0; i < rs.length; i++) {
                             var rowKey = rs[i];
                             var vImageUrl = "<img src='" + rowKey.file_url + "' width= '300px' height='200px'>";
                             $("#IMAGE_LIST").append("<td>" + vImageUrl + "</td>");
@@ -149,8 +157,11 @@
             });
         }
         function doQuery() {
-            vREC_ID = null;
             $('#DBGrid').bootstrapTable('refresh')
+        }
+
+        function OpenLive() {
+            OpenWinForm("../gtws/Live.aspx?TYPEID=3&CAMERACODE=" + ccamera_id + "&PRESET_ID=" + cpreset_id);
         }
     </script>
 </head>
@@ -166,7 +177,7 @@
                         <td>摄像机
                         </td>
                         <td>
-                            <input type="text" id="ADDR" name="ADDR" class="form-control" style="width: 300px; height: 28px" />
+                            <input type="text" id="CAMERA_NAME" name="CAMERA_NAME" class="form-control" style="width: 300px; height: 28px" />
                         </td>
                         <td>状态
                         </td>
@@ -189,7 +200,7 @@
             </div>
         </div>
         <div>
-            <input type="button" value="实时情况" class="btn-sm btn-primary" onclick="doQuery();" />
+            <input type="button" value="实时情况" class="btn-sm btn-primary" onclick="OpenLive();" />
             <input type="button" value="违法交办" class="btn-sm btn-primary" onclick="doQuery();" />
             <input type="button" value="解除报警" class="btn-sm btn-primary" onclick="doQuery();" />
         </div>

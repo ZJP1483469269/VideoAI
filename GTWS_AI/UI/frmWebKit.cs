@@ -16,13 +16,13 @@ using TLKJ_IVS;
 namespace GTWS_TASK.UI
 {
     [ComVisibleAttribute(true)]
-    public partial class frmMain : frmWeb
+    public partial class frmWebKit : frmWeb
     {
         private bool LOAD_LAST_FLAG = false;
         private bool LOAD_TOKEN_FLAG = false;
         private bool IS_HOME = false;
         Sunisoft.IrisSkin.SkinEngine iskin = new Sunisoft.IrisSkin.SkinEngine();
-        public frmMain()
+        public frmWebKit()
         {
             InitializeComponent();
             iskin.SkinFile = "skins/PageColor2.ssk";
