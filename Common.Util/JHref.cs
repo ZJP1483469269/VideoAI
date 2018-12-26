@@ -9,7 +9,7 @@ namespace TLKJ.Utils
         public int Layer;
         public string UrlID;
         public string Prefix;
-        public string Text;
+        public string UrlName;
         public string Match;
         public string Url;
         public string PageVal; 
@@ -17,7 +17,7 @@ namespace TLKJ.Utils
         override
         public string ToString()
         {
-            return Text;
+            return UrlName;
         }
     }
 }

@@ -116,6 +116,12 @@ namespace TLKJ.Utils
                 return "无效";
             }
         }
+
+        public static string getSafeSQL(string detail)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// 
         /// </summary>
