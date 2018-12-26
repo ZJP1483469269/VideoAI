@@ -39,14 +39,14 @@ namespace WEB_TASK
         {
             // InvokeRequired需要比较调用线程ID和创建线程ID
             // 如果它们不相同则返回true
-            if (this.lstUrls.InvokeRequired)
+            if (this.txtResult.InvokeRequired)
             {
                 AppendHref_delegate d = new AppendHref_delegate(AppendHref);
                 this.Invoke(d, new object[] { rowKey });
             }
             else
             {
-                lstUrls.Items.Add(rowKey);
+                txtResult.Text = rowKey.UrlName;
             }
         }
 
@@ -95,16 +95,12 @@ namespace WEB_TASK
             }
         }
 
-        private void btnAnalyse2_Click(object sender, EventArgs e)
-        {
-        }
-
         JHref ActiveHref = null;
         private void btnAnalyse_Click(object sender, EventArgs e)
         {
             JHref vTask = new JHref();
             vTask.Url = this.txtUrl.Text.Replace("{PAGE_NO}", "");
-            vTask.Text = "0";
+            vTask.UrlName = "0";
             vTask.Layer = 1;
             vTask.UrlID = StringEx.getString(ActiveHref.UrlID);
             vTask.Prefix = ActiveHref.Prefix;
@@ -116,7 +112,7 @@ namespace WEB_TASK
         public List<List<JHref>> PageList = new List<List<JHref>>();
         public int AddHref(int iLayer, JHref rowKey)
         {
-            log4net.WriteLogFile("第" + iLayer + "层，添加链接" + rowKey.Text);
+            log4net.WriteLogFile("第" + iLayer + "层，添加链接" + rowKey.UrlName);
             AppendHref(rowKey);
             PageList[iLayer - 1].Add(rowKey);
             return PageList[iLayer - 1].Count - 1;
@@ -168,7 +164,7 @@ namespace WEB_TASK
                     {
                         HrefList.Add(cLINK_HREF);
                         JHref rowKey = new JHref();
-                        rowKey.Text = cLINK_TEXT;
+                        rowKey.UrlName = cLINK_TEXT;
                         rowKey.Prefix = vTask.Prefix;
                         rowKey.Url = cLINK_HREF;
                         rowKey.UrlID = vTask.UrlID;
@@ -201,14 +197,16 @@ namespace WEB_TASK
                 return null;
             }
         }
+        int iReply = 1;
+        int iMax = 5;
+
         private void btnStart_Click(object sender, EventArgs e)
         {
             int iLayer = StringEx.getInt(this.ActiveHref.Layer);
             InitPageList(iLayer);
             btnAnalyse_Click(null, null);
         }
-        int iReply = 1;
-        int iMax = 5;
+
         public void ExecuteHref()
         {
             while (iReply < iMax)
@@ -261,14 +259,14 @@ namespace WEB_TASK
                 JHref vTask = new JHref();
                 vTask.Url = this.txtUrl.Text;
                 vTask.Url = vTask.Url.Replace("{PAGE_NO}", cPAGE_VAL);
-                vTask.Text = "0";
+                vTask.UrlName = "0";
                 vTask.Layer = i + 1;
                 vTask.Prefix = this.ActiveHref.Prefix;
                 List<JHref> rs = getHerfList(vTask);
                 for (int k = 0; k < rs.Count; k++)
                 {
                     var voKey = rs[k];
-                    String cLINK_TEXT = StringEx.getString(voKey.Text);
+                    String cLINK_TEXT = StringEx.getString(voKey.UrlName);
                     if (!String.IsNullOrWhiteSpace(cLINK_TEXT))
                     {
                         String cLINK_HREF = StringEx.getString(voKey.Url);
@@ -284,7 +282,7 @@ namespace WEB_TASK
                         {
                             HrefList.Add(cLINK_HREF);
                             JHref rowKey = new JHref();
-                            rowKey.Text = cLINK_TEXT;
+                            rowKey.UrlName = cLINK_TEXT;
                             rowKey.Prefix = vTask.Prefix;
                             rowKey.Url = cLINK_HREF;
                             rowKey.UrlID = vTask.UrlID;
@@ -303,27 +301,30 @@ namespace WEB_TASK
 
         private void button4_Click(object sender, EventArgs e)
         {
-            JActiveTable aTable = new JActiveTable();
-            aTable.TableName = "XT_WEB_PAGE";
-            for (int i = lstUrls.Items.Count - 1; i >= 0; i--)
+            frmDBConfig vDialog = new frmDBConfig();
+            if (vDialog.ShowDialog() == DialogResult.OK)
             {
-                JHref rowKey = (JHref)lstUrls.Items[i];
 
-                aTable.AddField("Text", rowKey.Text);
-                aTable.AddField("Url", rowKey.Url);
-                aTable.AddField("UrlID", rowKey.UrlID);
-                aTable.AddField("Html", this.getPageContent(rowKey, "#content"));
-                aTable.AddField("pubDate", this.getPageContent(rowKey, "#pubDate"));
-                String sql = aTable.getInsertSQL();
-                //Object[] ParmList = aTable.getParmList();
-                WebSQL.ExecSQL(sql);
             }
-
         }
         String[] FileList = null;
         private void button6_Click(object sender, EventArgs e)
         {
+            //JActiveTable aTable = new JActiveTable();
+            //aTable.TableName = "XT_WEB_PAGE";
+            //for (int i = lstUrls.Items.Count - 1; i >= 0; i--)
+            //{
+            //    JHref rowKey = (JHref)lstUrls.Items[i];
 
+            //    aTable.AddField("Text", rowKey.UrlName);
+            //    aTable.AddField("Url", rowKey.Url);
+            //    aTable.AddField("UrlID", rowKey.UrlID);
+            //    aTable.AddField("Html", this.getPageContent(rowKey, "#content"));
+            //    aTable.AddField("pubDate", this.getPageContent(rowKey, "#pubDate"));
+            //    String sql = aTable.getInsertSQL();
+            //    //Object[] ParmList = aTable.getParmList();
+            //    WebSQL.ExecSQL(sql);
+            //}
         }
 
         private void btnConfigLayer_Click(object sender, EventArgs e)
@@ -331,8 +332,36 @@ namespace WEB_TASK
             frmRule vDialog = new frmRule();
             if (vDialog.ShowDialog() == DialogResult.OK)
             {
-                
+                ActiveHref = new JHref();
+                ActiveHref.UrlID = vDialog.txtUrlID.Text;
+
+                ActiveHref.Layer = StringEx.getInt(vDialog.txtLayer.Text);
+
+                ActiveHref.Match = vDialog.txtMatch.Text;
+
+                ActiveHref.Prefix = vDialog.txtPrefix.Text;
+
+                ActiveHref.PageVal = vDialog.txtPageVal.Text;
+
+                ActiveHref.UrlName = vDialog.txtUrlName.Text;
+
+                ActiveHref.Url = vDialog.txtUrlName.Text;
             }
+        }
+
+        private void btnOpen_Click(object sender, EventArgs e)
+        {
+            String cUrl = this.txtUrl.Text;
+            this.geckoWebBrowser1.Navigate(cUrl);
+
+        }
+
+        private void timAuto_Tick(object sender, EventArgs e)
+        {
+            String cPageHtml = geckoWebBrowser1.Text;
+            Document doc = NSoupClient.Parse(cPageHtml);
+            var rs = doc.Select("img");
+
         }
         //public ChromiumWebBrowser chromeBrowser;
 

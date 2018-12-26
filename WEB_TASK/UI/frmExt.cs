@@ -6,12 +6,13 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using TLKJ.Utils;
 
 namespace WEB_TASK.UI
 {
-    public partial class frmRule : Form
+    public partial class frmExt : Form
     {
-        public frmRule()
+        public frmExt()
         {
             InitializeComponent();
         }
@@ -23,6 +24,7 @@ namespace WEB_TASK.UI
 
         private void btnApply_Click(object sender, EventArgs e)
         {
+            INIConfig.Write("Config", "FileExt", this.txtFileExt.Text);
             this.DialogResult = DialogResult.OK;
         }
     }

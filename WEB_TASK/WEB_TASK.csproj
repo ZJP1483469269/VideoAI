@@ -7,7 +7,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{52F65E1A-5E6D-446B-8B06-9BF35A553646}</ProjectGuid>
+    <ProjectGuid>{C3B6B5B1-2732-4676-A6CE-D78486F7EE8E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>WEB_TASK</RootNamespace>
     <AssemblyName>WEB_TASK</AssemblyName>
@@ -96,6 +96,12 @@
     </Compile>
     <Compile Include="UI\frmDBConfig.Designer.cs">
       <DependentUpon>frmDBConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\frmExt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmExt.Designer.cs">
+      <DependentUpon>frmExt.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\frmRule.cs">
       <SubType>Form</SubType>
@@ -228,6 +234,10 @@
       <Project>{9C69D4E3-5A02-41C0-B4DB-A356C443B65C}</Project>
       <Name>TLKJ.Util</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TLKJ_SYS\TLKJ.SYS.csproj">
+      <Project>{1180ba09-f329-455a-a9b2-19af9d092b10}</Project>
+      <Name>TLKJ.SYS</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="UI\frmCMain.resx">
@@ -235,6 +245,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\frmDBConfig.resx">
       <DependentUpon>frmDBConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\frmExt.resx">
+      <DependentUpon>frmExt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\frmRule.resx">
       <DependentUpon>frmRule.cs</DependentUpon>

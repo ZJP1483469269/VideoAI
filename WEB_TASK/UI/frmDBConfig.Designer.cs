@@ -30,14 +30,12 @@
         {
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.dbHost = new System.Windows.Forms.TextBox();
-            this.dbUser = new System.Windows.Forms.TextBox();
-            this.dbPass = new System.Windows.Forms.TextBox();
+            this.txtDB_URL = new System.Windows.Forms.TextBox();
             this.btnApply = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.cmbDBType = new System.Windows.Forms.ComboBox();
+            this.txtPrefix = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label2
@@ -58,57 +56,26 @@
             this.label1.TabIndex = 9;
             this.label1.Text = "数据库类型：";
             // 
-            // label3
+            // txtDB_URL
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(23, 103);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(77, 12);
-            this.label3.TabIndex = 11;
-            this.label3.Text = "数据库用户：";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(23, 143);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(77, 12);
-            this.label4.TabIndex = 13;
-            this.label4.Text = "数据库密码：";
-            // 
-            // dbHost
-            // 
-            this.dbHost.Location = new System.Drawing.Point(105, 64);
-            this.dbHost.Name = "dbHost";
-            this.dbHost.Size = new System.Drawing.Size(209, 21);
-            this.dbHost.TabIndex = 14;
-            // 
-            // dbUser
-            // 
-            this.dbUser.Location = new System.Drawing.Point(106, 100);
-            this.dbUser.Name = "dbUser";
-            this.dbUser.Size = new System.Drawing.Size(209, 21);
-            this.dbUser.TabIndex = 14;
-            // 
-            // dbPass
-            // 
-            this.dbPass.Location = new System.Drawing.Point(106, 140);
-            this.dbPass.Name = "dbPass";
-            this.dbPass.Size = new System.Drawing.Size(209, 21);
-            this.dbPass.TabIndex = 14;
+            this.txtDB_URL.Location = new System.Drawing.Point(105, 64);
+            this.txtDB_URL.Name = "txtDB_URL";
+            this.txtDB_URL.Size = new System.Drawing.Size(543, 21);
+            this.txtDB_URL.TabIndex = 14;
             // 
             // btnApply
             // 
-            this.btnApply.Location = new System.Drawing.Point(96, 182);
+            this.btnApply.Location = new System.Drawing.Point(478, 171);
             this.btnApply.Name = "btnApply";
             this.btnApply.Size = new System.Drawing.Size(75, 29);
             this.btnApply.TabIndex = 15;
             this.btnApply.Text = "确定(&A)";
             this.btnApply.UseVisualStyleBackColor = true;
+            this.btnApply.Click += new System.EventHandler(this.btnApply_Click);
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(201, 182);
+            this.btnClose.Location = new System.Drawing.Point(573, 171);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 29);
             this.btnClose.TabIndex = 15;
@@ -119,28 +86,49 @@
             // cmbDBType
             // 
             this.cmbDBType.FormattingEnabled = true;
+            this.cmbDBType.Items.AddRange(new object[] {
+            "SQL SERVER",
+            "MYSQL",
+            "ORACLE ",
+            "SQLITE"});
             this.cmbDBType.Location = new System.Drawing.Point(106, 26);
             this.cmbDBType.Name = "cmbDBType";
-            this.cmbDBType.Size = new System.Drawing.Size(208, 20);
+            this.cmbDBType.Size = new System.Drawing.Size(173, 20);
             this.cmbDBType.TabIndex = 16;
+            // 
+            // txtPrefix
+            // 
+            this.txtPrefix.Location = new System.Drawing.Point(105, 102);
+            this.txtPrefix.Name = "txtPrefix";
+            this.txtPrefix.Size = new System.Drawing.Size(174, 21);
+            this.txtPrefix.TabIndex = 18;
+            this.txtPrefix.Text = "T_";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(23, 105);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(77, 12);
+            this.label3.TabIndex = 17;
+            this.label3.Text = "数据表前缀：";
             // 
             // frmDBConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(338, 231);
+            this.ClientSize = new System.Drawing.Size(673, 224);
+            this.Controls.Add(this.txtPrefix);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.cmbDBType);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnApply);
-            this.Controls.Add(this.dbPass);
-            this.Controls.Add(this.dbUser);
-            this.Controls.Add(this.dbHost);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.txtDB_URL);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "frmDBConfig";
             this.Text = "数据库配置";
+            this.Load += new System.EventHandler(this.frmDBConfig_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -150,13 +138,11 @@
 
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox dbHost;
-        private System.Windows.Forms.TextBox dbUser;
-        private System.Windows.Forms.TextBox dbPass;
+        private System.Windows.Forms.TextBox txtDB_URL;
         private System.Windows.Forms.Button btnApply;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.ComboBox cmbDBType;
+        private System.Windows.Forms.TextBox txtPrefix;
+        private System.Windows.Forms.Label label3;
     }
 }
