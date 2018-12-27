@@ -650,7 +650,7 @@ namespace GTWS_TASK.UI
                     }
                 }
                 isPlay = true;
-                String cAppDir = Path.GetDirectoryName(Application.ExecutablePath) + "\\images\\";
+                String cAppDir = INIConfig.ReadString("Config", "ALARM", "FILE_PATH");
                 if (Directory.Exists(cAppDir))
                 {
                     Directory.CreateDirectory(cAppDir);

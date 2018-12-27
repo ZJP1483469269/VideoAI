@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCMain));
             this.button1 = new System.Windows.Forms.Button();
             this.txtUrl = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
@@ -38,6 +39,8 @@
             this.btnOpen = new System.Windows.Forms.Button();
             this.txtResult = new System.Windows.Forms.TextBox();
             this.timAuto = new System.Windows.Forms.Timer(this.components);
+            this.txtMatch = new System.Windows.Forms.TextBox();
+            this.txtAttr = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // button1
@@ -59,7 +62,7 @@
             this.txtUrl.Name = "txtUrl";
             this.txtUrl.Size = new System.Drawing.Size(703, 21);
             this.txtUrl.TabIndex = 1;
-            this.txtUrl.Text = "https://www.henan.gov.cn/ywdt/hnyw/";
+            this.txtUrl.Text = resources.GetString("txtUrl.Text");
             // 
             // button3
             // 
@@ -130,11 +133,29 @@
             this.timAuto.Interval = 200;
             this.timAuto.Tick += new System.EventHandler(this.timAuto_Tick);
             // 
+            // txtMatch
+            // 
+            this.txtMatch.Location = new System.Drawing.Point(723, 308);
+            this.txtMatch.Name = "txtMatch";
+            this.txtMatch.Size = new System.Drawing.Size(75, 21);
+            this.txtMatch.TabIndex = 18;
+            this.txtMatch.Text = "img";
+            // 
+            // txtAttr
+            // 
+            this.txtAttr.Location = new System.Drawing.Point(721, 335);
+            this.txtAttr.Name = "txtAttr";
+            this.txtAttr.Size = new System.Drawing.Size(75, 21);
+            this.txtAttr.TabIndex = 18;
+            this.txtAttr.Text = "src";
+            // 
             // frmCMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(808, 545);
+            this.Controls.Add(this.txtAttr);
+            this.Controls.Add(this.txtMatch);
             this.Controls.Add(this.txtResult);
             this.Controls.Add(this.btnOpen);
             this.Controls.Add(this.btnConfigLayer);
@@ -163,6 +184,8 @@
         private System.Windows.Forms.Button btnOpen;
         private System.Windows.Forms.TextBox txtResult;
         private System.Windows.Forms.Timer timAuto;
+        private System.Windows.Forms.TextBox txtMatch;
+        private System.Windows.Forms.TextBox txtAttr;
     }
 }
 

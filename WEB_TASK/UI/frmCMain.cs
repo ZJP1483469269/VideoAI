@@ -358,9 +358,15 @@ namespace WEB_TASK
 
         private void timAuto_Tick(object sender, EventArgs e)
         {
-            String cPageHtml = geckoWebBrowser1.Text;
+            String cPageHtml = geckoWebBrowser1.TextContent;
             Document doc = NSoupClient.Parse(cPageHtml);
-            var rs = doc.Select("img");
+            Elements rs = doc.Select(this.txtMatch.Text);
+            for (int i = 0; i < rs.Count; i++)
+            {
+                NSoup.Nodes.Element rowKey = rs[i];
+                String cUrl = rowKey.Attr(this.txtAttr.Text);
+                log4net.WriteLogFile(cUrl);
+            }
 
         }
         //public ChromiumWebBrowser chromeBrowser;
