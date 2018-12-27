@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -26,6 +27,19 @@ namespace GTWS_CARVE.UI
             {
                 ApplicationEvent.UploadThread = new Thread(UploadTask.Execute);
                 ApplicationEvent.UploadThread.Start();
+            }
+
+            try
+            {
+                String cFileName = Application.StartupPath + "\\GTWS_TASK.exe";
+                if (File.Exists(cFileName))
+                {
+                    System.Diagnostics.Process.Start(cFileName);
+                }
+            }
+            catch (Exception ex)
+            {
+
             }
         }
 

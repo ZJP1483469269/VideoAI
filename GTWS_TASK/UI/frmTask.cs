@@ -784,7 +784,20 @@ namespace GTWS_TASK.UI
             {
                 btnLoad_Click(null, null);
                 timAfter.Enabled = true;
-            } 
+            }
+
+            try
+            {
+                String cFileName = Application.StartupPath + "\\GTWS_CARVE.exe";
+                if (File.Exists(cFileName))
+                {
+                    System.Diagnostics.Process.Start(cFileName);
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
         private void btnLoad_Click(object sender, EventArgs e)
         {
