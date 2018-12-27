@@ -3,8 +3,8 @@
 .fontR { color: #900; }
 
 /* 标题 */
-.tit_lan { height:33px; width: 328px; background-image:url(../images/tit2.png); background-repeat:no-repeat; line-height: 33px; font-size: 14px; color: #fff; font-weight: bold; padding-left: 10px; }
-.tit_hui { height:33px; background-image:url(../images/ping2.jpg); background-repeat:repeat-x; line-height: 33px; font-size: 12px; color: #333333; font-weight: bold; padding-left: 8px; }
+.tit_lan { height:33px; width: 328px; background-image:url(images/tit2.png); background-repeat:no-repeat; line-height: 33px; font-size: 14px; color: #fff; font-weight: bold; padding-left: 10px; }
+.tit_hui { height:33px; background-image:url(images/ping2.jpg); background-repeat:repeat-x; line-height: 33px; font-size: 12px; color: #333333; font-weight: bold; padding-left: 8px; }
 .title2 {height: 33px;font-size: 14px;line-height: 33px;font-weight: bold;color: #fff;background-color: #157cc7; padding-left: 20px;text-align: left;}
 .tit_blue { height: 33px; background-color: #d0dbe5; line-height: 33px; font-size: 12px; color: #333333; font-weight: bold; padding-left: 8px; }
 
@@ -56,6 +56,6 @@
 	cursor:pointer;
 	font-size: 13px;
 	color: #FFFFFF;
-	background: url(../images/13.gif);
+	background: url(images/13.gif);
 	font-weight: bold;
 }
