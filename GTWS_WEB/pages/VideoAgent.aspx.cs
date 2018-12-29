@@ -24,7 +24,7 @@ public partial class VideoAgent : PageEx
         String cKeyID = cUSER_ID + "@" + cORG_ID + "@" + cDayTime + "@" + ID;
         String cKeyMD = Base64.StrToBase64(cKeyID);
         ActiveMQ_Message vMessage = new ActiveMQ_Message();
-        vMessage.MessageType = ActiveMQ_MessageType.VIDEO_LIVE;
+        vMessage.CMD_ID = ActiveMQ_MessageType.VIDEO_LIVE;
         Dictionary<string, string> voConf = new Dictionary<string, string>();
         voConf.Add("ID", ID);
         voConf.Add("ORG_ID", cORG_ID);

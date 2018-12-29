@@ -35,7 +35,7 @@ namespace GTWS_AI
                 INIConfig.setConfigFile(Application.StartupPath + @"\Config.ini");
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new frmAdmin());
+                Application.Run(new frmMain());
                 mux.ReleaseMutex();
             }
         } 

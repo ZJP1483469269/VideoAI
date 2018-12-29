@@ -14,11 +14,27 @@ namespace GTWS_AI.UI
 {
     public partial class frmMain : Form
     {
+        delegate void Change(ActiveMQ_Message text);
         public frmMain()
         {
             InitializeComponent();
         }
-
+        private void Settext(ActiveMQ_Message vMessage)
+        {
+            if (vMessage.CMD_ID == 11)
+            {
+                this.Show();
+                this.BringToFront();
+            }
+            else if (vMessage.CMD_ID == 12)
+            {
+                this.Hide(); 
+            }
+            else
+            {
+                log4net.WriteLogFile(string.Format(@"接收到:{0}{1}", vMessage.FROM_ID + "," + vMessage.USER_ID + "," + vMessage.MESSAGE, Environment.NewLine));
+            }
+        }
 
         public void InitMQClient()
         {
@@ -40,7 +56,8 @@ namespace GTWS_AI.UI
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-
+            InitMQClient();
+            this.Hide();
         }
         void onConsumerListener(IMessage message)
         {
@@ -49,20 +66,12 @@ namespace GTWS_AI.UI
             log4net.WriteLogFile(msg.Text);
             String cStr = msg.Text;
             ActiveMQ_Message vMessage = JsonLib.ToObject<ActiveMQ_Message>(cStr);
-            if (vMessage.CMD_ID == 11)
-            {
-                this.Show();
-                this.BringToFront();
-            }
-            else if (vMessage.CMD_ID == 12)
-            {
-                this.Hide();
-                this.BringToFront();
-            }
-            else
-            {
-                log4net.WriteLogFile(string.Format(@"接收到:{0}{1}", vMessage.FROM_ID + "," + vMessage.USER_ID + "," + vMessage.MESSAGE, Environment.NewLine));
-            }
+            this.BeginInvoke(new Change(Settext), vMessage);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
