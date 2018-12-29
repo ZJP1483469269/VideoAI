@@ -28,7 +28,46 @@ namespace GTWS_CARVE.UI
                 ApplicationEvent.UploadThread = new Thread(UploadTask.Execute);
                 ApplicationEvent.UploadThread.Start();
             }
+        }
 
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+            iskin.SkinFile = "skins/PageColor2.ssk";
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (ApplicationEvent.UploadThread != null)
+            {
+                try
+                {
+                    ApplicationEvent.isUploadAbort = true;
+                    ApplicationEvent.UploadThread.Abort();
+                    try
+                    {
+
+                        Thread.Sleep(1000);
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
+                    ApplicationEvent.UploadThread = null;
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
+        }
+
+        private void timCheck_Tick(object sender, EventArgs e)
+        {
             try
             {
                 String cFileName = Application.StartupPath + "\\GTWS_TASK.exe";
@@ -40,12 +79,14 @@ namespace GTWS_CARVE.UI
             catch (Exception ex)
             {
 
+
             }
+            LB_MSG.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         }
 
-        private void frmMain_Load(object sender, EventArgs e)
+        private void btnMonitor_Click(object sender, EventArgs e)
         {
-            iskin.SkinFile = "skins/PageColor2.ssk";
+            timCheck.Enabled = false;
         }
     }
 }

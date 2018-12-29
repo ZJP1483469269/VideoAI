@@ -43,8 +43,7 @@
             this.geckoWebBrowser1.DocumentCompleted += new System.EventHandler<Gecko.Events.GeckoDocumentCompletedEventArgs>(this.geckoWebBrowser1_DocumentCompleted);
             // 
             // timAfter
-            // 
-            this.timAfter.Tick += new System.EventHandler(this.timAfter_Tick);
+            //  
             // 
             // frmMain
             // 

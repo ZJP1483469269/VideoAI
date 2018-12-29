@@ -786,18 +786,7 @@ namespace GTWS_TASK.UI
                 timAfter.Enabled = true;
             }
 
-            try
-            {
-                String cFileName = Application.StartupPath + "\\GTWS_CARVE.exe";
-                if (File.Exists(cFileName))
-                {
-                    System.Diagnostics.Process.Start(cFileName);
-                }
-            }
-            catch (Exception ex)
-            {
-
-            }
+           
         }
         private void btnLoad_Click(object sender, EventArgs e)
         {
@@ -834,26 +823,25 @@ namespace GTWS_TASK.UI
         {
             if (ApplicationEvent.UploadThread != null)
             {
-                ApplicationEvent.isUploadAbort = true;
                 try
                 {
-
-                    Thread.Sleep(1000);
-                }
-                catch (Exception ex)
-                {
-
-                }
-                try
-                {
+                    ApplicationEvent.isUploadAbort = true;
                     ApplicationEvent.UploadThread.Abort();
+                    try
+                    {
+
+                        Thread.Sleep(1000);
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
                     ApplicationEvent.UploadThread = null;
                 }
                 catch (Exception ex)
                 {
 
-                }
-
+                } 
             }
         }
          
@@ -871,7 +859,35 @@ namespace GTWS_TASK.UI
         private void frmTask_Load(object sender, EventArgs e)
         {
             iskin.SkinFile = "skins/PageColor2.ssk";
-            btnLoad_Click(null, null); 
+            btnLoad_Click(null, null);
+            String cORG_ID = INIConfig.ReadString("Config", AppConfig.ORG_ID);
+            String cLeftCount = WebSQL.GetStrValue("SELECT COUNT(1) FROM XT_TASK_LIST WHERE ORG_ID LIKE '" + cORG_ID + "%' ");
+            int iLeftCount = StringEx.getInt(cLeftCount);
+            if (iLeftCount > 0)
+            {
+                this.timAfter.Enabled = true;
+            } 
+        }
+
+        private void timCheck_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                String cFileName = Application.StartupPath + "\\GTWS_CARVE.exe";
+                if (File.Exists(cFileName))
+                {
+                    System.Diagnostics.Process.Start(cFileName);
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        private void btnMonitor_Click(object sender, EventArgs e)
+        {
+            this.timCheck.Enabled = false;
         }
     }
 }

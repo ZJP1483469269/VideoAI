@@ -9,6 +9,7 @@ using System.Collections;
 using System.Collections.Specialized;
 using System.Text.RegularExpressions;
 using System.Drawing;
+using System.Net;
 
 namespace TLKJ.Utils
 {
@@ -17,6 +18,30 @@ namespace TLKJ.Utils
     /// </summary>
     public class AppManager
     {
+        public static String getIPAddr()
+        {
+            string hostName = Dns.GetHostName();                //获取本机名
+            IPAddress[] ips = Dns.GetHostAddresses(hostName);   //可以获取IPv4的地址
+            for (int i = 0; i < ips.Length; i++)
+            {
+                String cStr = StringEx.getString(ips[i]);
+                if (cStr.Length > 9)
+                {
+                    StringBuilder sb = new StringBuilder();
+                    String[] vals = cStr.Split('.');
+                    for (int k = 0; k < vals.Length; k++)
+                    {
+                        cStr = vals[k];
+                        int iVal = StringEx.getInt(cStr);
+                        sb.Append(string.Format("{0:000}", iVal));
+                    }
+                    return sb.ToString();
+                }
+            }
+            return "";
+
+        }
+
         public static ArrayList getTableHash(DataTable dtRows)
         {
             ArrayList arKeys = new ArrayList();

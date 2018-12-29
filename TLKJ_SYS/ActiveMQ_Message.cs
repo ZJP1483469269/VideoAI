@@ -6,10 +6,11 @@ namespace TLKJ.SYS
 {
     public class ActiveMQ_Message
     {
-        public int MessageType;
+        public String FROM_ID;
         public String USER_ID;
-        public String ORG_ID;
+        public int CMD_ID;
         public String MESSAGE;
+        public String CREATE_TIME;
     }
 
     public class ActiveMQ_MessageType

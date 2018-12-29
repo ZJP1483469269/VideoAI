@@ -82,19 +82,8 @@ namespace GTWS_TASK.UI
                     string cToken = js.getFieldValue("token");
                     ApplicationEvent.Token = cToken;
                     LOAD_TOKEN_FLAG = true;
-                    timAfter_Tick(null, null);
                 }
             }
-        }
-
-        private void timAfter_Tick(object sender, EventArgs e)
-        {
-            timAfter.Enabled = false;
-            frmAuto vDialog = new frmAuto();
-            vDialog.InitStart();
-            vDialog.ShowInTaskbar = false;
-            vDialog.btnAutoTake_Click(null, null);
-            vDialog.Hide();
-        }
+        } 
     }
 }

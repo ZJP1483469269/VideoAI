@@ -34,7 +34,6 @@ namespace TLKJ_IVS
         public static void Execute()
         {
             AnalyseTask Task = AnalyseTask.getInstance();
-            int iALARM_ALLOW = INIConfig.ReadInt("ALARM", "DFS_ALLOW");
             int iANALYSE_ALLOW = INIConfig.ReadInt("ANALYSE", "DFS_ALLOW");
             while (!ApplicationEvent.isUploadAbort)
             {
@@ -42,7 +41,7 @@ namespace TLKJ_IVS
                 log4net.WriteLogFile("UploadTask.Execute..", LogType.DEBUG);
                 String cFileName = null;
                 
-                if (iALARM_ALLOW > 0)
+                if (iANALYSE_ALLOW > 0)
                 {
                     cFileName = Task.getAnalyseFile(); 
                     if (String.IsNullOrWhiteSpace(cFileName))

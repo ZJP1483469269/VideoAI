@@ -44,6 +44,8 @@
             this.LB_KEY = new System.Windows.Forms.Label();
             this.LB_MSG = new System.Windows.Forms.Label();
             this.CameraNameList = new System.Windows.Forms.ListBox();
+            this.timCheck = new System.Windows.Forms.Timer(this.components);
+            this.btnMonitor = new System.Windows.Forms.Button();
             btnLoad = new System.Windows.Forms.Button();
             btnAutoTake = new System.Windows.Forms.Button();
             btnClose = new System.Windows.Forms.Button();
@@ -55,7 +57,7 @@
             // btnLoad
             // 
             btnLoad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            btnLoad.Location = new System.Drawing.Point(530, 506);
+            btnLoad.Location = new System.Drawing.Point(468, 506);
             btnLoad.Name = "btnLoad";
             btnLoad.Size = new System.Drawing.Size(74, 29);
             btnLoad.TabIndex = 87;
@@ -66,7 +68,7 @@
             // btnAutoTake
             // 
             btnAutoTake.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            btnAutoTake.Location = new System.Drawing.Point(611, 506);
+            btnAutoTake.Location = new System.Drawing.Point(549, 506);
             btnAutoTake.Name = "btnAutoTake";
             btnAutoTake.Size = new System.Drawing.Size(62, 29);
             btnAutoTake.TabIndex = 88;
@@ -88,7 +90,7 @@
             // btnEndReal
             // 
             btnEndReal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            btnEndReal.Location = new System.Drawing.Point(795, 506);
+            btnEndReal.Location = new System.Drawing.Point(733, 506);
             btnEndReal.Name = "btnEndReal";
             btnEndReal.Size = new System.Drawing.Size(61, 29);
             btnEndReal.TabIndex = 84;
@@ -99,7 +101,7 @@
             // btnTake
             // 
             btnTake.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            btnTake.Location = new System.Drawing.Point(679, 506);
+            btnTake.Location = new System.Drawing.Point(617, 506);
             btnTake.Name = "btnTake";
             btnTake.Size = new System.Drawing.Size(43, 29);
             btnTake.TabIndex = 82;
@@ -110,7 +112,7 @@
             // btnStartReal
             // 
             btnStartReal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            btnStartReal.Location = new System.Drawing.Point(728, 506);
+            btnStartReal.Location = new System.Drawing.Point(666, 506);
             btnStartReal.Name = "btnStartReal";
             btnStartReal.Size = new System.Drawing.Size(61, 29);
             btnStartReal.TabIndex = 83;
@@ -139,7 +141,7 @@
             // timTask
             // 
             this.timTask.Enabled = true;
-            this.timTask.Interval = 3000;
+            this.timTask.Interval = 30000;
             this.timTask.Tick += new System.EventHandler(this.timTask_Tick);
             // 
             // YWZ_TXT_LIST
@@ -193,11 +195,29 @@
             this.CameraNameList.TabIndex = 92;
             this.CameraNameList.DoubleClick += new System.EventHandler(this.CameraNameList_DoubleClick);
             // 
+            // timCheck
+            // 
+            this.timCheck.Enabled = true;
+            this.timCheck.Interval = 1000;
+            this.timCheck.Tick += new System.EventHandler(this.timCheck_Tick);
+            // 
+            // btnMonitor
+            // 
+            this.btnMonitor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMonitor.Location = new System.Drawing.Point(800, 506);
+            this.btnMonitor.Name = "btnMonitor";
+            this.btnMonitor.Size = new System.Drawing.Size(56, 29);
+            this.btnMonitor.TabIndex = 93;
+            this.btnMonitor.Text = "停止";
+            this.btnMonitor.UseVisualStyleBackColor = true;
+            this.btnMonitor.Click += new System.EventHandler(this.btnMonitor_Click);
+            // 
             // frmTask
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(937, 547);
+            this.Controls.Add(this.btnMonitor);
             this.Controls.Add(this.CameraNameList);
             this.Controls.Add(this.LB_MSG);
             this.Controls.Add(this.LB_KEY);
@@ -231,5 +251,7 @@
         private System.Windows.Forms.Label LB_KEY;
         private System.Windows.Forms.Label LB_MSG;
         private System.Windows.Forms.ListBox CameraNameList;
+        private System.Windows.Forms.Timer timCheck;
+        private System.Windows.Forms.Button btnMonitor;
     }
 }
