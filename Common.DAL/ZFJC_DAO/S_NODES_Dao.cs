@@ -19,24 +19,15 @@ namespace TLKJ.DAO
             response = rep;
         }
 
-        public DataTable QueryList(String cORG_ID, String cTypeID)
+        public DataTable QueryList(String cRoleID, String cTypeID)
         {
             ActiveResult vret = new ActiveResult();
-            string sql = "SELECT * FROM S_NODES A,S_ORG_INF_NODES B "
-                    + " WHERE (A.ID=B.NODE_ID) "
-                    + " AND (ORG_ID='" + cORG_ID + "') "
-                    + " AND (A.ISACTIVE=1) "
-                    + " AND (TYPE_ID='" + cTypeID + "')";
+            string sql = "SELECT * FROM S_NODES T "
+                    + " WHERE (T.ISACTIVE=1) "
+                    + " AND (TYPE_ID='" + cTypeID + "') "
+                    + " AND EXISTS(SELECT 1 FROM S_ROLE_GRANT X WHERE (X.ROLE_ID='" + cRoleID + "') AND T.ID=X.NODE_ID) ";
             return DbManager.QueryData(sql);
         }
-
-        public DataTable QueryList(String cTypeID)
-        {
-            ActiveResult vret = new ActiveResult();
-            string sql = "SELECT * FROM S_NODES WHERE (TYPE_ID='" + cTypeID + "') AND (ISACTIVE=1)";
-            return DbManager.QueryData(sql);
-        }
-
 
         public DataRow[] QueryMenuItem(string cTypeID)
         {
