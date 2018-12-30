@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Data;
 using System.Data.Common;
-using System.Collections;
-using System.Data.SqlClient;
 using System.Configuration;
-using TLKJ.Utils;
 using System.Collections.Generic;
 using System.Text;
+using TLKJ.Utils;
+using MySql.Data.MySqlClient;
 
 namespace TLKJ.DB
 {
@@ -22,9 +21,9 @@ namespace TLKJ.DB
 
             if (dbConnect == null)
             {
-                dbConnect = new SqlConnection();
+                dbConnect = new MySqlConnection();
                 dbConnect.ConnectionString = AConnString;
-                dbConnect = (SqlConnection)(dbConnect);
+                dbConnect = (MySqlConnection)(dbConnect);
                 try
                 {
                     dbConnect.Open();
@@ -43,7 +42,7 @@ namespace TLKJ.DB
             {
                 DataSet SqlDs = new DataSet();
                 DbCommand Cmd = dbConnect.CreateCommand();
-                DbDataAdapter sqldt = new SqlDataAdapter();
+                DbDataAdapter sqldt = new MySqlDataAdapter();
                 sqldt.SelectCommand = Cmd;
                 Cmd.CommandText = strSQL;
                 sqldt.Fill(SqlDs);
@@ -126,9 +125,10 @@ namespace TLKJ.DB
         {
             StringBuilder sql = new StringBuilder();
             if (iPageNo > 0)
+            {
                 sql.Append(" SELECT " + cFileList);
-            else
-                sql.Append(" SELECT TOP " + iPageNo + " " + cFileList);
+            }
+
             sql.Append(" FROM " + cTableName);
             if (!String.IsNullOrEmpty(cWhereParm))
             {
@@ -138,12 +138,16 @@ namespace TLKJ.DB
             {
                 sql.Append(" order by " + cOrderBy);
             }
+            if (iPageNo > 0)
+            {
+                sql.Append(" LIMIT " + iPageNo);
+            }
             return Query(sql.ToString());
         }
 
         public String ServerDateTime()
         {
-            string StrDtValue = GetStrValue("select getdate()");
+            string StrDtValue = GetStrValue("select now()");
             return DateTime.Parse(StrDtValue).ToString("yyyy-MM-dd HH:mm:ss");
         }
 
@@ -182,17 +186,14 @@ namespace TLKJ.DB
 
             sql.Length = 0;
 
-            sql.Append(" SELECT * FROM ( ");
-            sql.Append("    select row_number() over(" + cOrderBy + ") rownumber ");
-            sql.Append("    ," + cFileList);
+            sql.Append(" SELECT " + cFileList);
             sql.Append("    from " + cTableName);
             if (!String.IsNullOrEmpty(cWhereParm))
             {
                 sql.Append("    where " + cWhereParm);
             }
-            sql.Append(" ) tab");
-            sql.Append(" where rownumber>" + iStart + " and rownumber<" + iFinish);
-
+            sql.Append(" ORDER BY " + cOrderBy);
+            sql.Append(" LIMIT " + iPageSize + ",OFFSET " + iStart);
             vret.dtrows = Query(sql.ToString());
             return vret;
         }
@@ -200,12 +201,12 @@ namespace TLKJ.DB
         public int ExecSQL(List<String> sqls, List<Object[]> ParmList)
         {
             int iSqlCount = 0;
-            SqlTransaction trans = null;
+            MySqlTransaction trans = null;
             string sql = "";
             try
             {
-                SqlConnection cn =(SqlConnection) dbConnect;
-                SqlCommand cmd = cn.CreateCommand();
+                MySqlConnection cn = (MySqlConnection)dbConnect;
+                MySqlCommand cmd = cn.CreateCommand();
                 trans = cn.BeginTransaction();
                 cmd.Transaction = trans;
                 string Trandid = Guid.NewGuid().ToString();
@@ -248,10 +249,7 @@ namespace TLKJ.DB
                 #endregion
                 return -1;
             }
-        }
-
-
-
+        } 
         ~DBMySQL()
         {
             //

@@ -86,7 +86,9 @@ namespace TLKJ.DB
                 {
                     DBMySQL Connect = new DBMySQL(cConnString);
                     if (Connect != null)
+                    {
                         Connects.Enqueue(Connect);
+                    }
                 }
             }
         }
