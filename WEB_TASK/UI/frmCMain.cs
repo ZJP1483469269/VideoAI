@@ -358,7 +358,7 @@ namespace WEB_TASK
 
         private void timAuto_Tick(object sender, EventArgs e)
         {
-            String cPageHtml = geckoWebBrowser1.TextContent;
+            String cPageHtml = geckoWebBrowser1.Text; 
             Document doc = NSoupClient.Parse(cPageHtml);
             Elements rs = doc.Select(this.txtMatch.Text);
             for (int i = 0; i < rs.Count; i++)

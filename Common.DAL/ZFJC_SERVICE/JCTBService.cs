@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web;
-using TLKJ.Utils;
-using TLKJ.DB;
 using System.Data;
 using TLKJ.Utils;
+using TLKJ.DB;
 
 namespace TLKJ.DAO
 {

@@ -55,9 +55,6 @@
         </div>
         <input type="hidden" id="DEF_URL" value="<%=cDefUrl %>" />
         <input type="hidden" id="DEF_ID" value="<%=cDefID %>" />
-    </form>
-    <script type="text/javascript">
-        
-    </script>
+    </form> 
 </body>
 </html>

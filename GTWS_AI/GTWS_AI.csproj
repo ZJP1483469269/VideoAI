@@ -19,7 +19,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\GTWS\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -81,6 +81,7 @@
     <Compile Include="Common\Const.cs" />
     <Compile Include="Common\CopyUnit.cs" />
     <Compile Include="Common\IVS_API.cs" />
+    <Compile Include="Common\MyRect.cs" />
     <Compile Include="Common\ShellAPI.cs" />
     <Compile Include="Common\TVNode.cs" />
     <Compile Include="Common\UploadTask.cs" />
@@ -117,6 +118,12 @@
     <Compile Include="UI\frmAdmin.Designer.cs">
       <DependentUpon>frmAdmin.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\frmArea.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmArea.Designer.cs">
+      <DependentUpon>frmArea.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\frmBase.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -150,8 +157,14 @@
     <Compile Include="UI\frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\frmMain.Designer.cs">
+    <Compile Include="UI\frmMain.designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\frmTrain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmTrain.Designer.cs">
+      <DependentUpon>frmTrain.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\frmWebKit.cs">
       <SubType>Form</SubType>
@@ -195,6 +208,9 @@
     <EmbeddedResource Include="UI\frmAdmin.resx">
       <DependentUpon>frmAdmin.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\frmArea.resx">
+      <DependentUpon>frmArea.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\frmBase.resx">
       <DependentUpon>frmBase.cs</DependentUpon>
     </EmbeddedResource>
@@ -212,6 +228,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\frmTrain.resx">
+      <DependentUpon>frmTrain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\frmWebKit.resx">
       <DependentUpon>frmWebKit.cs</DependentUpon>
@@ -244,6 +263,15 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Content Include="doc\IrisSkin4\IrisSkin4.dll" />
+    <Content Include="images\IMG01.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\OpenCV_Chessboard.png" />
+    <Content Include="images\OpenCV_Chessboard2.png" />
+    <Content Include="images\OpenCV_Chessboard3.png" />
+    <Content Include="images\Photo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="License-LGPL.txt" />
     <Content Include="Model\OpenCV_Chessboard.png" />
     <Content Include="Model\OpenCV_Chessboard2.png" />

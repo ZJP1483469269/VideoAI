@@ -32,9 +32,9 @@ namespace TLKJ.SYS
                 //初始化工厂，这里默认的URL是不需要修改的
                 factory = new ConnectionFactory("tcp://" + cHost + ":" + cPort);
             }
-            catch
+            catch (Exception ex)
             {
-                log4net.WriteLogFile("ActiveMQ:初始化失败!!");
+                log4net.WriteLogFile("ActiveMQ:初始化失败--" + ex.Message);
             }
         }
 

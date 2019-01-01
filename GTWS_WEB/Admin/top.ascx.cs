@@ -23,11 +23,13 @@ public partial class Admin_top : System.Web.UI.UserControl
         PageEx vPage = (PageEx)Page;
         vPage.CheckLogin();
 
-        String cTypeID = "0";
-        dtRows = dao.QueryList(cTypeID);
         LoginUserInfo vUserInf = vPage.getLoginUserInfo();
         cOrg_Full_Name = vUserInf.ORG_FULL_NAME;
         cUser_Name = vUserInf.USER_NAME;
         cDEF_ID = vPage.getClientID(); 
+        String cRole_ID = vUserInf.ROLE_ID;
+        String cTypeID = "0";
+        dtRows = dao.QueryList(cRole_ID, cTypeID);
+
     }
 }

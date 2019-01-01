@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GTWS_TASK.UI;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -48,8 +49,7 @@ namespace GTWS_AI.UI
 
         private void button3_Click(object sender, EventArgs e)
         {
-            frmMain vDialog = new frmMain();
-            vDialog. InitMQClient(); 
+            frmMain vDialog = new frmMain(); 
             vDialog.Hide();
         }
     }

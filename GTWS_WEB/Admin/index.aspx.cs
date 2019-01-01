@@ -14,22 +14,22 @@ public partial class Admin_index : PageEx
     {
         CheckLogin();
         LoginUserInfo vUserInf = getLoginUserInfo();
-        String cUserCode = vUserInf.USER_CODE;
+        String cUSER_ID = vUserInf.USER_ID;
         if (Session["TOKEN"] == null)
         {
-            this.usercode.Value = cUserCode;
+            this.user_id.Value = cUSER_ID;
             long cDayTime = DateUtils.getDayTimeNum();
-            String cToken = MDUtil.Get32MD5(cUserCode + cDayTime);
+            String cToken = MDUtil.Get32MD5(cUSER_ID + cDayTime);
             List<String> sqls = new List<string>();
-            sqls.Add("DELETE FROM S_TOKEN WHERE USER_ID='" + cUserCode + "'");
+            sqls.Add("DELETE FROM S_TOKEN WHERE USER_ID='" + cUSER_ID + "'");
             System.Text.StringBuilder sql = new System.Text.StringBuilder();
             sql.Append("INSERT INTO S_TOKEN(user_id,token,create_date) ");
-            sql.Append(" VALUES('" + cUserCode + "','" + cToken + "','" + cDayTime + "')");
+            sql.Append(" VALUES('" + cUSER_ID + "','" + cToken + "','" + cDayTime + "')");
             sqls.Add(sql.ToString());
             DbManager.ExecSQL(sqls);
             Session["TOKEN"] = cToken;
         }
-        this.usercode.Value = cUserCode;
+        this.user_id.Value = cUSER_ID;
         this.token.Value = StringEx.getString(Session["TOKEN"]);
         this.orgid.Value = vUserInf.ORG_ID;
 

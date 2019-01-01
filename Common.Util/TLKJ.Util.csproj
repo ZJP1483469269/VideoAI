@@ -111,6 +111,7 @@
     <Compile Include="SMSUtil.cs" />
     <Compile Include="StatField.cs" />
     <Compile Include="SYS\DBResult.cs" />
+    <Compile Include="SYS\WinAPI.cs" />
     <Compile Include="WX\IMMessage.cs" />
     <Compile Include="WX\IMMessageType.cs" />
     <Compile Include="WX\IMRecvMSG.cs" />

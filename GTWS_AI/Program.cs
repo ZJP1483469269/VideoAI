@@ -32,10 +32,11 @@ namespace GTWS_AI
             }
             else
             {
+                Xpcom.Initialize(Application.StartupPath + @"\xulrunner");
                 INIConfig.setConfigFile(Application.StartupPath + @"\Config.ini");
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new frmMain());
+                Application.Run(new frmArea());
                 mux.ReleaseMutex();
             }
         } 

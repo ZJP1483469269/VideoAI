@@ -55,7 +55,7 @@
         </div>
     </div>
     <asp:HiddenField ID="token" runat="server" />
-    <asp:HiddenField ID="usercode" runat="server" />
+    <asp:HiddenField ID="user_id" runat="server" />
     <asp:HiddenField ID="orgid" runat="server" />
     </form>
 </body>

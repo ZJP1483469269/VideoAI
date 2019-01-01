@@ -1,0 +1,25 @@
+--------2019年1月1日星期二 22:08:24--------
+访问地址：/api/rest.ashx?action_type=Dict&action_method=query&limit=15&offset=0&maxrows=15&ORG_ID=411082&_=1546351704560
+用户地址：::1
+登陆页面：http://localhost:15355/sysweb/dict_list.aspx?ID=9907
+操作内容：执行SQL集合异常:列名 'CLS_ID' 无效。
+--------2019年1月1日星期二 22:08:24--------
+访问地址：/api/rest.ashx?action_type=Dict&action_method=query&limit=15&offset=0&maxrows=15&ORG_ID=411082&_=1546351704560
+用户地址：::1
+登陆页面：http://localhost:15355/sysweb/dict_list.aspx?ID=9907
+操作内容：列名 'CLS_ID' 无效。
+--------2019年1月1日星期二 22:09:38--------
+访问地址：/api/rest.ashx?action_type=Dict&action_method=query&limit=15&offset=0&maxrows=15&ORG_ID=411082&_=1546351778583
+用户地址：::1
+登陆页面：http://localhost:15355/sysweb/dict_list.aspx?ID=9907
+操作内容：列名 'TYPE_ID' 无效。
+--------2019年1月1日星期二 22:09:52--------
+访问地址：/api/rest.ashx?action_type=Dict&action_method=query&limit=15&offset=0&maxrows=15&ORG_ID=411082&_=1546351792327
+用户地址：::1
+登陆页面：http://localhost:15355/sysweb/dict_list.aspx?ID=9907
+操作内容：列名 'TYPE_ID' 无效。
+--------2019年1月1日星期二 22:10:07--------
+访问地址：/web/proxy.aspx?PAGE_id=NAV_LIST
+用户地址：::1
+登陆页面：http://localhost:15355/sysweb/page_list.aspx?ID=9911
+操作内容：对象名 't_nav_list' 无效。

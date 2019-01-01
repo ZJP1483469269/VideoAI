@@ -30,8 +30,7 @@
                         <div class="con_left">
                             <div class="conL_kuang" id="idTransformView">
                                 <a href="#">
-                                    <ul class="slider" id="idSlider">
-
+                                    <ul class="slider" id="idSlider"> 
                                         <li><a href="#" onclick="c_id('222 ','WZ_GTYW')">
                                             <img src="/TP/detail_tp/2018-12-10-11-37-52.jpg" width="518" height="308" /></a></li>
 
@@ -70,6 +69,7 @@
                                         <li>4</li>
                                         <li>5</li>
                                     </ul>
+                                </a>
                             </div>
                             <div class="conL_zi" style="display: none;" id="tu0">
                                 <a href="#" onclick="c_id(222,'WZ_GTYW')">王锋：发出正声音传递正能量奋力开创执法信访工作新局面

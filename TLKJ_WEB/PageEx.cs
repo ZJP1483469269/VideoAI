@@ -33,7 +33,7 @@ namespace TLKJ.WEB
 
         public void FillDropList(ListControl org_id, DataTable dtRows, String cKeyField, String cValField)
         {
-             
+
         }
         public String getClientID()
         {
@@ -78,37 +78,17 @@ namespace TLKJ.WEB
 
         public LoginUserInfo getLoginUserInfo()
         {
-            String cUserCode = null;
-            if (Config.GetAppSettings("IS_DEBUG").Equals("1"))
-            {
-                cUserCode = "admin";
-            }
-            HttpCookie vkUser = Request.Cookies[AppConfig.SESSION_USER_ID];
-            if (vkUser != null)
-            {
-                cUserCode = StringEx.getString(vkUser.Value);
-            }
-            if (String.IsNullOrEmpty(cUserCode))
-            {
-                cUserCode = StringEx.getString(Session[AppConfig.SESSION_USER_ID]);
-            }
-            if (String.IsNullOrEmpty(cUserCode))
-            {
-                String cToken = StringEx.getString(Request["TOKEN"]);
-                if (!String.IsNullOrEmpty(cToken))
-                {
-                    cUserCode = DbManager.GetStrValue("SELECT USER_ID FROM S_TOKEN WHERE TOKEN='" + cToken + "'");
-                }
-            }
-            if (!String.IsNullOrEmpty(cUserCode))
+            String cUSER_ID = getUserID();
+            if (!String.IsNullOrEmpty(cUSER_ID))
             {
                 try
                 {
-                    DataTable dtRows = DbManager.QueryData("SELECT * FROM S_USER_INF WHERE USER_CODE='" + cUserCode + "'");
+                    DataTable dtRows = DbManager.QueryData("SELECT * FROM S_USER_INF WHERE USER_ID='" + cUSER_ID + "'");
                     LoginUserInfo vUser = new LoginUserInfo();
-                    vUser.USER_CODE = cUserCode;
+                    vUser.USER_CODE = StringEx.getString(dtRows, 0, "USER_CODE");
                     vUser.ORG_ID = StringEx.getString(dtRows, 0, "ORG_ID");
                     vUser.USER_NAME = StringEx.getString(dtRows, 0, "USER_NAME");
+                    vUser.ROLE_ID = StringEx.getString(dtRows, 0, "ROLE_ID");
                     dtRows = DbManager.QueryData("SELECT ORG_NAME,ORG_FULL_NAME,X,Y FROM S_ORG_INF WHERE ORG_ID='" + vUser.ORG_ID + "'");
                     vUser.ORG_NAME = StringEx.getString(dtRows, 0, "ORG_NAME");
                     vUser.ORG_FULL_NAME = StringEx.getString(dtRows, 0, "ORG_FULL_NAME");
@@ -128,31 +108,7 @@ namespace TLKJ.WEB
             {
                 return null;
             }
-        }
-
-        //public LoginUserInfo getLoginUserInfo()
-        //{
-        //    HttpCookieCollection cks = Request.Cookies;
-        //    HttpCookie ckUser = cks.Get(AppConfig.SESSION_USER_INF);
-        //    if (ckUser != null)
-        //    {
-        //        String cLoginVal = ckUser.Value;
-        //        try
-        //        {
-        //            cLoginVal = HttpUtility.UrlDecode(cLoginVal);
-        //            LoginUserInfo vUser = (LoginUserInfo)JsonConvert.DeserializeObject<LoginUserInfo>(cLoginVal);
-        //            return vUser;
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            return null;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        return null;
-        //    }
-        //}
+        } 
 
         public void AlterThenGo(String cMessage, String cHref)
         {
@@ -179,34 +135,44 @@ namespace TLKJ.WEB
             iPageSize = StringEx.getInt(cPageSize, 15);
             iPageNo = StringEx.getInt(cPageNo, 1);
         }
-        public void CheckLogin()
+
+        public String getUserID()
         {
-            Boolean isLogin = false;
+            String cUSER_ID = null;
             if (Request != null)
             {
                 HttpCookie ckUser = Request.Cookies.Get(AppConfig.SESSION_USER_INF);
-                String cUserCode = "";
+
                 if (ckUser != null)
                 {
-                    cUserCode = StringEx.getString(ckUser.Value);
+                    cUSER_ID = StringEx.getString(ckUser.Value);
                 }
 
-                if (String.IsNullOrEmpty(cUserCode))
+                if (String.IsNullOrEmpty(cUSER_ID))
                 {
-                    cUserCode = StringEx.getString(Session[AppConfig.SESSION_USER_ID]);
+                    cUSER_ID = StringEx.getString(Session[AppConfig.SESSION_USER_ID]);
+                }
+                else
+                {
+                    return cUSER_ID;
                 }
 
-                if (String.IsNullOrEmpty(cUserCode))
+                if (String.IsNullOrEmpty(cUSER_ID))
                 {
                     String cToken = StringEx.getString(Request["TOKEN"]);
                     if (!String.IsNullOrEmpty(cToken))
                     {
-                        cUserCode = DbManager.GetStrValue("SELECT USER_ID FROM S_TOKEN WHERE TOKEN='" + cToken + "'");
+                        cUSER_ID = DbManager.GetStrValue("SELECT USER_ID FROM S_TOKEN WHERE TOKEN='" + cToken + "'");
                     }
                 }
-                isLogin = !string.IsNullOrEmpty(cUserCode);
             }
+            return cUSER_ID;
+        }
 
+        public void CheckLogin()
+        {
+            String cUSER_ID = getUserID();
+            Boolean isLogin = !string.IsNullOrEmpty(cUSER_ID);
             if (!isLogin)
             {
                 Response.Redirect("/Admin/Logoff.aspx");

@@ -17,6 +17,9 @@ public partial class Admin_left : PageEx
     {
         CheckLogin();
         String cTypeID = StringEx.getString(Request.QueryString["TYPE_ID"]);
-        dtRows = dao.QueryList(cTypeID);
+        LoginUserInfo vUserInf = getLoginUserInfo();
+        String cRole_ID = vUserInf.ROLE_ID;
+
+        dtRows = dao.QueryList(cRole_ID, cTypeID);
     }
 }

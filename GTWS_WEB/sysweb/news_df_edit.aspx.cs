@@ -11,6 +11,9 @@ public partial class news_df_edit : PageEx
     protected void Page_Load(object sender, EventArgs e)
     {
         CheckLogin();
-        org_id.Value = this.getLoginUserInfo().ORG_ID;
+        if (!Page.IsPostBack)
+        {
+            org_id.Value = this.getLoginUserInfo().ORG_ID;
+        }
     }
 }

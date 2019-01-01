@@ -37,7 +37,8 @@ public class Handler : IHttpHandler, IRequiresSessionState
             if (iRSCount > 0)
             {
                 HttpCookie vUserInf = new HttpCookie(AppConfig.SESSION_USER_ID, vUserCount);
-                ctx.Session[AppConfig.SESSION_USER_ID] = vUserCount;
+                String cUSER_ID = DbManager.GetStrValue("SELECT USER_ID FROM S_USER_INF WHERE USER_CODE='" + vUserCount + "'");
+                ctx.Session[AppConfig.SESSION_USER_ID] = cUSER_ID;
                 Request.Cookies.Add(vUserInf);
             }
             Response.Write(sqlValue);
@@ -106,7 +107,7 @@ public class Handler : IHttpHandler, IRequiresSessionState
                 delStr[1] = "insert into S_UPLOAD (ID,TEXT,URL,ORG_ID,RES_ID) VALUES ('" + vFiles_Id + "','蓝天卫士举报'," + cUrls + ",'" + cORG_ID + "','" + vFiles_Id + "')";
                 delStr[2] = "update XT_IMAGE_LIST set ISHANDS ='1' where id ='" + vImg_id + "' ";
             }
-            int iCode= DbManager.ExecSQL(delStr);
+            int iCode = DbManager.ExecSQL(delStr);
             if (iCode > 0)
             {
                 Response.Write(guid);
@@ -123,13 +124,14 @@ public class Handler : IHttpHandler, IRequiresSessionState
             {
                 String vImg_id = StringEx.getString(Request["img_id"]);
                 sql = "update XT_IMAGE_LIST set ISHANDS ='1' where id ='" + vImg_id + "' ";
-                int iCode= DbManager.ExecSQL(sql);
+                int iCode = DbManager.ExecSQL(sql);
                 Response.Write(iCode);
             }
-            catch(Exception ex) {
-                 log4net.WriteLogFile("api/handler-uneffectclick-sql" + sql + ex.Message);
-            } 
-        } 
+            catch (Exception ex)
+            {
+                log4net.WriteLogFile("api/handler-uneffectclick-sql" + sql + ex.Message);
+            }
+        }
     }
 
     public bool IsReusable

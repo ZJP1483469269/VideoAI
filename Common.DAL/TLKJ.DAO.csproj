@@ -51,6 +51,21 @@
     <Compile Include="GTWS_MODEL\XT_IMG_REC.cs" />
     <Compile Include="GTWS_SERVICE\XT_TASKService.cs" />
     <Compile Include="GTWS_SERVICE\XT_IMG_RECService.cs" />
+    <Compile Include="TLKJ.SYS.DAO\XT_CAMERA_CONFIG_Dao.cs" />
+    <Compile Include="TLKJ.SYS.DAO\S_PAGE_DICT_Dao.cs" />
+    <Compile Include="TLKJ.SYS.DAO\S_TEMPLATE_Dao.cs" />
+    <Compile Include="TLKJ.SYS.DAO\S_ROLE_INF_Dao.cs" />
+    <Compile Include="TLKJ.SYS.DAO\S_PAGE_Dao.cs" />
+    <Compile Include="TLKJ.SYS.MODEL\XT_CAMERA_CONFIG.cs" />
+    <Compile Include="TLKJ.SYS.MODEL\S_PAGE_DICT.cs" />
+    <Compile Include="TLKJ.SYS.MODEL\S_TEMPLATE.cs" />
+    <Compile Include="TLKJ.SYS.MODEL\S_ROLE_INF.cs" />
+    <Compile Include="TLKJ.SYS.MODEL\S_PAGE.cs" />
+    <Compile Include="TLKJ.SYS.SERVICE\CameraConfigService.cs" />
+    <Compile Include="TLKJ.SYS.SERVICE\PageDictService.cs" />
+    <Compile Include="TLKJ.SYS.SERVICE\TemplateService.cs" />
+    <Compile Include="TLKJ.SYS.SERVICE\RoleInfService.cs" />
+    <Compile Include="TLKJ.SYS.SERVICE\PageService.cs" />
     <Compile Include="Util\PackUtil.cs" />
     <Compile Include="ZFJC_DAO\JCTBDao.cs" />
     <Compile Include="ZFJC_DAO\WebJBDao.cs" />
@@ -64,15 +79,15 @@
     <Compile Include="ZFJC_MODEL\xt_jctb.cs" />
     <Compile Include="ZFJC_MODEL\webjb.cs" />
     <Compile Include="ZFJC_DAO\XT_JB_Dao.cs" />
-    <Compile Include="ZFJC_DAO\S_DICTS_Dao.cs" />
+    <Compile Include="TLKJ.SYS.DAO\S_DICTS_Dao.cs" />
     <Compile Include="ZFJC_DAO\XT_JB_RESULT_Dao.cs" />
     <Compile Include="ZFJC_DAO\DB_Dao.cs" />
     <Compile Include="ZFJC_DAO\WX_USER_Dao.cs" />
     <Compile Include="ZFJC_DAO\WX_RECV_MSG_Dao.cs" />
-    <Compile Include="ZFJC_MODEL\S_DICTS.cs" />
+    <Compile Include="TLKJ.SYS.MODEL\S_DICTS.cs" />
     <Compile Include="ZFJC_MODEL\XT_JB_RESULT.cs" />
-    <Compile Include="ZFJC_DAO\S_NODES_Dao.cs" />
-    <Compile Include="ZFJC_MODEL\S_NODES.cs" />
+    <Compile Include="TLKJ.SYS.DAO\S_NODES_Dao.cs" />
+    <Compile Include="TLKJ.SYS.MODEL\S_NODES.cs" />
     <Compile Include="ZFJC_MODEL\XT_JB.cs" />
     <Compile Include="ZFJC_MODEL\XT_NOTICE.cs" />
     <Compile Include="ZFJC_DAO\XT_NOTICE_Dao.cs" />
@@ -87,27 +102,27 @@
     <Compile Include="ZFJC_SERVICE\DBService.cs" />
     <Compile Include="Service\IService.cs" />
     <Compile Include="Service\SYSService.cs" />
-    <Compile Include="ZFJC_SERVICE\DictService.cs" />
+    <Compile Include="TLKJ.SYS.SERVICE\DictService.cs" />
     <Compile Include="ZFJC_SERVICE\WebService.cs" />
     <Compile Include="ZFJC_SERVICE\XT_IMG_SCREENService.cs" />
     <Compile Include="ZFJC_SERVICE\WFJBService.cs" />
     <Compile Include="ZFJC_SERVICE\WLJBService.cs" />
     <Compile Include="ZFJC_SERVICE\WXJBService.cs" />
     <Compile Include="ZFJC_DAO\XT_CAMERA_Dao.cs" />
-    <Compile Include="ZFJC_DAO\XT_ORG_Dao.cs" />
+    <Compile Include="TLKJ.SYS.DAO\XT_ORG_Dao.cs" />
     <Compile Include="ZFJC_DAO\XT_ORG_WX_CONFIG_Dao.cs" />
-    <Compile Include="ZFJC_DAO\XT_USER_Dao.cs" />
+    <Compile Include="TLKJ.SYS.DAO\XT_USER_Dao.cs" />
     <Compile Include="ZFJC_DAO\XT_RECEIVE_SMS_Dao.cs" />
     <Compile Include="ZFJC_MODEL\XT_CAMERA.cs" />
-    <Compile Include="ZFJC_MODEL\XT_ORG.cs" />
+    <Compile Include="TLKJ.SYS.MODEL\XT_ORG.cs" />
     <Compile Include="ZFJC_MODEL\XT_ORG_WX_CONFIG.cs" />
-    <Compile Include="ZFJC_MODEL\XT_USER.cs" />
+    <Compile Include="TLKJ.SYS.MODEL\XT_USER.cs" />
     <Compile Include="ZFJC_MODEL\XT_RECEIVE_SMS.cs" />
     <Compile Include="ZFJC_SERVICE\CameraService.cs" />
-    <Compile Include="ZFJC_SERVICE\NoticeService.cs" />
-    <Compile Include="ZFJC_SERVICE\OrgInfService.cs" />
+    <Compile Include="TLKJ.SYS.SERVICE\NoticeService.cs" />
+    <Compile Include="TLKJ.SYS.SERVICE\OrgInfService.cs" />
     <Compile Include="ZFJC_SERVICE\OrgWXConfigService.cs" />
-    <Compile Include="ZFJC_SERVICE\UserInfService.cs" />
+    <Compile Include="TLKJ.SYS.SERVICE\UserInfService.cs" />
     <Compile Include="ZFJC_SERVICE\ReceiveSMSService.cs" />
     <Compile Include="ZFJC_SERVICE\OrgConfigService.cs" />
     <Compile Include="ZFJC_SERVICE\WXUSERService.cs" />
@@ -135,6 +150,7 @@
       <Name>TLKJ.Util</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
