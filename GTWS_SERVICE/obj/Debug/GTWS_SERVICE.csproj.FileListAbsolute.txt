@@ -1,0 +1,7 @@
+D:\VideoAI\GTWS\GTWS_SERVICE.exe
+D:\VideoAI\GTWS_SERVICE\obj\Debug\GTWS_SERVICE.csprojAssemblyReference.cache
+D:\VideoAI\GTWS_SERVICE\obj\Debug\GTWS_SERVICE.ProjectInstaller.resources
+D:\VideoAI\GTWS_SERVICE\obj\Debug\GTWS_SERVICE.csproj.GenerateResource.cache
+D:\VideoAI\GTWS_SERVICE\obj\Debug\GTWS_SERVICE.csproj.CoreCompileInputs.cache
+D:\VideoAI\GTWS_SERVICE\obj\Debug\GTWS_SERVICE.exe
+D:\VideoAI\GTWS_SERVICE\obj\Debug\GTWS_SERVICE.pdb

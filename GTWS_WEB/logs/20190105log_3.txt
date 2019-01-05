@@ -1,0 +1,30 @@
+--------2019年1月5日 14:59:18--------
+访问地址：/api/rest.ashx?action_type=XT_IMG_REC&action_method=find&REC_ID=201812252029490000018465000000_0000
+用户地址：::1
+登陆页面：http://localhost:15355/alarm/wf_docheck.aspx?REC_ID=201812252029490000018465000000_0000
+操作内容：执行SQL集合异常:列名 'ID' 无效。
+--------2019年1月5日 15:09:34--------
+访问地址：/api/alarm.ashx?action_type=XT_IMG_REC&action_method=query_list
+用户地址：::1
+登陆页面：http://localhost:15355/alarm/default.aspx?TYPE_ID=16
+操作内容：执行SQL集合异常:已有打开的与此 Command 相关联的 DataReader，必须首先将它关闭。
+--------2019年1月5日 15:10:00--------
+访问地址：/api/alarm.ashx?action_type=XT_IMG_REC&action_method=query_list
+用户地址：::1
+登陆页面：http://localhost:15355/alarm/default.aspx?TYPE_ID=16
+操作内容：内部连接致命错误。错误状态: 15，标记: 53
+--------2019年1月5日 15:52:39--------
+访问地址：/api/rest.ashx?action_type=PageDict&action_method=query&limit=15&offset=0&maxrows=15&ORG_ID=411082&_=1546674759166
+用户地址：::1
+登陆页面：http://localhost:15355/sysweb/page_dict_list.aspx?ID=9913
+操作内容：执行SQL集合异常:列名 'ORG_ID' 无效。
+--------2019年1月5日 15:52:39--------
+访问地址：/api/rest.ashx?action_type=PageDict&action_method=query&limit=15&offset=0&maxrows=15&ORG_ID=411082&_=1546674759166
+用户地址：::1
+登陆页面：http://localhost:15355/sysweb/page_dict_list.aspx?ID=9913
+操作内容：列名 'ORG_ID' 无效。
+--------2019年1月5日 15:52:43--------
+访问地址：/api/rest.ashx?action_type=Dict&action_method=query&limit=15&offset=0&maxrows=15&ORG_ID=411082&_=1546674763881
+用户地址：::1
+登陆页面：http://localhost:15355/sysweb/dict_list.aspx?ID=9907
+操作内容：列名 'TYPE_ID' 无效。

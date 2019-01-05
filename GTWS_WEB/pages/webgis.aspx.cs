@@ -25,6 +25,16 @@ public partial class webgis : PageEx
         ORG_ID = UserInfo.ORG_ID;
 
         String ID = StringEx.getString(Request.QueryString["ID"]);
+
+        String P = StringEx.getString(Request.QueryString["P"]);
+        String T = StringEx.getString(Request.QueryString["T"]);
+        String X = StringEx.getString(Request.QueryString["X"]);
+        String DEVICE_ID = StringEx.getString(Request.QueryString["DEVICE_ID"]);
+
+        if (!String.IsNullOrEmpty(DEVICE_ID)) {
+
+        }
+
         if (ID.Length > 0)
         {
             UrlMessage vMSG = null;
@@ -45,7 +55,7 @@ public partial class webgis : PageEx
                 double cY = vo.y;
                 if ((cX > 0) && (cY > 0))
                 {
-                    X = cX;
+                    X = cX.ToString();
                     Y = cY;
                 }
             }
@@ -61,7 +71,7 @@ public partial class webgis : PageEx
             String cY = StringEx.getString(Request.QueryString["Y"]);
             if ((cX.Length > 0) && (cY.Length > 0))
             {
-                X = StringEx.GetDouble(cX);
+                X = StringEx.GetDouble(cX).ToString();
                 Y = StringEx.GetDouble(cY);
             }
         }

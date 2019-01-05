@@ -40,18 +40,31 @@ namespace TLKJ.DAO
             String cORG_ID = StringEx.getString(request["ORG_ID"]);
             String cCAMERA_NAME = StringEx.getString(request["CAMERA_NAME"]);
             String cALARM_CHECKED = StringEx.getString(request["ALARM_CHECKED"]);
+            String cALARM_FLAG = StringEx.getString(request["ALARM_FLAG"]);
+
             ActiveResult vret = ActiveResult.Valid(AppConfig.FAILURE);
 
-            String cWhereParm = " (ALARM_FLAG=1) ";
-            cWhereParm = cWhereParm + " AND EXISTS( SELECT 1 FROM XT_CAMERA X WHERE X.ORG_ID='" + cORG_ID + "' AND X.DEVICE_ID=CAMERA_ID ";
+            String cWhereParm = " EXISTS( SELECT 1 FROM XT_CAMERA X WHERE X.ORG_ID='" + cORG_ID + "' AND X.DEVICE_ID=CAMERA_ID AND ALARM_FLAG = '0' AND ALARM_CHECKED = '0' ";
+
             if (!String.IsNullOrWhiteSpace(cCAMERA_NAME))
             {
                 cWhereParm = cWhereParm + " AND (CAMERA_NAME LIKE '%" + cCAMERA_NAME + "%')";
             }
             cWhereParm = cWhereParm + " )";
+
+            if (!String.IsNullOrWhiteSpace(cALARM_FLAG))
+            {
+                cWhereParm = cWhereParm + " AND (ALARM_FLAG=" + cALARM_FLAG + ") ";
+            }
             if (!String.IsNullOrWhiteSpace(cALARM_CHECKED))
             {
-                cWhereParm = cWhereParm + " AND ALARM_CHECKED='" + cALARM_CHECKED + "'";
+                if (cALARM_CHECKED.Equals("0"))
+                {
+                    cWhereParm = cWhereParm + " AND ALARM_CHECKED='" + cALARM_CHECKED + "'";
+                }
+                else {
+                    cWhereParm = cWhereParm + " AND ALARM_CHECKED> 0 ";
+                }
             }
 
             String cOrderBy = "ORDER BY REC_ID ASC";
@@ -91,15 +104,11 @@ namespace TLKJ.DAO
         {
             ActiveResult vret = ActiveResult.Valid(AppConfig.FAILURE);
             String cKeyID = StringEx.getString(request["ID"]);
-            if (String.IsNullOrEmpty(cKeyID))
-            {
-                vret = ActiveResult.Valid("用户账号不能为空！");
-            }
-            else
-            {
-                XT_IMG_REC vInfo = dao.FindOne(cKeyID);
-                vret = ActiveResult.returnObject(vInfo);
-            }
+            String cCAMERA_ID = StringEx.getString(request["REC_ID"]);
+            String cCamera_ID = DbManager.GetStrValue(" select CAMERA_ID from XT_IMG_REC where REC_ID = '" + cCAMERA_ID + "'");
+            DataTable dtInfo = DbManager.QueryData(" SELECT * FROM XT_CAMERA WHERE DEVICE_ID = '" + cCamera_ID + "' ");
+            vret = ActiveResult.Query(dtInfo);
+
             response.Write(vret.toJSONString());
         }
 
@@ -107,15 +116,10 @@ namespace TLKJ.DAO
         {
             ActiveResult vret = ActiveResult.Valid(AppConfig.FAILURE);
             String cUSER_COUNT = StringEx.getString(request["dbkey"]);
-            if (String.IsNullOrEmpty(cUSER_COUNT))
-            {
-                vret = ActiveResult.Valid("编码不能为空！");
-            }
-            else
-            {
-                int iCode = dao.del_item(cUSER_COUNT);
-                vret = ActiveResult.Valid(iCode > 0);
-            }
+            String cREC_ID = StringEx.getString(request["REC_ID"]);
+
+            int Code = DbManager.ExecSQL(" delete XT_IMG_REC  WHERE REC_ID = '" + cREC_ID + "'");
+            vret.total = Code;
             response.Write(vret.toJSONString());
         }
 
@@ -123,27 +127,53 @@ namespace TLKJ.DAO
         {
             ActiveResult vret = ActiveResult.Valid(AppConfig.SUCCESS);
             String cKeyID = StringEx.getString(request["ID"]);
-            String cORG_ID = StringEx.getString(request["org_id"]);
-            String cCLS_ID = StringEx.getString(request["cls_id"]);
-
-            XT_IMG_REC vo = new XT_IMG_REC();
-            vo = (XT_IMG_REC)RequestUtil.readFromRequest(request, vo);
-            vo.cls_id = cCLS_ID;
-            vo.update_time = StringEx.getString(DateUtils.getDayTimeNum());
-            if (String.IsNullOrEmpty(cORG_ID))
+            String cREC_ID = StringEx.getString(request["REC_ID"]);
+            if (String.IsNullOrWhiteSpace(cREC_ID))
             {
-                vret = ActiveResult.Valid("单位编码不能为空！");
+                vret = ActiveResult.Valid("参数传递错误！");
             }
-            else if (String.IsNullOrEmpty(cCLS_ID))
+            else
             {
-                vret = ActiveResult.Valid("类型不能为空！");
-            }
+                String cDeviceID = DbManager.GetStrValue("SELECT CAMERA_ID FROM XT_IMG_REC WHERE REC_ID='" + cREC_ID + "'");
+                XT_CAMERA_Dao dao = new XT_CAMERA_Dao();
+                XT_CAMERA mv = dao.FindItem(cDeviceID);
 
-            if (vret.result == AppConfig.SUCCESS)
-            {
-                int iCode = dao.save(vo, cKeyID);
+                String cAddress = mv.addr;
+                String CX = StringEx.getString(mv.x); 
+                String CY = StringEx.getString(mv.y);
+                String ID = AutoID.getAutoID();
+
+                List<String> sqls = new List<string>();
+                sqls.Add("  update XT_IMG_REC SET ALARM_CHECKED =1 WHERE REC_ID = '" + cREC_ID + "' ");
+                JActiveTable aTable = new JActiveTable();
+                aTable.TableName = "XT_JB";
+                aTable.AddField("ID", ID);
+                aTable.AddField("ADRESS", cAddress);
+                aTable.AddField("X", CX);
+                aTable.AddField("Y", CY);
+                sqls.Add(aTable.getInsertSQL());
+
+                int iCode = DbManager.ExecSQL(sqls);
                 vret = ActiveResult.Valid(iCode);
             }
+
+            response.Write(vret.toJSONString());
+        }
+
+        public void clear_alarm()
+        {
+            ActiveResult vret = ActiveResult.Valid(AppConfig.SUCCESS);
+            String cREC_ID = StringEx.getString(request["ID"]);
+            if (String.IsNullOrWhiteSpace(cREC_ID))
+            {
+                vret = ActiveResult.Valid("参数传递错误！");
+            }
+            else
+            {
+                int iCode = DbManager.ExecSQL(" update XT_IMG_REC SET  ALARM_CHECKED =2 WHERE REC_ID = '" + cREC_ID + "' ");
+                vret = ActiveResult.Valid(iCode);
+            }
+
             response.Write(vret.toJSONString());
         }
     }

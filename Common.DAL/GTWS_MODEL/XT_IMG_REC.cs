@@ -77,6 +77,22 @@ namespace TLKJ.DAO
             get { return _is_active; }
             set { _is_active = value; }
         }
+        
+         private int _ALARM_FLAG;
+        [FieldAttr(FieldDesc = "是否有效", DBType = ActionField.ftBoolean)]
+        public int ALARM_FLAG
+        {
+            get { return _ALARM_FLAG; }
+            set { _ALARM_FLAG = value; }
+        }
+       
+        private String _REC_ID;
+        [FieldAttr(FieldDesc = "填报时间", DBLength = 30)]
+        public String REC_ID
+        {
+            get { return _REC_ID; }
+            set { _REC_ID = value; }
+        }
 
 
         public XT_IMG_REC()

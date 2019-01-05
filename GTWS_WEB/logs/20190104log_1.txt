@@ -1,0 +1,185 @@
+--------2019年1月4日 9:12:06--------
+--------2019年1月4日 9:12:07--------
+访问地址：/Admin/login.aspx
+用户地址：::1
+操作内容：Admin_Login
+--------2019年1月4日 9:12:09--------
+访问地址：/api/Handler.ashx
+用户地址：::1
+登陆页面：http://localhost:15355/Admin/login.aspx
+操作内容：初始化数据库连接
+--------2019年1月4日 9:12:10--------
+访问地址：/Admin/index.aspx
+用户地址：::1
+登陆页面：http://localhost:15355/Admin/login.aspx
+操作内容：TOKEN的值是e0d679a8f451e6a15e217b1623beac
+--------2019年1月4日 9:12:13--------
+访问地址：/api/rest.ashx?action_type=OrgInf&action_method=query&limit=15&offset=0&maxrows=15&ORG_ID=411082&_=1546564333367
+用户地址：::1
+登陆页面：http://localhost:15355/sysweb/org_list.aspx?ID=9901
+操作内容：ActiveResult：{"result":1,"total":1,"rows":[{"ploygn":"","x":"34.202156","org_name":"长葛市","rownumber":"1","remark":"","org_id":"411082","org_type":"6","org_full_name":"长葛市国土资源局","isactive":"1","orderby":"","y":"113.821461"}],"validfield":"","validmessage":"","info":{},"isLock":0}
+--------2019年1月4日 9:12:15--------
+访问地址：/api/rest.ashx?action_type=Camera&action_method=query&limit=15&offset=0&maxrows=15&ORG_ID=411082&_=1546564335334
+用户地址：::1
+登陆页面：http://localhost:15355/sysweb/camera_list.aspx?ID=9914
+操作内容：ActiveResult：{"result":1,"total":1591,"rows":[{"x":"","y":"","rownumber":"1","village_id":"4114021011","village":"梁园区","camera_name":"172_16_73_6梁园区","unit":"","org_id":"411402","first_phase":"","addr":"172_16_73_6梁园区","device_id":"00216810000000000101X0910c4d84e8046b6b3d66ff0ca158793","is_online":"","id":"00216810000000000101","view_range":"","is_complete":"","second_phase":"","county":"梁园区"},{"x":"115.175000","y":"34.330278","rownumber":"2","village_id":"4114231072","village":"黄岗乡","camera_name":"宁陵县黄岗乡民张营1","unit":"","org_id":"411423","first_phase":"","addr":"宁陵县黄岗乡民张营1","device_id":"01173840000000000101X0910c4d84e8046b6b3d66ff0ca158793","is_online":"","id":"01173840000000000101","view_range":"","is_complete":"","second_phase":"","county":"宁陵县"},{"x":"","y":"","rownumber":"3","village_id":"4114231068","village":"QT","camera_name":"宁陵县农业局监控中心","unit":"","org_id":"411423","first_phase":"","addr":"宁陵县农业局监控中心","device_id":"01218290000000000101X0910c4d84e8046b6b3d66ff0ca158793","is_online":"","id":"01218290000000000101","view_range":"","is_complete":"","second_phase":"","county":"宁陵县"},{"x":"","y":"","rownumber":"4","village_id":"4114021001","village":"QT","camera_name":"农业局本部","unit":"","org_id":"411402","first_phase":"","addr":"农业局本部","device_id":"02143430000000000101X347b4390f448413baa2d77bd7b7e9729","is_online":"","id":"02143430000000000101","view_range":"","is_complete":"","second_phase":"","county":"梁园区"},{"x":"","y":"","rownumber":"5","village_id":"4114251103","village":"QT","camera_name":"商丘市虞城县禁烧办","unit":"","org_id":"411425","first_phase":"","addr":"商丘市虞城县禁烧办","device_id":"04268140000000000101X632f08f636bf4b0b8b523d5cc7f79f61","is_online":"","id":"04268140000000000101","view_range":"","is_complete":"","second_phase":"","county":"虞城县"},{"x":"115.352222","y":"34.581389","rownumber":"6","village_id":"4114231075","village":"柳河镇","camera_name":"宁陵县柳河镇关尚1","unit":"","org_id":"411423","first_phase":"","addr":"宁陵县柳河镇关尚1","device_id":"04689370000000000101Xbb209695f3d64778b2fec6bd3362cfe3","is_online":"","id":"04689370000000000101","view_range":"","is_complete":"","second_phase":"","county":"宁陵县"},{"x":"","y":"","rownumber":"7","village_id":"4114241092","village":"监控中心","camera_name":"柘城数字中心","unit":"","org_id":"411424","first_phase":"","addr":"柘城数字中心","device_id":"06279660000000000101Xbb209695f3d64778b2fec6bd3362cfe3","is_online":"","id":"06279660000000000101","view_range":"","is_complete":"","second_phase":"","county":"柘城县"},{"x":"","y":"","rownumber":"8","village_id":"4114021001","village":"QT","camera_name":"商丘市禁烧办监控中心","unit":"","org_id":"411402","first_phase":"","addr":"商丘市禁烧办监控中心","device_id":"08300280000000000101Xbb209695f3d64778b2fec6bd3362cfe3","is_online":"","id":"08300280000000000101","view_range":"","is_complete":"","second_phase":"","county":"梁园区"},{"x":"115.263333","y":"34.296111","rownumber":"9","village_id":"4114231071","village":"华堡乡","camera_name":"宁陵县华堡乡华堡1","unit":"","org_id":"411423","first_phase":"","addr":"宁陵县华堡乡华堡1","device_id":"09045680000000000101Xbb209695f3d64778b2fec6bd3362cfe3","is_online":"","id":"09045680000000000101","view_range":"","is_complete":"","second_phase":"","county":"宁陵县"},{"x":"","y":"","rownumber":"10","village_id":"4114221047","village":"QT","camera_name":"商丘市睢县农业局","unit":"","org_id":"411422","first_phase":"","addr":"商丘市睢县农业局","device_id":"09334990000000000101X632f08f636bf4b0b8b523d5cc7f79f61","is_online":"","id":"09334990000000000101","view_range":"","is_complete":"","second_phase":"","county":"睢县"},{"x":"","y":"","rownumber":"11","village_id":"4114031028","village":"睢阳区","camera_name":"睢阳区农牧局办公室","unit":"","org_id":"411403","first_phase":"","addr":"睢阳区农牧局办公室","device_id":"09440910000000000101X632f08f636bf4b0b8b523d5cc7f79f61","is_online":"","id":"09440910000000000101","view_range":"","is_complete":"","second_phase":"","county":"睢阳区"},{"x":"115.264167","y":"34.451111","rownumber":"12","village_id":"4114231079","village":"阳驿乡","camera_name":"宁陵县阳驿乡徐楼1","unit":"","org_id":"411423","first_phase":"","addr":"宁陵县阳驿乡徐楼1","device_id":"09772210000000000101X0910c4d84e8046b6b3d66ff0ca158793","is_online":"","id":"09772210000000000101","view_range":"","is_complete":"","second_phase":"","county":"宁陵县"},{"x":"116.419130","y":"34.082710","rownumber":"13","village_id":"4114811179","village":"薛湖镇","camera_name":"永城薛湖黄营","unit":"","org_id":"411481","first_phase":"","addr":"永城薛湖黄营","device_id":"93700844351001000101X249f8714c5114ec2b19c21fd8e5ca2b7","is_online":"","id":"93700844351001000101","view_range":"","is_complete":"","second_phase":"","county":"永城市"},{"x":"116.167960","y":"34.038290","rownumber":"14","village_id":"4114811167","village":"马牧乡","camera_name":"永城马牧乡马牧村（马牧乡西）","unit":"","org_id":"411481","first_phase":"","addr":"永城马牧乡马牧村（马牧乡西）","device_id":"93700857817001000101X249f8714c5114ec2b19c21fd8e5ca2b7","is_online":"","id":"93700857817001000101","view_range":"","is_complete":"","second_phase":"","county":"永城市"},{"x":"116.373510","y":"34.127060","rownumber":"15","village_id":"4114811180","village":"演集镇","camera_name":"永城市三小","unit":"","org_id":"411481","first_phase":"","addr":"永城市三小","device_id":"93700857825001000101X249f8714c5114ec2b19c21fd8e5ca2b7","is_online":"","id":"93700857825001000101","view_range":"","is_complete":"","second_phase":"","county":"永城市"}],"validfield":"","validmessage":"","info":{},"isLock":0}
+--------2019年1月4日 9:12:20--------
+访问地址：/api/rest.ashx?action_type=PageDict&action_method=query&limit=15&offset=0&maxrows=15&ORG_ID=411082&_=1546564340647
+用户地址：::1
+登陆页面：http://localhost:15355/sysweb/page_dict_list.aspx?ID=9913
+操作内容： SELECT count(1) FROM S_PAGE_DICT    where ORG_ID ='411082'
+--------2019年1月4日 9:12:20--------
+访问地址：/api/rest.ashx?action_type=PageDict&action_method=query&limit=15&offset=0&maxrows=15&ORG_ID=411082&_=1546564340647
+用户地址：::1
+登陆页面：http://localhost:15355/sysweb/page_dict_list.aspx?ID=9913
+操作内容：GetDataSet SELECT * FROM (     select row_number() over(ORDER BY dict_id ASC) rownumber     ,*    from S_PAGE_DICT    where ORG_ID ='411082' ) tab where rownumber>0 and rownumber<=15
+--------2019年1月4日 9:12:20--------
+访问地址：/api/rest.ashx?action_type=PageDict&action_method=query&limit=15&offset=0&maxrows=15&ORG_ID=411082&_=1546564340647
+用户地址：::1
+登陆页面：http://localhost:15355/sysweb/page_dict_list.aspx?ID=9913
+操作内容：ActiveResult：{"result":-1,"total":-1,"rows":[],"validfield":"","validmessage":"","info":{},"isLock":0}
+--------2019年1月4日 9:12:22--------
+访问地址：/api/rest.ashx?action_type=Camera&action_method=query&limit=15&offset=0&maxrows=15&ORG_ID=411082&_=1546564342798
+用户地址：::1
+登陆页面：http://localhost:15355/sysweb/camera_list.aspx?ID=9914
+操作内容：ActiveResult：{"result":1,"total":1591,"rows":[{"x":"","y":"","rownumber":"1","village_id":"4114021011","village":"梁园区","camera_name":"172_16_73_6梁园区","unit":"","org_id":"411402","first_phase":"","addr":"172_16_73_6梁园区","device_id":"00216810000000000101X0910c4d84e8046b6b3d66ff0ca158793","is_online":"","id":"00216810000000000101","view_range":"","is_complete":"","second_phase":"","county":"梁园区"},{"x":"115.175000","y":"34.330278","rownumber":"2","village_id":"4114231072","village":"黄岗乡","camera_name":"宁陵县黄岗乡民张营1","unit":"","org_id":"411423","first_phase":"","addr":"宁陵县黄岗乡民张营1","device_id":"01173840000000000101X0910c4d84e8046b6b3d66ff0ca158793","is_online":"","id":"01173840000000000101","view_range":"","is_complete":"","second_phase":"","county":"宁陵县"},{"x":"","y":"","rownumber":"3","village_id":"4114231068","village":"QT","camera_name":"宁陵县农业局监控中心","unit":"","org_id":"411423","first_phase":"","addr":"宁陵县农业局监控中心","device_id":"01218290000000000101X0910c4d84e8046b6b3d66ff0ca158793","is_online":"","id":"01218290000000000101","view_range":"","is_complete":"","second_phase":"","county":"宁陵县"},{"x":"","y":"","rownumber":"4","village_id":"4114021001","village":"QT","camera_name":"农业局本部","unit":"","org_id":"411402","first_phase":"","addr":"农业局本部","device_id":"02143430000000000101X347b4390f448413baa2d77bd7b7e9729","is_online":"","id":"02143430000000000101","view_range":"","is_complete":"","second_phase":"","county":"梁园区"},{"x":"","y":"","rownumber":"5","village_id":"4114251103","village":"QT","camera_name":"商丘市虞城县禁烧办","unit":"","org_id":"411425","first_phase":"","addr":"商丘市虞城县禁烧办","device_id":"04268140000000000101X632f08f636bf4b0b8b523d5cc7f79f61","is_online":"","id":"04268140000000000101","view_range":"","is_complete":"","second_phase":"","county":"虞城县"},{"x":"115.352222","y":"34.581389","rownumber":"6","village_id":"4114231075","village":"柳河镇","camera_name":"宁陵县柳河镇关尚1","unit":"","org_id":"411423","first_phase":"","addr":"宁陵县柳河镇关尚1","device_id":"04689370000000000101Xbb209695f3d64778b2fec6bd3362cfe3","is_online":"","id":"04689370000000000101","view_range":"","is_complete":"","second_phase":"","county":"宁陵县"},{"x":"","y":"","rownumber":"7","village_id":"4114241092","village":"监控中心","camera_name":"柘城数字中心","unit":"","org_id":"411424","first_phase":"","addr":"柘城数字中心","device_id":"06279660000000000101Xbb209695f3d64778b2fec6bd3362cfe3","is_online":"","id":"06279660000000000101","view_range":"","is_complete":"","second_phase":"","county":"柘城县"},{"x":"","y":"","rownumber":"8","village_id":"4114021001","village":"QT","camera_name":"商丘市禁烧办监控中心","unit":"","org_id":"411402","first_phase":"","addr":"商丘市禁烧办监控中心","device_id":"08300280000000000101Xbb209695f3d64778b2fec6bd3362cfe3","is_online":"","id":"08300280000000000101","view_range":"","is_complete":"","second_phase":"","county":"梁园区"},{"x":"115.263333","y":"34.296111","rownumber":"9","village_id":"4114231071","village":"华堡乡","camera_name":"宁陵县华堡乡华堡1","unit":"","org_id":"411423","first_phase":"","addr":"宁陵县华堡乡华堡1","device_id":"09045680000000000101Xbb209695f3d64778b2fec6bd3362cfe3","is_online":"","id":"09045680000000000101","view_range":"","is_complete":"","second_phase":"","county":"宁陵县"},{"x":"","y":"","rownumber":"10","village_id":"4114221047","village":"QT","camera_name":"商丘市睢县农业局","unit":"","org_id":"411422","first_phase":"","addr":"商丘市睢县农业局","device_id":"09334990000000000101X632f08f636bf4b0b8b523d5cc7f79f61","is_online":"","id":"09334990000000000101","view_range":"","is_complete":"","second_phase":"","county":"睢县"},{"x":"","y":"","rownumber":"11","village_id":"4114031028","village":"睢阳区","camera_name":"睢阳区农牧局办公室","unit":"","org_id":"411403","first_phase":"","addr":"睢阳区农牧局办公室","device_id":"09440910000000000101X632f08f636bf4b0b8b523d5cc7f79f61","is_online":"","id":"09440910000000000101","view_range":"","is_complete":"","second_phase":"","county":"睢阳区"},{"x":"115.264167","y":"34.451111","rownumber":"12","village_id":"4114231079","village":"阳驿乡","camera_name":"宁陵县阳驿乡徐楼1","unit":"","org_id":"411423","first_phase":"","addr":"宁陵县阳驿乡徐楼1","device_id":"09772210000000000101X0910c4d84e8046b6b3d66ff0ca158793","is_online":"","id":"09772210000000000101","view_range":"","is_complete":"","second_phase":"","county":"宁陵县"},{"x":"116.419130","y":"34.082710","rownumber":"13","village_id":"4114811179","village":"薛湖镇","camera_name":"永城薛湖黄营","unit":"","org_id":"411481","first_phase":"","addr":"永城薛湖黄营","device_id":"93700844351001000101X249f8714c5114ec2b19c21fd8e5ca2b7","is_online":"","id":"93700844351001000101","view_range":"","is_complete":"","second_phase":"","county":"永城市"},{"x":"116.167960","y":"34.038290","rownumber":"14","village_id":"4114811167","village":"马牧乡","camera_name":"永城马牧乡马牧村（马牧乡西）","unit":"","org_id":"411481","first_phase":"","addr":"永城马牧乡马牧村（马牧乡西）","device_id":"93700857817001000101X249f8714c5114ec2b19c21fd8e5ca2b7","is_online":"","id":"93700857817001000101","view_range":"","is_complete":"","second_phase":"","county":"永城市"},{"x":"116.373510","y":"34.127060","rownumber":"15","village_id":"4114811180","village":"演集镇","camera_name":"永城市三小","unit":"","org_id":"411481","first_phase":"","addr":"永城市三小","device_id":"93700857825001000101X249f8714c5114ec2b19c21fd8e5ca2b7","is_online":"","id":"93700857825001000101","view_range":"","is_complete":"","second_phase":"","county":"永城市"}],"validfield":"","validmessage":"","info":{},"isLock":0}
+--------2019年1月4日 9:12:30--------
+访问地址：/api/rest.ashx?action_type=CameraConfig&action_method=find&ID=00216810000000000101
+用户地址：::1
+登陆页面：http://localhost:15355/sysweb/camera_peizhi.aspx?ID=00216810000000000101
+操作内容：ActiveResult：{"result":1,"total":0,"rows":[],"validfield":"","validmessage":"","info":{"device_id":"00216810000000000101X0910c4d84e8046b6b3d66ff0ca158793","offset_p":0.0,"offset_t":10.0,"offset_x":1.0,"offset_h":45.0,"x":0.0,"y":0.0},"isLock":0}
+--------2019年1月4日 9:12:34--------
+访问地址：/api/rest.ashx?action_type=CameraConfig&action_method=find&ID=01173840000000000101
+用户地址：::1
+登陆页面：http://localhost:15355/sysweb/camera_peizhi.aspx?ID=01173840000000000101
+操作内容：ActiveResult：{"result":1,"total":0,"rows":[],"validfield":"","validmessage":"","info":{"device_id":"01173840000000000101X0910c4d84e8046b6b3d66ff0ca158793","offset_p":0.0,"offset_t":10.0,"offset_x":1.0,"offset_h":45.0,"x":115.175,"y":34.330278},"isLock":0}
+--------2019年1月4日 13:40:52--------
+--------2019年1月4日 13:40:53--------
+访问地址：/Admin/login.aspx
+用户地址：::1
+操作内容：Admin_Login
+--------2019年1月4日 13:40:54--------
+访问地址：/api/Handler.ashx
+用户地址：::1
+登陆页面：http://localhost:15355/Admin/login.aspx
+操作内容：初始化数据库连接
+--------2019年1月4日 13:40:57--------
+访问地址：/Admin/index.aspx
+用户地址：::1
+登陆页面：http://localhost:15355/Admin/login.aspx
+操作内容：TOKEN的值是9290db43ccb8f075b217dd3b69bf6621
+--------2019年1月4日 13:41:01--------
+访问地址：/api/rest.ashx?action_type=XT_IMG_REC&action_method=query_alarm
+用户地址：::1
+登陆页面：http://localhost:15355/alarm/default.aspx?TYPE_ID=16
+操作内容：ActiveResult：{"result":1,"total":0,"rows":[],"validfield":"","validmessage":"","info":{},"isLock":0}
+--------2019年1月4日 13:41:04--------
+访问地址：/api/rest.ashx?action_type=XT_IMG_REC&action_method=query_alarm
+用户地址：::1
+登陆页面：http://localhost:15355/alarm/default.aspx?TYPE_ID=16
+操作内容：ActiveResult：{"result":1,"total":0,"rows":[],"validfield":"","validmessage":"","info":{},"isLock":0}
+--------2019年1月4日 13:41:06--------
+访问地址：/api/rest.ashx?action_type=XT_IMG_REC&action_method=query_alarm
+用户地址：::1
+登陆页面：http://localhost:15355/alarm/default.aspx?TYPE_ID=16
+操作内容：ActiveResult：{"result":1,"total":0,"rows":[],"validfield":"","validmessage":"","info":{},"isLock":0}
+--------2019年1月4日 13:41:07--------
+访问地址：/api/rest.ashx?action_type=XT_NEWS&action_method=query&limit=15&offset=0&maxrows=15&ORG_ID=411082&CLS_ID=LAW_GJ&_=1546580467889
+用户地址：::1
+登陆页面：http://localhost:15355/sysweb/news_gj_list.aspx?ID=1701
+操作内容：ActiveResult：{"result":1,"total":1,"rows":[{"publish_date":"2342","update_time":"20190103220132","page_title":"23423","rownumber":"1","id":"201901032201320000017767411082","org_id":"411082","page_html":"4234234","isactive":"1","cls_id":"LAW_DF","publish_org":"423423"}],"validfield":"","validmessage":"","info":{},"isLock":0}
+--------2019年1月4日 13:41:08--------
+访问地址：/api/rest.ashx?action_type=Notice&action_method=last
+用户地址：::1
+登陆页面：http://localhost:15355/sysweb/notice.aspx?TYPE_ID=18
+操作内容：ActiveResult：{"result":-1,"total":0,"rows":[],"validfield":"","validmessage":"","info":{},"isLock":0}
+--------2019年1月4日 13:41:13--------
+访问地址：/api/rest.ashx?action_type=OrgInf&action_method=query&limit=15&offset=0&maxrows=15&ORG_ID=411082&_=1546580473645
+用户地址：::1
+登陆页面：http://localhost:15355/sysweb/org_list.aspx?ID=9901
+操作内容：ActiveResult：{"result":1,"total":1,"rows":[{"ploygn":"","x":"34.202156","org_name":"长葛市","rownumber":"1","remark":"","org_id":"411082","org_type":"6","org_full_name":"长葛市国土资源局","isactive":"1","orderby":"","y":"113.821461"}],"validfield":"","validmessage":"","info":{},"isLock":0}
+--------2019年1月4日 13:41:15--------
+访问地址：/api/rest.ashx?action_type=Camera&action_method=query&limit=15&offset=0&maxrows=15&ORG_ID=411082&_=1546580475357
+用户地址：::1
+登陆页面：http://localhost:15355/sysweb/camera_list.aspx?ID=9914
+操作内容：ActiveResult：{"result":1,"total":1591,"rows":[{"x":"","y":"","rownumber":"1","village_id":"4114021011","village":"梁园区","camera_name":"172_16_73_6梁园区","unit":"","org_id":"411402","first_phase":"","addr":"172_16_73_6梁园区","device_id":"00216810000000000101X0910c4d84e8046b6b3d66ff0ca158793","is_online":"","id":"00216810000000000101","view_range":"","is_complete":"","second_phase":"","county":"梁园区"},{"x":"115.175000","y":"34.330278","rownumber":"2","village_id":"4114231072","village":"黄岗乡","camera_name":"宁陵县黄岗乡民张营1","unit":"","org_id":"411423","first_phase":"","addr":"宁陵县黄岗乡民张营1","device_id":"01173840000000000101X0910c4d84e8046b6b3d66ff0ca158793","is_online":"","id":"01173840000000000101","view_range":"","is_complete":"","second_phase":"","county":"宁陵县"},{"x":"","y":"","rownumber":"3","village_id":"4114231068","village":"QT","camera_name":"宁陵县农业局监控中心","unit":"","org_id":"411423","first_phase":"","addr":"宁陵县农业局监控中心","device_id":"01218290000000000101X0910c4d84e8046b6b3d66ff0ca158793","is_online":"","id":"01218290000000000101","view_range":"","is_complete":"","second_phase":"","county":"宁陵县"},{"x":"","y":"","rownumber":"4","village_id":"4114021001","village":"QT","camera_name":"农业局本部","unit":"","org_id":"411402","first_phase":"","addr":"农业局本部","device_id":"02143430000000000101X347b4390f448413baa2d77bd7b7e9729","is_online":"","id":"02143430000000000101","view_range":"","is_complete":"","second_phase":"","county":"梁园区"},{"x":"","y":"","rownumber":"5","village_id":"4114251103","village":"QT","camera_name":"商丘市虞城县禁烧办","unit":"","org_id":"411425","first_phase":"","addr":"商丘市虞城县禁烧办","device_id":"04268140000000000101X632f08f636bf4b0b8b523d5cc7f79f61","is_online":"","id":"04268140000000000101","view_range":"","is_complete":"","second_phase":"","county":"虞城县"},{"x":"115.352222","y":"34.581389","rownumber":"6","village_id":"4114231075","village":"柳河镇","camera_name":"宁陵县柳河镇关尚1","unit":"","org_id":"411423","first_phase":"","addr":"宁陵县柳河镇关尚1","device_id":"04689370000000000101Xbb209695f3d64778b2fec6bd3362cfe3","is_online":"","id":"04689370000000000101","view_range":"","is_complete":"","second_phase":"","county":"宁陵县"},{"x":"","y":"","rownumber":"7","village_id":"4114241092","village":"监控中心","camera_name":"柘城数字中心","unit":"","org_id":"411424","first_phase":"","addr":"柘城数字中心","device_id":"06279660000000000101Xbb209695f3d64778b2fec6bd3362cfe3","is_online":"","id":"06279660000000000101","view_range":"","is_complete":"","second_phase":"","county":"柘城县"},{"x":"","y":"","rownumber":"8","village_id":"4114021001","village":"QT","camera_name":"商丘市禁烧办监控中心","unit":"","org_id":"411402","first_phase":"","addr":"商丘市禁烧办监控中心","device_id":"08300280000000000101Xbb209695f3d64778b2fec6bd3362cfe3","is_online":"","id":"08300280000000000101","view_range":"","is_complete":"","second_phase":"","county":"梁园区"},{"x":"115.263333","y":"34.296111","rownumber":"9","village_id":"4114231071","village":"华堡乡","camera_name":"宁陵县华堡乡华堡1","unit":"","org_id":"411423","first_phase":"","addr":"宁陵县华堡乡华堡1","device_id":"09045680000000000101Xbb209695f3d64778b2fec6bd3362cfe3","is_online":"","id":"09045680000000000101","view_range":"","is_complete":"","second_phase":"","county":"宁陵县"},{"x":"","y":"","rownumber":"10","village_id":"4114221047","village":"QT","camera_name":"商丘市睢县农业局","unit":"","org_id":"411422","first_phase":"","addr":"商丘市睢县农业局","device_id":"09334990000000000101X632f08f636bf4b0b8b523d5cc7f79f61","is_online":"","id":"09334990000000000101","view_range":"","is_complete":"","second_phase":"","county":"睢县"},{"x":"","y":"","rownumber":"11","village_id":"4114031028","village":"睢阳区","camera_name":"睢阳区农牧局办公室","unit":"","org_id":"411403","first_phase":"","addr":"睢阳区农牧局办公室","device_id":"09440910000000000101X632f08f636bf4b0b8b523d5cc7f79f61","is_online":"","id":"09440910000000000101","view_range":"","is_complete":"","second_phase":"","county":"睢阳区"},{"x":"115.264167","y":"34.451111","rownumber":"12","village_id":"4114231079","village":"阳驿乡","camera_name":"宁陵县阳驿乡徐楼1","unit":"","org_id":"411423","first_phase":"","addr":"宁陵县阳驿乡徐楼1","device_id":"09772210000000000101X0910c4d84e8046b6b3d66ff0ca158793","is_online":"","id":"09772210000000000101","view_range":"","is_complete":"","second_phase":"","county":"宁陵县"},{"x":"116.419130","y":"34.082710","rownumber":"13","village_id":"4114811179","village":"薛湖镇","camera_name":"永城薛湖黄营","unit":"","org_id":"411481","first_phase":"","addr":"永城薛湖黄营","device_id":"93700844351001000101X249f8714c5114ec2b19c21fd8e5ca2b7","is_online":"","id":"93700844351001000101","view_range":"","is_complete":"","second_phase":"","county":"永城市"},{"x":"116.167960","y":"34.038290","rownumber":"14","village_id":"4114811167","village":"马牧乡","camera_name":"永城马牧乡马牧村（马牧乡西）","unit":"","org_id":"411481","first_phase":"","addr":"永城马牧乡马牧村（马牧乡西）","device_id":"93700857817001000101X249f8714c5114ec2b19c21fd8e5ca2b7","is_online":"","id":"93700857817001000101","view_range":"","is_complete":"","second_phase":"","county":"永城市"},{"x":"116.373510","y":"34.127060","rownumber":"15","village_id":"4114811180","village":"演集镇","camera_name":"永城市三小","unit":"","org_id":"411481","first_phase":"","addr":"永城市三小","device_id":"93700857825001000101X249f8714c5114ec2b19c21fd8e5ca2b7","is_online":"","id":"93700857825001000101","view_range":"","is_complete":"","second_phase":"","county":"永城市"}],"validfield":"","validmessage":"","info":{},"isLock":0}
+--------2019年1月4日 13:42:37--------
+操作内容：系统关闭...
+--------2019年1月4日 13:42:56--------
+--------2019年1月4日 13:42:57--------
+访问地址：/Admin/login.aspx
+用户地址：::1
+登陆页面：http://localhost:15355/Admin/logoff.aspx
+操作内容：Admin_Login
+--------2019年1月4日 13:42:58--------
+访问地址：/api/Handler.ashx
+用户地址：::1
+登陆页面：http://localhost:15355/Admin/login.aspx
+操作内容：初始化数据库连接
+--------2019年1月4日 13:42:58--------
+访问地址：/Admin/index.aspx
+用户地址：::1
+登陆页面：http://localhost:15355/Admin/login.aspx
+操作内容：TOKEN的值是ac45f6107baf2021c17891863b43e6
+--------2019年1月4日 13:43:01--------
+访问地址：/api/rest.ashx?action_type=OrgInf&action_method=query&limit=15&offset=0&maxrows=15&ORG_ID=411082&_=1546580581271
+用户地址：::1
+登陆页面：http://localhost:15355/sysweb/org_list.aspx?ID=9901
+操作内容：ActiveResult：{"result":1,"total":1,"rows":[{"ploygn":"","x":"34.202156","org_name":"长葛市","rownumber":"1","remark":"","org_id":"411082","org_type":"6","org_full_name":"长葛市国土资源局","isactive":"1","orderby":"","y":"113.821461"}],"validfield":"","validmessage":"","info":{},"isLock":0}
+--------2019年1月4日 13:43:02--------
+访问地址：/api/rest.ashx?action_type=Camera&action_method=query&limit=15&offset=0&maxrows=15&ORG_ID=411082&_=1546580582602
+用户地址：::1
+登陆页面：http://localhost:15355/sysweb/camera_list.aspx?ID=9914
+操作内容：ActiveResult：{"result":1,"total":1591,"rows":[{"x":"","y":"","rownumber":"1","village_id":"4114021011","village":"梁园区","camera_name":"172_16_73_6梁园区","unit":"","org_id":"411402","first_phase":"","addr":"172_16_73_6梁园区","device_id":"00216810000000000101X0910c4d84e8046b6b3d66ff0ca158793","is_online":"","id":"00216810000000000101","view_range":"","is_complete":"","second_phase":"","county":"梁园区"},{"x":"115.175000","y":"34.330278","rownumber":"2","village_id":"4114231072","village":"黄岗乡","camera_name":"宁陵县黄岗乡民张营1","unit":"","org_id":"411423","first_phase":"","addr":"宁陵县黄岗乡民张营1","device_id":"01173840000000000101X0910c4d84e8046b6b3d66ff0ca158793","is_online":"","id":"01173840000000000101","view_range":"","is_complete":"","second_phase":"","county":"宁陵县"},{"x":"","y":"","rownumber":"3","village_id":"4114231068","village":"QT","camera_name":"宁陵县农业局监控中心","unit":"","org_id":"411423","first_phase":"","addr":"宁陵县农业局监控中心","device_id":"01218290000000000101X0910c4d84e8046b6b3d66ff0ca158793","is_online":"","id":"01218290000000000101","view_range":"","is_complete":"","second_phase":"","county":"宁陵县"},{"x":"","y":"","rownumber":"4","village_id":"4114021001","village":"QT","camera_name":"农业局本部","unit":"","org_id":"411402","first_phase":"","addr":"农业局本部","device_id":"02143430000000000101X347b4390f448413baa2d77bd7b7e9729","is_online":"","id":"02143430000000000101","view_range":"","is_complete":"","second_phase":"","county":"梁园区"},{"x":"","y":"","rownumber":"5","village_id":"4114251103","village":"QT","camera_name":"商丘市虞城县禁烧办","unit":"","org_id":"411425","first_phase":"","addr":"商丘市虞城县禁烧办","device_id":"04268140000000000101X632f08f636bf4b0b8b523d5cc7f79f61","is_online":"","id":"04268140000000000101","view_range":"","is_complete":"","second_phase":"","county":"虞城县"},{"x":"115.352222","y":"34.581389","rownumber":"6","village_id":"4114231075","village":"柳河镇","camera_name":"宁陵县柳河镇关尚1","unit":"","org_id":"411423","first_phase":"","addr":"宁陵县柳河镇关尚1","device_id":"04689370000000000101Xbb209695f3d64778b2fec6bd3362cfe3","is_online":"","id":"04689370000000000101","view_range":"","is_complete":"","second_phase":"","county":"宁陵县"},{"x":"","y":"","rownumber":"7","village_id":"4114241092","village":"监控中心","camera_name":"柘城数字中心","unit":"","org_id":"411424","first_phase":"","addr":"柘城数字中心","device_id":"06279660000000000101Xbb209695f3d64778b2fec6bd3362cfe3","is_online":"","id":"06279660000000000101","view_range":"","is_complete":"","second_phase":"","county":"柘城县"},{"x":"","y":"","rownumber":"8","village_id":"4114021001","village":"QT","camera_name":"商丘市禁烧办监控中心","unit":"","org_id":"411402","first_phase":"","addr":"商丘市禁烧办监控中心","device_id":"08300280000000000101Xbb209695f3d64778b2fec6bd3362cfe3","is_online":"","id":"08300280000000000101","view_range":"","is_complete":"","second_phase":"","county":"梁园区"},{"x":"115.263333","y":"34.296111","rownumber":"9","village_id":"4114231071","village":"华堡乡","camera_name":"宁陵县华堡乡华堡1","unit":"","org_id":"411423","first_phase":"","addr":"宁陵县华堡乡华堡1","device_id":"09045680000000000101Xbb209695f3d64778b2fec6bd3362cfe3","is_online":"","id":"09045680000000000101","view_range":"","is_complete":"","second_phase":"","county":"宁陵县"},{"x":"","y":"","rownumber":"10","village_id":"4114221047","village":"QT","camera_name":"商丘市睢县农业局","unit":"","org_id":"411422","first_phase":"","addr":"商丘市睢县农业局","device_id":"09334990000000000101X632f08f636bf4b0b8b523d5cc7f79f61","is_online":"","id":"09334990000000000101","view_range":"","is_complete":"","second_phase":"","county":"睢县"},{"x":"","y":"","rownumber":"11","village_id":"4114031028","village":"睢阳区","camera_name":"睢阳区农牧局办公室","unit":"","org_id":"411403","first_phase":"","addr":"睢阳区农牧局办公室","device_id":"09440910000000000101X632f08f636bf4b0b8b523d5cc7f79f61","is_online":"","id":"09440910000000000101","view_range":"","is_complete":"","second_phase":"","county":"睢阳区"},{"x":"115.264167","y":"34.451111","rownumber":"12","village_id":"4114231079","village":"阳驿乡","camera_name":"宁陵县阳驿乡徐楼1","unit":"","org_id":"411423","first_phase":"","addr":"宁陵县阳驿乡徐楼1","device_id":"09772210000000000101X0910c4d84e8046b6b3d66ff0ca158793","is_online":"","id":"09772210000000000101","view_range":"","is_complete":"","second_phase":"","county":"宁陵县"},{"x":"116.419130","y":"34.082710","rownumber":"13","village_id":"4114811179","village":"薛湖镇","camera_name":"永城薛湖黄营","unit":"","org_id":"411481","first_phase":"","addr":"永城薛湖黄营","device_id":"93700844351001000101X249f8714c5114ec2b19c21fd8e5ca2b7","is_online":"","id":"93700844351001000101","view_range":"","is_complete":"","second_phase":"","county":"永城市"},{"x":"116.167960","y":"34.038290","rownumber":"14","village_id":"4114811167","village":"马牧乡","camera_name":"永城马牧乡马牧村（马牧乡西）","unit":"","org_id":"411481","first_phase":"","addr":"永城马牧乡马牧村（马牧乡西）","device_id":"93700857817001000101X249f8714c5114ec2b19c21fd8e5ca2b7","is_online":"","id":"93700857817001000101","view_range":"","is_complete":"","second_phase":"","county":"永城市"},{"x":"116.373510","y":"34.127060","rownumber":"15","village_id":"4114811180","village":"演集镇","camera_name":"永城市三小","unit":"","org_id":"411481","first_phase":"","addr":"永城市三小","device_id":"93700857825001000101X249f8714c5114ec2b19c21fd8e5ca2b7","is_online":"","id":"93700857825001000101","view_range":"","is_complete":"","second_phase":"","county":"永城市"}],"validfield":"","validmessage":"","info":{},"isLock":0}
+--------2019年1月4日 13:43:04--------
+访问地址：/api/rest.ashx?action_type=CameraConfig&action_method=find&ID=02143430000000000101
+用户地址：::1
+登陆页面：http://localhost:15355/sysweb/camera_peizhi.aspx?ID=02143430000000000101
+操作内容：ActiveResult：{"result":1,"total":0,"rows":[],"validfield":"","validmessage":"","info":{"device_id":"02143430000000000101X347b4390f448413baa2d77bd7b7e9729","offset_p":0.0,"offset_t":10.0,"offset_x":1.0,"offset_h":45.0,"x":0.0,"y":0.0},"isLock":0}
+--------2019年1月4日 14:50:54--------
+--------2019年1月4日 14:50:54--------
+访问地址：/Admin/login.aspx
+用户地址：::1
+操作内容：Admin_Login
+--------2019年1月4日 14:51:32--------
+访问地址：/api/Handler.ashx
+用户地址：::1
+登陆页面：http://localhost:15355/Admin/login.aspx
+操作内容：初始化数据库连接
+--------2019年1月4日 14:51:33--------
+访问地址：/Admin/index.aspx
+用户地址：::1
+登陆页面：http://localhost:15355/Admin/login.aspx
+操作内容：TOKEN的值是c6c27e754d6dcc5a82f125c88062c7a
+--------2019年1月4日 14:51:35--------
+访问地址：/api/rest.ashx?action_type=XT_IMG_REC&action_method=query_alarm
+用户地址：::1
+登陆页面：http://localhost:15355/alarm/default.aspx?TYPE_ID=16
+操作内容：ActiveResult：{"result":1,"total":722,"rows":[{"x":"1.000","rec_id":"201812252021020000012424000000_0005","image_redraw":"0","rownumber":"1","camera_name":"长葛市大周镇和尚杨村","p":"188.900","create_time":"20181225202102","addr":"许昌市长葛和尚杨","file_url":"","t":"14.800","preset_id":"5","alarm_flag":"0","upload_flag":"1","camera_id":"93740217427001000101X6cf5156252d2443bbe08944111478953","update_time":"20181225203208","ai_flag":"2","alarm_checked":"0"},{"x":"1.000","rec_id":"201812252021150000016843000000_0004","image_redraw":"0","rownumber":"2","camera_name":"长葛市大周镇和尚杨村","p":"243.000","create_time":"20181225202115","addr":"许昌市长葛和尚杨","file_url":"/dfs/20181225/201812252021150000016843000000_0004.jpg","t":"13.400","preset_id":"4","alarm_flag":"0","upload_flag":"1","camera_id":"93740217427001000101X6cf5156252d2443bbe08944111478953","update_time":"20181225203209","ai_flag":"2","alarm_checked":"0"},{"x":"","rec_id":"201812252021190000015284000000_0003","image_redraw":"0","rownumber":"3","camera_name":"长葛市大周镇和尚杨村","p":"","create_time":"20181225202119","addr":"许昌市长葛和尚杨","file_url":"/dfs/20181225/201812252021190000015284000000_0003.jpg","t":"","preset_id":"3","alarm_flag":"0","upload_flag":"1","camera_id":"93740217427001000101X6cf5156252d2443bbe08944111478953","update_time":"20181225203210","ai_flag":"2","alarm_checked":"0"},{"x":"","rec_id":"201812252021220000014281000000_0002","image_redraw":"0","rownumber":"4","camera_name":"长葛市大周镇和尚杨村","p":"","create_time":"20181225202123","addr":"许昌市长葛和尚杨","file_url":"/dfs/20181225/201812252021220000014281000000_0002.jpg","t":"","preset_id":"2","alarm_flag":"0","upload_flag":"1","camera_id":"93740217427001000101X6cf5156252d2443bbe08944111478953","update_time":"20181225203211","ai_flag":"2","alarm_checked":"0"},{"x":"","rec_id":"201812252021260000015231000000_0001","image_redraw":"0","rownumber":"5","camera_name":"长葛市大周镇和尚杨村","p":"","create_time":"20181225202126","addr":"许昌市长葛和尚杨","file_url":"/dfs/20181225/201812252021260000015231000000_0001.jpg","t":"","preset_id":"1","alarm_flag":"0","upload_flag":"1","camera_id":"93740217427001000101X6cf5156252d2443bbe08944111478953","update_time":"20181225203212","ai_flag":"2","alarm_checked":"0"}],"validfield":"","validmessage":"","info":{},"isLock":0}
+--------2019年1月4日 14:51:35--------
+访问地址：/api/alarm.ashx?action_type=XT_IMG_REC&action_method=query_list
+用户地址：::1
+登陆页面：http://localhost:15355/alarm/default.aspx?TYPE_ID=16
+操作内容：ActiveResult：{"result":1,"total":5,"rows":[{"x":"1.000","rec_id":"201812252021020000012424000000_0005","image_redraw":"0","rownumber":"1","p":"188.900","create_time":"20181225202102","addr":"许昌市长葛和尚杨","file_url":"","t":"14.800","preset_id":"5","alarm_flag":"0","upload_flag":"1","camera_id":"93740217427001000101X6cf5156252d2443bbe08944111478953","update_time":"20181225203208","ai_flag":"2","alarm_checked":"0"},{"x":"","rec_id":"201812252027060000012346000000_0005","image_redraw":"0","rownumber":"2","p":"","create_time":"20181225202707","addr":"许昌市长葛和尚杨","file_url":"/dfs/20181225/201812252027060000012346000000_0005.jpg","t":"","preset_id":"5","alarm_flag":"1","upload_flag":"1","camera_id":"93740217427001000101X6cf5156252d2443bbe08944111478953","update_time":"20181225203225","ai_flag":"2","alarm_checked":"0"},{"x":"","rec_id":"201812252028000000014382000000_0005","image_redraw":"0","rownumber":"3","p":"","create_time":"20181225202800","addr":"许昌市长葛和尚杨","file_url":"/dfs/20181225/201812252028000000014382000000_0005.jpg","t":"","preset_id":"5","alarm_flag":"1","upload_flag":"1","camera_id":"93740217427001000101X6cf5156252d2443bbe08944111478953","update_time":"20181225203232","ai_flag":"2","alarm_checked":"0"},{"x":"","rec_id":"201812252031530000014284000000_0005","image_redraw":"0","rownumber":"4","p":"","create_time":"20181225203153","addr":"许昌市长葛和尚杨","file_url":"/dfs/20181225/201812252031530000014284000000_0005.jpg","t":"","preset_id":"5","alarm_flag":"0","upload_flag":"1","camera_id":"93740217427001000101X6cf5156252d2443bbe08944111478953","update_time":"20181225203240","ai_flag":"2","alarm_checked":"0"},{"x":"","rec_id":"201812252035540000011069000000_0005","image_redraw":"0","rownumber":"5","p":"","create_time":"20181225203555","addr":"许昌市长葛和尚杨","file_url":"/dfs/20181225/201812252035540000011069000000_0005.jpg","t":"","preset_id":"5","alarm_flag":"0","upload_flag":"1","camera_id":"93740217427001000101X6cf5156252d2443bbe08944111478953","update_time":"20181225203557","ai_flag":"2","alarm_checked":"0"}],"validfield":"","validmessage":"","info":{},"isLock":0}
+--------2019年1月4日 14:51:54--------
+访问地址：/api/rest.ashx?action_type=XT_IMG_REC&action_method=find&REC_ID=93740217427001000101X6cf5156252d2443bbe08944111478953
+用户地址：::1
+登陆页面：http://localhost:15355/alarm/wf_docheck.aspx?REC_ID=93740217427001000101X6cf5156252d2443bbe08944111478953
+操作内容：ActiveResult：{"result":1,"total":0,"rows":[],"validfield":"","validmessage":"","info":{},"isLock":0}
+--------2019年1月4日 14:58:53--------
+操作内容：系统关闭...
+--------2019年1月4日 14:58:56--------
+--------2019年1月4日 14:58:56--------
+访问地址：/Admin/login.aspx
+用户地址：::1
+操作内容：Admin_Login
+--------2019年1月4日 14:58:59--------
+访问地址：/api/Handler.ashx
+用户地址：::1
+登陆页面：http://localhost:15355/Admin/login.aspx
+操作内容：初始化数据库连接
+--------2019年1月4日 14:58:59--------
+访问地址：/Admin/index.aspx
+用户地址：::1
+登陆页面：http://localhost:15355/Admin/login.aspx
+操作内容：TOKEN的值是7b114e76ac12bbf620548cd1a7a13f38

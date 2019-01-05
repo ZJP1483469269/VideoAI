@@ -1,0 +1,20 @@
+--------2019年1月2日 17:26:13--------
+访问地址：/api/rest.ashx?action_type=Dict&action_method=query&limit=15&offset=0&maxrows=15&ORG_ID=411082&_=1546421173393
+用户地址：::1
+登陆页面：http://localhost:15355/sysweb/dict_list.aspx?ID=9907
+操作内容：列名 'TYPE_ID' 无效。
+--------2019年1月2日 17:26:18--------
+访问地址：/api/rest.ashx?action_type=Dict&action_method=query&limit=15&offset=0&maxrows=15&ORG_ID=411082&_=1546421178132
+用户地址：::1
+登陆页面：http://localhost:15355/sysweb/dict_list.aspx?ID=9907
+操作内容：列名 'TYPE_ID' 无效。
+--------2019年1月2日 17:26:34--------
+访问地址：/api/rest.ashx?action_type=Dict&action_method=query&limit=15&offset=0&maxrows=15&ORG_ID=411082&_=1546421194017
+用户地址：::1
+登陆页面：http://localhost:15355/sysweb/dict_list.aspx?ID=9907
+操作内容：列名 'TYPE_ID' 无效。
+--------2019年1月2日 17:26:35--------
+访问地址：/api/rest.ashx?action_type=Dict&action_method=query&limit=15&offset=0&maxrows=15&ORG_ID=411082&_=1546421195385
+用户地址：::1
+登陆页面：http://localhost:15355/sysweb/dict_list.aspx?ID=9907
+操作内容：列名 'TYPE_ID' 无效。

@@ -109,7 +109,7 @@
                         , title: '操作'
                         , align: 'center'
                         , formatter: function (value, row, index) {
-                            var cStr = "<a href='#' onclick='LoadList(\"" + row.rec_id + "\");'>查看</a>";
+                            var cStr = "<a href='#' onclick='LoadList(\"" + row.rec_id + "\",\"" + row.camera_id + "\",\"" + row.preset_id + "\");'>查看</a>";
                             return cStr;
                         }
                     }
@@ -134,7 +134,11 @@
             return temp;
         };
 
-        function LoadList(cREC_ID) {
+        function LoadList(cREC_ID, camera_id, preset_id) {
+            vREC_ID = cREC_ID;
+            ccamera_id = camera_id;
+            cpreset_id = preset_id;
+
             $("#IMAGE_LIST").empty();
             var vUrl = "/api/alarm.ashx?action_type=XT_IMG_REC&action_method=query_list";
             var cValue = "REC_ID=" + cREC_ID;
@@ -163,6 +167,36 @@
         function OpenLive() {
             OpenWinForm("../gtws/Live.aspx?TYPEID=3&CAMERACODE=" + ccamera_id + "&PRESET_ID=" + cpreset_id);
         }
+
+        function doCheck() {            
+            AjaxOpenDialog("违法交办","wf_docheck.aspx?REC_ID="+vREC_ID,"800px", "640px");
+        }
+
+          function clearAlarm() {
+            var stauts = confirm("确认解除警报吗？")
+            if (!stauts) {    //如果点击事件取消
+                return false; //返回页面
+            }
+            else {                
+                var vUrl = "/api/rest.ashx?action_type=XT_IMG_REC&action_method=clear_alarm&ID=" + vREC_ID + "";
+                $.ajax({
+                  type: "POST",
+                  url: vUrl,      
+                  dataType: "json",                 
+                  cache: false,                 
+                  success: function (vret) {
+                     if (vret.result == 1) {
+                            doQuery();
+                        } 
+                },
+                error: function (vret) {
+                    alert("error");
+                }
+                });
+            } 
+
+        }
+
     </script>
 </head>
 <body>
@@ -188,8 +222,15 @@
                                 <option value="1">已处理</option>
                             </select>
                         </td>
+                         <td>
+                            <select class="form-control" id="ALARM_FLAG" name="ALARM_FLAG" style="width: 200px">
+                                <option value="">--全部--</option>
+                                <option value="0">未报警</option>
+                                <option value="1">已报警</option>
+                            </select>
+                        </td>
                         <td>
-                            <input type="button" value="查询" class="btn-sm btn-info" onclick="doQuery();" />
+                            <input type="button" value="查询" class="btn-sm btn-info" onclick="doQuery(vREC_ID);" />
                         </td>
                     </tr>
                 </table>
@@ -201,8 +242,8 @@
         </div>
         <div>
             <input type="button" value="实时情况" class="btn-sm btn-primary" onclick="OpenLive();" />
-            <input type="button" value="违法交办" class="btn-sm btn-primary" onclick="doQuery();" />
-            <input type="button" value="解除报警" class="btn-sm btn-primary" onclick="doQuery();" />
+            <input type="button" value="违法交办" class="btn-sm btn-primary" onclick="doCheck();" />
+            <input type="button" value="解除报警" class="btn-sm btn-primary" onclick="clearAlarm()" />
         </div>
         <table class="panel panel-primary">
             <tr id="IMAGE_LIST">

@@ -1,0 +1,10 @@
+--------2019年1月4日 9:12:20--------
+访问地址：/api/rest.ashx?action_type=PageDict&action_method=query&limit=15&offset=0&maxrows=15&ORG_ID=411082&_=1546564340647
+用户地址：::1
+登陆页面：http://localhost:15355/sysweb/page_dict_list.aspx?ID=9913
+操作内容：执行SQL集合异常:列名 'ORG_ID' 无效。
+--------2019年1月4日 9:12:20--------
+访问地址：/api/rest.ashx?action_type=PageDict&action_method=query&limit=15&offset=0&maxrows=15&ORG_ID=411082&_=1546564340647
+用户地址：::1
+登陆页面：http://localhost:15355/sysweb/page_dict_list.aspx?ID=9913
+操作内容：列名 'ORG_ID' 无效。

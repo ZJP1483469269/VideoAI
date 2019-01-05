@@ -1,0 +1,275 @@
+{
+  "version": 3,
+  "targets": {
+    ".NETFramework,Version=v4.0": {
+      "DocX/1.2.1": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System",
+          "System.Xaml"
+        ],
+        "compile": {
+          "lib/Xceed.Words.NET.dll": {}
+        },
+        "runtime": {
+          "lib/Xceed.Words.NET.dll": {}
+        }
+      },
+      "DotNetZip/1.13.0": {
+        "type": "package",
+        "compile": {
+          "lib/net40/DotNetZip.dll": {}
+        },
+        "runtime": {
+          "lib/net40/DotNetZip.dll": {}
+        }
+      },
+      "Newtonsoft.Json/12.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/net40/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/net40/Newtonsoft.Json.dll": {}
+        }
+      }
+    },
+    ".NETFramework,Version=v4.0/win": {
+      "DocX/1.2.1": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System",
+          "System.Xaml"
+        ],
+        "compile": {
+          "lib/Xceed.Words.NET.dll": {}
+        },
+        "runtime": {
+          "lib/Xceed.Words.NET.dll": {}
+        }
+      },
+      "DotNetZip/1.13.0": {
+        "type": "package",
+        "compile": {
+          "lib/net40/DotNetZip.dll": {}
+        },
+        "runtime": {
+          "lib/net40/DotNetZip.dll": {}
+        }
+      },
+      "Newtonsoft.Json/12.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/net40/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/net40/Newtonsoft.Json.dll": {}
+        }
+      }
+    },
+    ".NETFramework,Version=v4.0/win-x64": {
+      "DocX/1.2.1": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System",
+          "System.Xaml"
+        ],
+        "compile": {
+          "lib/Xceed.Words.NET.dll": {}
+        },
+        "runtime": {
+          "lib/Xceed.Words.NET.dll": {}
+        }
+      },
+      "DotNetZip/1.13.0": {
+        "type": "package",
+        "compile": {
+          "lib/net40/DotNetZip.dll": {}
+        },
+        "runtime": {
+          "lib/net40/DotNetZip.dll": {}
+        }
+      },
+      "Newtonsoft.Json/12.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/net40/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/net40/Newtonsoft.Json.dll": {}
+        }
+      }
+    },
+    ".NETFramework,Version=v4.0/win-x86": {
+      "DocX/1.2.1": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System",
+          "System.Xaml"
+        ],
+        "compile": {
+          "lib/Xceed.Words.NET.dll": {}
+        },
+        "runtime": {
+          "lib/Xceed.Words.NET.dll": {}
+        }
+      },
+      "DotNetZip/1.13.0": {
+        "type": "package",
+        "compile": {
+          "lib/net40/DotNetZip.dll": {}
+        },
+        "runtime": {
+          "lib/net40/DotNetZip.dll": {}
+        }
+      },
+      "Newtonsoft.Json/12.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/net40/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/net40/Newtonsoft.Json.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "DocX/1.2.1": {
+      "sha512": "GtCKvuGK09Fiuh8PFBf2SS3vQT7UTPvp2YGnduED6qtEyTA8Dz8gOui04yGRVdaoT/I6eF4TUm6Vf93HKVNu4A==",
+      "type": "package",
+      "path": "docx/1.2.1",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "docx.1.2.1.nupkg.sha512",
+        "docx.nuspec",
+        "lib/Xceed.Words.NET.dll",
+        "tools/install.ps1"
+      ]
+    },
+    "DotNetZip/1.13.0": {
+      "sha512": "5hrWkJNDnbq2042UvoiwkMaZxkUwKm1+yvMKJUCakcpizxbjBzpMz6VFfk/eP8h9VA4hfJ86JT+LkNfQXCrwNA==",
+      "type": "package",
+      "path": "dotnetzip/1.13.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "dotnetzip.1.13.0.nupkg.sha512",
+        "dotnetzip.nuspec",
+        "lib/net40/DotNetZip.dll",
+        "lib/net40/DotNetZip.pdb",
+        "lib/net40/DotNetZip.xml",
+        "lib/netstandard2.0/DotNetZip.dll",
+        "lib/netstandard2.0/DotNetZip.pdb"
+      ]
+    },
+    "Newtonsoft.Json/12.0.1": {
+      "sha512": "pBR3wCgYWZGiaZDYP+HHYnalVnPJlpP1q55qvVb+adrDHmFMDc1NAKio61xTwftK3Pw5h7TZJPJEEVMd6ty8rg==",
+      "type": "package",
+      "path": "newtonsoft.json/12.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "lib/net20/Newtonsoft.Json.dll",
+        "lib/net20/Newtonsoft.Json.pdb",
+        "lib/net20/Newtonsoft.Json.xml",
+        "lib/net35/Newtonsoft.Json.dll",
+        "lib/net35/Newtonsoft.Json.pdb",
+        "lib/net35/Newtonsoft.Json.xml",
+        "lib/net40/Newtonsoft.Json.dll",
+        "lib/net40/Newtonsoft.Json.pdb",
+        "lib/net40/Newtonsoft.Json.xml",
+        "lib/net45/Newtonsoft.Json.dll",
+        "lib/net45/Newtonsoft.Json.pdb",
+        "lib/net45/Newtonsoft.Json.xml",
+        "lib/netstandard1.0/Newtonsoft.Json.dll",
+        "lib/netstandard1.0/Newtonsoft.Json.pdb",
+        "lib/netstandard1.0/Newtonsoft.Json.xml",
+        "lib/netstandard1.3/Newtonsoft.Json.dll",
+        "lib/netstandard1.3/Newtonsoft.Json.pdb",
+        "lib/netstandard1.3/Newtonsoft.Json.xml",
+        "lib/netstandard2.0/Newtonsoft.Json.dll",
+        "lib/netstandard2.0/Newtonsoft.Json.pdb",
+        "lib/netstandard2.0/Newtonsoft.Json.xml",
+        "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.dll",
+        "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.pdb",
+        "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.xml",
+        "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.dll",
+        "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.pdb",
+        "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.xml",
+        "newtonsoft.json.12.0.1.nupkg.sha512",
+        "newtonsoft.json.nuspec"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    ".NETFramework,Version=v4.0": [
+      "DocX >= 1.2.1",
+      "DotNetZip >= 1.13.0",
+      "Newtonsoft.Json >= 12.0.1"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\Administrator\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "D:\\VideoAI\\Common.Util\\TLKJ.Util.csproj",
+      "projectName": "TLKJ.Util",
+      "projectPath": "D:\\VideoAI\\Common.Util\\TLKJ.Util.csproj",
+      "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
+      "outputPath": "D:\\VideoAI\\Common.Util\\obj\\",
+      "projectStyle": "PackageReference",
+      "skipContentFileWrite": true,
+      "configFilePaths": [
+        "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net40"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net40": {
+          "projectReferences": {}
+        }
+      }
+    },
+    "frameworks": {
+      "net40": {
+        "dependencies": {
+          "DocX": {
+            "target": "Package",
+            "version": "[1.2.1, )"
+          },
+          "DotNetZip": {
+            "target": "Package",
+            "version": "[1.13.0, )"
+          },
+          "Newtonsoft.Json": {
+            "target": "Package",
+            "version": "[12.0.1, )"
+          }
+        }
+      }
+    },
+    "runtimes": {
+      "win": {
+        "#import": []
+      },
+      "win-x64": {
+        "#import": []
+      },
+      "win-x86": {
+        "#import": []
+      }
+    }
+  }
+}

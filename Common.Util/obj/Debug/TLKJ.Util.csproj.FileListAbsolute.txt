@@ -1,0 +1,12 @@
+D:\VideoAI\Common.Util\bin\Debug\TLKJ.Util.dll
+D:\VideoAI\Common.Util\bin\Debug\TLKJ.Util.pdb
+D:\VideoAI\Common.Util\bin\Debug\Xceed.Words.NET.dll
+D:\VideoAI\Common.Util\bin\Debug\DotNetZip.dll
+D:\VideoAI\Common.Util\bin\Debug\DotNetZip.pdb
+D:\VideoAI\Common.Util\bin\Debug\Newtonsoft.Json.dll
+D:\VideoAI\Common.Util\bin\Debug\Newtonsoft.Json.pdb
+D:\VideoAI\Common.Util\obj\Debug\TLKJ.Util.csprojAssemblyReference.cache
+D:\VideoAI\Common.Util\obj\Debug\TLKJ.Util.csproj.CoreCompileInputs.cache
+D:\VideoAI\Common.Util\obj\Debug\TLKJ.Util.csproj.CopyComplete
+D:\VideoAI\Common.Util\obj\Debug\TLKJ.Util.dll
+D:\VideoAI\Common.Util\obj\Debug\TLKJ.Util.pdb
